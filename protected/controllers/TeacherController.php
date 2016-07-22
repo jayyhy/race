@@ -190,7 +190,57 @@ class TeacherController extends CController {
             $flag = 1;
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
-        $this->render('control' . $render, array("step" => $step, "race" => $race, "flag" => $flag, "endTime" => $endTime,"nowOnStep"=>$nowOnStep));
+        $this->render('control' . $render, array("step" => $step, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
+    }
+
+    public function actionMarkRace() {
+        $teacherID = Yii::app()->session['userid_now'];
+        $teacher = Teacher::model()->find("userID=?", array($teacherID));
+        $course = Course::model()->find("courseID=?", array($teacher['classID']));
+        $pager = RaceIndex::model()->getAllRaceIndex();
+        $raceIndex = $pager['list'];
+        $pages = $pager['pages'];
+        $this->render('markRace', array("course" => $course, "raceIndex" => $raceIndex, "pages" => $pages));
+    }
+
+    public function actionStuLst() {
+        $teacherID = Yii::app()->session['userid_now'];
+        $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
+        $lstWithPages = Student::model()->getStuLstByClassID($classID);
+        $students = $lstWithPages['list'];
+        $pages = $lstWithPages['pages'];
+        $indexID = $_GET['indexID'];
+        $raceIndex = RaceIndex::model()->find("indexID=?", array($indexID));
+        $this->render('stuLst', array("students" => $students, "pages" => $pages, "raceIndex" => $raceIndex));
+    }
+
+    public function actionDetail() {
+        $step = $_GET['step'];
+        $indexID = $_GET['indexID'];
+        $race = Race::model()->find("indexID=? AND step=?",array($indexID,$step));
+        $result="";
+        $render = "";
+        switch ($step){
+            case 1:
+                $render = "One";
+                break;
+            case 2:
+                $render = "Two";
+                break;
+            case 3:
+                $render = "Three";
+                break;
+            case 4:
+                $render = "Four";
+                break;
+            case 5:
+                $render = "Five";
+                break;
+            case 6:
+                $render = "Six";
+                break;
+        }
+        $this->render("detail" . $render,array("step"=>$step,"race"=>$race,'result'=>$result));
     }
 
 }
