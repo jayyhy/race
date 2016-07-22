@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body{
+   // height:950px;
+    //width: 1250px;
+    //border-style:solid;
+    // border-width:1px;
+}
+
+/*#main{
+    position:relative;
+    float: left;
+    height: 850px;
+    width: 850px;
+    text-align: center;
+    // border-style:solid;
+    //border-width:1px;
+}*/
+
+/*#right{
+    position: relative;
+    float: right;
+    height: 850px;
+    width: 120px;
+    text-align: center;
+    //border-style:solid;
+    // border-width:1px;
+}*/
+
+#broadcasting{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    height: 800px;
+    width: 900px;
+    text-align: center;
+    // border-style:solid;
+    // border-width:1px;
+}
+
+#video{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    height: 800px;
+    width: 900px;
+    text-align: center;
+    // border-style:solid;
+    //border-width:1px;
+}
+
+#ppt{
+    position: absolute;
+    left: 280px;
+    top: 45px;
+    height: 760px;
+    width: 900px;
+    text-align: center;
+    // border-style:solid;
+    // border-width:1px;
+}
+
+#draw{
+    position: absolute;
+    left: 280px;
+    top: 45px;
+    height:760px;
+    width: 900px;
+    text-align: center;
+    // border-style:solid;
+    // border-width:1px;
+}
+
+#control{
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    height: 800px;
+    width: 280px;
+    text-align: center;
+    //  border-style:solid;
+    // border-width:1px;
+}
+
+#chat{
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    height: 800px;
+    width: 280px;
+    text-align: center;
+    // border-style:solid;
+    //  border-width:1px;
+}
+
+#button-bar{
+    position: absolute;
+    left: 260px;
+    top: 860px;
+    height: 80px;
+    width: 800px;
+    text-align: left;
+    //  border-style:solid;
+    //  border-width:1px;
+}
+
+#broadcasting-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+
+}
+
+#video-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+
+}
+
+#ppt-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+
+}
+
+#draw-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+    filter:alpha(opacity=50);
+    opacity:.5;
+
+}
+
+#control-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+
+}
+
+#chat-frame{
+    height: 98%;
+    width: 98%;
+    text-align: center;
+
+}

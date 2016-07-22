@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-5-21, 20:55:23
+    Author     : LC
+*/
+
+.key{
+    background-color:#007cc3;
+    height:60px;
+    line-height:60px;
+    width:35px;
+    font-size:15px;
+    border-width:thin;
+    vertical-align:middle;
+    background-position: center;
+    text-align: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;	
+    border-radius: 5px;
+}
+.key_right{
+    background-color: #33FF00;
+    height:60px;
+    line-height:60px;
+    width:35px;
+    font-size:15px;
+    border-width:thin;
+    vertical-align:middle;
+    background-position: center;
+    text-align: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;	
+    border-radius: 5px;
+}
+.key_wrong{
+    background-color: #FF3333;
+    height:100px;
+    line-height:100px;
+    width:60px;
+    font-size:25px;
+    border-width:thin;
+    vertical-align:middle;
+    background-position: center;
+    text-align: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;	
+    border-radius: 5px;
+}
+.compareBlock{
+    max-height: 400px;
+    overflow-y: auto;
+    width: 580px;
+    font-size: 25px; 
+    font-family:monospace; 
+    border:1px solid #808080;
+    border-radius: 5px;
+    -moz-user-select:none;
+    margin-top: 0px;
+    height: 500px;
+}
+.questionBlock{
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 750px;
+    font-size: 25px; 
+    font-family:monospace; 
+    border:1px solid #808080;
+    border-radius: 5px;
+    -moz-user-select:none;
+}

@@ -1,0 +1,181 @@
+.zoom-in {
+    margin-left: 290px;
+}
+
+.media-container{
+    display: block;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.left{
+    margin-left:20px;
+    width:61%;
+    min-height: 672px;
+    max-height: 1000px;
+    overflow-y:hidden;
+    float:left;
+    background: none;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.right{
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    margin-right: 30px;
+    width:31%;
+    max-height: 1000px;
+    overflow-y: auto;
+    float:right;
+}
+
+audio,
+video {
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    vertical-align: top;
+    width: 90%;
+    margin-left:auto; 
+    margin-right:auto;
+    border:1px;
+    padding-top:20px;
+    padding-left:30px;
+    
+}
+
+.bulletin {
+    width: 80%;
+    border:1px;
+}  
+
+.online {
+    position: relative;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    right: 5px;
+    width: 100%;
+    float: right;
+    border:1px;
+}  
+
+.chatroom {
+    width: 80%;
+    height: 250px;
+    margin-left:auto; 
+    margin-right:auto;  
+    margin-bottom: 10px;
+    overflow:auto;
+    font-size:15px;
+    color:#fff;
+    border:1px solid #ccc; 
+}
+
+.sendfoot {
+    width: 80%;
+    height: 40px;
+    margin-top: -10px;
+    margin-left:auto; 
+    margin-right:auto;
+    overflow:auto;        
+}
+
+input {
+    border: 1px solid #d9d9d9;
+    border-radius: 1px;
+    font-size: 2em;
+    margin: .2em;
+    width: 20%;
+}
+.setup {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    font-size: 102%;
+    height: 47px;
+    margin-left: -9px;
+    margin-top: 8px;
+    position: absolute;
+}
+p {
+    padding: 1em;
+}
+#chat-output div,
+#file-progress div {
+    border: 1px solid black;
+    border-bottom: 0;
+    padding: .1em .4em;
+}
+#chat-output,
+#file-progress {
+    margin: 0 0 0 .4em;
+    max-height: 12em;
+    overflow: auto;
+}
+.data-box input {
+    border: 1px solid black;
+    font-family: inherit;
+    font-size: 1em;
+    margin: .1em .3em;
+    outline: none;
+    padding: .1em .2em;
+    width: 97%;
+}
+
+.student-video-head-table{
+    font-size:15px;
+    margin-top: 2px;
+    padding-top:2px;
+    margin-left:1%;
+    margin-right:1%;
+    height:30px;
+    width:98%;
+    border: 1px solid #d9d9d9;
+    height: 40px;
+    text-align:center;
+}
+
+.student-video-head-tr{
+}
+
+.student-video-head-td{
+    border: 1px solid #d4d4d4;
+}
+
+.title_select{
+    border: 3px solid ;
+    position: relative;
+    border-color: #fff;
+    background-color: #3b3b3b;
+    padding: 0px 0px;
+    height: 66px;
+    width: 86px;
+    cursor: pointer;
+    color: #fff;
+    float: left
+}
+.title_select:hover{
+    cursor: pointer;
+    color: #f46500;
+}
+
+.title_split{
+    border: 3px solid ;
+    overflow-y: auto;
+    position: relative;
+    border-color: #fff;
+    background-color: #3b3b3b;
+    padding: 0px 0px;
+    height: 40px;
+    width: 735px;
+    cursor: pointer;
+    color: #fff;
+}
+.title_split:hover{
+    cursor: pointer;
+    color: #f46500;
+}
