@@ -3,9 +3,6 @@
 <?php
 if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] == 'student'&&Yii::app()->session['cfmLogin']=1 ) {
     ?>
-    <?php
-    $classID = Student::model()->findClassByStudentID(Yii::app()->session['userid_now']);
-    ?>
     <html lang="zh-cn"><!--<![endif]--> 
         <head>
             <meta charset="utf-8">
@@ -30,8 +27,6 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                             <a class="brand" href="./index.php?r=student/index"></a>
                             <div class="nav-collapse">
                                 <ul class="nav">
-<!--                                    <li><a id="courseExam" href="./index.php?r=student/classExam">考 试</a></li>
-                                    <li><a id ="exam_statistics_stu" href="./index.php?r=student/watchData&&classID=<?php if($classID==0) echo ""; else echo $classID; ?>">统 计</a></li>-->
                                     <li><a id="blank_title" href="./index.php?r=student/index">亚伟国赛考试系统</a></li>
                                     <li><a id="blank_stu"></a></li>
                                     <li>
