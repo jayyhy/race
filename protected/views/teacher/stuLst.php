@@ -21,7 +21,7 @@
                     <td class="font-center"><?php echo $model['userID']; ?></td>
                     <td class="font-center"><?php echo $model['classID']; ?></td>
                     <td class="font-center" style="width: 100px">  
-                        <a href="./index.php?r=teacher/detail&indexID=<?php echo $raceIndex["indexID"]; ?>&step=1"  ><img title="管控" src="<?php echo IMG_URL; ?>edit.png"></a>
+                        <a href="./index.php?r=teacher/detail&indexID=<?php echo $raceIndex["indexID"]; ?>&step=1&stuID=<?php echo $model['userID']; ?>"  ><img title="管控" src="<?php echo IMG_URL; ?>edit.png"></a>
                     </td>
                 </tr>            
             <?php endforeach; ?> 

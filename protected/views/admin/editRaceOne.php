@@ -38,7 +38,6 @@
     <h2>阶段一</h2>
     <div align="center">
         <h3>第一阶段持续时间以及配分</h3>
-        <h3></h3>
         <form method="POST" action="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1">
             时间: <input name="time" id="time" value="<?php echo $race['time']; ?>"/>
             <br/>
@@ -62,11 +61,12 @@
     }, true);
     $(document).ready(function () {
         var result = <?php echo "'$result'"; ?>;
-        if (result === '1')
-            window.wxc.xcConfirm("设定成功！", window.wxc.xcConfirm.typeEnum.success, {
+        if (result === '1') {
+            window.wxc.xcConfirm("评分成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
                     window.location.href = "./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2";
                 }
             });
+        }
     });
 </script>

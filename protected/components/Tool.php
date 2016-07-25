@@ -415,7 +415,7 @@ class McIo {
             }
         }
         unset($temp_array);
-        return $this->mc_dr;
+        return $this->mc_dr."GS";
     }
 
     function forwi() {
