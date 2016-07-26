@@ -2,7 +2,6 @@
 
 class Tool {
 
-    public static $studentNumber = 50;
     public static $EXER_TYPE = [
         'choice',
         'filling',
@@ -147,7 +146,13 @@ class Tool {
         // echo("id:$id\n");
         return $id;
     }
-
+    
+    public static function getStudentLimitNumber(){
+        $datas = json_decode(file_get_contents(__DIR__ . "/../config/test2.php"));
+        $LimitStudent = $datas[3];
+        return $LimitStudent;
+    }
+    
     public static function mainLoginIn() {
         $result = 0;
         $McIo = new McIo('');
@@ -178,10 +183,12 @@ class Tool {
         if (isset($flagArray[1])) {
             $m = $flagArray[0];
             $LimitDate = $flagArray[1];
+            $LimitStudent = $flagArray[2];
         }
         $data[0] = $m;
         $data[1] = $LimitDate;
         $data[2] = base64_encode(Tool::beCount($dateNow));
+        $data[3] = $LimitStudent;
         file_put_contents(__DIR__ . "/../config/test2.php", json_encode($data));
     }
 

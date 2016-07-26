@@ -170,7 +170,8 @@ class Student extends CActiveRecord {
     }
     
     public function addRaceStudent($courseID){
-        for($i=1;$i<=Tool::$studentNumber;$i++){
+        $studentNumber = Tool::getStudentLimitNumber();
+        for($i=1;$i<=$studentNumber;$i++){
             $student = new Student();
             $var=sprintf("%03d", $i);
             $id = "GS".$var."C".$courseID;
