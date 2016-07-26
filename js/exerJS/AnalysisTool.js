@@ -85,10 +85,6 @@ $(document).ready(function () {
         var countMomentKey = window.G_countMomentKey;
         var myDate = new Date();
         var nowTime = myDate.getTime();
-        if (G_isKeyType === 1) {
-            yaweiOCX.PutBufferToContent();
-            window.GA_answer = yaweiOCX.GetContentWithSteno();
-        }
         //暂停开关
         if (window.G_isPause === 1) {
             if (pauseOn === 0) {
@@ -250,7 +246,6 @@ $(document).ready(function () {
             if (typeof (worker) == "undefined")
             {
                 worker = new Worker('js/exerJS/GetAccuracyRate.js');
-                ;
             }
             worker.onmessage = function (event) {
                 if (!isNaN(event.data.accuracyRate)) {

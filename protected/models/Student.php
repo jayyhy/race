@@ -44,27 +44,6 @@ class Student extends CActiveRecord {
             return $newStu->insert();
     }
 
-    public function getStuLst($type, $value) {
-        $order = " order by userID ASC";
-        if ($type != "" && $type != "is_delete")
-            $condition = " WHERE $type = '$value' AND is_delete = 0";
-        else if ($type == "is_delete")
-            $condition = " WHERE is_delete = 1";
-        else
-            $condition = " WHERE is_delete = 0";
-        $select = "SELECT * FROM student";
-        $sql = $select . $condition . $order;
-        $criteria = new CDbCriteria();
-        $result = Yii::app()->db->createCommand($sql)->query();
-        $pages = new CPagination($result->rowCount);
-        $pages->pageSize = 10;
-        $pages->applyLimit($criteria);
-        $result = Yii::app()->db->createCommand($sql . " LIMIT :offset,:limit");
-        $result->bindValue(':offset', $pages->currentPage * $pages->pageSize);
-        $result->bindValue(':limit', $pages->pageSize);
-        $stuLst = $result->query();
-        return ['stuLst' => $stuLst, 'pages' => $pages,];
-    }
     
     public function getForbidStuByClass($classID){
         $order = " order by userID ASC";
@@ -84,52 +63,6 @@ class Student extends CActiveRecord {
         
     }
 
-    public function findClassByStudentID($studentID) {
-        $student = $this->find("userid = '$studentID'");
-        return $student['classID'];
-//    }
-//    public function getAnswerRecordAll($suiteID){
-//        $userID = Yii::app()->session['userid_now'];
-//        foreach (Tool::$EXER_TYPE as $type) {
-//            switch ($type) {
-//                case 'choice':
-//                    $result['choice']['0']['title'] = '选择题';
-//                    break;
-//                case 'filling':
-//                    $result['filling']['0']['title'] = '填空题';
-//                    break;
-//                case 'question':
-//                    $result['question']['0']['title'] = '问答题';
-//                    break;
-//                default:
-//                    $exerAll = Suite::model()->getSuiteExerByType( $suiteID, $type);
-//                    foreach ($exerAll as $row) {
-//                        $result[$type][$row['exerciseID']]['title'] = $row['title'];
-//                        $record = SuiteRecord::model()->find('suiteID=? and studentID=?',[$suiteID,$userID]);
-//                        $theAns = AnswerRecord::getAnswerID($record->recordID, $type, $row['exerciseID']);
-//
-//                        if($theAns == NULL){
-//                            //echo '************************************************';
-//                            //echo $record->recordID;
-//                            //echo $type;
-//                            //echo $row['exerciseID'];
-//                            $result[$type][$row['exerciseID']]['accomplish'] = 0;
-//                            $result[$type][$row['exerciseID']]['correct'] = 0;
-//                        } else{
-//                            $result[$type][$row['exerciseID']]['accomplish'] = $theAns->ratio_accomplish;
-//                            $result[$type][$row['exerciseID']]['correct'] = $theAns->ratio_correct;
-//                        }
-//                    }
-//                    break;
-//            }
-//        }
-        //recordID, exerciseID, type
-
-
-
-
-        return $result;
-    }
 
     public function getAnswerRecordSub() {
         $type = Yii::app()->session['type'];
@@ -148,89 +81,6 @@ class Student extends CActiveRecord {
         return $result;
     }
 
-    protected function getAccomplish($suiteID) {
-        /*
-          $exerNum = Suite::model()->getExerNum($suiteID);
-          $answerNum = AnswerRecord::model()->getAnswerNum($suiteID);
-          $exerSum = 0;
-          $answerSum = 0;
-          foreach (Tool::$EXER_TYPE as $type) {
-          $exerSum += $exerNum[$type];
-          $answerSum +=$answerNum[$type];
-          }
-          return $answerSum / $exerSum;
-
-         * 
-         */
-        //改用直接查询数据库。。。
-        $userID = Yii::app()->session['userid_now'];
-        $record = SuiteRecord::model()->find('suiteID=? and studentID=?', array($suiteID, $userID));
-        return $record == NULL ? 0 : $record->ratio_accomplish;
-    }
-
-    protected function getCorrect($suiteID) {
-        /*
-          $answerCorrect = AnswerRecord::model()->getAnswerCorrect($suiteID);
-          $ratioSum = 0;
-          //print_r($answerCorrect);
-          foreach (Tool::$EXER_TYPE as $type) {
-          if(isset($answerCorrect[$type])){
-          foreach ($answerCorrect[$type] as $ratio){
-          $ratioSum += $ratio;
-          }
-          }
-          }
-          $exerNum = Suite::model()->getExerNum($suiteID);
-          $exerSum = 0;
-          foreach (Tool::$EXER_TYPE as $type) {
-          $exerSum += $exerNum[$type];
-          }
-          return $ratioSum / $exerSum;
-         * 
-         * 同样，直接改成查询数据库
-         */
-        $userID = Yii::app()->session['userid_now'];
-        $record = SuiteRecord::model()->find('suiteID=? and studentID=?', array($suiteID, $userID));
-        return $record == NULL ? 0 : $record->ratio_correct;
-    }
-
-//    public function getAnswerRecordByType($type){
-//        //返回页面progress需要的某题型所有信息,根据题型。type = listen 、look、key、knlg
-//        $allClasswork = SuiteRecord::getClassworkAll();
-//        foreach ($allClasswork as $classwork){
-//            $recordID = $classwork['recordID'];
-//            $suiteID = $classwork['suiteID'];
-//            $exerAll = Suite::model()->getSuiteExerByType( $suiteID, $type);
-//            foreach ($exerAll as $exer){
-//                $exerID = $exer['exerciseID'];
-//                $result["$suiteID"]["$type"]["$exerID"]['title'] = $exer['title'];
-//                
-//                echo '$recordID='.$recordID.' ';
-//                echo '$type='.$type.' ';
-//                echo '$exerID='.$exerID.' ';
-//                echo "\n";
-//                //for debug
-//                 
-//                $answer = AnswerRecord::getAnswer($recordID, $type, $exerID);
-//                if($answer == NULL){
-//                    $result["$suiteID"]["$type"]["$exerID"]['accomplish'] = 0;
-//                    $result["$suiteID"]["$type"]["$exerID"]['correct'] = 0;
-//                } else {
-//                    $result["$suiteID"]["$type"]["$exerID"]['accomplish'] = $answer -> ratio_accomplish;
-//                    $result["$suiteID"]["$type"]["$exerID"]['correct'] = $answer -> ratio_correct;
-//                }
-//            }
-//        }
-//        //$result['exer'] = get
-//        return $result;
-//    }
-
-    /**
-     * @return string the associated database table name
-     */
-    public function tableName() {
-        return 'student';
-    }
 
     /**
      * @return array validation rules for model attributes.
@@ -302,13 +152,13 @@ class Student extends CActiveRecord {
         ));
     }
 
-    public static function isLogin($userID,$login){
-        $student = new Student();
-        $student = $student->find("userID = '$userID'");
-        $student->is_login = $login;
-        $result = $student->update();
+    public function getStuLstByClassID($classID){
+        $sql = "SELECT * FROM student WHERE classID = ".$classID;
+        $result = Tool::pager($sql, 10);
         return $result;
     }
+
+
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -330,12 +180,6 @@ class Student extends CActiveRecord {
             $student->classID = $courseID;
             $student->insert();
         }
-    }
-    
-    public function findStudentByClass($classID){
-        $student = new Student();
-        $student = $student->findAll("classID='$classID'");
-        return $student;
     }
 
 }

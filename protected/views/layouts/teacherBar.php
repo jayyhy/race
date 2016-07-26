@@ -73,7 +73,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
         </body>
     </html>
 <?php } else { ?>
-    <script>    window.location.href = "./index.php?r=user/login"</script>
+    <script>    window.location.href = "./index.php?r=user/login";</script>
 <?php } ?>
 <script type="text/javascript">
 //    window.onbeforeunload = onbeforeunload_handler;

@@ -89,20 +89,44 @@ class AnswerRecord extends CActiveRecord {
         ));
     }
 
-    public function submitRace($studentID, $raceID, $content,$courseID) {
+    public function submitRace($studentID, $raceID, $content, $courseID) {
         $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
+        $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
         if ($record == "") {
             $record = new AnswerRecord();
             $record->studentID = $studentID;
-            $record->raceID= $raceID;
+            $record->raceID = $raceID;
             $record->content = $content;
             $record->courseID = $courseID;
+            $record->indexID = $indexID;
             $result = $record->insert();
         } else {
             $record->content = $content;
             $result = $record->update();
         }
         return $result;
+    }
+
+    public function markScore($stuID, $raceID, $mark, $rate) {
+        $answer = AnswerRecord::model()->find("studentID=? AND raceID=?", array($stuID, $raceID));
+        $result = 0;
+        if ($answer != '') {
+            $answer->score = $mark;
+            $answer->rate = $rate;
+            $result = $answer->update();
+            return $result;
+        }else{
+            return $result;
+        }
+    }
+    
+    public function getAllScoreByStudentIDAndIndexID($studentID,$indexID){
+        $answers = AnswerRecord::model()->findAll('studentID=? AND indexID=?',array($studentID,$indexID));
+        $totalScore = 0;
+        foreach ($answers as $v){
+            $totalScore+=$v['score'];
+        }
+        return $totalScore;
     }
 
     /**
