@@ -1730,6 +1730,8 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
     padding: 4px 4px;
     background: url(../../img/icon_answer.png);
     background-repeat: no-repeat;
+    position:relative;
+    bottom:7px;
 }
 .icon-align-center {
     background-position:-288px -48px
@@ -1872,6 +1874,8 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
     padding: 4px 4px;
     background: url(../../img/UI_adm/icon_addperson.png);
     background-repeat: no-repeat;
+    position:relative;
+    bottom:6px;
 }
 .icon-plus-editwork {
     background-position: -408px -96px
@@ -5745,10 +5749,10 @@ table tr td {
 }
 .stuindex{
     width: 1090px;
-    height: 750px
+    height: 550px
 }
 .stuIframe{
     border: 0px;
-    height: 400px;
+    height: 200px;
     width: 1090px;
 }

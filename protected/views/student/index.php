@@ -11,16 +11,32 @@
     var doc = document;
     function over(raceID, step) {
         var content = yaweiOCX.GetContent();
+        if (step === 2) {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+        }
         if (step === 3) {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
-            yaweiOCX.ExportTxtFile("D:/" + raceID + StudentID + ".txt");
+            yaweiOCX.ExportTxtFile("D:/" +step+ raceID + StudentID + ".txt");
+        }
+        if (step === 4) {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+        }
+        if (step === 5) {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+        }
+        if (step === 6) {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
         }
         yaweiOCX.ClearContent();
-        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
-            onClose: function () {
+//        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
+//            onClose: function () {
                 ajaxSubmit(raceID, content);
-            }
-        });
+//            }
+//        });
     }
 
     function ajaxSubmit(raceID, content) {

@@ -108,7 +108,7 @@ class Course extends CActiveRecord {
         $course = Course::model()->find("courseID=?", array($courseID));
         $currentTime = Race::model()->find("raceID=?", array($raceID))['time'];
         $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
-        $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime * 60)));
+        $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime)));
         $course->startTime = $startTime;
         $course->onRaceID = $raceID;
         $course->endTime = $endTime;

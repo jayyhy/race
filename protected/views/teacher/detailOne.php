@@ -5,32 +5,32 @@
             if ($step == 1) {
                 echo 'class="active"';
             }
-            ?>  ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=1&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段一</a></li>
+            ?>  ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=1&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 文本校对</a></li>
             <li <?php
             if ($step == 2) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=2&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段二</a></li>
+            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=2&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 看打</a></li>
             <li <?php
             if ($step == 3) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=3&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段三</a></li>
+            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=3&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 听打</a></li>
             <li <?php
             if ($step == 4) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=4&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段四</a></li>
+            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=4&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 听打校对</a></li>
             <li <?php
             if ($step == 5) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=5&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段五</a></li>
+            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=5&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 盲打</a></li>
             <li <?php
             if ($step == 6) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=6&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 阶段六</a></li>
+            ?> ><a href="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=6&stuID=<?php echo $_GET['stuID']; ?>"><i class="icon-align-left"></i> 视频纠错</a></li>
         </ul>
         <br/>
         <ul class="nav nav-list">

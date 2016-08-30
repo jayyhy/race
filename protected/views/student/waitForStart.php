@@ -1,7 +1,12 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<section >
+<section style="height:200px">
     <h2>比赛即将开始，请调试控件。</h2>
-    <h3>倒计时<span id = "sideTime">00:00:00</span></h3>
+    <div id="ready">
+        <h2 style="text-align: center">未开始</h2>
+    </div>
+    <div id="beginTime" style="display:none">
+        <h2 style="text-align: center">倒计时：<span id = "sideTime">00</span></h2>
+    </div>
 </section>
 <script>
     (function () {
@@ -16,6 +21,8 @@
                         var nowTime = data['nowTime'];
                         var startTime = data['startTime'];
                         if (startTime > nowTime) {
+                            $("#ready").hide();
+                            $("#beginTime").show();
                             var seconds = startTime - nowTime;
                             printTime(seconds, "sideTime");
                         }else{
@@ -37,10 +44,10 @@
         var mm = parseInt((seconds) % 3600 / 60);
         var ss = parseInt((seconds) % 60);
         var strTime = "";
-        strTime += hh < 10 ? "0" + hh : hh;
-        strTime += ":";
-        strTime += mm < 10 ? "0" + mm : mm;
-        strTime += ":";
+//        strTime += hh < 10 ? "0" + hh : hh;
+//        strTime += ":";
+//        strTime += mm < 10 ? "0" + mm : mm;
+//        strTime += ":";
         strTime += ss < 10 ? "0" + ss : ss;
         document.getElementById(eleID).innerHTML = strTime;
     }
