@@ -232,14 +232,15 @@ class AdminController extends CController {
                 $render = 'Two';
                 break;
             case 3:
-                if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
                     $score = $_POST['score'];
                     $content = $_POST['content'];
-                    $dir = "./resources/race/";
+                    $dir = "./resources/race/";                    
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
+                    
                     if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
@@ -251,6 +252,10 @@ class AdminController extends CController {
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                         Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
                         Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
                         $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
                         Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
@@ -270,8 +275,8 @@ class AdminController extends CController {
                 $render = 'Four';
                 break;
             case 5:
-                if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
                     $score = $_POST['score'];
                     $content = $_POST['content'];
                     $dir = "./resources/race/";
@@ -289,6 +294,10 @@ class AdminController extends CController {
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                         Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
                         Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
                         $result = 1;
                     }
@@ -296,8 +305,8 @@ class AdminController extends CController {
                 $render = 'Five';
                 break;
             case 6:
-                if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
                     $score = $_POST['score'];
                     $content = $_POST['content'];
                     $dir = "./resources/race/";
@@ -312,6 +321,10 @@ class AdminController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
+                            $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                            $player=new COM("WMPlayer.OCX");
+                            $media=$player->newMedia($file);
+                            $time=round($media->duration);
                             Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
                             $result = 1;
                         }

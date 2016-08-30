@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 function printTime(seconds, eleID){
-    var hh = parseInt((seconds) / 3600);
-    var mm = parseInt((seconds) % 3600 / 60);
+//    var hh = parseInt((seconds) / 3600);
+    var mm = parseInt((seconds) / 60);
     var ss = parseInt((seconds) % 60);
     var strTime = "";
-    strTime += hh < 10 ? "0" + hh : hh;
-    strTime += ":";
+//    strTime += hh < 10 ? "0" + hh : hh;
+//    strTime += ":";
     strTime += mm < 10 ? "0" + mm : mm;
     strTime += ":";
     strTime += ss < 10 ? "0" + ss : ss;
