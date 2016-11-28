@@ -214,7 +214,7 @@ class AdminController extends CController {
         switch ($step) {
             case 1:
                 if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                    $time = $_POST['time']*60;
                     $score = $_POST['score'];
                     Race::model()->addRace($indexID, $step, "", $score, $time, "", "");
                     $result = 1;
@@ -223,7 +223,7 @@ class AdminController extends CController {
                 break;
             case 2:
                 if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                    $time = $_POST['time']*60;
                     $score = $_POST['score'];
                     $content = $_POST['content'];
                     Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");
@@ -266,7 +266,7 @@ class AdminController extends CController {
                 break;
             case 4:
                 if (isset($_POST['time'])) {
-                    $time = $_POST['time'];
+                    $time = $_POST['time']*60;
                     $score = $_POST['score'];
                     $content = Race::model()->find("indexID=? AND step=?", array($indexID, 3))['content'];
                     Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");

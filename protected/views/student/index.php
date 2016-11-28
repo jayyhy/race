@@ -30,6 +30,8 @@
         if (step === 6) {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            $("#other").show();
+            $("#six").hide();
         }
         yaweiOCX.ClearContent();
 //        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
@@ -66,7 +68,7 @@
 
     function reciveContent(raceID) {
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
-        yaweiOCX.LoadFromTxtFile("D:/" + raceID + StudentID + ".txt");
+        yaweiOCX.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
     }
     
     function stepFive(){
