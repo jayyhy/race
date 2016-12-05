@@ -54,10 +54,10 @@
                     <label class="control-label" for="input02">文件：</label>
                     <div class="controls">
                         <?php if ($race != "") { ?>
-                            <div class="control-group">
+                        <div class="control-group">
                                 <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
                                 <?php if (file_exists($listenpath)) { ?>
-                                    <audio  src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio>
+                                    <video  src = "<?php echo $listenpath; ?>" preload = "auto" style="border:1px solid #5C595A" poster="./resources/race/01d32256f4084132f875a944080917.gif" controls></video>
                                 <?php } else { ?>
                                     <p style="color: red">原音频文件丢失或损坏！</p>
                                 <?php } ?>
