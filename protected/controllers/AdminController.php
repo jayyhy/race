@@ -232,6 +232,20 @@ class AdminController extends CController {
                 $render = 'Two';
                 break;
             case 3:
+                $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
+                if ($flag!=null){
+                if (isset($_POST['score'])) {
+                $time = $flag['time'];
+                $score = $_POST['score'];
+                $newName = $flag['resourseID'];
+                $oldName = $flag['fileName'];
+                $content = $_POST['content'];
+                Race::model()->addRace($indexID, $step, $content, $score,$time, $newName, $oldName);
+                $result = 1;
+                $render = 'Three';
+                break;
+                    }
+                }
                 if (isset($_POST['score'])) {
 //                    $time = $_POST['time'];
                     $score = $_POST['score'];
