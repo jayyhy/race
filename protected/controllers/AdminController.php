@@ -240,14 +240,15 @@ class AdminController extends CController {
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
-                    
-                    if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                    $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
+                    if ($flag==null){
+                            if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
-                        $result = '文件格式不正确，应为MP3或WAV格式';
-                    } else if ($_FILES['file']['error'] > 0) {
-                        $result = '文件上传失败';
-                    } else {
+                            $result = '文件格式不正确，应为MP3或WAV格式';
+                        } else if ($_FILES['file']['error'] > 0) {
+                                 $result = '文件上传失败';
+                         } else {
                         $oldName = $_FILES["file"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
@@ -260,7 +261,39 @@ class AdminController extends CController {
                         $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
                         Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
                         $result = 1;
+                            }                 
+                                    }
+                else {
+                   if($_FILES["file"]["name"]!=""){
+                        if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                                $result = '文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['file']['error'] > 0) {
+                                 $result = '文件上传失败';
+                              }else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
+                        $result = 1;
+                            } 
+                        }
+                else {
+                     $newName = $flag['resourseID'];
+                     $oldName = $flag['fileName'];
+                     $time = $flag['time'];
+                     Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                     $result = '1';
                     }
+                        }
                 }
                 $render = 'Three';
                 break;
