@@ -41,7 +41,7 @@
         <h3></h3>
         <form method="POST" action="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4">
             时间：
-            <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']; ?></textarea> 分钟
+            <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']/60; ?></textarea> 分钟
             <br/><br/>
             分数：
             <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> &nbsp;&nbsp;&nbsp;分
