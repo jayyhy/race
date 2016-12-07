@@ -37,7 +37,7 @@
 <div class="span9">
     <h2>盲打</h2>
     <div>
-        <h3 style="text-align: center">第五阶段持续时间以及配分</h3>
+        <h3 style="text-align: center">持续时间以及配分</h3>
         <h3></h3>
         <form class="form-horizontal" method="post" action="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" id="myForm" enctype="multipart/form-data"> 
             
