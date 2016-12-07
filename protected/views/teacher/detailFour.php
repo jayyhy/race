@@ -43,7 +43,7 @@
     <?php if ($answer == "") { ?>
         <h3>未作答</h3>
     <?php } else { ?>
-        <h3>考试时间：<?php echo $race['time']; ?></h3>
+        <h3>考试时间：<?php echo $race['time']/60; ?></h3>
         <h3>本阶段满分:<?php echo $race['score']; ?></h3>
         <textarea style="width: 600px;height: 140px" disabled="true"><?php echo $race['content']; ?></textarea>
         <textarea style="width: 600px;height: 140px" disabled="true"><?php echo $answer['content']; ?></textarea>

@@ -43,7 +43,7 @@
     <?php if ($answer == "") { ?>
         <h3>未作答</h3>
     <?php } else { ?>
-        <h3>考试时间：<?php echo $race['time']; ?></h3>
+        <h3>考试时间：<?php echo $race['time']/60; ?></h3>
         <h3>本阶段满分:<?php echo $race['score']; ?></h3>
         <form method="POST" action="./index.php?r=teacher/detail&indexID=<?php echo $_GET['indexID']; ?>&step=1&stuID=<?php echo $_GET['stuID']; ?>">
             <h3>打分：<input <?php
