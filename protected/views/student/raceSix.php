@@ -7,6 +7,7 @@
     <div style="position:absolute;top:0px;left:500px;">
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
+
         <video id="audio" src = "<?php echo $listenpath; ?>" preload = "auto" autoplay="true" style="height:200px;"></video>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>

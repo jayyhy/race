@@ -44,7 +44,7 @@
             <div class="control-group">
                 <label class="control-label">时间：</label>
                 <div class="controls">
-                    <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']; ?></textarea> 分钟
+                    <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']/60; ?></textarea> 分钟
                 </div>
             </div>
             

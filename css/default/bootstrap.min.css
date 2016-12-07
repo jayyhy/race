@@ -4670,6 +4670,26 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     background-repeat:no-repeat;
 }
 
+#examUpload{
+    position: relative;
+    top:1px;
+    background:-moz-linear-gradient(left,#565656,#565656);
+    color: #fff;
+    font-size: 20px;
+    padding: 17px 26px;
+    background-repeat:no-repeat;
+}
+#examUpload:hover{
+    position: relative;
+    top:1px;
+    background:-moz-linear-gradient(left,#565656,#565656);
+    text-shadow: #f46500 1px 1px 1px;
+    color: #f46500;
+    font-size: 20px;
+    padding: 17px 26px;
+    background-repeat:no-repeat;
+}
+
 .userUI{
     position: relative;
     top: 1px;
@@ -5209,7 +5229,7 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     position: relative;
     top: 1px;
     background:-moz-linear-gradient(left,#565656,#fff);
-    padding: 27px 215px;
+    padding: 27px 149px;
 }
 #schedule{
     position: relative;
