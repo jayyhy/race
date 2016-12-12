@@ -38,7 +38,7 @@ class AnswerRecord extends CActiveRecord
 			array('studentID', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('recordID, studentID, content, raceID, score, rate, courseID, indexID, accept_time', 'safe', 'on'=>'search'),
+			array('recordID, studentID, content, raceID, score, rate, courseID, indexID, accept_time,completion_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +68,7 @@ class AnswerRecord extends CActiveRecord
 			'courseID' => 'Course',
 			'indexID' => 'Index',
 			'accept_time' => 'Accept Time',
+                        'completion_time'=>'Completion_time',
 		);
 	}
 
@@ -98,7 +99,7 @@ class AnswerRecord extends CActiveRecord
 		$criteria->compare('courseID',$this->courseID);
 		$criteria->compare('indexID',$this->indexID);
 		$criteria->compare('accept_time',$this->accept_time);
-
+                $criteria->compare('completion_time',$this->completion_time);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -119,7 +120,7 @@ class AnswerRecord extends CActiveRecord
         $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
         $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
         $accepttime = microtime(true)*10000;
-        error_log($accepttime);
+        $completiontime = microtime(true)*10000;
         if ($record == "") {
             $record = new AnswerRecord();
             $record->studentID = $studentID;
@@ -131,6 +132,7 @@ class AnswerRecord extends CActiveRecord
             $result = $record->insert();
         } else {
             $record->content = $content;
+            $record->completion_time =$completiontime;
             $result = $record->update();
         }
         return $result;
