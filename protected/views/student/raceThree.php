@@ -6,8 +6,10 @@
     <h3>剩余：<span id="time"></span></h3>
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
-    <audio id="audio" src = "<?php echo $listenpath; ?>" preload = "auto" autoplay="true"></audio>
-    <?php } else { ?>
+    <div style="position:absolute;top:0px;left:500px;">
+        <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" preload = "auto" autoplay="true" height="200px"></video>
+    </div>
+ <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
     <script>
