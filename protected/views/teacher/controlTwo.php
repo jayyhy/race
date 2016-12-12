@@ -39,7 +39,19 @@
     <h2>看打</h2>
     <?php
     if ($nowOnStep != 0) {
-        echo '<p>当前进行:第' . $nowOnStep . '阶段</p>';
+        if($nowOnStep == 1){
+            echo '<p>当前进行:文本校对</p>';
+        }else if($nowOnStep == 2){
+            echo '<p>当前进行:看打</p>';
+        }else if($nowOnStep == 3){
+            echo '<p>当前进行:听打</p>';
+        }else if($nowOnStep == 4){
+            echo '<p>当前进行:听打校对</p>';
+        }else if($nowOnStep == 5){
+            echo '<p>当前进行:盲打</p>';
+        }else if($nowOnStep == 6){
+            echo '<p>当前进行:视频纠错</p>';
+        }
     } else {
         ?>
 <!--        <p>设置准备时间:<input style="width: 30px" id="CDTime"/>秒</p>-->
