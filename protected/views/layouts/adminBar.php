@@ -46,7 +46,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
 
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="./index.php?r=admin/set">设置</a>
+<!--                                                    <a href="./index.php?r=admin/set">设置</a>-->
                                                     <a href="./index.php?r=user/login&exit=1">退出</a>
                                                 </li>
                                             </ul>   

@@ -38,7 +38,7 @@
                     <td class="font-center"><?php echo $model['name']; ?></td>
                     <td class="font-center"><?php echo $model['createTime']; ?></td>
                     <td class="font-center" style="width: 100px">  
-                        <a href="#"  ><img title="查看" src="<?php echo IMG_URL; ?>detail.png"></a>
+<!--                        <a href="#"  ><img title="查看" src="<?php echo IMG_URL; ?>detail.png"></a>-->
                         <a href="#"  onclick="deleteCourse(<?php echo $model['courseID']; ?>,'<?php echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>delete.png"></a>
                     </td>
                 </tr>            
