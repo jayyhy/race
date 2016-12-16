@@ -421,5 +421,15 @@ class AdminController extends CController {
             echo 100;
         }
     }
-
+    public function ActionAddRoom(){
+        $result = Course::model()->getAllLst();
+        $courseLst = $result ['list'];
+        $pages = $result ['pages'];
+        $this->render('courseLst', array(
+            'courseLst' => $courseLst,
+            'pages' => $pages,
+            'result' => ''
+        ));   
+    }
+    
 }
