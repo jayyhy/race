@@ -1,7 +1,5 @@
-   <?php $indexID = $race['indexID'];
-         $race2 = Race::model()->find("indexID = '$indexID' and step = 32");
-         
-   ?>
+
+<meta http-equiv="refresh" content="300">
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
@@ -12,9 +10,10 @@
            $listenpath2 = "./resources/race/" . $race2['resourseID'];
     ?>
     <?php if (file_exists($listenpath)) { ?>
-    <audio id="audio" src = "<?php echo $listenpath; ?>" preload = "auto" autoplay="true"></audio>
-    <audio id="audio2" src = "<?php echo $listenpath2; ?>"></audio>
-    <?php } else { ?>
+    <div style="position:absolute;top:0px;left:500px;">
+        <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" preload = "auto" autoplay="true" height="200px"></video>
+    </div>
+ <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
     <script>

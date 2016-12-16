@@ -108,6 +108,10 @@ class StudentController extends CController {
         }
         $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, "lastRaceIDForStepFour" => $lastRaceIDForStepFour));
     }
+    
+    public function saveInRealTime(){
+        
+    }
 
     public function actionOver() {
         $userID = Yii::app()->session['userid_now'];
