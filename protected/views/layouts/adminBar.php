@@ -27,9 +27,12 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
                             <a class="brand" href="./index.php?r=admin/index"></a>
                             <div class="nav-collapse">
                                 <ul class="nav">
-                                     <li><a id="course_manager"  href="./index.php?r=admin/courseLst">考场调度</a></li>
+<!--                                     <li><a id="course_manager"  href="./index.php?r=admin/courseLst">考场调度</a></li>
                                      <li><a id="topic_manager"  href="./index.php?r=admin/raceLst">试卷调配</a></li>
-                                   <li><a id="notice_manager" href="./index.php?r=admin/noticeLst">公告管理</a></li>
+                                   <li><a id="notice_manager" href="./index.php?r=admin/noticeLst">公告管理</a></li>-->
+                                   <li><a id="notice_manager" href="./index.php?r=admin/addRoom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;创建考场</a></li>
                                       <li><a id="blank_admin"></a></li>
                                     <li >
                                         <div class="userUI">
