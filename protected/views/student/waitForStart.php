@@ -51,7 +51,7 @@
                     console.log(exception, "exception");
                 }
             });
-        }, 100);
+        }, 500);
     })();
     function printTime(seconds, eleID) {
         var hh = parseInt((seconds) / 3600);
