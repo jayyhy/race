@@ -9,6 +9,7 @@
             var curtime = <?php echo time(); ?>;
             var endtime = <?php echo $endTime; ?>;
             tCounter(curtime, endtime, "time", endDo);
+            window.parent.stepFive();
         })();
         function endDo(){
             window.parent.over(<?php echo $race['raceID']; ?>);

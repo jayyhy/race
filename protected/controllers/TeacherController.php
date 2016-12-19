@@ -49,7 +49,308 @@ class TeacherController extends CController {
     public function actionIndex() {
         $this->render('index');
     }
+    public function actionRaceLst() {
+        $aList = RaceIndex::model()->getAllRaceIndex();
+        $result = $aList['list'];
+        $pages = $aList['pages'];
+        $this->render('raceLst', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'result' => ''
+        ));
+    }
+        public function actionEditRace() {
+        $step = $_GET["step"];
+        $indexID = $_GET["indexID"];
+        $result = "";
+        $render = '';
+        switch ($step) {
+            case 1:
+                if (isset($_POST['time'])) {
+                    $time = $_POST['time']*60;
+                    $score = $_POST['score'];
+                    Race::model()->addRace($indexID, $step, "", $score, $time, "", "");
+                    $result = 1;
+                }
+                $render = 'One';
+                break;
+            case 2:
+                if (isset($_POST['time'])) {
+                    $time = $_POST['time']*60;
+                    $score = $_POST['score'];
+                    $content = $_POST['content'];
+                    Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");
+                    $result = 1;
+                }
+                $render = 'Two';
+                break;
+            case 3:
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
+                    $score = $_POST['score'];
+                    $content = $_POST['content'];
+                    $score2 = $_POST['score2'];
+                    $content2 = $_POST['content2'];
+                    $dir = "./resources/race/";                    
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777);
+                    }
+                    $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
+                    $flag2 = Race::model()->find("indexID=? AND step =?", array($indexID, 32));
+                    if ($flag==null){
+                            if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                            $result = '文件格式不正确，应为MP3或WAV格式';
+                        } else if ($_FILES['file']['error'] > 0) {
+                                 $result = '文件上传失败';
+                         } else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+//                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+//                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
+                        $result = 1;
+                            }                 
+                                    }
+                else {
+                   if($_FILES["file"]["name"]!=""){
+                        if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                                $result = '文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['file']['error'] > 0) {
+                                 $result = '文件上传失败';
+                              }else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+//                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+//                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
+                        $result = 1;
+                            } 
+                        }else {
+                           $newName = $flag['resourseID'];
+                           $oldName = $flag['fileName'];
+                           $time = $flag['time'];
+                           Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                           $result = '1';
+                        }
+                 }
+                 if($flag2 == null){
+                      if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
+                          $_FILES ['file2'] ['type'] != "audio/wav" &&
+                          $_FILES ['file2'] ['type'] != "audio/x-wav") {
+                          $result = '文件格式不正确，应为MP3或WAV格式';
+                          } else if ($_FILES['file2']['error'] > 0) {
+                              $result = '文件上传失败';
+                         } else {
+                           $oldName = $_FILES["file2"]["name"];
+                           $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                           move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                           Resourse::model()->insertRelaVoice($newName, $oldName);
+                           $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                           $player=new COM("WMPlayer.OCX");
+                           $media=$player->newMedia($file);
+                           $time=round($media->duration);
+                           Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
+                           $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+                           Race::model()->addRace($indexID, 4, $content2, $step4['score'], $step4['time'], "", "");
+                           $result = 1;
+                        } 
+                 }  else {
+                     if($_FILES["file2"]["name"]!=""){
+                        if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file2'] ['type'] != "audio/wav" &&
+                            $_FILES ['file2'] ['type'] != "audio/x-wav") {
+                                $result = '文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['file2']['error'] > 0) {
+                                 $result = '文件上传失败';
+                              }else {
+                        $oldName = $_FILES["file2"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
+                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+                        Race::model()->addRace($indexID, 4, $content2, $step4['score'], $step4['time'], "", "");
+                        $result = 1;
+                            } 
+                        }else {
+                           $newName = $flag2['resourseID'];
+                           $oldName = $flag2['fileName'];
+                           $time = $flag2['time'];
+                           Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
+                           $result = '1';
+                        }
+                 }
+                        
+             }
+                $render = 'Three';
+                break;
+            case 4:
+                if (isset($_POST['time'])) {
+                    $time = $_POST['time']*60;
+                    $score = $_POST['score'];
+                    $content = Race::model()->find("indexID=? AND step=?", array($indexID, 3))['content'];
+                    Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");
+                    $result = 1;
+                }
+                $render = 'Four';
+                break;
+            case 5:
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
+                    $score = $_POST['score'];
+                    $content = $_POST['content'];
+                    $dir = "./resources/race/";
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777);
+                    }
+                    if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                        $result = '文件格式不正确，应为MP3或WAV格式';
+                    } else if ($_FILES['file']['error'] > 0) {
+                        $result = '文件上传失败';
+                    } else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                        $result = 1;
+                    }
+                }
+                $render = 'Five';
+                break;
+            case 6:
+                if (isset($_POST['score'])) {
+//                    $time = $_POST['time'];
+                    $score = $_POST['score'];
+                    $content = $_POST['content'];
+                    $dir = "./resources/race/";
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777);
+                    }
+                    if ($_FILES["file"]["type"] == "video/mp4" || $_FILES["file"]["type"] == "application/octet-stream" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "rm" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "RM") {
+                        if ($_FILES["file"]["error"] > 0) {
+                            $result = "Return Code: " . $_FILES["file"]["error"];
+                        } else {
+                            $oldName = $_FILES["file"]["name"];
+                            $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                            move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                            Resourse::model()->insertRelaVideo($newName, $oldName);
+                            $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                            $player=new COM("WMPlayer.OCX");
+                            $media=$player->newMedia($file);
+                            $time=round($media->duration);
+                            Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                            $result = 1;
+                        }
+                    } else {
+                        $result = "请上传正确类型的文件！";
+                    }
+                }
+                $render = 'Six';
+                break;
+        }
+        $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+        if($render == "Three"){
+            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
+            $this->render('editRace' . $render, array(
+            'race' => $race,
+            'race2'=>$race2,
+            'result' => $result,
+            'step' => $step
+           )); 
+        }  else {
+           $this->render('editRace' . $render, array(
+            'race' => $race,
+            'result' => $result,
+            'step' => $step
+           )); 
+        }
+        
+    }
+     public function ActionGetProgress() {
+        session_start();
+        $i = ini_get('session.upload_progress.name');
+        $key = ini_get("session.upload_progress.prefix") . $_GET[$i];
+        if (!empty($_SESSION[$key])) {
+            $current = $_SESSION[$key]["bytes_processed"];
+            $total = $_SESSION[$key]["content_length"];
+            echo $current < $total ? ceil($current / $total * 100) : 100;
+        } else {
+            echo 100;
+        }
+    }
+        public function actionDeleteRaceIndex() {
+        if (isset($_GET['indexID'])) {
+            $indexID = $_GET['indexID'];
+            RaceIndex::model()->deleteRaceIndex($indexID);
+            $result = 1;
+        }
 
+        if (isset($_POST['checkbox'])) {
+            $result = 1;
+            $userIDlist = $_POST['checkbox'];
+            foreach ($userIDlist as $v) {
+                RaceIndex::model()->deleteRaceIndex($v);
+            }
+            $aList = RaceIndex::model()->getAllRaceIndex();
+            $raceLst = $aList ['list'];
+            $pages = $aList ['pages'];
+            $this->render('raceLst', array(
+                'raceLst' => $raceLst,
+                'pages' => $pages,
+                'result' => $result,
+            ));
+        } else {
+            $aList = RaceIndex::model()->getAllRaceIndex();
+            $raceLst = $aList ['list'];
+            $pages = $aList ['pages'];
+            $this->render('raceLst', array(
+                'raceLst' => $raceLst,
+                'pages' => $pages,
+                'result' => $result
+            ));
+        }
+    }
+    
+    public function actionAddRaceIndex() {
+        $raceName = $_GET['raceName'];
+        RaceIndex::model()->addRaceIndex($raceName);
+        $aList = RaceIndex::model()->getAllRaceIndex();
+        $result = $aList['list'];
+        $pages = $aList['pages'];
+        $this->render('raceLst', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'result' => ''
+        ));
+    }
+    
     public function actionteaInformation() {
         $ID = Yii::app()->session['userid_now'];
         $teacher = Teacher::model()->find("userID = '$ID'");
@@ -196,7 +497,12 @@ class TeacherController extends CController {
             $flag = 1;
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
-        $this->render('control' . $render, array("step" => $step, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
+        if($render == "Three"){
+            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
+          $this->render('control' . $render, array("step" => $step, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
+        }else {
+          $this->render('control' . $render, array("step" => $step, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
+        }
     }
 
     public function actionMarkRace() {

@@ -38,6 +38,14 @@
 //            }
 //        });
     }
+    
+    function saveInRealTime(){
+        $.ajax({
+            type:"POST",
+            
+            url:""
+        });
+    }
 
     function ajaxSubmit(raceID, content) {
         $.ajax({
