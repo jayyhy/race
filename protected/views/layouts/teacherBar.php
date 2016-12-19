@@ -28,6 +28,9 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                             <a class="brand" href="./index.php?r=teacher/index"></a>
                             <div class="nav-collapse">
                                 <ul class="nav">
+                                   <li class="dropdown">
+                                        <a href="./index.php?r=teacher/raceLst"  id="topic_manager">试卷调配</a>
+                                    </li> 
                                     <li class="dropdown">
                                         <a href="./index.php?r=teacher/raceControl"  id="homework">考场管控</a>
                                     </li>

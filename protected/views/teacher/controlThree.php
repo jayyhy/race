@@ -56,7 +56,7 @@
         ?>
 <!--        <p>设置准备时间:<input style="width: 30px" id="CDTime"/>秒</p>-->
     <?php } ?>
-    <p>考试时间:<?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</p>
+    <p>考试时间:<?php echo floor(($race['time'] +$race2['time'])/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time'])-floor(($race['time'] +$race2['time']) / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
     <button class="btn_4big" id="start" onclick="start()">开始</button>
