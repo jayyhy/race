@@ -10721,3 +10721,821 @@ Stack trace:
 REQUEST_URI=/race/index.php?r=student/AjaxHertBeatWaitForStart
 HTTP_REFERER=http://192.168.0.198/race/index.php?r=student/waitForStart
 ---
+2016/12/19 16:18:56 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `Student` `t` WHERE userID=? LIMIT 1. Bound with :0=NULL.
+in C:\wamp\www\race\protected\controllers\StudentController.php (52)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 16:18:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `Student` `t` WHERE userID=? LIMIT 1. Bound with :0=NULL' in C:\wamp\www\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp\www\framework\db\ar\CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 C:\wamp\www\framework\db\ar\CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\wamp\www\race\protected\controllers\StudentController.php(52): CActiveRecord->find('userID=?', Array)
+#4 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionIndex()
+#5 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#9 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('student/index')
+#10 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#11 C:\wamp\www\race\index.php(32): CApplication->run()
+#12 {main}
+REQUEST_URI=/race/index.php?r=student/index
+---
+2016/12/19 16:27:07 [error] [php] Undefined variable: courseLst (C:\wamp\www\race\protected\views\admin\index.php:35)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(8): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/index
+in C:\wamp\www\race\protected\views\admin\index.php (35)
+in C:\wamp\www\race\protected\controllers\AdminController.php (8)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 16:28:37 [error] [php] Undefined variable: courseLst (C:\wamp\www\race\protected\views\admin\index.php:35)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(8): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/index
+in C:\wamp\www\race\protected\views\admin\index.php (35)
+in C:\wamp\www\race\protected\controllers\AdminController.php (8)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 18:39:58 [error] [php] Undefined index: renshu (C:\wamp\www\race\protected\controllers\AdminController.php:179)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#1 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#2 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#3 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#4 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#5 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=%E8%8B%8F%E7%8F%8A%E7%8F%8A&kaohao=ss
+in C:\wamp\www\race\protected\controllers\AdminController.php (179)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 19:04:51 [error] [php] Trying to get property of non-object (C:\wamp\www\race\protected\components\Tool.php:198)
+Stack trace:
+#0 C:\wamp\www\framework\web\CBaseController.php(95): StudentController->renderInternal()
+#1 C:\wamp\www\framework\web\CController.php(783): StudentController->renderFile()
+#2 C:\wamp\www\race\protected\controllers\StudentController.php(54): StudentController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionIndex()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): StudentController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): StudentController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): StudentController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=student/index
+in C:\wamp\www\race\protected\components\Tool.php (198)
+in C:\wamp\www\race\protected\views\layouts\studentBar.php (33)
+in C:\wamp\www\race\protected\controllers\StudentController.php (54)
+2016/12/19 19:04:52 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL.
+in C:\wamp\www\race\protected\controllers\StudentController.php (64)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 19:04:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL' in C:\wamp\www\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp\www\framework\db\ar\CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 C:\wamp\www\framework\db\ar\CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\wamp\www\race\protected\controllers\StudentController.php(64): CActiveRecord->find('courseID=?', Array)
+#4 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionAjaxHertBeatWaitForStart()
+#5 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('AjaxHertBeatWai...')
+#9 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('student/AjaxHer...')
+#10 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#11 C:\wamp\www\race\index.php(32): CApplication->run()
+#12 {main}
+REQUEST_URI=/race/index.php?r=student/AjaxHertBeatWaitForStart
+HTTP_REFERER=https://localhost/race/index.php?r=student/waitForStart
+---
+2016/12/19 19:04:53 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL.
+in C:\wamp\www\race\protected\controllers\StudentController.php (64)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 19:04:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL' in C:\wamp\www\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp\www\framework\db\ar\CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 C:\wamp\www\framework\db\ar\CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\wamp\www\race\protected\controllers\StudentController.php(64): CActiveRecord->find('courseID=?', Array)
+#4 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionAjaxHertBeatWaitForStart()
+#5 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('AjaxHertBeatWai...')
+#9 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('student/AjaxHer...')
+#10 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#11 C:\wamp\www\race\index.php(32): CApplication->run()
+#12 {main}
+REQUEST_URI=/race/index.php?r=student/AjaxHertBeatWaitForStart
+HTTP_REFERER=https://localhost/race/index.php?r=student/waitForStart
+---
+2016/12/19 19:04:53 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL.
+in C:\wamp\www\race\protected\controllers\StudentController.php (64)
+in C:\wamp\www\race\index.php (32)
+2016/12/19 19:04:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined. The SQL statement executed was: SELECT * FROM `course` `t` WHERE courseID=? LIMIT 1. Bound with :0=NULL' in C:\wamp\www\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp\www\framework\db\ar\CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 C:\wamp\www\framework\db\ar\CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\wamp\www\race\protected\controllers\StudentController.php(64): CActiveRecord->find('courseID=?', Array)
+#4 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionAjaxHertBeatWaitForStart()
+#5 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('AjaxHertBeatWai...')
+#9 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('student/AjaxHer...')
+#10 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#11 C:\wamp\www\race\index.php(32): CApplication->run()
+#12 {main}
+REQUEST_URI=/race/index.php?r=student/AjaxHertBeatWaitForStart
+HTTP_REFERER=https://localhost/race/index.php?r=student/waitForStart
+---
+2016/12/19 19:09:59 [error] [php] Trying to get property of non-object (C:\wamp\www\race\protected\components\Tool.php:198)
+Stack trace:
+#0 C:\wamp\www\framework\web\CBaseController.php(95): StudentController->renderInternal()
+#1 C:\wamp\www\framework\web\CController.php(783): StudentController->renderFile()
+#2 C:\wamp\www\race\protected\controllers\StudentController.php(54): StudentController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): StudentController->ActionIndex()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): StudentController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): StudentController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): StudentController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=student/index
+in C:\wamp\www\race\protected\components\Tool.php (198)
+in C:\wamp\www\race\protected\views\layouts\studentBar.php (33)
+in C:\wamp\www\race\protected\controllers\StudentController.php (54)
+2016/12/20 09:26:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/index')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin/index
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index&page=2
+---
+2016/12/20 09:27:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/index')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin/index
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index&page=2
+---
+2016/12/20 09:27:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/index')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin/index
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index&page=2
+---
+2016/12/20 09:27:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/index')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin/index&page=2
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:27:12 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin
+---
+2016/12/20 09:27:19 [error] [exception.CDbException] exception 'CDbException' with message 'CDbDataReader 无法倒回, 只允许向前读取.' in C:\wamp\www\framework\db\CDbDataReader.php:203
+Stack trace:
+#0 C:\wamp\www\race\protected\views\admin\index.php(64): CDbDataReader->rewind()
+#1 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\\wamp\\www\\rac...')
+#2 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\wamp\\www\\rac...', Array, true)
+#3 C:\wamp\www\framework\web\CController.php(868): CBaseController->renderFile('C:\\wamp\\www\\rac...', Array, true)
+#4 C:\wamp\www\framework\web\CController.php(781): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\race\protected\controllers\AdminController.php(18): CController->render('index', Array)
+#6 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionIndex()
+#7 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('index')
+#11 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/index')
+#12 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#13 C:\wamp\www\race\index.php(32): CApplication->run()
+#14 {main}
+REQUEST_URI=/race/index.php?r=admin/index
+HTTP_REFERER=https://jd.com/race/index.php
+---
+2016/12/20 09:28:44 [error] [php] Undefined variable: Allresult (C:\wamp\www\race\protected\controllers\AdminController.php:12)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#1 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#2 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#3 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#4 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#5 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/index
+in C:\wamp\www\race\protected\controllers\AdminController.php (12)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:28:45 [error] [php] Undefined variable: Allresult (C:\wamp\www\race\protected\controllers\AdminController.php:12)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#1 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#2 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#3 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#4 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#5 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/index
+in C:\wamp\www\race\protected\controllers\AdminController.php (12)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:29:07 [error] [php] Undefined variable: Allresult (C:\wamp\www\race\protected\controllers\AdminController.php:12)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#1 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#2 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#3 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#4 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#5 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/index
+in C:\wamp\www\race\protected\controllers\AdminController.php (12)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:43:37 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(195): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=20&kaohao=s&renshu=30
+in C:\wamp\www\race\protected\views\admin\index.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (195)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:43:58 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=40.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:43:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=40' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('40', '30', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=20&kaohao=s&renshu=30
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:44:59 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(195): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=%E7%AC%AC10&kaohao=10g&renshu=100
+in C:\wamp\www\race\protected\views\admin\index.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (195)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:47:35 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(195): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=10&kaohao=2s&renshu=100
+in C:\wamp\www\race\protected\views\admin\index.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (195)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:48:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2s001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='2s001', :yp1='2s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=43.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:48:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2s001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='2s001', :yp1='2s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=43' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('43', '100', '2s')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=10&kaohao=2s&renshu=100
+---
+2016/12/20 09:49:46 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2s001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='2s001', :yp1='2s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=44.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:49:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2s001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='2s001', :yp1='2s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=44' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('44', '100', '2s')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=10&kaohao=2s&renshu=100
+---
+2016/12/20 09:50:03 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=45.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:50:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=45' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('45', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:50:21 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=46.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:50:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=46' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('46', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:50:22 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=47.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:50:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=47' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('47', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=48.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=48' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('48', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=49.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=49' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('49', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=50.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=50' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('50', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=51.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=51' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('51', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=52.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=52' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('52', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=53.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=53' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('53', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=54.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=54' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('54', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=55.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=55' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('55', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=56.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=56' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('56', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 09:51:35 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=57.
+in C:\wamp\www\race\protected\models\Student.php (182)
+in C:\wamp\www\race\protected\controllers\AdminController.php (186)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 09:51:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 's001' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `Student` (`userName`, `userID`, `password`, `classID`) VALUES (:yp0, :yp1, :yp2, :yp3). Bound with :yp0='s001', :yp1='s001', :yp2='c6f057b86584942e415435ffb1fa93d4', :yp3=57' in C:\wamp\www\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\race\protected\models\Student.php(182): CActiveRecord->insert()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(186): Student->addRaceStudent('57', '100', 's')
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionAddRaceCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\framework\web\CController.php(285): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\framework\web\CController.php(264): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): CController->run('addRaceCourse')
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController('admin/addRaceCo...')
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CApplication->run()
+#11 {main}
+REQUEST_URI=/race/index.php?r=admin/addRaceCourse&courseName=sss&kaohao=s&renshu=100
+HTTP_REFERER=https://jd.com/race/index.php?r=admin/index
+---
+2016/12/20 10:02:08 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\courseLst.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(154): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionDeleteCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/deleteCourse
+in C:\wamp\www\race\protected\views\admin\courseLst.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (154)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:03:53 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:59)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(179): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionCourseLst()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/courseLst
+in C:\wamp\www\race\protected\views\admin\index.php (59)
+in C:\wamp\www\race\protected\controllers\AdminController.php (179)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:04:10 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:59)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(179): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionCourseLst()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/courseLst
+in C:\wamp\www\race\protected\views\admin\index.php (59)
+in C:\wamp\www\race\protected\controllers\AdminController.php (179)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:04:11 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:59)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(179): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionCourseLst()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/courseLst
+in C:\wamp\www\race\protected\views\admin\index.php (59)
+in C:\wamp\www\race\protected\controllers\AdminController.php (179)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:05:51 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\index.php:59)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(179): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionCourseLst()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/courseLst
+in C:\wamp\www\race\protected\views\admin\index.php (59)
+in C:\wamp\www\race\protected\controllers\AdminController.php (179)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:06:53 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\courseLst.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(167): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionDeleteCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/deleteCourse&&courseID=58
+in C:\wamp\www\race\protected\views\admin\courseLst.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (167)
+in C:\wamp\www\race\index.php (32)
+2016/12/20 10:07:01 [error] [php] Undefined variable: student (C:\wamp\www\race\protected\views\admin\courseLst.php:69)
+Stack trace:
+#0 C:\wamp\www\framework\web\CController.php(868): AdminController->renderFile()
+#1 C:\wamp\www\framework\web\CController.php(781): AdminController->renderPartial()
+#2 C:\wamp\www\race\protected\controllers\AdminController.php(167): AdminController->render()
+#3 C:\wamp\www\framework\web\actions\CInlineAction.php(49): AdminController->actionDeleteCourse()
+#4 C:\wamp\www\framework\web\CController.php(307): CInlineAction->runWithParams()
+#5 C:\wamp\www\framework\web\CController.php(285): AdminController->runAction()
+#6 C:\wamp\www\framework\web\CController.php(264): AdminController->runActionWithFilters()
+#7 C:\wamp\www\framework\web\CWebApplication.php(284): AdminController->run()
+#8 C:\wamp\www\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 C:\wamp\www\framework\base\CApplication.php(187): CWebApplication->processRequest()
+#10 C:\wamp\www\race\index.php(32): CWebApplication->run()
+REQUEST_URI=/race/index.php?r=admin/deleteCourse&&courseID=58
+in C:\wamp\www\race\protected\views\admin\courseLst.php (69)
+in C:\wamp\www\race\protected\controllers\AdminController.php (167)
+in C:\wamp\www\race\index.php (32)
