@@ -3,7 +3,9 @@
         <ul class="nav nav-list">
             <li class="nav-header"><i class="icon-plus"></i>添加</li>
             <li>
-                <input id="value" type="text" class="search-query span2" placeholder="班级名称" />
+                <input id="value" type="text" class="search-query span2" placeholder="考场名称" />
+                <input id="kaohao" type="text" class="search-query span2" placeholder="考号" />
+                <input id="renshu" type="text" class="search-query span2" placeholder="人数" />
             </li>
             <li style="margin-top:10px">
                 <button onclick="addCourse()" class="btn_4big">添 加</button>
@@ -23,7 +25,7 @@
         <thead>
             <tr>
                 <th class="font-center">选择</th>
-                <th class="font-center">考场号</th>
+<!--                <th class="font-center">考场号</th>-->
                 <th class="font-center">考场名</th>
                 <th class="font-center">创建时间</th>
                 <th class="font-center">操作</th>
@@ -34,7 +36,7 @@
             <?php foreach ($courseLst as $k => $model): ?>
                 <tr>
                     <td class="font-center" style="width: 50px"> <input type="checkbox" name="checkbox[]" value="<?php echo $model['courseID']; ?>" /> </td>
-                    <td class="font-center"><?php echo $model['courseID']; ?></td>
+<!--                    <td class="font-center"><?php //echo $model['courseID']; ?></td>-->
                     <td class="font-center"><?php echo $model['name']; ?></td>
                     <td class="font-center"><?php echo $model['createTime']; ?></td>
                     <td class="font-center" style="width: 100px">  
@@ -56,8 +58,23 @@
     <!-- 翻页标签结束 -->
 
     <!-- 右侧内容展示结束-->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="font-center">考号</th>
+                <th class="font-center">姓名</th>
+            </tr>
+        </thead>
+        <tbody>   
+    <?php foreach ($student as $allstu){ ?>
+                  <tr>
+                    <td class="font-center"><?php echo $allstu['userID']; ?></td>
+                    <td class="font-center"><?php echo $allstu['userName']; ?></td>
+                </tr>           
+<?php }?>
+        </tbody>
+    </table>
 </div>
-
 <script>
 
     $(document).ready(function () {
@@ -97,11 +114,25 @@
 
     function addCourse() {
         var courseName = document.querySelector("#value").value;
-        if(courseName!==""){
-            window.location.href="./index.php?r=admin/addRaceCourse&courseName="+courseName;
-        }else{
+        var kaohao = document.querySelector("#kaohao").value;
+        var renshu = document.querySelector("#renshu").value;
+        if(courseName==""){
             window.wxc.xcConfirm('请输入考场名', window.wxc.xcConfirm.typeEnum.info);
+        }else if(kaohao==""){
+            window.wxc.xcConfirm('请输入考号', window.wxc.xcConfirm.typeEnum.info);
         }
+        else if(renshu==""){
+            window.wxc.xcConfirm('请输入人数', window.wxc.xcConfirm.typeEnum.info);
+        }
+        else{ 
+            if(isNaN(renshu) || renshu<=0){
+                    window.wxc.xcConfirm('请在人数框里输入大于0的数字', window.wxc.xcConfirm.typeEnum.info);
+                    return false;
+            }
+            else{
+                 window.location.href="./index.php?r=admin/addRaceCourse&courseName="+courseName+"&kaohao="+kaohao+"&renshu="+renshu;
+            }
+    }
     }
 
     function deleCheck() {
@@ -114,7 +145,7 @@
             }
         }
         if (flag === 0) {
-            window.wxc.xcConfirm('未选中任何题目', window.wxc.xcConfirm.typeEnum.info);
+            window.wxc.xcConfirm('未选中任何考场', window.wxc.xcConfirm.typeEnum.info);
         } else {
             var option = {
                 title: "警告",
@@ -123,7 +154,7 @@
                     $('#deleForm').submit();
                 }
             };
-            window.wxc.xcConfirm("确定删除选中的科目吗？", "custom", option);
+            window.wxc.xcConfirm("确定删除选中的考场吗？", "custom", option);
         }
 
     }

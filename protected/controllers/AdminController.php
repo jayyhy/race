@@ -5,7 +5,17 @@ class AdminController extends CController {
     public $layout = '//layouts/adminBar';
 
     public function actionIndex() {
-        $this->render('index');
+        $result = Course::model()->getAllLst();
+        $courseLst = $result ['list'];
+        $stu = Student::model()->getStudent();
+        $pages = $stu ['pages'];
+        $student =  $stu ['list'];
+        $this->render('index', array(
+            'courseLst' => $courseLst,
+            'student' => $student,
+            'pages' => $pages,
+            'result' => ''
+        ));   
     }
 
     public function actionSet() {       //set
@@ -135,9 +145,12 @@ class AdminController extends CController {
             }
             $result1 = Course::model()->getAllLst();
             $courseLst = $result1 ['list'];
-            $pages = $result1 ['pages'];
-            $this->render('courseLst', array(
+            $stu = Student::model()->getStudent();
+            $pages = $stu ['pages'];
+            $student =  $stu ['list'];
+            $this->render('index', array(
                 'courseLst' => $courseLst,
+                'student'=>$student,
                 'pages' => $pages,
                 'teacher' => Teacher::model()->findall(),
                 'result' => $result,
@@ -145,9 +158,12 @@ class AdminController extends CController {
         } else {
             $courses = Course::model()->getAllLst();
             $courseLst = $courses ['list'];
-            $pages = $courses ['pages'];
+            $stu = Student::model()->getStudent();
+            $pages = $stu ['pages'];
+            $student =  $stu ['list'];
             $this->render('courseLst', array(
                 'courseLst' => $courseLst,
+                'student'=>$student,
                 'pages' => $pages,
                 'teacher' => Teacher::model()->findall(),
                 'result' => $result
@@ -158,30 +174,53 @@ class AdminController extends CController {
     public function actionCourseLst() {
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
-        $pages = $result ['pages'];
-        $this->render('courseLst', array(
+        $stu = Student::model()->getStudent();
+        $pages = $stu ['pages'];
+        $student =  $stu ['list'];
+        $this->render('index', array(
             'courseLst' => $courseLst,
+            'student'=>$student,
             'pages' => $pages,
             'result' => ''
         ));
     }
 
     public function actionAddRaceCourse() {
+        $flag = Course::model()->findAll();
+        $flag =  count($flag);
+    if($flag==0){
         $courseName = $_GET['courseName'];
+        //添加考号人数
+        $kaohao = $_GET['kaohao'];
+        $renshu = $_GET['renshu'];
         Course::model()->addRaceCourse($courseName);
         $courseID = Course::model()->getAllLstDesc();
-        Student::model()->addRaceStudent($courseID['courseID']);
+        Student::model()->addRaceStudent($courseID['courseID'],$renshu,$kaohao);
         Teacher::model()->addRaceTeacher($courseID['courseID']);
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
         $pages = $result ['pages'];
-        $this->render('courseLst', array(
+        $stu = Student::model()->getStudent();
+        $student =  $stu['list'];
+        $this->render('index', array(
             'courseLst' => $courseLst,
+            'student'=>$student,
             'pages' => $pages,
             'result' => "1"
         ));
     }
-
+    else{$result = Course::model()->getAllLst();
+        $courseLst = $result ['list'];
+        $pages = $result ['pages'];
+        $stu = Student::model()->getStudent();
+        $student =  $stu['list'];
+        $this->render('index', array(
+            'courseLst' => $courseLst,
+            'student'=>$student,
+            'pages' => $pages,
+            'result' => "3"
+        ));}
+    }
     public function actionRaceLst() {
         $aList = RaceIndex::model()->getAllRaceIndex();
         $result = $aList['list'];
@@ -424,10 +463,13 @@ class AdminController extends CController {
     public function ActionAddRoom(){
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
-        $pages = $result ['pages'];
+        $stu = Student::model()->getStudent();
+        $pages = $stu ['pages'];
+        $student =  $stu ['list'];
         $this->render('courseLst', array(
             'courseLst' => $courseLst,
             'pages' => $pages,
+            'student'=>$student,
             'result' => ''
         ));   
     }
