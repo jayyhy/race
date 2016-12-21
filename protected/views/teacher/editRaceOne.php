@@ -44,9 +44,6 @@
             时间：
             <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']/60; ?></textarea> 分钟
             <br/><br>
-            分数：
-            <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> &nbsp;&nbsp;&nbsp;分
-            <br/><br/>
             <button type="submit" class="btn_4big">确定</button>
         </form>
     </div>
@@ -66,7 +63,7 @@
     $(document).ready(function () {
         var result = <?php echo "'$result'"; ?>;
         if (result === '1') {
-            window.wxc.xcConfirm("评分成功！", window.wxc.xcConfirm.typeEnum.success, {
+            window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
                     window.location.href = "./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2";
                 }
