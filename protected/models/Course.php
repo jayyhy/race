@@ -81,7 +81,7 @@ class Course extends CActiveRecord {
 
     public function getAllLst() {
         $sql = "SELECT * FROM course";
-        $result = Tool::pager($sql, 20);
+        $result = Tool::pager($sql, 1);
         return $result;
     }
 
