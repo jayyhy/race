@@ -52,3 +52,34 @@ h1 {padding-bottom:0.2em;}
 .zebra-list li:nth-child(odd) {background-color:#F9F9F9;}
 .zebra-list li:first-child {-webkit-border-radius:4px 4px 0 0; -moz-border-radius:4px 4px 0 0; border-radius:4px 4px 0 0;}
 .zebra-list li:last-child {border-bottom:1px solid #DDD; -webkit-border-radius:0 0 4px 4px; -moz-border-radius:0 0 4px 4px; border-radius:0 0 4px 4px;}
+.ywnav{
+    width: 100%;
+    margin-top: -20px;
+    background-color: #29282e;
+}
+.ywlogo{
+    width: 264px;
+    height: 60px;
+    background:url(../../img/logo.png);
+}
+.ysgs{
+    margin-left: 289px;
+    margin-top: -40px;
+    font-size: 30px;
+    color: #fff;
+    float: left;
+}
+.leftbar{
+    float:left;
+    width: 264px;
+    margin-top: -20px;
+    height: 800px;
+    background-color: #ffe9e3;
+}
+.rightbar{
+    margin-top: -20px;
+    float: left;
+    height: 600px;
+    overflow:auto;
+    width: 75%;
+}
