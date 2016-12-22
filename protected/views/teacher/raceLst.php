@@ -104,7 +104,7 @@
                 window.location.href = "./index.php?r=teacher/deleteRaceIndex&&indexID=" + id;
             }
         };
-        window.wxc.xcConfirm("确定要删除考场：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
+        window.wxc.xcConfirm("确定要删除试卷：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
     }
 
     function addRace() {
@@ -112,7 +112,7 @@
         if(courseName!==""){
             window.location.href="./index.php?r=teacher/addRaceIndex&raceName="+courseName;
         }else{
-            window.wxc.xcConfirm('请输入考场名', window.wxc.xcConfirm.typeEnum.info);
+            window.wxc.xcConfirm('请输入试卷名', window.wxc.xcConfirm.typeEnum.info);
         }
     }
 
@@ -126,7 +126,7 @@
             }
         }
         if (flag === 0) {
-            window.wxc.xcConfirm('未选中任何题目', window.wxc.xcConfirm.typeEnum.info);
+            window.wxc.xcConfirm('未选中任何试卷', window.wxc.xcConfirm.typeEnum.info);
         } else {
             var option = {
                 title: "警告",
@@ -135,7 +135,7 @@
                     $('#deleForm').submit();
                 }
             };
-            window.wxc.xcConfirm("确定删除选中的科目吗？", "custom", option);
+            window.wxc.xcConfirm("确定删除选中的试卷吗？", "custom", option);
         }
 
     }
