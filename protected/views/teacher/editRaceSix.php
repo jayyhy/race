@@ -43,9 +43,9 @@
         <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" id="myForm" enctype="multipart/form-data"> 
             
             <div class="control-group">
-                <label class="control-label">分数：</label>
+                <label class="control-label">时间：</label>
                 <div class="controls">
-                    <textarea name="score" style="width:50px; height:20px;" id="score"><?php echo $race['score']; ?></textarea> 分
+                    <textarea name="time" style="width:50px; height:20px;" id="time"><?php echo $race['time']/60; ?></textarea> 分钟
                 </div>
             </div>
  
@@ -74,6 +74,12 @@
                     </div>
                 </div>
                 <div class="control-group">
+                <label class="control-label" for="input04">上传答案</label>
+                <div class="controls">
+                    <input type="file" name="myfile" id="myfile" >
+                </div>
+            </div>
+                <div class="control-group">
                     <label class="control-label" for="input03">参考答案</label>
                     <div class="controls">               
                         <textarea name="content" style="width:450px; height:200px;" id="input03"><?php echo $race['content']; ?></textarea>
@@ -87,22 +93,36 @@
     
 </div>
 <script>
+    <?php
+    $tag = "0";
+    if($race == null) {
+        $tag = "1";
+    }
+    ?>
+        var tag = <?php echo $tag; ?>;
     $("#myForm").submit(function () {
         var uploadFile = $("#input02")[0].value;
-        var time = document.querySelector("#name").value;
-        var score = document.querySelector("#score").value;
+        var time = document.getElementById("time").value;
+//        var score = document.querySelector("#score").value;
         var reg = new RegExp("^[0-9]*$");
-        if (!(reg.test(time) && reg.test(score))) {
-            event.preventDefault();
-            window.wxc.xcConfirm('请输入数字', window.wxc.xcConfirm.typeEnum.info);
+        if(time == ""){
+            window.wxc.xcConfirm('时间不能为空', window.wxc.xcConfirm.typeEnum.info);
+            return false;
+        }else{
+            if (!(reg.test(time))) {
+            window.wxc.xcConfirm('请输入正确数字', window.wxc.xcConfirm.typeEnum.info);
+            return false;
         }
-        if (uploadFile === "")
+        }
+        
+        if (uploadFile === "" && tag == "1")
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
+        var files =  document.getElementById("myfile").value;
         var A = $("#input03")[0].value;
-        if (A === "") {
+        if (files === "" && A === "") {
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
@@ -124,14 +144,22 @@
         $("#wordCount").text(v);
         $("#upload").hide();
         var result = <?php echo "'$result'"; ?>;
-        if (result === '1') {
+        var result2 = <?php echo "'$result2'"; ?>;
+        var result3 = <?php echo "'$result3'"; ?>;
+         if(result3!=""){
+                   window.wxc.xcConfirm(result3, window.wxc.xcConfirm.typeEnum.error);
+
+            }else if(result2!=""){
+                   window.wxc.xcConfirm(result2, window.wxc.xcConfirm.typeEnum.error);
+
+            }else if (result === '1') {
             window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
                     window.location.href = "./index.php?r=teacher/raceLst";
                 }
             });
-        } else if (result !== "") {
+        }else if (result !== "") {
             window.wxc.xcConfirm(result, window.wxc.xcConfirm.typeEnum.warning);
-        }
+        } 
     });
 </script>

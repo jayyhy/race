@@ -44,9 +44,9 @@
             时间：
             <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']/60; ?></textarea> 分钟
             <br/><br/>
-            分数：
+<!--            分数：
             <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> &nbsp;&nbsp;&nbsp;分
-            <br/><br/>
+            <br/><br/>-->
             <button type="submit" class="btn_4big">确定</button>
         </form>
     </div>
@@ -56,9 +56,9 @@
 <script>
     window.addEventListener("submit", function (event) {
         var time = document.querySelector("#time").value;
-        var score = document.querySelector("#score").value;
+//        var score = document.querySelector("#score").value;
         var reg = new RegExp("^[0-9]*$");
-        if (!(reg.test(time) && reg.test(score))) {
+        if (!(reg.test(time))) {
             event.preventDefault();
             window.wxc.xcConfirm('请输入正确的数字', window.wxc.xcConfirm.typeEnum.info);
         }

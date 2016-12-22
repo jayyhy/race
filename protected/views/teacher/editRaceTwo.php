@@ -40,7 +40,7 @@
     <div>
         <h3 style="text-align: center">持续时间以及配分</h3>
         <h3></h3>
-        <form class="form-horizontal" method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2">
+        <form class="form-horizontal" method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" enctype="multipart/form-data">
             
             <div class="control-group">
                 <label class="control-label">时间：</label>
@@ -49,17 +49,22 @@
                 </div>
             </div>
             
-            <div class="control-group">
+<!--            <div class="control-group">
                 <label class="control-label">分数：</label>
                 <div class="controls">
                     <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> 分
                 </div>
+            </div>-->
+            <div class="control-group">
+                <label class="control-label" for="input04">上传答案</label>
+                <div class="controls">
+                    <input type="file" name="myfile" id="myfile" >
+                </div>
             </div>
-            
             <div class="control-group">
                 <label class="control-label">内容：</label>
                 <div class="controls">
-                    <textarea name="content" style="width:450px; height:200px;" id="score" ><?php echo $race['content']; ?></textarea>
+                    <textarea name="content" style="width:450px; height:200px;" id="content" disabled="disabled" ><?php echo $race['content']; ?></textarea>
                     <br>字数：<span id="wordCount">0</span> 字
                 </div>
             </div>
@@ -72,11 +77,17 @@
 <script>
     window.addEventListener("submit", function (event) {
         var time = document.querySelector("#time").value;
-        var score = document.querySelector("#score").value;
+//        var score = document.querySelector("#score").value;
         var reg = new RegExp("^[0-9]*$");
-        if (!(reg.test(time) && reg.test(score))) {
+        if (!reg.test(time)) {
             event.preventDefault();
             window.wxc.xcConfirm('请输入正确的数字', window.wxc.xcConfirm.typeEnum.info);
+        }
+        var files =  document.getElementById("myfile").value;
+        var content = document.getElementById("content").value;
+        if(files === "" && content === "") {
+            event.preventDefault();
+            window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
         }
     }, true);
     $(document).ready(function () {
@@ -96,5 +107,10 @@
                 }
             });
         }
+         else if (result != '')
+        {
+            window.wxc.xcConfirm(result, window.wxc.xcConfirm.typeEnum.info);
+        }
+        
     });
 </script>
