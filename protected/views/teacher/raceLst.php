@@ -1,19 +1,30 @@
-<div class="span3">
-    <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-            <li class="nav-header"><i class="icon-plus"></i>添加</li>
+<div class="leftbar" style ="display: none; background: #FFE9E3;margin-left: 20px" id="on_adding">
+    <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
+    <div style="margin-left: 10px;margin-top: 10px">
+        <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建试卷</font>
+    </div>
+        <div style="background:#FFFFFF;width: 90%;margin-left: 5%">
+        <ul class="nav nav-list" style="margin-top: 15px">
             <li>
-                <input id="value" type="text" class="search-query span2" placeholder="试卷名称" />
+                <input id="value" type="text" class="search span2" placeholder="请输入试卷标题" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
             </li>
-            <li style="margin-top:10px">
-                <button onclick="addRace()" class="btn_4big">添 加</button>
+            <li style="margin-bottom: 30px">
+                <button onclick="cancel()" class="btn_6big">取 消</button>
+                <button onclick="addRace()" class="btn_5big">确 定</button>
             </li>
-            <li class="divider"></li>
-            <li class="active" ><a href="./index.php?r=teacher/raceLst"><i class="icon-align-left"></i> 试卷列表</a></li>
         </ul>
+        </div>
     </div>
 </div>
-<div class="span9">
+<div class="leftbar" style="margin-left: 20px" id="on_add">
+    <div style="height: 100%;margin-left: 10px;margin-top: 10px">
+            <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建试卷</font>
+            <div style="margin-top: 10px;margin-left: 10px">
+         <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png">&nbsp;创建试卷</a>
+    </div>
+    </div>
+    </div>
+<div class="rightbar">
 
     <h2>试卷列表</h2>
     <!-- 科目列表-->
@@ -61,6 +72,7 @@
 <script>
 
     $(document).ready(function () {
+        window.parent.doClick();
         var result = <?php echo "'$result'"; ?>;
         if (result === '1')
             window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
@@ -127,4 +139,13 @@
         }
 
     }
+        function adding(){
+        document.getElementById("on_adding").style.display='block';
+        document.getElementById("on_add").style.display='none';
+    }
+    function cancel(){
+        document.getElementById("on_adding").style.display='none';
+        document.getElementById("on_add").style.display='block';  
+    }
+    
 </script>
