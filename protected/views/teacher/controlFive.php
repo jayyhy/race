@@ -60,6 +60,15 @@
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
     <button class="btn_4big" id="start" onclick="start()">开始</button>
+    <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
+    <?php if (file_exists($listenpath)) { ?>
+    <div style="position:absolute;top:0px;left:500px;display: none" id="play">
+    <audio id="fristAu"  src="<?php echo $listenpath; ?>" preload="auto"  ></audio>
+    </div>
+    <?php } else { ?>
+        <p style="color: red">原音频文件丢失或损坏！</p>
+    <?php } ?>
+    
 </div>
 
 <script>
@@ -72,18 +81,25 @@
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
-            tCounter(curtime, <?php
+            tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
     } else {
         echo strtotime($endTime);
     }
-    ?>, "sideTime", endDo);
+    ?>, "sideTime", endDo,playAudio);
         }
 //        else {
 //            CDTime.focus();
 //        }
-
+        function playAudio(sideTime){
+            var fristAu = document.getElementById("fristAu");
+            var examTime = <?php echo $race['time']; ?>;
+            if(examTime == sideTime){
+               fristAu.autoplay = "true";
+               document.getElementById("play").style.display ="block";                 
+            }
+        }
         function endDo() {
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step + 1 ?>&over=1';
         }
