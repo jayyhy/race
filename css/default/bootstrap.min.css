@@ -228,7 +228,7 @@ a:hover,a:focus {
     position:relative;
     float: left;
     margin-left: 0px;
-    margin-top: -13px;
+    margin-top: 0px;
     overflow: auto;
 }
 .span8 {
@@ -247,7 +247,7 @@ a:hover,a:focus {
     width:300px
 }
 .span3 {
-    margin-top: -20px;
+    margin-top: 0px;
     background: #FFE9E3;
     height: 620px;
     width:266px;
@@ -4689,7 +4689,7 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     top: -40px;
     position: relative;
     float: right;
-    width: 100%;
+    width: 120px;
 }
 .gsglxt{
     height: 60px;
