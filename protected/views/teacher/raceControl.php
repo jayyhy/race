@@ -38,5 +38,8 @@
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+    window.parent.doClick1();
+    });
 </script>
 

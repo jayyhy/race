@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
 <?php
 if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] == 'teacher'&&Yii::app()->session['cfmLogin']=1 ) {
     ?>
@@ -17,55 +16,32 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
             <link rel="stylesheet" type="text/css" href="<?php echo XC_Confirm; ?>css/xcConfirm.css"/>
             <script src="<?php echo JS_URL; ?>jquery-2.1.3.min.js" ></script>
             <script src="<?php echo XC_Confirm; ?>js/xcConfirm.js"></script>
-            <!--            -->
-                        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         </head>
         <body>
-            <div class="container">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <a class="brand" href="./index.php?r=teacher/index"></a>
-                            <div class="nav-collapse">
-                                <ul class="nav">
-                                   <li class="dropdown">
-                                        <a href="./index.php?r=teacher/raceLst"  id="topic_manager">试卷调配</a>
-                                    </li> 
-                                    <li class="dropdown">
-                                        <a href="./index.php?r=teacher/raceControl"  id="homework">考场管控</a>
-                                    </li>
-                                     <li class="dropdown">
-                                        <a href="./index.php?r=teacher/markRace"   id="exammanager">批改试卷</a>
-                                    </li>  
-                                    <li><a id="blank_teacher"></a></li>
-                                     <li>
-                                       <?php if(Tool::teacherNotice() == 0){?>
-                                       <a id="stuMail_off" href="./index.php?r=teacher/teacherNotice"></a>
-                                       <?php }else {?>
-                                          <a id="stuMail_on" href="./index.php?r=teacher/teacherNotice"></a>  
-                                       <?php }?>
-                                   </li> 
-                                        <li class="dropdown">
-                                            <div class="userUI">
-                                                <a href="" data-toggle="dropdown" id="userUI" title="<?php echo Yii::app()->session['userName'];?>">
-        <?php $name=Yii::app()->session['userName'];
-        if (Tool::clength($name) <= 3)
-                            echo $name;
-                        else
-                            echo Tool::csubstr($name, 0, 3) . "...";
-        ?><b class="user_dropdown_logo"></b>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="./index.php?r=teacher/teaInformation">个人设置</a></li>
-                                                    <li><a href="./index.php?r=user/login&exit=1&usertype=teacher">退出</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="ywnav">
+                <a class="ywlogo" href="./index.php?r=teacher/index"> <div class="ywlogo"> </div></a>
+<!--                <font class="ysgs">亚伟国赛管理系统</font>-->
+<div class="sjdp" id="sjdp"><a href="./index.php?r=teacher/raceLst" onclick="changesjdp()">试卷调配</a></div>
+<div class="kcjk" id="kcjk"><a href="./index.php?r=teacher/raceControl">考场监控</a></div>
+<div class="ksjg"><a href="">考试结果</a></div>
+                <div class="userUI">
+                 <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
+                  <?php $name=Yii::app()->session['userName'];
+                  if(Tool::clength($name) <= 3)
+                   echo $name;
+                       else
+                         echo Tool::csubstr($name, 0, 3) . "...";
+                               ?>
+                                <b class="user_dropdown_logo"></b>
+                              </a>
+
+                              <ul class="dropdown-menu">
+                                        <li>
+                                  <a href="./index.php?r=teacher/teaInformation">个人设置</a></li>
+                               <li><a href="./index.php?r=user/login&exit=1">退出</a>
+                              </li>
+                         </ul>   
+                       </div></div>         
                 <div class="row" style="min-height: 700px">
     <?php echo $content; ?>
                 </div>
@@ -79,40 +55,16 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
     <script>    window.location.href = "./index.php?r=user/login";</script>
 <?php } ?>
 <script type="text/javascript">
-//    window.onbeforeunload = onbeforeunload_handler;
-//    window.onunload = onunload_handler;
-//    function onbeforeunload_handler() {
-//        $.ajax({
-//            type: 'POST',
-//            url: "./index.php?r=api/loginOut",
-//            data: {user:'teacher',userID:'<?php //echo Yii::app()->session['userid_now'];?>'},
-//            success: function (data, textStatus, jqXHR) {
-//                console.log('jqXHR' + jqXHR);
-//                console.log('textStatus' + textStatus);
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.log('jqXHR' + jqXHR);
-//                console.log('textStatus' + textStatus);
-//                console.log('errorThrown' + errorThrown);
-//            }
-//
-//        });
-//    }
-//     function onunload_handler() {
-//        $.ajax({
-//            type: 'POST',
-//            url: "./index.php?r=api/loginOut",
-//            data: {user: 'teacher', userID: '<?php //echo Yii::app()->session['userid_now']; ?>'},
-//            success: function (data, textStatus, jqXHR) {
-//                console.log('jqXHR' + jqXHR);
-//                console.log('textStatus' + textStatus);
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.log('jqXHR' + jqXHR);
-//                console.log('textStatus' + textStatus);
-//                console.log('errorThrown' + errorThrown);
-//            }
-//
-//        });
-//    }
+function doClick(){
+   var obj = document.getElementById("sjdp");
+   obj.setAttribute("class", "sjdp1");
+}
+function doClick1(){
+   var obj = document.getElementById("kcjk");
+   obj.setAttribute("class", "kcjk1");
+}
+function doClick2(){
+   var obj = document.getElementById("ksjg");
+   obj.setAttribute("class", "ksjg1");
+}
 </script>
