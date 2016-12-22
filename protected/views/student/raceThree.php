@@ -28,7 +28,6 @@
             var endtime = <?php echo $endTime; ?>;           
             audio.currentTime = (curtime - startTime);
             var timer = setInterval(function() {
-                console.log(audio.ended);
                 if(audio.ended){ 
                    
                    document.getElementById("audio2").autoplay = "true";
