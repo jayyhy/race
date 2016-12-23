@@ -1,4 +1,5 @@
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
+<script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <div class="span3">
     <div class="well" style="padding: 8px 0;">
         <ul class="nav nav-list">
@@ -63,7 +64,7 @@
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
 
-        <video id="audio" src = "<?php echo $listenpath; ?>" preload = "auto"  style="height:200px; display: none"></video>
+    <video id="audio" src = "<?php echo $listenpath; ?>" preload = "auto"  style="height:200px; visibility: hidden"></video>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
@@ -95,7 +96,7 @@
             var examTime = <?php echo $race['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";
-                fristAu.style.diaplay = "inline" ;                 
+                fristAu.style.visibility = "visible";        
             }
         }
         function endDo() {
