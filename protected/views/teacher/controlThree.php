@@ -59,15 +59,22 @@
     <p>考试时间:<?php echo floor(($race['time'] +$race2['time'])/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time'])-floor(($race['time'] +$race2['time']) / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-    <button class="btn_4big" id="start" onclick="start()">开始</button>
+                <?php 
+            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
+            if(count($result)===0){
+                ?>
+    <button class="btn_4big" id="start" onclick="start()"> 开始</button>
+    <?php } else { ?>
+    <button class="btn_4big" id="start" onclick="stop()"> 开始</button>   
+     <?php
+            } 
+        ?>
     <?php $listenpath = "./resources/race/" . $race['resourseID']; 
            $listenpath2 = "./resources/race/" . $race2['resourseID'];
     ?>
     <?php if (file_exists($listenpath)) { ?>
-    <div style="position:absolute;top:0px;left:500px;">
-    <audio id="fristAu" style="display: none" src="<?php echo $listenpath; ?>" preload="auto"  ></audio>
-    <audio id="secondAu" style="display: none" src="<?php echo $listenpath2; ?>" preload="auto"></audio>
-    </div>
+    <audio id="fristAu" style="visibility: hidden" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
+    <audio id="secondAu" style="visibility: hidden" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls" ></audio>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
@@ -101,17 +108,17 @@
             var examTime = <?php echo $race['time'] +$race2['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";
-                fristAu.style.diaplay = "inline" ;                 
+                fristAu.style.visibility = "visible";                 
             }
             if(fristAu.ended && tag == "1"){
                 secondAu.autoplay = "true";
-                fristAu.style.diaplay = "none";
-                secondAu.style.diaplay = "block";
+               fristAu.style.visibility = "hidden";
+                secondAu.style.visibility = "visible";
                 tag ="0";
             }
         }
         function endDo() {
-            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step + 1 ?>&over=1';
+            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
         }
     })();
 
@@ -124,6 +131,9 @@
         }else{
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
         }
+    }
+        function stop() {
+    window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
     }
 </script>
 
