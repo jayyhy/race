@@ -73,10 +73,8 @@
            $listenpath2 = "./resources/race/" . $race2['resourseID'];
     ?>
     <?php if (file_exists($listenpath)) { ?>
-    <div style="position:absolute;top:0px;left:500px;">
-    <audio id="fristAu" style="display: none" src="<?php echo $listenpath; ?>" preload="auto"  ></audio>
-    <audio id="secondAu" style="display: none" src="<?php echo $listenpath2; ?>" preload="auto"></audio>
-    </div>
+    <audio id="fristAu" style="visibility: hidden" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
+    <audio id="secondAu" style="visibility: hidden" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls" ></audio>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
@@ -110,12 +108,12 @@
             var examTime = <?php echo $race['time'] +$race2['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";
-                fristAu.style.diaplay = "inline" ;                 
+                fristAu.style.visibility = "visible";                 
             }
             if(fristAu.ended && tag == "1"){
                 secondAu.autoplay = "true";
-                fristAu.style.diaplay = "none";
-                secondAu.style.diaplay = "block";
+               fristAu.style.visibility = "hidden";
+                secondAu.style.visibility = "visible";
                 tag ="0";
             }
         }

@@ -35,7 +35,7 @@
         </ul>
     </div>
 </div>
-<div class="span9">
+<div class="span9" style="width: 500px;height: 500px">
     <h2>盲打</h2>
     <?php
     if ($nowOnStep != 0) {
@@ -59,24 +59,15 @@
     <p>考试时间:<?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-                <?php 
-            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
-            if(count($result)===0){
-                ?>
-    <button class="btn_4big" id="start" onclick="start()"> 开始</button>
-    <?php } else { ?>
-    <button class="btn_4big" id="start" onclick="stop()"> 开始</button>   
-     <?php
-            } 
-        ?>
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
-    <div style="position:absolute;top:0px;left:500px;display: none" id="play">
-    <audio id="fristAu"  src="<?php echo $listenpath; ?>" preload="auto"  ></audio>
-    </div>
+   
+        <audio id="fristAu"  src="<?php echo $listenpath; ?>" preload="auto" style="visibility: hidden" controls="controls" ></audio>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
+    <button class="btn_4big" id="start" onclick="start()">开始</button>
+    
     
 </div>
 
@@ -106,7 +97,7 @@
             var examTime = <?php echo $race['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";
-               document.getElementById("play").style.display ="block";                 
+               fristAu.style.visibility = "visible";               
             }
         }
         function endDo() {
