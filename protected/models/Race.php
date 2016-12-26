@@ -34,7 +34,7 @@ class Race extends CActiveRecord {
             array('fileName', 'length', 'max' => 30),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('raceID, indexID, step, content, score, time, resourseID, fileName', 'safe', 'on' => 'search'),
+            array('raceID, indexID, step, content, score, time, resourseID, fileName,is_over', 'safe', 'on' => 'search'),
         );
     }
 
@@ -61,6 +61,7 @@ class Race extends CActiveRecord {
             'time' => 'Time',
             'resourseID' => 'Resourse',
             'fileName' => 'File Name',
+            'is_over' => 'Is_over',
         );
     }
 
@@ -89,6 +90,7 @@ class Race extends CActiveRecord {
         $criteria->compare('time', $this->time);
         $criteria->compare('resourseID', $this->resourseID);
         $criteria->compare('fileName', $this->fileName, true);
+        $criteria->compare('is_over', $this->fileName, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -106,6 +108,7 @@ class Race extends CActiveRecord {
             $race->score = $score;
             $race->resourseID = $resourceID;
             $race->fileName = $fileName;
+            $race->is_over = 0;
             $race->insert();
         } else {
             $result->time = $time;
@@ -115,9 +118,19 @@ class Race extends CActiveRecord {
             $result->score = $score;
             $result->resourseID = $resourceID;
             $result->fileName = $fileName;
+            $result->is_over = 0;
             $result->update();
         }
     }
+    public function isover($indexID,$step){
+            $step = $step-1;
+            $result = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
+            error_log(111);
+            error_log($step);
+            $result->is_over = 1;
+            $result->update();
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!

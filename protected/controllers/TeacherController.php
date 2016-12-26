@@ -788,6 +788,13 @@ class TeacherController extends CController {
                     $CDTime = $_GET['CDTime'];
                     Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
                 }
+                if (isset($_GET['over'])) {
+                    Course::model()->overRace($teacherID);
+                    Race::model()->isover($indexID,$step);
+                    $step = $step + 1;
+                    $render = "Two";
+                    break;
+                }
                 $render = "One";
                 break;
             case 2:
@@ -797,6 +804,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    Race::model()->isover($indexID,$step);
+                    $step = $step + 1;
+                    $render = "Three";
+                    break;
                 }
                 $render = "Two";
                 break;
@@ -807,6 +818,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    Race::model()->isover($indexID,$step);
+                    $step = $step + 1;
+                    $render = "Four";
+                    break;
                 }
                 $render = "Three";
                 break;
@@ -817,6 +832,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    Race::model()->isover($indexID,$step);
+                    $step = $step + 1;
+                    $render = "Five";
+                    break;
                 }
                 $render = "Four";
                 break;
@@ -827,6 +846,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    Race::model()->isover($indexID,$step);
+                    $step = $step + 1;
+                    $render = "Six";
+                    break;
                 }
                 $render = "Five";
                 break;
@@ -837,6 +860,11 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Six";
+                    $step = $step - 1;
+                    break;
                 }
                 $render = "Six";
                 break;
