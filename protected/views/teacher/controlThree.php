@@ -70,7 +70,17 @@
     <p>考试时间:<?php echo floor(($race['time'] +$race2['time']+$time)/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time']+$time)-floor(($race['time'] +$race2['time']+$time) / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-    <button class="btn_4big" id="start" onclick="start()">开始</button>
+    <?php 
+            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
+            if(count($result)===0){
+                ?>
+    <button class="btn_4big" id="start" onclick="start()"> 开始</button>
+    <?php } else { ?>
+    <button class="btn_4big" id="start" onclick="stop()"> 开始</button>   
+     <?php
+            } 
+        ?>
+
     
     <?php if (file_exists($listenpath)) { ?>
     <audio id="audition" style="visibility: hidden" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
