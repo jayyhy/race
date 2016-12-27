@@ -9,6 +9,7 @@
 <script>
     var yaweiOCX = document.getElementById("typeOCX");
     var doc = document;
+    var dialogArgument;
     function over(raceID, step) {
         var content = yaweiOCX.GetContent();
         if (step === 2) {
@@ -39,11 +40,18 @@
 //        });
     }
     
-    function saveInRealTime(){
+    function saveInRealTime(raceID, content){
         $.ajax({
-            type:"POST",
-            
-            url:""
+            type: "POST",
+            url: "index.php?r=student/over",
+            data: {raceID: raceID, content: content},
+            success: function (data) {
+            },
+            error: function (xhr, type, exception) {
+                console.log('waitForStart error', type);
+                console.log(xhr, "Failed");
+                console.log(exception, "exception");
+            }
         });
     }
 

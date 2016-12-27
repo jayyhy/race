@@ -18,9 +18,14 @@
             var endtime = <?php echo $endTime; ?>;
             var audio = document.querySelector("#audio");
             audio.currentTime = (curtime - startTime);
-            tCounter(curtime, endtime, "time", endDo);
+            tCounter(curtime, endtime, "time", endDo,saveInReTime);
 //            window.parent.stepFive();
         })();
+        function saveInReTime(){
+            var yaweiOCX1=window.parent.document.getElementById("typeOCX")
+            var content=yaweiOCX1.GetContent();
+             window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
+        }
         function endDo() {
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
         }
