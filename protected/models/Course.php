@@ -111,7 +111,13 @@ class Course extends CActiveRecord {
             $indexID = Race::model()->find("raceID=?", array($raceID))['indexID'];
             $currentTime2 = Race::model()->find("indexID=? AND step=?", array($indexID,32))['time'];
             $currentTime = Race::model()->find("raceID=?", array($raceID))['time'];
-            $currentTime = $currentTime + $currentTime2;
+            $radio = Resourse::model()->find("path='$indexID'"); 
+            $dir ="./resources/race/radio";
+            $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
+            $player=new COM("WMPlayer.OCX");
+            $media=$player->newMedia($file);
+            $time=round($media->duration);
+            $currentTime = $currentTime + $currentTime2+$time;
             $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
             $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime))); 
         }  else {

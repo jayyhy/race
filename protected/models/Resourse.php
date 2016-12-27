@@ -30,7 +30,26 @@ class Resourse extends CActiveRecord
             $resource->type="voice";
             return $resource->insert();
         }
-        
+        public function insertAudition($newName,$oldName,$indexID){
+            $result = Resourse::model()->find("path = '$indexID'");
+            if($result == NULL){
+               $resource             = new Resourse();
+               $resource->resourseID = $newName;
+               $resource->name       = $oldName;
+               $resource->path       = $indexID;
+               $resource->type="voice";
+               return $resource->insert(); 
+            }else {
+               $result->resourseID = $newName;
+               $result->name       = $oldName;
+               $result->path       = $indexID; 
+               $result->update();
+            }
+        }
+
+
+
+
         public function  getOriName($name)
         {
             $resource      =   new Resourse();
