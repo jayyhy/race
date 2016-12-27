@@ -35,7 +35,7 @@
         </ul>
     </div>
 </div>
-<div class="span9">
+<div class="span9" style="width: 500px;height: 500px">
     <h2>盲打</h2>
     <?php
     if ($nowOnStep != 0) {
@@ -59,7 +59,25 @@
     <p>考试时间:<?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-    <button class="btn_4big" id="start" onclick="start()">开始</button>
+    <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
+    <?php if (file_exists($listenpath)) { ?>
+   
+        <audio id="fristAu"  src="<?php echo $listenpath; ?>" preload="auto" style="visibility: hidden" controls="controls" ></audio>
+    <?php } else { ?>
+        <p style="color: red">原音频文件丢失或损坏！</p>
+    <?php } ?>
+                    <?php 
+            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
+            if(count($result)===0){
+                ?>
+    <button class="btn_4big" id="start" onclick="start()"> 开始</button>
+    <?php } else { ?>
+    <button class="btn_4big" id="start" onclick="stop()"> 开始</button>   
+     <?php
+            } 
+        ?>
+    
+    
 </div>
 
 <script>
@@ -72,20 +90,27 @@
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
-            tCounter(curtime, <?php
+            tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
     } else {
         echo strtotime($endTime);
     }
-    ?>, "sideTime", endDo,"");
+    ?>, "sideTime", endDo,playAudio);
         }
 //        else {
 //            CDTime.focus();
 //        }
-
+        function playAudio(sideTime){
+            var fristAu = document.getElementById("fristAu");
+            var examTime = <?php echo $race['time']; ?>;
+            if(examTime == sideTime){
+               fristAu.autoplay = "true";
+               fristAu.style.visibility = "visible";               
+            }
+        }
         function endDo() {
-            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step + 1 ?>&over=1';
+            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
         }
     })();
 
@@ -97,6 +122,9 @@
         }else{
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
         }
+    }
+        function stop() {
+    window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
     }
 </script>
 

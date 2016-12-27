@@ -64,46 +64,108 @@ class TeacherController extends CController {
         $indexID = $_GET["indexID"];
         $result = "";
         $render = '';
+        $result2 = "";
+        $result3 = "";
+        $result4 = "";
+        $result5 = "";
         switch ($step) {
             case 1:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
-                    $score = $_POST['score'];
-                    Race::model()->addRace($indexID, $step, "", $score, $time, "", "");
+//                    $score = $_POST['score'];
+                    Race::model()->addRace($indexID, $step, "", 0, $time, "", "");
                     $result = 1;
                 }
                 $render = 'One';
                 break;
             case 2:
                 if (isset($_POST['time'])) {
+                    $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
                     $time = $_POST['time']*60;
-                    $score = $_POST['score'];
-                    $content = $_POST['content'];
-                    Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");
-                    $result = 1;
+//                    $score = $_POST['score'];
+                    $txtNoSpace="";
+                    if(!empty($_FILES["myfile"]['name'])){
+                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                     $file_type = $file_types [count($file_types) - 1];
+                     // 判别是不是excel文件
+                     if (strtolower($file_type) != "text/plain") {
+                        $result = '不是txt文件';
+                     } else {
+                     // 解析文件并存入数据库逻辑
+                     /* 设置上传路径 */
+                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                      if (!copy($tmp_file, $savePath . $file_name)) {
+                        $result = '上传失败';
+                      } else {
+                        $file_dir = $savePath . $file_name;
+                        $file_dir = str_replace("\\", "\\\\", $file_dir);
+                        $fp = fopen($file_dir, "r");
+                        move_uploaded_file($file_name, $savePath);
+                        $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result = '空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, "", "");
+                            $result = "1";
+                       }
+                    }
                 }
+            }else {
+                $txtContent = $flag["content"];
+                Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
+                $result = "1";
+            }
+                    
+        }
                 $render = 'Two';
                 break;
             case 3:
-                if (isset($_POST['score'])) {
+                if (isset($_POST['content2'])) {
 //                    $time = $_POST['time'];
-                    $score = $_POST['score'];
-                    $content = $_POST['content'];
-                    $score2 = $_POST['score2'];
-                    $content2 = $_POST['content2'];
+//                    $score = $_POST['score'];
+                    $txtNoSpace = "";
+//                    $score2 = $_POST['score2'];
+//                    $content2 = $_POST['content2'];
                     $dir = "./resources/race/";                    
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
+                    $radioDir = "./resources/race/radio";
+                    if (!is_dir($radioDir)) {
+                        mkdir($radioDir, 0777);
+                    }
                     $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
                     $flag2 = Race::model()->find("indexID=? AND step =?", array($indexID, 32));
                     if ($flag==null){
+                        if($_FILES["files"]["name"]!=""){
+                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['files'] ['type'] != "audio/wav" &&
+                            $_FILES ['files'] ['type'] != "audio/x-wav") {
+                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['files']['error'] > 0) {
+                                 $result5 = '试音音频文件上传失败';
+                              }else {
+                        $oldName = $_FILES["files"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertAudition($newName, $oldName,$indexID);
+                        
+//                        $result = "1";
+                            } 
+                        }
                             if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
-                            $result = '文件格式不正确，应为MP3或WAV格式';
+                            $result4 = '第一个音频格式不正确，应为MP3或WAV格式';
                         } else if ($_FILES['file']['error'] > 0) {
-                                 $result = '文件上传失败';
+                                 $result4 = '第一个音频文件上传失败';
                          } else {
                         $oldName = $_FILES["file"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
@@ -113,20 +175,90 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
-//                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-//                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
-                        $result = 1;
-                            }                 
-                                    }
+                        if(!empty($_FILES["myfile"]['name'])){
+                         $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                         $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                         $file_type = $file_types [count($file_types) - 1];
+                        // 判别是不是excel文件
+                         if (strtolower($file_type) != "text/plain") {
+                            $result3 = '上传答案不是txt文件';
+                        } else {
+                        // 解析文件并存入数据库逻辑
+                        /* 设置上传路径 */
+                        $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                        $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                        $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                        if (!copy($tmp_file, $savePath . $file_name)) {
+                            $result3 = '上传答案失败';
+                        } else {
+                            $file_dir = $savePath . $file_name;
+                            $file_dir = str_replace("\\", "\\\\", $file_dir);
+                            $fp = fopen($file_dir, "r");
+                            move_uploaded_file($file_name, $savePath);
+                            $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result3 = '上传答案为空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                          
+                           if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
+                          $_FILES ['file2'] ['type'] != "audio/wav" &&
+                          $_FILES ['file2'] ['type'] != "audio/x-wav") {
+                          $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
+                          } else if ($_FILES['file2']['error'] > 0) {
+                              $result2 = '第二个音频文件上传失败';
+                         } else {
+                              Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                           $oldName = $_FILES["file2"]["name"];
+                           $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                           move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                           Resourse::model()->insertRelaVoice($newName, $oldName);
+                           $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                           $player=new COM("WMPlayer.OCX");
+                           $media=$player->newMedia($file);
+                           $time=round($media->duration);
+                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
+                           $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+                           Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
+                           $result = "1";
+                        } 
+                       }
+                    }
+                }
+            }
+         }  
+          
+     }
                 else {
+                   $newName = $flag['resourseID'];
+                   $oldName = $flag['fileName'];
+                   $time = $flag['time'];
+                   $txtNoSpace = $flag['content']; 
+                   if($_FILES["files"]["name"]!=""){
+                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['files'] ['type'] != "audio/wav" &&
+                            $_FILES ['files'] ['type'] != "audio/x-wav") {
+                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['files']['error'] > 0) {
+                                 $result5 = '试音音频文件上传失败';
+                              }else {
+                        $oldNames = $_FILES["files"]["name"];
+                        $newNames = Tool::createID() . "." . pathinfo($oldNames, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newNames));
+                        Resourse::model()->insertAudition($newNames, $oldNames,$indexID);
+//                        $result = "1";
+                            } 
+                        }
                    if($_FILES["file"]["name"]!=""){
                         if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
-                                $result = '文件格式不正确，应为MP3或WAV格式';
+                                $result4 = '第一个音频文件格式不正确，应为MP3或WAV格式';
                             } else if ($_FILES['file']['error'] > 0) {
-                                 $result = '文件上传失败';
+                                 $result4 = '第一个音频文件上传失败';
                               }else {
                         $oldName = $_FILES["file"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
@@ -136,48 +268,54 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
+                        
 //                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
 //                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
-                        $result = 1;
+                        $result = "1";
                             } 
-                        }else {
-                           $newName = $flag['resourseID'];
-                           $oldName = $flag['fileName'];
-                           $time = $flag['time'];
-                           Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
-                           $result = '1';
                         }
-                 }
-                 if($flag2 == null){
-                      if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
-                          $_FILES ['file2'] ['type'] != "audio/wav" &&
-                          $_FILES ['file2'] ['type'] != "audio/x-wav") {
-                          $result = '文件格式不正确，应为MP3或WAV格式';
-                          } else if ($_FILES['file2']['error'] > 0) {
-                              $result = '文件上传失败';
-                         } else {
-                           $oldName = $_FILES["file2"]["name"];
-                           $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
-                           move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
-                           Resourse::model()->insertRelaVoice($newName, $oldName);
-                           $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                           $player=new COM("WMPlayer.OCX");
-                           $media=$player->newMedia($file);
-                           $time=round($media->duration);
-                           Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
-                           $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-                           Race::model()->addRace($indexID, 4, $content2, $step4['score'], $step4['time'], "", "");
-                           $result = 1;
-                        } 
-                 }  else {
-                     if($_FILES["file2"]["name"]!=""){
+                        if(!empty($_FILES["myfile"]['name'])){
+                            $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                            $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                            $file_type = $file_types [count($file_types) - 1];
+                            // 判别是不是excel文件
+                            if (strtolower($file_type) != "text/plain") {
+                                $result3 = '上传答案不是txt文件';
+                             } else {
+                            // 解析文件并存入数据库逻辑
+                            /* 设置上传路径 */
+                                $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                                $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                                $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                                if (!copy($tmp_file, $savePath . $file_name)) {
+                                   $result3 = '上传答案失败';
+                                } else {
+                                    $file_dir = $savePath . $file_name;
+                                    $file_dir = str_replace("\\", "\\\\", $file_dir);
+                                    $fp = fopen($file_dir, "r");
+                                    move_uploaded_file($file_name, $savePath);
+                                    $file_name=iconv("gb2312","UTF-8", $file_name);
+                                    if (filesize($file_dir) < 1) {
+                                        $result3 = '上传答案为空文件，上传失败';
+                                    } else {
+                                        $contents = fread($fp, filesize($file_dir)); //读文件 
+                                        $content = iconv('GBK', 'utf-8', $contents);
+                                        $txtContent = Tool::SBC_DBC($content, 0);
+                                        $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                                        $result = "1";
+                                    }
+                                }
+                            }
+                     }
+                     Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                     
+                 if($_FILES["file2"]["name"]!=""){
                         if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file2'] ['type'] != "audio/wav" &&
                             $_FILES ['file2'] ['type'] != "audio/x-wav") {
-                                $result = '文件格式不正确，应为MP3或WAV格式';
+                                $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
                             } else if ($_FILES['file2']['error'] > 0) {
-                                 $result = '文件上传失败';
+                                 $result2 = '第二个音频文件上传失败';
                               }else {
                         $oldName = $_FILES["file2"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
@@ -187,19 +325,70 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
+                        Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
                         $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-                        Race::model()->addRace($indexID, 4, $content2, $step4['score'], $step4['time'], "", "");
-                        $result = 1;
+                        Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
+                        $result = "1";
                             } 
                         }else {
                            $newName = $flag2['resourseID'];
                            $oldName = $flag2['fileName'];
                            $time = $flag2['time'];
-                           Race::model()->addRace($indexID, 32, $content2, $score2, $time, $newName, $oldName);
-                           $result = '1';
-                        }
-                 }
+                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
+//                           $result = '1';
+                        }    
+         }
+//                 if($flag2 == null){
+//                      if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
+//                          $_FILES ['file2'] ['type'] != "audio/wav" &&
+//                          $_FILES ['file2'] ['type'] != "audio/x-wav") {
+//                          $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
+//                          } else if ($_FILES['file2']['error'] > 0) {
+//                              $result2 = '第二个音频文件上传失败';
+//                         } else {
+//                           $oldName = $_FILES["file2"]["name"];
+//                           $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+//                           move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+//                           Resourse::model()->insertRelaVoice($newName, $oldName);
+//                           $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+//                           $player=new COM("WMPlayer.OCX");
+//                           $media=$player->newMedia($file);
+//                           $time=round($media->duration);
+//                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
+//                           $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+//                           Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
+//                           $result = "1";
+//                        } 
+//                 }  else {
+//                     if($_FILES["file2"]["name"]!=""){
+//                        if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
+//                            $_FILES ['file2'] ['type'] != "audio/wav" &&
+//                            $_FILES ['file2'] ['type'] != "audio/x-wav") {
+//                                $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
+//                            } else if ($_FILES['file2']['error'] > 0) {
+//                                 $result2 = '第二个音频文件上传失败';
+//                              }else {
+//                        $oldName = $_FILES["file2"]["name"];
+//                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+//                        move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+//                        Resourse::model()->insertRelaVoice($newName, $oldName);
+//                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+//                        $player=new COM("WMPlayer.OCX");
+//                        $media=$player->newMedia($file);
+//                        $time=round($media->duration);
+//                        Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
+//                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+//                        Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
+//                        $result = "1";
+//                            } 
+//                        }else {
+//                           $newName = $flag2['resourseID'];
+//                           $oldName = $flag2['fileName'];
+//                           $time = $flag2['time'];
+//                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
+////                           $result = '1';
+//                        }
+//                 }
                         
              }
                 $render = 'Three';
@@ -207,22 +396,26 @@ class TeacherController extends CController {
             case 4:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
-                    $score = $_POST['score'];
+//                    $score = $_POST['score'];
                     $content = Race::model()->find("indexID=? AND step=?", array($indexID, 3))['content'];
-                    Race::model()->addRace($indexID, $step, $content, $score, $time, "", "");
+                    Race::model()->addRace($indexID, $step, $content, 0, $time, "", "");
                     $result = 1;
                 }
                 $render = 'Four';
                 break;
             case 5:
-                if (isset($_POST['score'])) {
+                if (isset($_POST['content'])) {
 //                    $time = $_POST['time'];
-                    $score = $_POST['score'];
-                    $content = $_POST['content'];
+//                    $score = $_POST['score'];
+                    $flag5 = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+//                    $content = "";
+                    
                     $dir = "./resources/race/";
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
+                if($flag5== NULL){
+                    if($_FILES["file"]["name"]!=""){
                     if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
@@ -238,21 +431,118 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
-                        $result = 1;
+                 if(!empty($_FILES["myfile"]['name'])){
+                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                     $file_type = $file_types [count($file_types) - 1];
+                     // 判别是不是excel文件
+                     if (strtolower($file_type) != "text/plain") {
+                        $result = '不是txt文件';
+                     } else {
+                     // 解析文件并存入数据库逻辑
+                     /* 设置上传路径 */
+                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                      if (!copy($tmp_file, $savePath . $file_name)) {
+                        $result = '上传失败';
+                      } else {
+                        $file_dir = $savePath . $file_name;
+                        $file_dir = str_replace("\\", "\\\\", $file_dir);
+                        $fp = fopen($file_dir, "r");
+                        move_uploaded_file($file_name, $savePath);
+                        $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result = '空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                           Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                            $result = "1";
+                       }
                     }
                 }
+            }
+                        
+     }
+                }
+                }else {
+                    $txtNoSpace = $flag5['content'];
+                    $time = $flag5['time'];
+                    $newName = $flag5['resourseID'];
+                    $oldName = $flag5['fileName'];
+                   if($_FILES["file"]["name"]!=""){
+                      if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                        $result2 = '文件格式不正确，应为MP3或WAV格式';
+                    } else if ($_FILES['file']['error'] > 0) {
+                        $result2 = '文件上传失败';
+                    } else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        $result = "1";
+                    } 
+                   } 
+                   if(!empty($_FILES["myfile"]['name'])){
+                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                     $file_type = $file_types [count($file_types) - 1];
+                     // 判别是不是excel文件
+                     if (strtolower($file_type) != "text/plain") {
+                        $result3 = '不是txt文件';
+                     } else {
+                     // 解析文件并存入数据库逻辑
+                     /* 设置上传路径 */
+                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                      if (!copy($tmp_file, $savePath . $file_name)) {
+                        $result3 = '上传失败';
+                      } else {
+                        $file_dir = $savePath . $file_name;
+                        $file_dir = str_replace("\\", "\\\\", $file_dir);
+                        $fp = fopen($file_dir, "r");
+                        move_uploaded_file($file_name, $savePath);
+                        $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result3 = '空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                            $result = "1";
+                       }
+                    }
+                }
+            }
+                 Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+//                 $result = "1";   
+                }
+              }
                 $render = 'Five';
                 break;
             case 6:
-                if (isset($_POST['score'])) {
-//                    $time = $_POST['time'];
-                    $score = $_POST['score'];
-                    $content = $_POST['content'];
+                if (isset($_POST['time'])) {
+                    $flag6 = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+                    $time = $_POST['time']*60;
+//                    $score = $_POST['score'];
+//                    $content = $_POST['content'];
                     $dir = "./resources/race/";
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
+                 if($flag6 == NULL){
+                if($_FILES["file"]["name"]!=""){
                     if ($_FILES["file"]["type"] == "video/mp4" || $_FILES["file"]["type"] == "application/octet-stream" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "rm" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "RM") {
                         if ($_FILES["file"]["error"] > 0) {
                             $result = "Return Code: " . $_FILES["file"]["error"];
@@ -261,17 +551,107 @@ class TeacherController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
-                            $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                            $player=new COM("WMPlayer.OCX");
-                            $media=$player->newMedia($file);
-                            $time=round($media->duration);
-                            Race::model()->addRace($indexID, $step, $content, $score, $time, $newName, $oldName);
-                            $result = 1;
+//                            $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+//                            $player=new COM("WMPlayer.OCX");
+//                            $media=$player->newMedia($file);
+//                            $time=round($media->duration);
+                  if(!empty($_FILES["myfile"]['name'])){
+                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                     $file_type = $file_types [count($file_types) - 1];
+                     // 判别是不是excel文件
+                     if (strtolower($file_type) != "text/plain") {
+                        $result = '不是txt文件';
+                     } else {
+                     // 解析文件并存入数据库逻辑
+                     /* 设置上传路径 */
+                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                      if (!copy($tmp_file, $savePath . $file_name)) {
+                        $result = '上传失败';
+                      } else {
+                        $file_dir = $savePath . $file_name;
+                        $file_dir = str_replace("\\", "\\\\", $file_dir);
+                        $fp = fopen($file_dir, "r");
+                        move_uploaded_file($file_name, $savePath);
+                        $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result = '空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                            $result = "1";
+                       }
+                    }
+                }
+            }
+                            
                         }
                     } else {
                         $result = "请上传正确类型的文件！";
                     }
+                 }
+                }else {
+                    $txtNoSpace = $flag6['content'];
+//                    $time = $flag6['time'];
+                    $newName = $flag6['resourseID'];
+                    $oldName = $flag6['fileName'];
+                  if($_FILES["file"]["name"]!=""){
+                    if ($_FILES["file"]["type"] == "video/mp4" || $_FILES["file"]["type"] == "application/octet-stream" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "rm" && substr($_FILES["file"]["name"], strrpos($_FILES["file"]["name"], '.') + 1) != "RM") {
+                        if ($_FILES["file"]["error"] > 0) {
+                            $result2 = "Return Code: " . $_FILES["file"]["error"];
+                        } else {
+                            $oldName = $_FILES["file"]["name"];
+                            $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                            move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                            Resourse::model()->insertRelaVideo($newName, $oldName);
+                            $result ="1";
+                        } 
+                    }else {
+                        $result2 = "请上传正确类型的文件！";
+                    }
+                  }
+                  if(!empty($_FILES["myfile"]['name'])){
+                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
+                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
+                     $file_type = $file_types [count($file_types) - 1];
+                     // 判别是不是excel文件
+                     if (strtolower($file_type) != "text/plain") {
+                        $result3 = '不是txt文件';
+                     } else {
+                     // 解析文件并存入数据库逻辑
+                     /* 设置上传路径 */
+                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
+                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
+                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
+                      if (!copy($tmp_file, $savePath . $file_name)) {
+                        $result3 = '上传失败';
+                      } else {
+                        $file_dir = $savePath . $file_name;
+                        $file_dir = str_replace("\\", "\\\\", $file_dir);
+                        $fp = fopen($file_dir, "r");
+                        move_uploaded_file($file_name, $savePath);
+                        $file_name=iconv("gb2312","UTF-8", $file_name);
+                        if (filesize($file_dir) < 1) {
+                            $result3 = '空文件，上传失败';
+                        } else {
+                            $contents = fread($fp, filesize($file_dir)); //读文件 
+                            $content = iconv('GBK', 'utf-8', $contents);
+                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
+                           
+                            $result = "1";
+                       }
+                    }
                 }
+            }
+                 Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);  
+                }
+              }
                 $render = 'Six';
                 break;
         }
@@ -282,12 +662,18 @@ class TeacherController extends CController {
             'race' => $race,
             'race2'=>$race2,
             'result' => $result,
+            'result2' => $result2,
+            'result3' => $result3,
+            'result4' => $result4,
+            'result5' => $result5,
             'step' => $step
            )); 
         }  else {
            $this->render('editRace' . $render, array(
             'race' => $race,
             'result' => $result,
+            'result2' => $result2,
+            'result3' => $result3,
             'step' => $step
            )); 
         }
@@ -439,6 +825,13 @@ class TeacherController extends CController {
                     $CDTime = $_GET['CDTime'];
                     Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
                 }
+                if (isset($_GET['over'])) {
+                    Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Two";
+                    break;
+                }
                 $render = "One";
                 break;
             case 2:
@@ -448,6 +841,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Three";
+                    break;
                 }
                 $render = "Two";
                 break;
@@ -458,6 +855,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Four";
+                    break;
                 }
                 $render = "Three";
                 break;
@@ -468,6 +869,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Five";
+                    break;
                 }
                 $render = "Four";
                 break;
@@ -478,6 +883,10 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Six";
+                    break;
                 }
                 $render = "Five";
                 break;
@@ -488,6 +897,11 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
+                    $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
+                    $render = "Six";
+                    $step = $step - 1;
+                    break;
                 }
                 $render = "Six";
                 break;
@@ -583,5 +997,88 @@ class TeacherController extends CController {
         }
         $this->render("detail" . $render, array("step" => $step, "race" => $race,'totalScore'=>$totalScore, 'answer' => $answer, 'result' => $result));
     }
+    public function actionresults(){
+            $aList = RaceIndex::model()->getAllRaceIndex();
+            $result = $aList['list'];
+            $pages = $aList['pages'];
+            $arrayData = Array();
+            $data = Array();
+        if(isset($_GET['indexID'])){
+            $indexID = $_GET['indexID'];
+            $stuList = Student::model()->findAll();
+            foreach ($stuList as $key => $studentID){
+                $studentID = $studentID['userID'];
+                $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
+                $step1 = $step1['raceID'];
+                $resultstep1 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step1));
+                $step2 = Race::model()->find("step=? AND indexID=?",array(2,$indexID));
+                $step2 = $step2['raceID'];
+                $resultstep2 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step2));
+                $step3 = Race::model()->find("step=? AND indexID=?",array(3,$indexID));
+                $step3 = $step3['raceID'];
+                $resultstep3 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step3));
+                $step4 = Race::model()->find("step=? AND indexID=?",array(4,$indexID));
+                $step4 = $step4['raceID'];
+                $resultstep4 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step4));
+                $step5 = Race::model()->find("step=? AND indexID=?",array(5,$indexID));
+                $step5 = $step5['raceID'];
+                $resultstep5 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step5));
+                $step6 = Race::model()->find("step=? AND indexID=?",array(6,$indexID));
+                $step6 = $step6['raceID'];
+                $resultstep6 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step6));
+                $arrayData = ["studentID"=>$studentID,
+                "resultstep1"=>$resultstep1,"resultstep2"=>$resultstep2,
+                "resultstep3"=>$resultstep3,"resultstep4"=>$resultstep4,
+                "resultstep5"=>$resultstep5,"resultstep6"=>$resultstep6,
+                ];
+                array_push($data, $arrayData);
+            }
+            $this->render('results', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'stuList' => $stuList,
+            'data' => $data,
+        ));
+        }else{
+        $this->render('results', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'result' => ''
+        ));}
+    }
+    public function actionExportresults(){ 
+            $arrayData = Array();
+            $data = Array();
+            $indexID = $_GET['indexID'];
+            $stuList = Student::model()->findAll();
+            foreach ($stuList as $key => $studentID){
+                $studentID = $studentID['userID'];
+                $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
+                $step1 = $step1['raceID'];
+                $resultstep1 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step1));
+                $step2 = Race::model()->find("step=? AND indexID=?",array(2,$indexID));
+                $step2 = $step2['raceID'];
+                $resultstep2 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step2));
+                $step3 = Race::model()->find("step=? AND indexID=?",array(3,$indexID));
+                $step3 = $step3['raceID'];
+                $resultstep3 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step3));
+                $step4 = Race::model()->find("step=? AND indexID=?",array(4,$indexID));
+                $step4 = $step4['raceID'];
+                $resultstep4 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step4));
+                $step5 = Race::model()->find("step=? AND indexID=?",array(5,$indexID));
+                $step5 = $step5['raceID'];
+                $resultstep5 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step5));
+                $step6 = Race::model()->find("step=? AND indexID=?",array(6,$indexID));
+                $step6 = $step6['raceID'];
+                $resultstep6 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step6));
+                $arrayData = ["studentID"=>$studentID,
+                "resultstep1"=>$resultstep1,"resultstep2"=>$resultstep2,
+                "resultstep3"=>$resultstep3,"resultstep4"=>$resultstep4,
+                "resultstep5"=>$resultstep5,"resultstep6"=>$resultstep6,
+                ];
+                array_push($data, $arrayData);
+            }    
 
+    return $this->renderPartial('simple',['data'=>$data]);
+}
 }

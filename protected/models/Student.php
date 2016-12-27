@@ -184,7 +184,7 @@ class Student extends CActiveRecord {
     }
     public function getStudent() {
         $sql = "SELECT * FROM student";
-        $Allresult = Tool::pager($sql, 10);
+        $Allresult = Tool::pager($sql, 1000);
         return $Allresult;   
     }
     

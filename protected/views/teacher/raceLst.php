@@ -1,19 +1,30 @@
-<div class="span3">
-    <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-            <li class="nav-header"><i class="icon-plus"></i>添加</li>
+<div class="leftbar" style ="display: none; background: #FFE9E3;margin-left: 20px" id="on_adding">
+    <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
+    <div style="margin-left: 10px;margin-top: 10px">
+        <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px; font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
+    </div>
+        <div style="background:#FFFFFF;width: 88%;margin-left: 16px;margin-top: 48px;border-radius: 6px;">
+        <ul class="nav nav-list" style="margin-top: 15px">
             <li>
-                <input id="value" type="text" class="search-query span2" placeholder="试卷名称" />
+                <input id="value" type="text" class="search span2" placeholder="请输入试卷标题" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
             </li>
-            <li style="margin-top:10px">
-                <button onclick="addRace()" class="btn_4big">添 加</button>
+            <li style="margin-bottom: 30px">
+                <button onclick="cancel()" class="btn_6big">取 消</button>
+                <button onclick="addRace()" class="btn_5big">确 定</button>
             </li>
-            <li class="divider"></li>
-            <li class="active" ><a href="./index.php?r=teacher/raceLst"><i class="icon-align-left"></i> 试卷列表</a></li>
         </ul>
+        </div>
     </div>
 </div>
-<div class="span9">
+<div class="leftbar" style="margin-left: 20px" id="on_add">
+    <div style="height: 100%;margin-left: 20px;margin-top: 20px;background:#F8F4F2;width: 80%;height: 46px;border-radius: 6px;">
+            <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px;font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
+            <div style="margin-top: 55px;margin-left: 8px">
+                <a href="#" onclick="adding()" style="font-size: 14px;color: #9D9D9C ;position: relative;top: 12px;left: 2px"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png" >&nbsp;新建试卷</a>
+    </div>
+    </div>
+    </div>
+<div class="rightbar">
 
     <h2>试卷列表</h2>
     <!-- 科目列表-->
@@ -61,6 +72,7 @@
 <script>
 
     $(document).ready(function () {
+        window.parent.doClick();
         var result = <?php echo "'$result'"; ?>;
         if (result === '1')
             window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
@@ -92,7 +104,7 @@
                 window.location.href = "./index.php?r=teacher/deleteRaceIndex&&indexID=" + id;
             }
         };
-        window.wxc.xcConfirm("确定要删除考场：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
+        window.wxc.xcConfirm("确定要删除试卷：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
     }
 
     function addRace() {
@@ -100,7 +112,7 @@
         if(courseName!==""){
             window.location.href="./index.php?r=teacher/addRaceIndex&raceName="+courseName;
         }else{
-            window.wxc.xcConfirm('请输入考场名', window.wxc.xcConfirm.typeEnum.info);
+            window.wxc.xcConfirm('请输入试卷名', window.wxc.xcConfirm.typeEnum.info);
         }
     }
 
@@ -114,7 +126,7 @@
             }
         }
         if (flag === 0) {
-            window.wxc.xcConfirm('未选中任何题目', window.wxc.xcConfirm.typeEnum.info);
+            window.wxc.xcConfirm('未选中任何试卷', window.wxc.xcConfirm.typeEnum.info);
         } else {
             var option = {
                 title: "警告",
@@ -123,8 +135,17 @@
                     $('#deleForm').submit();
                 }
             };
-            window.wxc.xcConfirm("确定删除选中的科目吗？", "custom", option);
+            window.wxc.xcConfirm("确定删除选中的试卷吗？", "custom", option);
         }
 
     }
+        function adding(){
+        document.getElementById("on_adding").style.display='block';
+        document.getElementById("on_add").style.display='none';
+    }
+    function cancel(){
+        document.getElementById("on_adding").style.display='none';
+        document.getElementById("on_add").style.display='block';  
+    }
+    
 </script>

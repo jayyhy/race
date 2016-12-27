@@ -10,8 +10,10 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent();
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
+        $teacher = Teacher::model()->findAll();
         $this->render('index', array(
             'courseLst' => $courseLst,
+            'teacher' => $teacher,
             'student' => $student,
             'pages' => $pages,
             'result' => ''
@@ -161,7 +163,7 @@ class AdminController extends CController {
             $stu = Student::model()->getStudent();
             $pages = $stu ['pages'];
             $student =  $stu ['list'];
-            $this->render('courseLst', array(
+            $this->render('index', array(
                 'courseLst' => $courseLst,
                 'student'=>$student,
                 'pages' => $pages,
@@ -177,9 +179,11 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent();
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
+        $teacher = Teacher::model()->findAll();
         $this->render('index', array(
             'courseLst' => $courseLst,
             'student'=>$student,
+            'teacher'=>$teacher,
             'pages' => $pages,
             'result' => ''
         ));
@@ -202,9 +206,11 @@ class AdminController extends CController {
         $pages = $result ['pages'];
         $stu = Student::model()->getStudent();
         $student =  $stu['list'];
+        $teacher = Teacher::model()->findAll();
         $this->render('index', array(
             'courseLst' => $courseLst,
             'student'=>$student,
+            'teacher'=>$teacher,
             'pages' => $pages,
             'result' => "1"
         ));
@@ -214,10 +220,12 @@ class AdminController extends CController {
         $pages = $result ['pages'];
         $stu = Student::model()->getStudent();
         $student =  $stu['list'];
+        $teacher = Teacher::model()->findAll();
         $this->render('index', array(
             'courseLst' => $courseLst,
             'student'=>$student,
             'pages' => $pages,
+            'teacher'=>$teacher,
             'result' => "3"
         ));}
     }
@@ -466,7 +474,7 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent();
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $this->render('courseLst', array(
+        $this->render('index', array(
             'courseLst' => $courseLst,
             'pages' => $pages,
             'student'=>$student,

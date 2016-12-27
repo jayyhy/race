@@ -1,85 +1,80 @@
-<div class="span3" style ="display: none;" id="on_adding">
-    <div class="well" style="padding: 8px 0; height: 650px;">
-        <ul class="nav nav-list" style="margin-top: 100px">
-            <li class="divider"></li><br>
+<div class="leftbar" style ="display: none; background: #FFE9E3" id="on_adding">
+    <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
+    <div style="margin-left: 10px;margin-top: 10px">
+        <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建考场</font>
+    </div>
+        <div style="background:#FFFFFF;width: 90%;margin-left: 5%">
+        <ul class="nav nav-list" style="margin-top: 15px">
             <li>
-                <input id="value" type="text" class="search-query span2" placeholder="考场名称" />
-                <input id="kaohao" type="text" class="search-query span2" placeholder="考号" />
-                <input id="renshu" type="text" class="search-query span2" placeholder="人数" />
+                <input id="value" type="text" class="search span2" placeholder="请输入考场名" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
+                <input id="kaohao" type="text" class="search span2" placeholder="请输入考场号" style="width: 92%;border-color: #FEE1DA"/>
+                <input id="renshu" type="text" class="search span2" placeholder="请输入人数" style="width: 80%;border-color: #FEE1DA"/> <font color="#9797B7">人</font>
             </li>
-            <li style="margin-top:10px">
-                <button onclick="addCourse()" class="btn_4big">添 加</button>
-            </li><br>
-            <li class="divider"></li>
+            <li style="margin-bottom: 30px">
+                <button onclick="cancel()" class="btn_6big">取 消</button>
+                <button onclick="addCourse()" class="btn_5big">确 定</button>
+            </li>
         </ul>
+        </div>
     </div>
 </div>
-<div class="span3" id="on_add">
-    <div class="well" style="padding: 8px 0; height: 650px">
-        <div style="margin-top: 100px">
-                <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>add.jpg"></a>
+<div class="leftbar" id="on_add">
+    <div style="height: 100%;margin-left: 10px;margin-top: 10px">
+            <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建考场</font>
+            <?php if(count($courseLst)==0){?>
+            <div style="margin-top: 10px;margin-left: 10px">
+         <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png">新建考场</a>
+    </div>
+            <?php } ?>
+            <div style="background-color:#FBF8F7;width: 92%; margin-top: 13px">
+             <?php foreach ($courseLst as $k => $model): ?>
+                <div style="padding: 30px">
+            <?php echo $model['name']; ?><br>
+            <?php echo $model['createTime']; ?>
+            <div style="float: right;margin-top: -10px;">
+            <a href="#"  onclick="deleteCourse(<?php echo $model['courseID']; ?>,'<?php echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>icon_delete.png"></a>
             </div>
+            </div>
+             <?php endforeach; ?>   
+        </div>
     </div>
-</div>
-<div class="span9">
-
-    <h2>考场列表</h2>
-    <!-- 科目列表-->
-<!--    <input type="checkbox" name="all" onclick="check_all(this, 'checkbox[]')" style="margin-bottom: 3px"> 全选　　批量操作：
-    <a href="#" onclick="deleCheck()"><img title="批量删除" src="<?php echo IMG_URL; ?>delete.png"></a>-->
-    <table class="table table-bordered table-striped">
+    </div>
+    <?php if(count($courseLst)!=0){?>
+<div class="rightbar">
+    <div style="margin-left:3%;font-weight:bold">
+        <div style="font-size: 25px;margin-top: 20px;">教学ID:<font color="#FE0100">
+            <?php
+            foreach ($teacher as $tea){echo $tea['userName'];}
+            ?>
+            </font>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            学生人数:<font color="#FE0100"><?php echo count($student);?></font></div>
+    <h3>学生ID:</h3>
+   <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-<!--                <th class="font-center">选择</th>-->
-<!--                <th class="font-center">考场号</th>-->
-                <th class="font-center">考场名</th>
-                <th class="font-center">创建时间</th>
-                <th class="font-center">操作</th>
-            </tr>
-        </thead>
-        <tbody>        
-        <form id="deleForm" method="post" action="./index.php?r=admin/deleteCourse">
-            <?php foreach ($courseLst as $k => $model): ?>
-                <tr>
-<!--                    <td class="font-center" style="width: 50px"> <input type="checkbox" name="checkbox[]" value="<?php //echo $model['courseID']; ?>" /> </td>-->
-<!--                    <td class="font-center"><?php //echo $model['courseID']; ?></td>-->
-                    <td class="font-center"><?php echo $model['name']; ?></td>
-                    <td class="font-center"><?php echo $model['createTime']; ?></td>
-                    <td class="font-center" style="width: 100px">  
-<!--                        <a href="#"  ><img title="查看" src="<?php echo IMG_URL; ?>detail.png"></a>-->
-                        <a href="#"  onclick="deleteCourse(<?php echo $model['courseID']; ?>,'<?php echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>delete.png"></a>
-                    </td>
-                </tr>            
-            <?php endforeach; ?> 
-        </form>
-        </tbody>
-    </table>
-
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th class="font-center">考号</th>
-                <th class="font-center">姓名</th>
-            </tr>
         </thead>
         <tbody>   
-    <?php foreach ($student as $allstu){ ?>
-                  <tr>
-                    <td class="font-center"><?php echo $allstu['userID']; ?></td>
-                    <td class="font-center"><?php echo $allstu['userName']; ?></td>
-                </tr>           
+    <?php 
+     $i = 0;
+            echo "<tr>";
+    foreach ($student as $allstu){ 
+        $i++;
+        echo "<td>";
+        echo $allstu['userID'];
+        echo "</td>";
+        if ($i % 5 == 0) {
+          echo "</tr>";
+        }
+        ?> 
 <?php }?>
         </tbody>
     </table>
-        <!-- 学生列表结束 -->
-    <!-- 显示翻页标签 -->
-    <div align=center>
-        <?php
-        $this->widget('CLinkPager', array('pages' => $pages));
-        ?>
-    </div>
-    <!-- 翻页标签结束 -->
 </div>
+</div>
+    <?php } else { ?>
+<div class="rightbar"><div style="margin-left: 35%"><img src="<?php echo IMG_URL; ?>null_exam.png"></div></div>
+    <?php } ?>
+
 <script>
 
     $(document).ready(function () {
@@ -141,6 +136,7 @@
             if(isNaN(renshu) || renshu<=0 || renshu>100 || parseInt(renshu)!=renshu){
                     window.wxc.xcConfirm('请在人数框里输入大于0小鱼100的正整数', window.wxc.xcConfirm.typeEnum.info);
                     return false;
+                    
             }
             else if(!reg.test(kaohao)){
                      window.wxc.xcConfirm('请在考号框里只能输入英文和数字', window.wxc.xcConfirm.typeEnum.info);
@@ -181,5 +177,9 @@
     function adding(){
         document.getElementById("on_adding").style.display='block';
         document.getElementById("on_add").style.display='none';
+    }
+    function cancel(){
+        document.getElementById("on_adding").style.display='none';
+        document.getElementById("on_add").style.display='block';  
     }
 </script>

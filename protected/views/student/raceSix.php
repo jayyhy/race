@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="300">
+
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>

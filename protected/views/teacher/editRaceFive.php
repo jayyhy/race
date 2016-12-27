@@ -42,12 +42,12 @@
         <h3></h3>
         <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" id="myForm" enctype="multipart/form-data"> 
             
-            <div class="control-group">
+<!--            <div class="control-group">
                 <label class="control-label">分数：</label>
                 <div class="controls">
                     <textarea name="score" style="width:50px; height:20px;" id="score"><?php echo $race['score']; ?></textarea> 分
                 </div>
-            </div>
+            </div>-->
 
             <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
             <fieldset>
@@ -73,6 +73,12 @@
                     </div>
                 </div>
                 <div class="control-group">
+                <label class="control-label" for="input04">上传答案</label>
+                <div class="controls">
+                    <input type="file" name="myfile" id="myfile" >
+                </div>
+            </div>
+                <div class="control-group">
                     <label class="control-label" for="input03">答案：</label>
                     <div class="controls">               
                         <textarea name="content" style="width:450px; height:200px;" id="input03"><?php echo $race['content']; ?></textarea>
@@ -87,23 +93,30 @@
 </div>
 
 <script>
+    <?php
+    $tag = "0";
+    if($race == null) {
+        $tag = "1";
+    }
+    ?>
+        var tag = <?php echo $tag; ?>;
     $("#myForm").submit(function () {
         var uploadFile = $("#input02")[0].value;
-        var time = document.querySelector("#name").value;
-        var score = document.querySelector("#score").value;
-        var reg = new RegExp("^[0-9]*$");
-        if (!(reg.test(time) && reg.test(score))) {
-            event.preventDefault();
-            window.wxc.xcConfirm('请输入数字', window.wxc.xcConfirm.typeEnum.info);
-        }
-        if (uploadFile === "")
+//        var time = document.querySelector("#name").value;
+////        var score = document.querySelector("#score").value;
+//        var reg = new RegExp("^[0-9]*$");
+//        if (!(reg.test(time) && reg.test(score))) {
+//            event.preventDefault();
+//            window.wxc.xcConfirm('请输入数字', window.wxc.xcConfirm.typeEnum.info);
+//        }
+        if (uploadFile === "" && tag == "1")
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
-
+        var files =  document.getElementById("myfile").value;
         var A = $("#input03")[0].value;
-        if (A === "") {
+        if (files === "" && A === "") {
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
@@ -125,20 +138,27 @@
         $("#wordCount").text(v);
         $("#upload").hide();
         var result = <?php echo "'$result'"; ?>;
-        if (result === '1'){
+        var result2 = <?php echo "'$result2'"; ?>;
+        var result3 = <?php echo "'$result3'"; ?>;
+        if (result === '0') {
+            window.wxc.xcConfirm("已有班级进行需要删除的试卷，无法删除！", window.wxc.xcConfirm.typeEnum.error, {
+                onOk: function () {
+                    window.location.href = "./index.php?r=teacher/RaceLst";
+                }
+            });}else if(result3!=""){
+                   window.wxc.xcConfirm(result3, window.wxc.xcConfirm.typeEnum.error);
+
+            }else if(result2!=""){
+                   window.wxc.xcConfirm(result2, window.wxc.xcConfirm.typeEnum.error);
+
+            }else if (result === '1'){
             window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
                     window.location.href = "./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6";
                 }
             });
-            }else if (result === '0') {
-            window.wxc.xcConfirm("已有班级进行需要删除的试卷，无法删除！", window.wxc.xcConfirm.typeEnum.error, {
-                onOk: function () {
-                    window.location.href = "./index.php?r=teacher/RaceLst";
-                }
-            });}else if(result!=""){
-                   window.wxc.xcConfirm(result, window.wxc.xcConfirm.typeEnum.error);
-
+            }else if(result!="") {
+              window.wxc.xcConfirm(result, window.wxc.xcConfirm.typeEnum.error);
             }
     });
 
