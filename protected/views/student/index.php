@@ -1,4 +1,4 @@
-<div class="span9 stuindex">
+<div class="stuindex">
     <iframe scrolling="no" class="stuIframe" seamless src="./index.php?r=student/waitForStart"></iframe>
     <object id="typeOCX" type="application/x-itst-activex" 
             clsid="{ED848B16-B8D3-46c3-8516-E22371CCBC4B}" 

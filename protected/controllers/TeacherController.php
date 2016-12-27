@@ -960,5 +960,88 @@ class TeacherController extends CController {
         }
         $this->render("detail" . $render, array("step" => $step, "race" => $race,'totalScore'=>$totalScore, 'answer' => $answer, 'result' => $result));
     }
+    public function actionresults(){
+            $aList = RaceIndex::model()->getAllRaceIndex();
+            $result = $aList['list'];
+            $pages = $aList['pages'];
+            $arrayData = Array();
+            $data = Array();
+        if(isset($_GET['indexID'])){
+            $indexID = $_GET['indexID'];
+            $stuList = Student::model()->findAll();
+            foreach ($stuList as $key => $studentID){
+                $studentID = $studentID['userID'];
+                $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
+                $step1 = $step1['raceID'];
+                $resultstep1 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step1));
+                $step2 = Race::model()->find("step=? AND indexID=?",array(2,$indexID));
+                $step2 = $step2['raceID'];
+                $resultstep2 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step2));
+                $step3 = Race::model()->find("step=? AND indexID=?",array(3,$indexID));
+                $step3 = $step3['raceID'];
+                $resultstep3 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step3));
+                $step4 = Race::model()->find("step=? AND indexID=?",array(4,$indexID));
+                $step4 = $step4['raceID'];
+                $resultstep4 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step4));
+                $step5 = Race::model()->find("step=? AND indexID=?",array(5,$indexID));
+                $step5 = $step5['raceID'];
+                $resultstep5 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step5));
+                $step6 = Race::model()->find("step=? AND indexID=?",array(6,$indexID));
+                $step6 = $step6['raceID'];
+                $resultstep6 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step6));
+                $arrayData = ["studentID"=>$studentID,
+                "resultstep1"=>$resultstep1,"resultstep2"=>$resultstep2,
+                "resultstep3"=>$resultstep3,"resultstep4"=>$resultstep4,
+                "resultstep5"=>$resultstep5,"resultstep6"=>$resultstep6,
+                ];
+                array_push($data, $arrayData);
+            }
+            $this->render('results', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'stuList' => $stuList,
+            'data' => $data,
+        ));
+        }else{
+        $this->render('results', array(
+            'raceLst' => $result,
+            'pages' => $pages,
+            'result' => ''
+        ));}
+    }
+    public function actionExportresults(){ 
+            $arrayData = Array();
+            $data = Array();
+            $indexID = $_GET['indexID'];
+            $stuList = Student::model()->findAll();
+            foreach ($stuList as $key => $studentID){
+                $studentID = $studentID['userID'];
+                $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
+                $step1 = $step1['raceID'];
+                $resultstep1 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step1));
+                $step2 = Race::model()->find("step=? AND indexID=?",array(2,$indexID));
+                $step2 = $step2['raceID'];
+                $resultstep2 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step2));
+                $step3 = Race::model()->find("step=? AND indexID=?",array(3,$indexID));
+                $step3 = $step3['raceID'];
+                $resultstep3 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step3));
+                $step4 = Race::model()->find("step=? AND indexID=?",array(4,$indexID));
+                $step4 = $step4['raceID'];
+                $resultstep4 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step4));
+                $step5 = Race::model()->find("step=? AND indexID=?",array(5,$indexID));
+                $step5 = $step5['raceID'];
+                $resultstep5 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step5));
+                $step6 = Race::model()->find("step=? AND indexID=?",array(6,$indexID));
+                $step6 = $step6['raceID'];
+                $resultstep6 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step6));
+                $arrayData = ["studentID"=>$studentID,
+                "resultstep1"=>$resultstep1,"resultstep2"=>$resultstep2,
+                "resultstep3"=>$resultstep3,"resultstep4"=>$resultstep4,
+                "resultstep5"=>$resultstep5,"resultstep6"=>$resultstep6,
+                ];
+                array_push($data, $arrayData);
+            }    
 
+    return $this->renderPartial('simple',['data'=>$data]);
+}
 }
