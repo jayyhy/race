@@ -94,7 +94,7 @@
 //        }
 
         function endDo() {
-            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step + 1 ?>&over=1';
+            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step?>&over=1';
         }
     })();
 
