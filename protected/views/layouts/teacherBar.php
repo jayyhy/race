@@ -23,7 +23,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
 <!--                <font class="ysgs">亚伟国赛管理系统</font>-->
 <div class="sjdp" id="sjdp"><a href="./index.php?r=teacher/raceLst" onclick="changesjdp()">试卷调配</a></div>
 <div class="kcjk" id="kcjk"><a href="./index.php?r=teacher/raceControl">考场监控</a></div>
-<div class="ksjg"><a href="">考试结果</a></div>
+<div class="ksjg"><a href="./index.php?r=teacher/results">考试结果</a></div>
                 <div class="userUI">
                  <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                   <?php $name=Yii::app()->session['userName'];

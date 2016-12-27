@@ -159,4 +159,10 @@ class AnswerRecord extends CActiveRecord
         }
         return $totalScore;
     }
+        public function getAllresults($indexID){
+        $sql = "SELECT * FROM answer_record where indexID = '$indexID'";
+        $criteria   =   new CDbCriteria();
+        $result     =   Yii::app()->db->createCommand($sql)->queryAll();
+        return $result;
+    }
 }

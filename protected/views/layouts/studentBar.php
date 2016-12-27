@@ -20,49 +20,31 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
             <!--            -->
         </head>
         <body>
-            <div class="container">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container" style="width:1300px">
-                            <a class="brand" href="./index.php?r=student/index"></a>
-                            <div class="nav-collapse">
-                                <ul class="nav">
-                                    <li><a id="blank_title" href="./index.php?r=student/index">亚伟国赛考试系统</a></li>
-                                    <li><a id="blank_stu"></a></li>
-                                    <li>
-                                        <?php if (Tool::stuNotice() == 0) { ?>                                         
-                                            <a id="stuMail_off" href="./index.php?r=student/stuNotice"></a>
-                                        <?php } else { ?>
-                                            <a id="stuMail_on" href="./index.php?r=student/stuNotice"></a>  
-                                        <?php } ?>
-                                    </li> 
-                                    <li >
-                                        <div class="userUI">
-                                            <a href="#" id="userUI"  data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
-                                                    <?php $name=Yii::app()->session['userName'];
-                                                            if (Tool::clength($name) <= 3)
-                                                                echo $name;
-                                                            else
-                                                                echo Tool::csubstr($name, 0, 3) . "...";
-                                                    ?>
-                                                    <?php echo Yii::app()->session['className']; ?><b class="user_dropdown_logo"></b>
+             <div class="ywnav">
+               
+                    <a class="ywlogo" href="./index.php?r=student/index"> <div class="ywlogo"> </div></a>
+               
+                <font class="ysgs">亚伟国赛管理系统</font>
+                <div class="userUI">
+                                            <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
+                                                
+                                                <?php $name=Yii::app()->session['userName'];
+                                                        if(Tool::clength($name) <= 3)
+                                                            echo $name;
+                                                        else
+                                                            echo Tool::csubstr($name, 0, 3) . "...";
+                                                ?>
+                                                <b class="user_dropdown_logo"></b>
                                             </a>
+
                                             <ul class="dropdown-menu">
-                                                <li><a href="./index.php?r=user/login&exit=1&usertype=student">退出</a> </li>
+                                                <li>
+<!--                                                    <a href="./index.php?r=admin/set">设置</a>-->
+                                                    <a href="./index.php?r=user/login&exit=1">退出</a>
+                                                </li>
                                             </ul>   
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="min-height: 700px">
+                                        </div></div>
                     <?php echo $content; ?>
-                </div>
-            </div>
             <div  class="copyright">
                 2015 &copy;南京兜秘网络科技有限公司.&nbsp;&nbsp;&nbsp;<a href="#"  class="copyright">法律声明</a><a href="#"  class="copyright">联系我们</a><a href="#"  class="copyright">获得帮助</a>
             </div>
