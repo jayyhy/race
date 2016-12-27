@@ -59,7 +59,16 @@
     <p>考试时间:<?php echo $race['time']/60; ?>分钟</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-    <button class="btn_4big" id="start" onclick="start()">开始</button>
+                <?php 
+            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
+            if(count($result)===0){
+                ?>
+    <button class="btn_4big" id="start" onclick="start()"> 开始</button>
+    <?php } else { ?>
+    <button class="btn_4big" id="start" onclick="stop()"> 开始</button>   
+     <?php
+            } 
+        ?>
 </div>
 
 <script>
@@ -85,7 +94,7 @@
 //        }
 
         function endDo() {
-            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step + 1 ?>&over=1';
+            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step?>&over=1';
         }
     })();
 
@@ -97,6 +106,9 @@
         }else{
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
         }
+    }
+    function stop() {
+    window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
     }
 </script>
 
