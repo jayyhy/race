@@ -15,7 +15,7 @@ function printTime(seconds, eleID){
     strTime += ss < 10 ? "0" + ss : ss;
     document.getElementById(eleID).innerHTML = strTime;
 }
-function tCounter(currTime, endTime, time_id, endDo){
+function tCounter(currTime, endTime, time_id, endDo,saveInReTime){
     var seconds = endTime - currTime;
     if(seconds <= 0){
         endDo();
@@ -23,13 +23,16 @@ function tCounter(currTime, endTime, time_id, endDo){
     }
     printTime(seconds, time_id);
     var timer = setInterval(function() {
+        if(saveInReTime!==""){
+            saveInReTime();
+        }
         seconds = seconds - 1;
         if(seconds <= 0){
             endDo();
             clearInterval(timer);
         }else{
             if(seconds % 100 === 0){
-                $.get("index.php?r=api/getTime",function(data,status){
+                $.get("index.php?r=api/getTime",function(data,status){                    
                     //console.log("Data: " + data + "\nStatus: " + status);
                     seconds = endTime - parseInt(data);
                 });

@@ -87,7 +87,7 @@
     } else {
         echo strtotime($endTime);
     }
-    ?>, "sideTime", endDo);
+    ?>, "sideTime", endDo,"");
         }
 //        else {
 //            CDTime.focus();
