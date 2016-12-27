@@ -790,8 +790,8 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
-                    Race::model()->isover($indexID,$step);
                     $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
                     $render = "Two";
                     break;
                 }
@@ -804,8 +804,8 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
-                    Race::model()->isover($indexID,$step);
                     $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
                     $render = "Three";
                     break;
                 }
@@ -818,8 +818,8 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
-                    Race::model()->isover($indexID,$step);
                     $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
                     $render = "Four";
                     break;
                 }
@@ -832,8 +832,8 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
-                    Race::model()->isover($indexID,$step);
                     $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
                     $render = "Five";
                     break;
                 }
@@ -846,8 +846,8 @@ class TeacherController extends CController {
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
-                    Race::model()->isover($indexID,$step);
                     $step = $step + 1;
+                    Race::model()->isover($indexID,$step);
                     $render = "Six";
                     break;
                 }
