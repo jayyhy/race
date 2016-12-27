@@ -67,6 +67,7 @@ class TeacherController extends CController {
         $result2 = "";
         $result3 = "";
         $result4 = "";
+        $result5 = "";
         switch ($step) {
             case 1:
                 if (isset($_POST['time'])) {
@@ -136,9 +137,29 @@ class TeacherController extends CController {
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
+                    $radioDir = "./resources/race/radio";
+                    if (!is_dir($radioDir)) {
+                        mkdir($radioDir, 0777);
+                    }
                     $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
                     $flag2 = Race::model()->find("indexID=? AND step =?", array($indexID, 32));
                     if ($flag==null){
+                        if($_FILES["files"]["name"]!=""){
+                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['files'] ['type'] != "audio/wav" &&
+                            $_FILES ['files'] ['type'] != "audio/x-wav") {
+                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['files']['error'] > 0) {
+                                 $result5 = '试音音频文件上传失败';
+                              }else {
+                        $oldName = $_FILES["files"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertAudition($newName, $oldName,$indexID);
+                        
+//                        $result = "1";
+                            } 
+                        }
                             if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
@@ -216,6 +237,21 @@ class TeacherController extends CController {
                    $oldName = $flag['fileName'];
                    $time = $flag['time'];
                    $txtNoSpace = $flag['content']; 
+                   if($_FILES["files"]["name"]!=""){
+                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['files'] ['type'] != "audio/wav" &&
+                            $_FILES ['files'] ['type'] != "audio/x-wav") {
+                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
+                            } else if ($_FILES['files']['error'] > 0) {
+                                 $result5 = '试音音频文件上传失败';
+                              }else {
+                        $oldNames = $_FILES["files"]["name"];
+                        $newNames = Tool::createID() . "." . pathinfo($oldNames, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newNames));
+                        Resourse::model()->insertAudition($newNames, $oldNames,$indexID);
+//                        $result = "1";
+                            } 
+                        }
                    if($_FILES["file"]["name"]!=""){
                         if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
@@ -628,7 +664,8 @@ class TeacherController extends CController {
             'result' => $result,
             'result2' => $result2,
             'result3' => $result3,
-            'result4' => $result4,  
+            'result4' => $result4,
+            'result5' => $result5,
             'step' => $step
            )); 
         }  else {

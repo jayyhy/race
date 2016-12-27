@@ -1,9 +1,9 @@
 <div class="leftbar" style ="display: none; background: #FFE9E3;margin-left: 20px" id="on_adding">
     <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
     <div style="margin-left: 10px;margin-top: 10px">
-        <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建试卷</font>
+        <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px; font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
     </div>
-        <div style="background:#FFFFFF;width: 90%;margin-left: 5%">
+        <div style="background:#FFFFFF;width: 88%;margin-left: 16px;margin-top: 48px;border-radius: 6px;">
         <ul class="nav nav-list" style="margin-top: 15px">
             <li>
                 <input id="value" type="text" class="search span2" placeholder="请输入试卷标题" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
@@ -17,10 +17,10 @@
     </div>
 </div>
 <div class="leftbar" style="margin-left: 20px" id="on_add">
-    <div style="height: 100%;margin-left: 10px;margin-top: 10px">
-            <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建试卷</font>
-            <div style="margin-top: 10px;margin-left: 10px">
-         <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png">&nbsp;创建试卷</a>
+    <div style="height: 100%;margin-left: 20px;margin-top: 20px;background:#F8F4F2;width: 80%;height: 46px;border-radius: 6px;">
+            <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px;font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
+            <div style="margin-top: 55px;margin-left: 8px">
+                <a href="#" onclick="adding()" style="font-size: 14px;color: #9D9D9C ;position: relative;top: 12px;left: 2px"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png" >&nbsp;新建试卷</a>
     </div>
     </div>
     </div>
