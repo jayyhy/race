@@ -34,8 +34,9 @@
             
             var startTime =  <?php echo $startTime; ?>;
             var curtime = <?php echo time(); ?>;
-            var endtime = <?php echo $endTime; ?>;           
-            tCounter(curtime, endtime, "time", endDo,saveInReTime);
+            var endtime = <?php echo $endTime; ?>;
+//            audio3.currentTime = (curtime - startTime);
+            tCounter3(curtime, endtime, "time", endDo,playAudio,saveInReTime);
         })();
         function saveInReTime(){
             var yaweiOCX1=window.parent.document.getElementById("typeOCX")
