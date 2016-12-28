@@ -48,9 +48,32 @@
                     <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> 分
                 </div>
             </div>-->
-            
+            <?php 
+            $indexID = $_GET['indexID'];
+            $radio = Resourse::model()->find("path='$indexID'"); ?>
             <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
             <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="input02">试音音频：</label>
+                    <div class="controls">
+                        <?php if ($radio != "") { ?>
+                        <div class="control-group">
+                                <?php $listenpath = "./resources/race/radio" . $radio['resourseID']; ?>
+                                <?php if (file_exists($listenpath)) { ?>
+                                    <video  src = "<?php echo $listenpath; ?>" preload = "auto" style="border:1px solid #5C595A" poster="./resources/race/01d32256f4084132f875a944080917.gif" controls></video>
+                                <?php } else { ?>
+                                    <p style="color: red">原音频文件丢失或损坏！</p>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <input type="file" name="files" id="input">   
+                        <div id="upload3" style="display:none;" hidden="true">
+                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
+                            正在上传，请稍等...
+                            <div id="number">0%</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="control-group">
                     <label class="control-label" for="input02">文件：</label>
                     <div class="controls">
@@ -71,12 +94,11 @@
                             <div id="number">0%</div>
                         </div>
                     </div>
-<!--                    (支持mp3及wav格式,最大1G)-->
                 </div>
 <!--                <div class="control-group">
                     <label class="control-label" for="input03">听打答案：</label>
                     <div class="controls">               
-                        <textarea name="content" style="width:450px; height:200px;" id="input03"><?php echo $race['content']; ?></textarea>
+                        <textarea name="content" style="width:450px; height:200px;" id="input03"><?php //echo $race['content']; ?></textarea>
                         <br>字数：<span id="wordCount">0</span> 字
                     </div>
                 </div> -->
@@ -115,7 +137,7 @@
 <!--                    (支持mp3及wav格式,最大1G)-->
                 </div>
                 <div class="control-group">
-                <label class="control-label" for="input04">上传答案</label>
+                <label class="control-label" for="input04">上传答案：</label>
                 <div class="controls">
                     <input type="file" name="myfile" id="myfile" >
                 </div>
@@ -158,7 +180,11 @@
 //            event.preventDefault();
 //            window.wxc.xcConfirm('请输入数字', window.wxc.xcConfirm.typeEnum.info);
 //        }
-        
+        var radio = document.getElementById("input").vale;
+        if(radio == ""){
+            window.wxc.xcConfirm('试音文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
+            return false;
+        }
         if (uploadFile === "" && tag=="1" )
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
@@ -176,6 +202,7 @@
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
+        
         $("#upload").show();
         setTimeout('fetch_progress()', 1000);
     });
@@ -197,7 +224,7 @@
         var result2 = <?php echo "'$result2'"; ?>;
         var result3 = <?php echo "'$result3'"; ?>;
         var result4 = <?php echo "'$result4'"; ?>;
-        
+        var result5 = <?php echo "'$result5'"; ?>;
         if (result === '1')
             window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
@@ -218,6 +245,8 @@
         }
         else if(result3 !=""){
             window.wxc.xcConfirm(result3, window.wxc.xcConfirm.typeEnum.error);
+        }else if(result5 !=""){
+            window.wxc.xcConfirm(result5, window.wxc.xcConfirm.typeEnum.error);
         }
     });
 

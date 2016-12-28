@@ -8,7 +8,7 @@
         (function () {
             var curtime = <?php echo time(); ?>;
             var endtime = <?php echo $endTime; ?>;
-            tCounter(curtime, endtime, "time", endDo);
+            tCounter(curtime, endtime, "time", endDo,"");
             window.parent.stepFive();
         })();
         function endDo(){

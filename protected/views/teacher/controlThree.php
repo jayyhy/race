@@ -56,10 +56,21 @@
         ?>
 <!--        <p>设置准备时间:<input style="width: 30px" id="CDTime"/>秒</p>-->
     <?php } ?>
-    <p>考试时间:<?php echo floor(($race['time'] +$race2['time'])/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time'])-floor(($race['time'] +$race2['time']) / 60) * 60); ?> 秒</p>
+    <?php $listenpath = "./resources/race/" . $race['resourseID']; 
+           $listenpath2 = "./resources/race/" . $race2['resourseID'];
+            $indexID = $_GET['indexID'];
+            $radio = Resourse::model()->find("path='$indexID'"); 
+            $dir ="./resources/race/radio";
+            $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
+            $player=new COM("WMPlayer.OCX");
+            $media=$player->newMedia($file);
+            $time=round($media->duration);
+            $listenpath3 = "./resources/race/radio" . $radio['resourseID'];
+    ?>
+    <p>考试时间:<?php echo floor(($race['time'] +$race2['time']+$time)/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time']+$time)-floor(($race['time'] +$race2['time']+$time) / 60) * 60); ?> 秒</p>
     <p>倒计时:<font id = "sideTime">未开始</font></p>
     <p>阶段结束时间:<font id = "endTime">未开始</font></p>
-                <?php 
+    <?php 
             $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
             if(count($result)===0){
                 ?>
@@ -69,10 +80,10 @@
      <?php
             } 
         ?>
-    <?php $listenpath = "./resources/race/" . $race['resourseID']; 
-           $listenpath2 = "./resources/race/" . $race2['resourseID'];
-    ?>
+
+    
     <?php if (file_exists($listenpath)) { ?>
+    <audio id="audition" style="visibility: hidden" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
     <audio id="fristAu" style="visibility: hidden" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
     <audio id="secondAu" style="visibility: hidden" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls" ></audio>
     <?php } else { ?>
@@ -104,17 +115,25 @@
         function playAudio(sideTime){
             var fristAu = document.getElementById("fristAu");
             var secondAu = document.getElementById("secondAu");
+            var audition = document.getElementById("audition");
             var tag ="1";
-            var examTime = <?php echo $race['time'] +$race2['time']; ?>;
+            var flag ="1";
+            var examTime = <?php echo $race['time'] +$race2['time'] +$time;?>;
             if(examTime == sideTime){
-               fristAu.autoplay = "true";
-                fristAu.style.visibility = "visible";                 
+               audition.autoplay = "true";
+                audition.style.visibility = "visible";                 
             }
-            if(fristAu.ended && tag == "1"){
+            if(audition.ended && tag == "1"){
+                fristAu.autoplay = "true";
+               audition.style.visibility = "hidden";
+                fristAu.style.visibility = "visible";
+                tag ="0";
+            }
+            if(fristAu.ended && flag == "1"){
                 secondAu.autoplay = "true";
                fristAu.style.visibility = "hidden";
                 secondAu.style.visibility = "visible";
-                tag ="0";
+                flag ="0";
             }
         }
         function endDo() {
