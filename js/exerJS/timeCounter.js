@@ -64,7 +64,7 @@ function tCounter2(currTime, endTime, time_id, endDo){
         }
     }, 1000);
 };
-function tCounter3(currTime, endTime, time_id, endDo , playAudio){
+function tCounter3(currTime, endTime, time_id, endDo , playAudio,saveInReTime){
     var seconds = endTime - currTime;
     if(seconds <= 0){
         endDo();
@@ -72,7 +72,9 @@ function tCounter3(currTime, endTime, time_id, endDo , playAudio){
     }
     printTime(seconds, time_id);
     var timer = setInterval(function() {
-        
+        if(saveInReTime!==""){
+            saveInReTime();
+        }
         seconds = seconds - 1;
         playAudio(seconds);
         if(seconds <= 0){
