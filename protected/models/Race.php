@@ -123,10 +123,8 @@ class Race extends CActiveRecord {
         }
     }
     public function isover($indexID,$step){
-            $step = $step-1;
-            $result = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
-            error_log(111);
-            error_log($step);
+            $ste = $step-1;
+            $result = Race::model()->find("indexID=? AND step =?", array($indexID, $ste));
             $result->is_over = 1;
             $result->update();
     }
