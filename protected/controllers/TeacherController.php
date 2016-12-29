@@ -819,6 +819,8 @@ class TeacherController extends CController {
         $flag = 0;
         $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
         $teacherID = Yii::app()->session['userid_now'];
+        $pager = RaceIndex::model()->getAllRaceIndex();
+        $raceIndex = $pager['list'];
         if(isset($_GET['over'])){
                     $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step+1));
                 }
@@ -919,8 +921,7 @@ class TeacherController extends CController {
             $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
           $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
         }else {
-            error_log($step);
-          $this->render('control' . $render, array("step" => $step, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
+          $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
         }
     }
 
