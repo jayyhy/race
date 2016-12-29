@@ -17,6 +17,7 @@ defined('SITE_URL') or define('SITE_URL','http://'.$host.dirname($_SERVER['PHP_S
 //前台
 defined('CSS_URL') or define('CSS_URL',SITE_URL.'css/default/');
 defined('IMG_URL') or define('IMG_URL',SITE_URL.'img/default/');
+defined('IMG_URL_NEW') or define('IMG_URL_NEW',SITE_URL.'img/new_ui/');
 defined('IMG_UITea_URL') or define('IMG_UITea_URL',SITE_URL.'img/UI_tea/');
 defined('IMG_UIStu_URL') or define('IMG_UIStu_URL',SITE_URL.'img/UI_stu/');
 defined('JS_URL') or define('JS_URL',SITE_URL.'js/');
