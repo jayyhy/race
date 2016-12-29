@@ -72,6 +72,7 @@ class StudentController extends CController {
     }
 
     public function actionRace() {
+        $userID = Yii::app()->session['userid_now'];
         $render = "";
         $raceID = $_GET['raceID'];
         $race = Race::model()->find("raceID=?", array($raceID));
@@ -80,6 +81,8 @@ class StudentController extends CController {
         $EndTime = strtotime($course['endTime']);
         $startTime = strtotime($course['startTime']);
         $lastRaceIDForStepFour = 0;
+        $route = AnswerRecord::model()->find("studentID=? AND raceID=?", array($userID, $raceID));
+        $route = $route['recovery'];
         switch ($step) {
             case 1:
                 $render = "One";
@@ -106,7 +109,9 @@ class StudentController extends CController {
                 $render = "Six";
                 break;
         }
-        $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, "lastRaceIDForStepFour" => $lastRaceIDForStepFour));
+        $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, "lastRaceIDForStepFour" => $lastRaceIDForStepFour,
+            "route" => $route   
+            ));
     }
     
     public function saveInRealTime(){
@@ -129,4 +134,10 @@ class StudentController extends CController {
         $courseID = Student::model()->find("userID=?",array($userID))['classID'];
         $data = AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID);
     }
-}
+    public function actionSaveroute(){
+    $route=$_POST['route'];
+    $raceID = $_POST['raceID'];
+    $userID = Yii::app()->session['userid_now'];
+    AnswerRecord::model()->saveroute($route,$raceID,$userID);
+    }
+    }
