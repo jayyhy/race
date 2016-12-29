@@ -30,14 +30,12 @@
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
     <script>
-        (function () {
-            
-            var startTime =  <?php echo $startTime; ?>;
-            var curtime = <?php echo time(); ?>;
-            var endtime = <?php echo $endTime; ?>;
-//            audio3.currentTime = (curtime - startTime);
-            tCounter3(curtime, endtime, "time", endDo,playAudio,saveInReTime);
-        })();
+        var yaweiOCX1=window.parent.document.getElementById("typeOCX");
+        function savetxt() {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            var timestamp = (new Date()).valueOf();
+            yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
+        }
         function saveInReTime(){
             var yaweiOCX1=window.parent.document.getElementById("typeOCX")
             var content=yaweiOCX1.GetContent();
@@ -63,6 +61,13 @@
                     flag = "0";
                 }
         }
+            function timec(){
+            var curtime = <?php echo time(); ?>;
+            var endtime = <?php echo $endTime; ?>;
+            tCounter(curtime, endtime, "time", endDo,saveInReTime);
+        }
+        setTimeout(timec,0);
+        setInterval(savetxt,10000)
     </script>
 </body>
 
