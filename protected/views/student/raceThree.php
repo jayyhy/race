@@ -35,6 +35,19 @@
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
+            var raceID = <?php echo $race['raceID']; ?>;
+            var route = "D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
+            $.ajax({
+            type: "POST",
+            url: "index.php?r=student/saveroute",
+            data: {raceID: raceID, route:route},
+            success: function () {
+               
+            },
+            error: function (xhr, type, exception) {
+                
+            }
+        });
         }
         function saveInReTime(){
             var yaweiOCX1=window.parent.document.getElementById("typeOCX")
@@ -65,9 +78,13 @@
             var curtime = <?php echo time(); ?>;
             var endtime = <?php echo $endTime; ?>;
             tCounter(curtime, endtime, "time", endDo,saveInReTime);
+            reciveContent();
         }
         setTimeout(timec,0);
-        setInterval(savetxt,10000)
+        setInterval(savetxt,2000);
+        function reciveContent() {
+        yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
+        }
     </script>
 </body>
 
