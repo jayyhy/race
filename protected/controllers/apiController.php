@@ -30,6 +30,12 @@ class apiController extends Controller {
 
         $this->renderJSON($all_chats);
     }
+    
+    public function actionAnswerDataSave(){
+        $rate=$_POST['right_Radio'];
+        $race_ID=$_POST['race_ID'];
+        AnswerRecord::model()->updataAnswerData1($rate,$race_ID);
+    }
 
     public function actionPutChat() {
         $classID = $_GET['classID'];
@@ -1681,7 +1687,6 @@ class apiController extends Controller {
                     $s2+=intval($value);
                 }
                 $s2=$s2/($key+1);
-                error_log($s2);
                 if($n2==0){
                    $min=$s2;
                    $max=$s2;
@@ -1717,8 +1722,6 @@ class apiController extends Controller {
                     $max=$s3;
                     $maxN=$n3;
                 }
-                error_log($minN);
-                error_log($maxN);
             }else if($choice=='backDelete'){
                 $n4++;
                 $s4=0;
