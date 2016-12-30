@@ -7,13 +7,24 @@
     <h3>剩余：<span id="time"></span></h3>
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
-        (function () {
-            var curtime = <?php echo time(); ?>;
-            var endtime = <?php echo $endTime; ?>;
+        function savetxt() {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
-            yaweiOCX1.ExportTxtFile("D:/" + 2 + <?php echo $race['raceID']; ?> + StudentID + ".txt");
-            tCounter(curtime, endtime, "time", endDo,saveInReTime);
-        })();
+            var timestamp = (new Date()).valueOf();
+            yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/2/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
+            var route = "D:/YAWEIEXAM/2/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
+            var raceID = <?php echo $race['raceID']; ?>;
+             $.ajax({
+            type: "POST",
+            url: "index.php?r=student/saveroute",
+            data: {raceID: raceID, route:route},
+            success: function () {
+               
+            },
+            error: function (xhr, type, exception) {
+                
+            }
+        });
+        }
         function saveInReTime(){
 //            var yaweiOCX1=window.parent.document.getElementById("typeOCX")
             var content=yaweiOCX1.GetContent();
@@ -21,6 +32,18 @@
         }
         function endDo(){
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
+        }
+        
+        function timec(){
+            var curtime = <?php echo time(); ?>;
+            var endtime = <?php echo $endTime; ?>;
+            tCounter(curtime, endtime, "time", endDo,saveInReTime);
+            reciveContent();
+        }
+        setTimeout(timec,0);
+        setInterval(savetxt,2000)
+        function reciveContent() {
+        yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
         }
     </script>
 </body>

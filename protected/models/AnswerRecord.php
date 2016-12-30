@@ -38,7 +38,7 @@ class AnswerRecord extends CActiveRecord
 			array('studentID', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('recordID, studentID, content, raceID, score, rate, courseID, indexID, accept_time,completion_time', 'safe', 'on'=>'search'),
+			array('recordID, studentID, content, raceID, score, rate, courseID, indexID, accept_time,completion_time,recovery', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +69,7 @@ class AnswerRecord extends CActiveRecord
 			'indexID' => 'Index',
 			'accept_time' => 'Accept Time',
                         'completion_time'=>'Completion_time',
+                        'recovery'=>'Recovery',
 		);
 	}
 
@@ -100,6 +101,7 @@ class AnswerRecord extends CActiveRecord
 		$criteria->compare('indexID',$this->indexID);
 		$criteria->compare('accept_time',$this->accept_time);
                 $criteria->compare('completion_time',$this->completion_time);
+                $criteria->compare('recovery',$this->recovery);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -171,5 +173,10 @@ class AnswerRecord extends CActiveRecord
         $criteria   =   new CDbCriteria();
         $result     =   Yii::app()->db->createCommand($sql)->queryAll();
         return $result;
+    }
+    public function saveroute($route,$raceID,$userID){
+       $answer = AnswerRecord::model()->find("studentID=? AND raceID=?", array($userID, $raceID)); 
+       $answer->recovery = $route;
+       $result = $answer->update();
     }
 }
