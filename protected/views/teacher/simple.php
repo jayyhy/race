@@ -1,6 +1,6 @@
 <?php
-    $title=array('学号','阶段一','阶段二','阶段三','阶段四','阶段五','阶段六');
-    $filename='report';
+    $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
+    $filename="考场".$indexID."导出结果";
     header("Content-type:application/octet-stream");
     header("Accept-Ranges:bytes");
     header("Content-type:application/vnd.ms-excel;charset=gbk");  
@@ -20,12 +20,11 @@
     if (!empty($data)){
                    foreach ($data as $k => $model):
                 echo $model['studentID']."\t";
-                if($model['resultstep1']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep1']['rate']."\t";}
-                if($model['resultstep2']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep2']['rate']."\t";}
-                if($model['resultstep3']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep3']['rate']."\t";}
-                if($model['resultstep4']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep4']['rate']."\t";}
-                if($model['resultstep5']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep5']['rate']."\t";}
-                if($model['resultstep6']['rate']==null){echo"未作答"."\n";}else{echo $model['resultstep6']['rate']."\n";}
+                if($model['resultstep2']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep2']['rate']."%"."\t";}
+                if($model['resultstep3']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep3']['rate']."%"."\t";}
+                if($model['resultstep4']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep4']['rate']."%"."\t";}
+                if($model['resultstep5']['rate']==null){echo"未作答"."\t";}else{echo $model['resultstep5']['rate']."%"."\t";}
+                if($model['resultstep6']['rate']==null){echo"未作答"."\n";}else{echo $model['resultstep6']['rate']."%"."\n";}
            endforeach;
     }
 
