@@ -203,7 +203,7 @@ a:hover,a:focus {
     margin-left:20px
 }
 .container,.navbar-static-top .container,.navbar-fixed-top .container,.navbar-fixed-bottom .container {
-       width: 1200px;
+       width: 1440px;
 }
 .vp1 {
     border-radius: 5px;
@@ -4760,7 +4760,8 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     background-repeat:no-repeat;
 }
 .btn_5big{
-    width: 45%;
+    width: 77px;
+    height: 33px;
     border-style: solid;
     font-family: YouYuan;
     font-weight: 100;
@@ -4770,7 +4771,6 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     border-color: #f46500;
     background-color: #F80D01;
     color: #fff;
-    padding: 6px 25px;
     background-repeat:no-repeat;
 }
 .btn_4big:hover{
@@ -4812,11 +4812,12 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     border-color: #f46500;
     background-color: #f46500;
     color: #fff;
-    padding: 6px 25px;
+/*    padding: 6px 25px;*/
     background-repeat:no-repeat;
 }
 .btn_6big{
-    width: 45%;
+    width: 77px;
+    height: 33px;
     border-style: solid;
     font-family: YouYuan;
     font-weight: 100;
@@ -4826,7 +4827,6 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     border-color: #FBF8F7;
     background-color: #FBF8F7;
     color: #9797B7;
-    padding: 6px 25px;
     background-repeat:no-repeat;
 }
 .btn_add{
@@ -5819,10 +5819,10 @@ table tr td {
 }
 .stuindex{
     width: 1090px;
-    height: 550px
+    height: 670px
 }
 .stuIframe{
     border: 0px;
-    height: 200px;
+    height: 300px;
     width: 1090px;
 }

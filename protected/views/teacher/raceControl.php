@@ -2,7 +2,7 @@
 if(count($raceIndex)>0){
 require 'examSideBar.php';
 }  else {?>
-<body  style="  background: url(<?php echo IMG_URL_NEW; ?>null_start.png) no-repeat 50% 50% #F8F4F2 "></body>>
+<body  style="  background: url(<?php echo IMG_URL_NEW; ?>null_start.png) no-repeat 50% 50% #F8F4F2 "></body>
 <?php
 }
 ?>

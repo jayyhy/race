@@ -23,8 +23,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
              <div class="ywnav">
                
                     <a class="ywlogo" href="./index.php?r=student/index"> <div class="ywlogo"> </div></a>
-               
-                <font class="ysgs">亚伟国赛管理系统</font>
+                    <font class="ysgs" style="margin-left: 50%;">亚伟国赛考试系统</font>
                 <div class="userUI">
                                             <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                                                 
