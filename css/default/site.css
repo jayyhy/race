@@ -54,7 +54,7 @@ h1 {padding-bottom:0.2em;}
 .zebra-list li:last-child {border-bottom:1px solid #DDD; -webkit-border-radius:0 0 4px 4px; -moz-border-radius:0 0 4px 4px; border-radius:0 0 4px 4px;}
 .ywnav{
     width: 100%;
-    margin-top: -20px;
+    margin-top: -10px;
     background-color: #29282e;
 }
 .ywlogo{
