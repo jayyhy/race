@@ -108,6 +108,9 @@ class StudentController extends CController {
             case 6:
                 $render = "Six";
                 break;
+            case 32:
+                $render = "Three1";
+                break;
         }
         $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, "lastRaceIDForStepFour" => $lastRaceIDForStepFour,
             "route" => $route   

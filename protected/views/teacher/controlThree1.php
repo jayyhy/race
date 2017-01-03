@@ -57,13 +57,13 @@ require 'examSideBar.php';
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
         <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文本校对</a></div>
         <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">看打</a></div>
-        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" style=" color: #ff0000;">听打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=32" class="word" >听打</a></div>
         <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
         <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
         <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打一</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打二</h3>
             <?php
     if ($nowOnStep != 0) {
         if($nowOnStep == 1){?>
@@ -119,6 +119,7 @@ require 'examSideBar.php';
     <?php } ?>
         </div>
     </div>
+    
 </div>
 <script>
     function getExam(indexID){
@@ -186,5 +187,9 @@ require 'examSideBar.php';
     }
         function stop() {
     window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
-    }
+    } 
+    <?php if (isset($tip)){ ?><?php if($tip==1){ ?>
+    setTimeout(start,0);
+    <?php error_log($tip);}} ?>
 </script>
+
