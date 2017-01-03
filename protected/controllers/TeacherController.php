@@ -858,18 +858,21 @@ class TeacherController extends CController {
                 $render = "Two";
                 break;
             case 3:
-                
                 if (isset($_GET['raceID'])) {
-                    $CDTime = $_GET['CDTime'];
+                   $CDTime = $_GET['CDTime'];
                    Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
                 }
                 if (isset($_GET['over'])) {
                     Course::model()->overRace($teacherID);
                     $step = $step + 1;
                     Race::model()->isover($indexID,$step);
-                    $render = "Four";
+                    $step = 32;
+                    $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+                    $render = "Three1";
+                    $tip = 1;
                     break;
                 }
+                $tip = 1;
                 $render = "Three";
                 break;
             case 4:
@@ -915,15 +918,34 @@ class TeacherController extends CController {
                 }
                 $render = "Six";
                 break;
+            case 32:
+                if (isset($_GET['raceID'])) {
+                    $CDTime = $_GET['CDTime'];
+                    Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
+                }
+                if (isset($_GET['over'])) {
+                    Course::model()->overRace($teacherID);
+                    $step = 32;
+                    Race::model()->isover($indexID,$step);
+                    $step = 4;
+                    $tip = 1;
+                    $render = "Four";
+                    break;
+                }
+                $step = 32;
+                $render = "Three1";
+                $tip = 0;
+                break;
         }
+            
         $endTime = Course::model()->isOpen($teacherID);
         if ($endTime) {
             $flag = 1;
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
-        if($render == "Three"){
+        if($render == "Three" || $render == "Three1"){
             $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
-          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
+          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
         }else {
           $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
         }
