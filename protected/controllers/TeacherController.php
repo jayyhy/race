@@ -1089,6 +1089,6 @@ class TeacherController extends CController {
                 array_push($data, $arrayData);
             }    
 
-    return $this->renderPartial('simple',['data'=>$data]);
+    return $this->renderPartial('simple',['data'=>$data,'indexID'=>$indexID]);
 }
 }
