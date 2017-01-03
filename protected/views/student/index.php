@@ -86,7 +86,7 @@
     }
     
     function stepFive(){
-        doc.querySelector("#typeOCX").height="30";
+        doc.querySelector("#typeOCX").height="0";
     }
 
 </script>
