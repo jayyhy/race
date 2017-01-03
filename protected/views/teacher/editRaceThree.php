@@ -1,175 +1,173 @@
-<div class="span3">
-    <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-            <li <?php
-            if ($step == 1) {
-                echo 'class="active"';
-            }
-            ?>  ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1"><i class="icon-align-left"></i> 文本校对</a></li>
-            <li <?php
-            if ($step == 2) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2"><i class="icon-align-left"></i> 看打</a></li>
-            <li <?php
-            if ($step == 3) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3"><i class="icon-align-left"></i> 听打</a></li>
-            <li <?php
-            if ($step == 4) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4"><i class="icon-align-left"></i> 听打校对</a></li>
-            <li <?php
-            if ($step == 5) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5"><i class="icon-align-left"></i> 盲打</a></li>
-            <li <?php
-            if ($step == 6) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6"><i class="icon-align-left"></i> 视频纠错</a></li>
-        </ul>
-    </div>
-    <a href="./index.php?r=teacher/RaceLst" class="btn btn-primary" style="width: 16%;" >返回</a>
-</div>
-<div class="span9">
-    <h2>听打</h2>
-    <div>
-        <h3 style="text-align: center">持续时间以及配分</h3>
-        <h3></h3>
-        <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" id="myForm" enctype="multipart/form-data"> 
-            
-<!--            <div class="control-group">
-                <label class="control-label">分数：</label>
-                <div class="controls">
-                    <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> 分
-                </div>
-            </div>-->
-            <?php 
-            $indexID = $_GET['indexID'];
-            $radio = Resourse::model()->find("path='$indexID'"); ?>
-            <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="input02">试音音频：</label>
-                    <div class="controls">
-                        <?php if ($radio != "") { ?>
-                        <div class="control-group">
-                                <?php $listenpath = "./resources/race/radio" . $radio['resourseID']; ?>
-                                <?php if (file_exists($listenpath)) { ?>
-                                    <video  src = "<?php echo $listenpath; ?>" preload = "auto" style="border:1px solid #5C595A" poster="./resources/race/01d32256f4084132f875a944080917.gif" controls></video>
-                                <?php } else { ?>
-                                    <p style="color: red">原音频文件丢失或损坏！</p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <input type="file" name="files" id="input">   
-                        <div id="upload3" style="display:none;" hidden="true">
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="input02">文件：</label>
-                    <div class="controls">
-                        <?php if ($race != "") { ?>
-                        <div class="control-group">
-                                <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
-                                <?php if (file_exists($listenpath)) { ?>
-                                    <video  src = "<?php echo $listenpath; ?>" preload = "auto" style="border:1px solid #5C595A" poster="./resources/race/01d32256f4084132f875a944080917.gif" controls></video>
-                                <?php } else { ?>
-                                    <p style="color: red">原音频文件丢失或损坏！</p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <input type="file" name="file" id="input02">   
-                        <div id="upload" style="display:inline;" hidden="true">
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
-                    </div>
-                </div>
-<!--                <div class="control-group">
-                    <label class="control-label" for="input03">听打答案：</label>
-                    <div class="controls">               
-                        <textarea name="content" style="width:450px; height:200px;" id="input03"><?php //echo $race['content']; ?></textarea>
-                        <br>字数：<span id="wordCount">0</span> 字
-                    </div>
-                </div> -->
-            </fieldset>
-            
-            <!--第二个音频 -->           
-<!--            <div class="control-group">
-                <label class="control-label">分数：</label>
-                <div class="controls">
-                    <textarea name="score2" style="width:50px; height:20px;" id="score2" ><?php echo $race2['score']; ?></textarea> 分
-                </div>
-            </div>-->
-            
-            <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="input02s">文件：</label>
-                    <div class="controls">
-                        <?php if ($race2 != "") { ?>
-                        <div class="control-group">
-                                <?php $listenpath2 = "./resources/race/" . $race2['resourseID']; ?>
-                                <?php if (file_exists($listenpath2)) { ?>
-                                    <video  src = "<?php echo $listenpath2; ?>" preload = "auto" style="border:1px solid #5C595A" poster="./resources/race/01d32256f4084132f875a944080917.gif" controls></video>
-                                <?php } else { ?>
-                                    <p style="color: red">原音频文件丢失或损坏！</p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <input type="file" name="file2" id="input02s">   
-                        <div id="upload2" style="display:none;" hidden="true">
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <div id="number2">0%</div>
-                        </div>
-                    </div>
-<!--                    (支持mp3及wav格式,最大1G)-->
-                </div>
-                <div class="control-group">
-                <label class="control-label" for="input04">上传答案：</label>
-                <div class="controls">
-                    <input type="file" name="myfile" id="myfile" >
-                </div>
-            </div>
-                <div class="control-group">
-                    <label class="control-label" for="input03s">听打答案：</label>
-                    <div class="controls">               
-                        <textarea name="content2" style="width:450px; height:200px;" id="content2"><?php echo $race['content']; ?></textarea>
-                        <br>字数：<span id="wordCount">0</span> 字
-                    </div>
-                </div> 
-            </fieldset>
-            <button type="submit" class="btn_4big" style="float:right">确定</button>
-        </form>
-        
-    </div>
+<?php require 'raceLstBar.php';?>
+<script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
+<style>
+    .stage{
+        float: left;
+        margin-left: 40px;
+        margin-top: 20px;
+        height: 35px
+    }
+    .word{
+        font-size: 18px;
+        font-weight: bold;
+        color: #29282e;
+    }
+    .words{
+       font-size: 18px;
+       color: #c9c9c9;
+    }
+    .currentTag{
+         float: right;
+         margin-top: -61px;
+         margin-right: 25px;
+         background-color: #F8F4EE;
+         width: 184px;
+         height: 38px;
+    }
+    .wordTag1{
+        font-size: 16px;
+        color: #DAD9D6;
+        position: relative;
+        left: 18px;
+        top: 9px;
+    }
+    .wordTag2{
+        font-size: 16px;
+        color: #3F3E43;
+        position: relative;
+        left: 24px;
+        top: 9px;
+    }
     
+</style>
+<script>
+    function wo(f){
+        if(f == 3){
+        $("#audio3").remove() ;
+        $("#a3").remove();
+        $("#input02s").show();
+        $("#span3").show();
+
+        }
+        if(f == 1){
+        $("#audio1").remove() ;
+        $("#a1").remove();
+        $("#input").show();
+        $("#span1").show();
+
+        }
+        if(f == 2){
+        $("#audio2").remove() ;
+        $("#a2").remove();
+        $("#input02").show();
+        $("#span2").show();
+
+        }
+    }
+
+</script>
+<?php   $indexID = $_GET['indexID'];
+         $radio = Resourse::model()->find("path='$indexID'");
+         $listenpath = "./resources/race/radio" . $radio['resourseID'];
+         $listenpath1 = "./resources/race/" . $race['resourseID'];
+         $listenpath2 = "./resources/race/" . $race2['resourseID'];
+         ?>
+<div class="span9" style="width: 1176px;height: 800px;margin-top: -19px;background-color: #f8f4f2">
+    <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" >文本校对</a></div>
+        <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" >看打</a></div>
+        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" style=" color: #ff0000;">听打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
+    </div>
+    <div style="background-color: #fff;height: 700px;margin-top: 20px;width: 1082px;margin-left: 16px;">
+        <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
+        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打</h3><br>
+        <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" id="myForm" enctype="multipart/form-data">
+            
+        <div style="margin-top: -24px;margin-left: 60px;" >
+            <?php if ($radio != "") { ?>
+            <?php $listenpath = "./resources/race/radio/" . $radio['resourseID']; ?>
+            <?php if (file_exists($listenpath)) { ?>
+          <audio id="audio1" src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(1)" id="a1"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
+          <input type="file" name="files" id="input" style="float: left; display: none;margin-bottom:1% ">  <span style=" position: relative;left: -24px;top: 2px;float: left; display: none" id="span1">(上传试音音频)</span>                        
+        <?php } else { ?>
+                            <input type="file" name="files" id="input" style="float: left;">  <span style=" position: relative;left: -24px;top: 2px;float: left;">(上传试音音频)</span>         <span style="color: red;position: relative;left: 1px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                                <?php } ?>
+                                    <?php }else { ?>
+            <input type="file" name="files" id="input" style="float: left;">  <span style=" position: relative;left: -24px;top: 2px;float: left;">(上传试音音频)</span>
+            <?php } ?>
+                                    
+                <div id="upload" style=" float: left;display: none" >
+                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
+                            正在上传，请稍等...
+                            <div id="number">0%</div>
+                        </div>
+        </div>
+            
+            <div style="clear:both;margin-top: 16px;margin-left: 60px;">
+               <?php if ($race != "") { ?>
+                                <?php $listenpath1 = "./resources/race/" . $race['resourseID'];; ?>
+            <?php if (file_exists($listenpath1)) { ?>
+                 <audio id="audio2" src = "<?php echo $listenpath1; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
+                      <input type="file" name="file" id="input02" style="margin-top: 17px;display: none"> <span style=" position: relative;left: -24px;top: 11px;display: none" id="span2">(上传第一个音频)</span>          
+                     <?php } else { ?>
+                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: -24px;top: 11px">(上传第一个音频)</span><span style="color: red;position: relative;left: 1px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                                <?php } ?>
+                                    <?php } else {?>
+                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: -24px;top: 11px">(上传第一个音频)</span>
+                <?php } ?>
+            </div>
+            <div style="margin-top: 24px;margin-left: 60px" id="div3">
+                <?php if ($race2 != "") { ?>
+                                <?php $listenpath2 = "./resources/race/" . $race2['resourseID']; ?>
+            <?php if (file_exists($listenpath2)) { ?>
+                <audio id="audio3" src = "<?php echo $listenpath2; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(3)" id="a3"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
+                <input type="file" name="file2" id="input02s" style="display: none">  <span style=" position: relative;left: -24px;top: 2px; display: none" id="span3">(上传第二个音频)</span>           
+                    <?php } else { ?>
+                                   <input type="file" name="file2" id="input02s">  <span style=" position: relative;left: -24px;top: 2px">(上传第二个音频)</span> <span style="color: red;position: relative;left: 1px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                                <?php } ?>
+                                    <?php } else { ?>
+                <input type="file" name="file2" id="input02s">  <span style=" position: relative;left: -24px;top: 2px">(上传第二个音频)</span>
+                <?php } ?>
+            </div>
+            <div style="margin-top: 24px;margin-left: 60px">
+                
+                <input type="file" name="myfile" id="myfile" >  <span style=" position: relative;left: -24px;top: 2px">(上传答案)</span>
+            </div>
+            <div style="margin-top: 19px;margin-left: 60px">
+                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
+            </div>
+            <div style=" margin-left: 297px;margin-top: 25px">
+                <button  class="btn_6big" style=" width: 96px">取 消</button>&nbsp;&nbsp;
+                <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
+            </div>
+            
+        </form>
+    </div>
 </div>
 
+
 <script>
+    
     <?php 
     $tag = "0";
     $tag2 = "0";
+    $tag3 = "0";
     if($race == NULL){
        $tag = "1"; 
     }
     if($race2 == NULL){
         $tag2 = "1";
     }
+    if($radio == NULL) {
+        $tag3 = "1";
+    }
     ?>
     var tag = <?php echo $tag; ?>;
     var tag2 = <?php echo $tag2; ?>;
+    var tag3 = <?php echo $tag3; ?>;
     $("#myForm").submit(function () {
         var uploadFile = $("#input02")[0].value;
         var uploadFile2 = $("#input02s")[0].value;
@@ -180,8 +178,8 @@
 //            event.preventDefault();
 //            window.wxc.xcConfirm('请输入数字', window.wxc.xcConfirm.typeEnum.info);
 //        }
-        var radio = document.getElementById("input").vale;
-        if(radio == ""){
+        var radio = document.getElementById("input").value;
+        if(radio == "" && tag3 == "1"){
             window.wxc.xcConfirm('试音文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
@@ -197,12 +195,12 @@
             return false;
         }
         var files =  document.getElementById("myfile").value;
-        var content = document.getElementById("content2").value;
+        var content = document.getElementById("content").value;
         if (files === "" && content ==="") {
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
-        
+
         $("#upload").show();
         setTimeout('fetch_progress()', 1000);
     });
@@ -218,7 +216,7 @@
     }
     $(document).ready(function () {
         var v=<?php echo Tool::clength($race['content']);?>;
-        $("#wordCount").text(v);
+//        $("#wordCount").text(v);
         $("#upload").hide();
         var result = <?php echo "'$result'"; ?>;
         var result2 = <?php echo "'$result2'"; ?>;
@@ -249,5 +247,8 @@
             window.wxc.xcConfirm(result5, window.wxc.xcConfirm.typeEnum.error);
         }
     });
+    //移除标签
+
 
 </script>
+

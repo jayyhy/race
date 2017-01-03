@@ -60,6 +60,8 @@ class TeacherController extends CController {
         ));
     }
         public function actionEditRace() {
+        $aList = RaceIndex::model()->getAllRaceIndex();
+        $raceList = $aList['list'];
         $step = $_GET["step"];
         $indexID = $_GET["indexID"];
         $result = "";
@@ -127,7 +129,7 @@ class TeacherController extends CController {
                 $render = 'Two';
                 break;
             case 3:
-                if (isset($_POST['content2'])) {
+                if (isset($_POST['content'])) {
 //                    $time = $_POST['time'];
 //                    $score = $_POST['score'];
                     $txtNoSpace = "";
@@ -137,7 +139,7 @@ class TeacherController extends CController {
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
                     }
-                    $radioDir = "./resources/race/radio";
+                    $radioDir = "./resources/race/radio/";
                     if (!is_dir($radioDir)) {
                         mkdir($radioDir, 0777);
                     }
@@ -659,6 +661,7 @@ class TeacherController extends CController {
         if($render == "Three"){
             $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
             $this->render('editRace' . $render, array(
+                'raceLst' => $raceList,
             'race' => $race,
             'race2'=>$race2,
             'result' => $result,
@@ -670,6 +673,7 @@ class TeacherController extends CController {
            )); 
         }  else {
            $this->render('editRace' . $render, array(
+               'raceLst' => $raceList,
             'race' => $race,
             'result' => $result,
             'result2' => $result2,

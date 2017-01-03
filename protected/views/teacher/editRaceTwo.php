@@ -1,75 +1,74 @@
-<div class="span3">
-    <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-            <li <?php
-            if ($step == 1) {
-                echo 'class="active"';
-            }
-            ?>  ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1"><i class="icon-align-left"></i> 文本校对</a></li>
-            <li <?php
-            if ($step == 2) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2"><i class="icon-align-left"></i> 看打</a></li>
-            <li <?php
-                if ($step == 3) {
-                    echo 'class="active"';
-                }
-                ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3"><i class="icon-align-left"></i> 听打</a></li>
-            <li <?php
-            if ($step == 4) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4"><i class="icon-align-left"></i> 听打校对</a></li>
-            <li <?php
-            if ($step == 5) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5"><i class="icon-align-left"></i> 盲打</a></li>
-            <li <?php
-            if ($step == 6) {
-                echo 'class="active"';
-            }
-            ?> ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6"><i class="icon-align-left"></i> 视频纠错</a></li>
-        </ul>
+<?php require 'raceLstBar.php';?>
+<style>
+    .stage{
+        float: left;
+        margin-left: 40px;
+        margin-top: 20px;
+        height: 35px
+    }
+    .word{
+        font-size: 18px;
+        font-weight: bold;
+        color: #29282e;
+    }
+    .words{
+       font-size: 18px;
+       color: #c9c9c9;
+    }
+    .currentTag{
+         float: right;
+         margin-top: -61px;
+         margin-right: 25px;
+         background-color: #F8F4EE;
+         width: 184px;
+         height: 38px;
+    }
+    .wordTag1{
+        font-size: 16px;
+        color: #DAD9D6;
+        position: relative;
+        left: 18px;
+        top: 9px;
+    }
+    .wordTag2{
+        font-size: 16px;
+        color: #3F3E43;
+        position: relative;
+        left: 24px;
+        top: 9px;
+    }
+    
+</style>
+<div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
+    <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" >文本校对</a></div>
+        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" style=" color: #ff0000;">看打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">听打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
     </div>
-    <a href="./index.php?r=teacher/RaceLst" class="btn btn-primary" style="width: 16%;" >返回</a>
-</div>
-<div class="span9">
-    <h2>看打</h2>
-    <div>
-        <h3 style="text-align: center">持续时间以及配分</h3>
-        <h3></h3>
-        <form class="form-horizontal" method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" enctype="multipart/form-data">
+    <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
+        <img src="<?php echo IMG_URL_NEW; ?>icon_open.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">看打</h3>
+        <form method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" enctype="multipart/form-data">
             
-            <div class="control-group">
-                <label class="control-label">时间：</label>
-                <div class="controls">
-                    <textarea name="time" style="width:50px; height:20px;" id="time" ><?php echo $race['time']/60; ?></textarea> 分钟
-                </div>
+        <div style="margin-top: -24px;margin-left: 60px" >
+                <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
+                <font style="font-size: 16px;color: #D8D8D8;position: relative;top: 2px">分钟</font>
+            
+        </div>
+            <div style="margin-top: 16px;margin-left: 60px">
+                
+                <input type="file" name="myfile" id="myfile" ><span style=" position: relative;left: -68px;top: 2px">(上传答案)</span>
+            </div>
+            <div style="margin-top: 19px;margin-left: 60px">
+                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
+            </div>
+            <div style=" margin-left: 297px;margin-top: 25px">
+                <button  class="btn_6big" style=" width: 96px">取 消</button>&nbsp;&nbsp;
+                <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
             </div>
             
-<!--            <div class="control-group">
-                <label class="control-label">分数：</label>
-                <div class="controls">
-                    <textarea name="score" style="width:50px; height:20px;" id="score" ><?php echo $race['score']; ?></textarea> 分
-                </div>
-            </div>-->
-            <div class="control-group">
-                <label class="control-label" for="input04">上传答案</label>
-                <div class="controls">
-                    <input type="file" name="myfile" id="myfile" >
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">内容：</label>
-                <div class="controls">
-                    <textarea name="content" style="width:450px; height:200px;" id="content" disabled="disabled" ><?php echo $race['content']; ?></textarea>
-                    <br>字数：<span id="wordCount">0</span> 字
-                </div>
-            </div>
-
-            <button type="submit" class="btn_4big" style="float:right">确定</button>
         </form>
     </div>
 </div>
@@ -91,6 +90,7 @@
         }
     }, true);
     $(document).ready(function () {
+        window.parent.doClick();
         var v=<?php echo Tool::clength($race['content']);?>;
         $("#wordCount").text(v);
         var result = <?php echo "'$result'"; ?>;

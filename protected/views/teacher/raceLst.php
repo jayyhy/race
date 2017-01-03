@@ -1,33 +1,12 @@
-<div class="leftbar" style ="display: none; background: #FFE9E3;margin-left: 20px" id="on_adding">
-    <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
-    <div style="margin-left: 10px;margin-top: 10px">
-        <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px; font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
-    </div>
-        <div style="background:#FFFFFF;width: 88%;margin-left: 16px;margin-top: 48px;border-radius: 6px;">
-        <ul class="nav nav-list" style="margin-top: 15px">
-            <li>
-                <input id="value" type="text" class="search span2" placeholder="请输入试卷标题" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
-            </li>
-            <li style="margin-bottom: 30px">
-                <button onclick="cancel()" class="btn_6big">取 消</button>
-                <button onclick="addRace()" class="btn_5big">确 定</button>
-            </li>
-        </ul>
-        </div>
-    </div>
-</div>
-<div class="leftbar" style="margin-left: 20px" id="on_add">
-    <div style="height: 100%;margin-left: 20px;margin-top: 20px;background:#F8F4F2;width: 80%;height: 46px;border-radius: 6px;">
-            <img src="<?php echo IMG_URL; ?>icon_test.png" style="position: absolute;left: 22px;top: 76px;"/><font style="font-size:23px;font-weight: 600;position: absolute;left: 45px;top: 76px;">&nbsp;试卷列表</font>
-            <div style="margin-top: 55px;margin-left: 8px">
-                <a href="#" onclick="adding()" style="font-size: 14px;color: #9D9D9C ;position: relative;top: 12px;left: 2px"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png" >&nbsp;新建试卷</a>
-    </div>
-    </div>
-    </div>
-<div class="rightbar">
+<?php require 'raceLstBar.php';
+  if(count($raceLst) == 0) {?>
+  <div class="rightbar" style="  background: url(<?php echo IMG_URL_NEW; ?>null_paper.png) no-repeat 50% 50% #F8F4F2 "> 
+  </div>
+<?php }?>
 
-    <h2>试卷列表</h2>
-    <!-- 科目列表-->
+
+<!--    <h2>试卷列表</h2>
+     科目列表
     <input type="checkbox" name="all" onclick="check_all(this, 'checkbox[]')" style="margin-bottom: 3px"> 全选　　批量操作：
     <a href="#" onclick="deleCheck()"><img title="批量删除" src="<?php echo IMG_URL; ?>delete.png"></a>
     <table class="table table-bordered table-striped">
@@ -42,35 +21,34 @@
         </thead>
         <tbody>        
         <form id="deleForm" method="post" action="./index.php?r=teacher/deleteRaceIndex">
-            <?php foreach ($raceLst as $k => $model): ?>
+            <?php //foreach ($raceLst as $k => $model): ?>
                 <tr>
-                    <td class="font-center" style="width: 50px"> <input type="checkbox" name="checkbox[]" value="<?php echo $model['indexID']; ?>" /> </td>
-                    <td class="font-center"><?php echo $model['indexID']; ?></td>
-                    <td class="font-center"><?php echo $model['name']; ?></td>
-                    <td class="font-center"><?php echo $model['createTime']; ?></td>
+                    <td class="font-center" style="width: 50px"> <input type="checkbox" name="checkbox[]" value="<?php //echo $model['indexID']; ?>" /> </td>
+                    <td class="font-center"><?php //echo $model['indexID']; ?></td>
+                    <td class="font-center"><?php //echo $model['name']; ?></td>
+                    <td class="font-center"><?php //echo $model['createTime']; ?></td>
                     <td class="font-center" style="width: 100px">  
-                        <a href="./index.php?r=teacher/editRace&indexID=<?php echo $model['indexID']; ?>&step=1"  ><img title="编辑" src="<?php echo IMG_URL; ?>edit.png"></a>
-                        <a href="#"  onclick="deleteRaceIndex(<?php echo $model['indexID']; ?>,'<?php echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>delete.png"></a>
+                        <a href="./index.php?r=teacher/editRace&indexID=<?php //echo $model['indexID']; ?>&step=1"  ><img title="编辑" src="<?php echo IMG_URL; ?>edit.png"></a>
+                        <a href="#"  onclick="deleteRaceIndex(<?php //echo $model['indexID']; ?>,'<?php// echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>delete.png"></a>
                     </td>
                 </tr>            
-            <?php endforeach; ?> 
+            <?php //endforeach; ?> 
         </form>
         </tbody>
     </table>
-    <!-- 学生列表结束 -->
-    <!-- 显示翻页标签 -->
+     学生列表结束 
+     显示翻页标签 
     <div align=center>
         <?php
         $this->widget('CLinkPager', array('pages' => $pages));
         ?>
     </div>
-    <!-- 翻页标签结束 -->
+     翻页标签结束 
 
-    <!-- 右侧内容展示结束-->
-</div>
+     右侧内容展示结束-->
 
 <script>
-
+    
     $(document).ready(function () {
         window.parent.doClick();
         var result = <?php echo "'$result'"; ?>;
@@ -96,16 +74,7 @@
         }
     }
 
-    function deleteRaceIndex(id, name) {
-        var option = {
-            title: "警告",
-            btn: parseInt("0011", 2),
-            onOk: function () {
-                window.location.href = "./index.php?r=teacher/deleteRaceIndex&&indexID=" + id;
-            }
-        };
-        window.wxc.xcConfirm("确定要删除试卷：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
-    }
+    
 
     function addRace() {
         var courseName = document.querySelector("#value").value;

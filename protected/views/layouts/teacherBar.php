@@ -6,6 +6,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
     <html lang="zh-cn"><!--<![endif]--> 
         <head>
             <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no"/>
             <title>亚伟速录</title>
             <link href="<?php echo CSS_URL; ?>bootstrap.min.css" rel="stylesheet">
             <link href="<?php echo CSS_URL; ?>site.css" rel="stylesheet">
@@ -18,6 +19,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
             <script src="<?php echo XC_Confirm; ?>js/xcConfirm.js"></script>
         </head>
         <body>
+            <div class="container">
             <div class="ywnav">
                 <a class="ywlogo" href="./index.php?r=teacher/index"> <div class="ywlogo"> </div></a>
 <!--                <font class="ysgs">亚伟国赛管理系统</font>-->
@@ -41,11 +43,11 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                                <li><a href="./index.php?r=user/login&exit=1">退出</a>
                               </li>
                          </ul>   
-                       </div></div>         
+                       </div></div>       
                 <div class="row" style="min-height: 700px">
     <?php echo $content; ?>
-                </div>
-            </div> 
+                </div></div> 
+            </div>  
             <div  class="copyright">
                 2015 &copy;南京兜秘网络科技有限公司.&nbsp;&nbsp;&nbsp;<a href="#"  class="copyright">法律声明</a><a href="#"  class="copyright">联系我们</a><a href="#"  class="copyright">获得帮助</a>
             </div>
