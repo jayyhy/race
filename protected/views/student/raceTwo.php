@@ -36,8 +36,6 @@
             var content2=yaweiOCX1.GetContent();
             currentCount = content2.length;
             originalCount = originalContent.length;
-            alert(currentCount);
-            alert(originalCount);
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
             worker.onmessage = function (event) {
                 if (!isNaN(event.data.accuracyRate)) {
