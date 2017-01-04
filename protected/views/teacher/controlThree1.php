@@ -52,32 +52,18 @@ require 'examSideBar.php';
             $media=$player->newMedia($file);
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
-            error_log($listenpath3);
     ?>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-    <?php
-        if($nowOnStep == 3){?>    
-            <div class="stage" style=" margin-left: 25px"><a href="#" class="word">文本校对</a></div>
-            <div class="stage"><a href="#" class="word">看打</a></div>
-    <?php }else{ ?>
-            <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文本校对</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">看打</a></div>
-    <?php } ?>    
-        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" style=" color: #ff0000;">听打</a></div>
-    <?php
-        if($nowOnStep == 3){?>
-            <div class="stage"><a href="#" class="word">听打校对</a></div>
-            <div class="stage"><a href="#" class="word">盲打</a></div>
-            <div class="stage"><a href="#" class="word">视频纠错</a></div>
-    <?php }else{ ?>    
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
-    <?php } ?>
+        <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文本校对</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">看打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=32" class="word" >听打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打一</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打二</h3>
             <?php
     if ($nowOnStep != 0) {
         if($nowOnStep == 1){?>
@@ -133,6 +119,7 @@ require 'examSideBar.php';
     <?php } ?>
         </div>
     </div>
+    
 </div>
 <script>
     function getExam(indexID){
@@ -150,6 +137,8 @@ require 'examSideBar.php';
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
+            console.log("1-----",curtime);
+            console.log("2-----",endTime);
             tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
@@ -162,22 +151,14 @@ require 'examSideBar.php';
 //            CDTime.focus();
 //        }
         function playAudio(sideTime){
-            var fristAu = document.getElementById("fristAu");
+//            var fristAu = document.getElementById("fristAu");
             var secondAu = document.getElementById("secondAu");
-            var audition = document.getElementById("audition");
-            var tag ="1";
-            var flag ="1";
-            var examTime = <?php echo (($race['time'] +$race2['time'] +$time) == NULL )?  0 : $race['time'] +$race2['time'] +$time; ?>;
+//            var audition = document.getElementById("audition");
+//            var tag ="1";
+//            var flag ="1";
+            var examTime = <?php echo $race2['time'] +$time;?>;
             if(examTime == sideTime){
-               audition.autoplay = "true";              
-            }
-            if(audition.ended && tag == "1"){
-                fristAu.autoplay = "true";
-                tag ="0";
-            }
-            if(fristAu.ended && flag == "1"){
-                secondAu.autoplay = "true";
-                flag ="0";
+               secondAu.autoplay = "true";              
             }
         }
         function endDo() {
@@ -198,5 +179,9 @@ require 'examSideBar.php';
     }
         function stop() {
     window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
-    }
+    } 
+    <?php if (isset($tip)){ ?><?php if($tip==1){ ?>
+    setTimeout(start,0);
+    <?php }} ?>
 </script>
+

@@ -1,11 +1,12 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <section style="height:200px">
-    <h2>比赛即将开始，请调试控件。</h2>
-    <div id="ready">
-        <h2 style="text-align: center">未开始</h2>
+    <div id="ready" style="text-align: center">
+        <img src="<?php echo IMG_UIStu_URL; ?>null_prepare.png" height="250px" style="">
     </div>
-    <div id="beginTime" style="display:none">
-        <h2 style="text-align: center">倒计时：<span id = "sideTime">00</span></h2>
+    <div id="beginTime" style="display:none;position: relative;" align="center">
+        <img src="<?php echo IMG_UIStu_URL; ?>null_pre.png" height="250px" style="top:50%">
+        <div style="position: absolute;z-index:2;left:43%;top:33%;color: grey">倒计时：</div>
+        <div style="position: absolute;z-index:2;left:48%;top:48%"><span id = "sideTime" style="font-size: 30px;color: red">00</span></div>
     </div>
 </section>
 <script>

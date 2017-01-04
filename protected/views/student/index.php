@@ -32,6 +32,10 @@
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
         }
+        if (step === 32) {
+            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+            yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+        }
         yaweiOCX.ClearContent();
 //        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
 //            onClose: function () {
@@ -82,11 +86,11 @@
 
     function reciveContent(raceID) {
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
-        yaweiOCX.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
+//        yaweiOCX.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
     }
     
     function stepFive(){
-        doc.querySelector("#typeOCX").height="30";
+        doc.querySelector("#typeOCX").height="0";
     }
 
 </script>

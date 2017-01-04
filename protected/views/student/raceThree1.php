@@ -16,7 +16,7 @@
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio" . $radio['resourseID'];
     ?>
-    <h2>听打一</h2>
+    <h2>听打二</h2>
     <h3>本阶段共：<?php echo floor(($race['time']+$race2['time']+$time) / 60); ?> 分 <?php echo floor(($race['time']+$race2['time']+$time)-floor(($race['time']+$race2['time']+$time) / 60) * 60); ?> 秒</h3>
     <h3>剩余：<span id="time"></span></h3>
     
@@ -31,7 +31,6 @@
     <?php } ?>
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
-        var RightRadio=0;
         function savetxt() {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
@@ -56,37 +55,8 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
-            var originalContent='<?php echo $race['content'];?>';
-            var content2=yaweiOCX1.GetContent();
-            var worker = new Worker('js/exerJS/GetAccuracyRate.js');
-            worker.onmessage = function (event) {
-                if (!isNaN(event.data.accuracyRate)) {
-                    window.RightRadio = event.data.accuracyRate;
-                    saveRightRadio();
-                }
-                worker.terminate();
-            };
-            worker.postMessage({
-                currentContent: content2,
-                originalContent: originalContent
-            });
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
         }
-        
-        function saveRightRadio(){
-            $.ajax({
-                type:"POST",
-                dataType:"json",
-                url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>},
-                success:function(){
-                },
-                error: function (xhr) {
-                    console.log(xhr, "Failed");
-                }
-            });
-        }
-        
         function playAudio(sideTime){
             var audio3 = document.getElementById("audio3");
             var audio = document.querySelector("#audio");
@@ -113,7 +83,7 @@
         setTimeout(timec,0);
         setInterval(savetxt,2000);
         function reciveContent() {
-        yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
+        yaweiOCX1.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
         }
     </script>
 </body>
