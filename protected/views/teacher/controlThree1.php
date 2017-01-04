@@ -51,7 +51,7 @@ require 'examSideBar.php';
             $player=new COM("WMPlayer.OCX");
             $media=$player->newMedia($file);
             $time=round($media->duration);
-            $listenpath3 = "./resources/race/radio" . $radio['resourseID'];
+            $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
@@ -151,22 +151,14 @@ require 'examSideBar.php';
 //            CDTime.focus();
 //        }
         function playAudio(sideTime){
-            var fristAu = document.getElementById("fristAu");
+//            var fristAu = document.getElementById("fristAu");
             var secondAu = document.getElementById("secondAu");
-            var audition = document.getElementById("audition");
-            var tag ="1";
-            var flag ="1";
-            var examTime = <?php echo $race['time'] +$race2['time'] +$time;?>;
+//            var audition = document.getElementById("audition");
+//            var tag ="1";
+//            var flag ="1";
+            var examTime = <?php echo $race2['time'] +$time;?>;
             if(examTime == sideTime){
-               audition.autoplay = "true";              
-            }
-            if(audition.ended && tag == "1"){
-                fristAu.autoplay = "true";
-                tag ="0";
-            }
-            if(fristAu.ended && flag == "1"){
-                secondAu.autoplay = "true";
-                flag ="0";
+               secondAu.autoplay = "true";              
             }
         }
         function endDo() {
@@ -190,6 +182,6 @@ require 'examSideBar.php';
     } 
     <?php if (isset($tip)){ ?><?php if($tip==1){ ?>
     setTimeout(start,0);
-    <?php error_log($tip);}} ?>
+    <?php }} ?>
 </script>
 

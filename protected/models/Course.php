@@ -117,7 +117,7 @@ class Course extends CActiveRecord {
             $player=new COM("WMPlayer.OCX");
             $media=$player->newMedia($file);
             $time=round($media->duration);
-            $currentTime = $currentTime +$time;
+            $currentTime = $currentTime +$time +$currentTime2;
             $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
             $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime))); 
         }  else {
