@@ -72,7 +72,7 @@ class UserController extends Controller {
                 Yii::app()->session['userName'] = $userName;
                 Yii::app()->session['userid_now'] = $username_now;
                 Yii::app()->session['role_now'] = $role_now;
-                $this->redirect(['/teacher/teacherNotice']);
+                $this->redirect(['/teacher/raceLst']);
             } else if ($role_now === 'student') {
                 $user = (new Student())->find("userid='$username_now'");
                 $userName = $user->userName;

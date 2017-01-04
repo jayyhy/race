@@ -96,15 +96,15 @@ require 'examSideBar.php';
            } ?>
            
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
-            <font class="words" style="position: relative;left: 61px;">考试时间</font>
+            <span class="words" style="position: relative;left: 61px;">考试时间</span>
             <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo $race['time']/60; ?>分钟</h3>
         </div>
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
-            <font class="words" style="position: relative;left: 25px;">倒计时</font>
+            <span class="words" style="position: relative;left: 25px;">倒计时</span>
             <h3 class="time" style="position: relative;left: 119px;top: 20px" id = "sideTime">00:00</h3>
         </div>
         <div style=" width: 320px;height: 118px;background-color: #fff;float: left">
-            <font class="words" style="position: relative;left: 25px;">阶段结束时间</font>
+            <span class="words" style="position: relative;left: 25px;">阶段结束时间</span>
             <div>
             <h3 class="time" style="position: relative;left: 122px;top: 20px;" id = "endTime" >未开始</h3>
             </div>
@@ -112,10 +112,10 @@ require 'examSideBar.php';
         <div style=" width: 500px;height: 118px;margin-top: 196px">
         
         <?php if (file_exists($listenpath)) { ?>
-        <font class="words" style="position: relative;left: 61px;top: -174px">考试视频</font>
+        <span class="words" style="position: relative;left: 61px;top: -174px">考试视频</span>
         <video id="audio" style="position: relative;left: 93px;top: 9px;width: 356px;height: 200px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></video><br>
     <?php } else { ?>
-        <font class="words" style="position: relative;left: 61px;">考试音频</font>
+        <span class="words" style="position: relative;left: 61px;">考试音频</span>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
         </div>
@@ -128,6 +128,9 @@ require 'examSideBar.php';
     }
     $(document).ready(function () {
     window.parent.doClick1();
+    $("#audio").bind("contextmenu",function(e){  
+          return false;  
+    }); 
     });
    var doc = document;
     (function () {
@@ -152,7 +155,7 @@ require 'examSideBar.php';
 //        }
          function playAudio(sideTime){
             var fristAu = document.getElementById("audio");
-            var examTime = <?php echo $race['time']; ?>;
+            var examTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";
                 fristAu.style.visibility = "visible";        

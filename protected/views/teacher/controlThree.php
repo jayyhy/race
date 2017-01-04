@@ -150,8 +150,6 @@ require 'examSideBar.php';
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
-            console.log("1-----",curtime);
-            console.log("2-----",endTime);
             tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
@@ -169,7 +167,7 @@ require 'examSideBar.php';
             var audition = document.getElementById("audition");
             var tag ="1";
             var flag ="1";
-            var examTime = <?php echo $race['time'] +$race2['time'] +$time;?>;
+            var examTime = <?php echo (($race['time'] +$race2['time'] +$time) == NULL )?  0 : $race['time'] +$race2['time'] +$time; ?>;
             if(examTime == sideTime){
                audition.autoplay = "true";              
             }
