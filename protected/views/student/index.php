@@ -7,6 +7,29 @@
     </object>
 </div>
 <script>
+    $(document).ready(function () {
+    <?php $studentID = Yii::app()->session['userid_now'];
+          $indexID = AnswerRecord::model()->find("studentID = '$studentID'")['indexID'];
+          $tags = "0";
+          if($indexID != NULL) {
+              
+             $races =  Race::model()->findAll("indexID = '$indexID'");
+             if($races != NULL){
+                 $tags = "1";
+                foreach ($races as $r) {
+                  if($r["is_over"] == 0){
+                   $tags = "0";
+                   break;
+              }
+            }
+          }
+       }   
+    ?>
+             var tags = <?php echo $tags; ?>;
+                if(tags =="1"){
+                     window.wxc.xcConfirm('考试结束', window.wxc.xcConfirm.typeEnum.info);
+                } 
+    });
     var yaweiOCX = document.getElementById("typeOCX");
     var doc = document;
     var dialogArgument;
