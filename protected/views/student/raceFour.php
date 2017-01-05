@@ -2,12 +2,22 @@
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
-    <h2>听打校对</h2>
-    <h3>本阶段共：<?php echo $race['time']/60; ?> 分钟</h3>
-    <h3>剩余：<span id="time"></span></h3>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_proof.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">听打校对</h2>
+    <div style="width: 530px;height: 350px;background-color: #ffffff;float: left">
+        <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
+        <h2 style="position: relative;left:230px;top:50px"><?php echo $race['time']/60; ?> 分钟</h2>
+    </div>
+    <div style="width: 530px;height: 350px;background-color: #ffffff;margin-left: 10px;float: left">
+        <h4 style="position: relative;left: 30px;color: gray;top: 10px">剩余时间：</h4>
+        <h2 style="position: relative;left:230px;top:50px"><span id="time"></span></h2>
+    </div>
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
+        var step3raceID = <?php $step3raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 32)); 
+        echo $step3raceID['raceID'];
+        ?>;
+        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
         function savetxt() {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
@@ -78,7 +88,7 @@
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
 
              <?php }else{ ?>
-        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + raceID + StudentID + ".txt");
-                 <?php } ?>        }
+        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + step3raceID + StudentID + ".txt");
+            <?php } ?>        }
     </script>
 </body>
