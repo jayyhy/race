@@ -8,6 +8,10 @@
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
+        var step3raceID = <?php $step3raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 32)); 
+        echo $step3raceID['raceID'];
+        ?>;
+        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
         function savetxt() {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
@@ -78,7 +82,7 @@
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
 
              <?php }else{ ?>
-        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + raceID + StudentID + ".txt");
-                 <?php } ?>        }
+        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + step3raceID + StudentID + ".txt");
+            <?php } ?>        }
     </script>
 </body>

@@ -46,13 +46,12 @@ require 'examSideBar.php';
        $listenpath2 = "./resources/race/" . $race2['resourseID'];
             $indexID = $_GET['indexID'];
             $radio = Resourse::model()->find("path='$indexID'"); 
-            $dir ="./resources/race/radio";
+            $dir ="./resources/race/radio/";
             $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
             $player=new COM("WMPlayer.OCX");
             $media=$player->newMedia($file);
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
-            error_log($listenpath3);
     ?>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">

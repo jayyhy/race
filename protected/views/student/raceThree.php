@@ -16,7 +16,7 @@
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio" . $radio['resourseID'];
     ?>
-    <h2>听打一</h2>
+    <h2>听打(一)</h2>
     <h3>本阶段共：<?php echo floor(($race['time']+$race2['time']+$time) / 60); ?> 分 <?php echo floor(($race['time']+$race2['time']+$time)-floor(($race['time']+$race2['time']+$time) / 60) * 60); ?> 秒</h3>
     <h3>剩余：<span id="time"></span></h3>
     
