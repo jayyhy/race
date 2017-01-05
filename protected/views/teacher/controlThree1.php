@@ -46,7 +46,7 @@ require 'examSideBar.php';
        $listenpath2 = "./resources/race/" . $race2['resourseID'];
             $indexID = $_GET['indexID'];
             $radio = Resourse::model()->find("path='$indexID'"); 
-            $dir ="./resources/race/radio";
+            $dir ="./resources/race/radio/";
             $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
             $player=new COM("WMPlayer.OCX");
             $media=$player->newMedia($file);
@@ -63,7 +63,7 @@ require 'examSideBar.php';
         <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打二</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打(二)</h3>
             <?php
     if ($nowOnStep != 0) {
         if($nowOnStep == 1){?>
@@ -93,10 +93,9 @@ require 'examSideBar.php';
         <button class="btn_4big" id="start" onclick="stop()" style=" float: right; margin-top: -61px;margin-right: 25px"> 开始考试</button>   
         <?php }
            } ?>
-           
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 61px;">考试时间</font>
-            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time'] +$race2['time']+$time)/ 60); ?> 分 <?php echo floor(($race['time'] +$race2['time']+$time)-floor(($race['time'] +$race2['time']+$time) / 60) * 60); ?> 秒</h3>
+            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time']+$race2['time']+$time) / 60); ?> 分 <?php echo floor(($race['time']+$race2['time']+$time)-floor(($race['time']+$race2['time']+$time) / 60) * 60); ?> 秒</h3>
         </div>
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 25px;">倒计时</font>
@@ -112,8 +111,8 @@ require 'examSideBar.php';
         <font class="words" style="position: relative;left: 61px;">考试音频</font>
         <?php if (file_exists($listenpath3)) { ?>
         <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio><br>
-        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio><br>
-        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls" ></audio><br>
+        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls"  ></audio><br>
+        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls" ></audio><br>
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
@@ -156,13 +155,12 @@ require 'examSideBar.php';
 //            var audition = document.getElementById("audition");
 //            var tag ="1";
 //            var flag ="1";
-            var examTime = <?php echo $race2['time'] +$time;?>;
+            var examTime = <?php echo $race2['time'];?>;
             if(examTime == sideTime){
                secondAu.autoplay = "true";              
             }
         }
         function endDo() {
-            <?php ?>
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
         }
     })();
@@ -177,7 +175,7 @@ require 'examSideBar.php';
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
         }
     }
-        function stop() {
+   function stop() {
     window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);
     } 
     <?php if (isset($tip)){ ?><?php if($tip==1){ ?>
