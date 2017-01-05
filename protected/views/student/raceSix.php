@@ -1,7 +1,7 @@
 
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<body>
+<body onbeforeunload="getVideoTime()">
     <h2>视频纠错</h2>
     <h3>本阶段共：<?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</h3>
     <h3>剩余：<span id="time"></span></h3>
@@ -15,6 +15,16 @@
     <?php } ?>
     </div>
     <script>
+       function getVideoTime() {
+          var video = document.getElementById('audio');
+          // Store
+          var current = video.currentTime;
+          window.localStorage.setItem("current", current);
+       }
+       var video = document.getElementById('audio');
+       var current = window.localStorage.getItem("current");
+       video.currentTime = current;
+        
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         function savetxt() {
