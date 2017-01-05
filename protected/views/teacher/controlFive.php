@@ -151,7 +151,7 @@ require 'examSideBar.php';
 //        }
         function playAudio(sideTime){
             var fristAu = document.getElementById("fristAu");
-            var examTime = <?php echo $race['time']; ?>;
+            var examTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
             if(examTime == sideTime){
                fristAu.autoplay = "true";              
             }
