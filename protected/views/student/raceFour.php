@@ -80,7 +80,11 @@
         setTimeout(timec,0);
         setInterval(savetxt,2000);
          function reciveContent() {
+             <?php if($route !=NULL){ ?>
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
-        }
+
+             <?php }else{ ?>
+        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + raceID + StudentID + ".txt");
+                 <?php } ?>        }
     </script>
 </body>
