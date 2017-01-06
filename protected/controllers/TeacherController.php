@@ -943,10 +943,16 @@ class TeacherController extends CController {
             $flag = 1;
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
-        if($render == "Three" || $render == "Three1"){
-            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
+        if($render == "Three"){
+           $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
           $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
-        }else {
+        }
+        else if ($render == "Three1") {
+            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 3));
+            $race = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
+          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
+         }
+        else {
           $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
         }
     }

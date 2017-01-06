@@ -22,6 +22,16 @@
     </div>
     
     <script>
+       function getVideoTime() {
+          var video = document.getElementById('audio');
+          // Store
+          var current = video.currentTime;
+          window.localStorage.setItem("current", current);
+       }
+       var video = document.getElementById('audio');
+       var current = window.localStorage.getItem("current");
+       video.currentTime = current;
+        
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         $("#audio").bind("contextmenu",function(e){  
