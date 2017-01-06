@@ -90,6 +90,7 @@
             success: function (data) {
                 if (data === '1') {
                     window.location.href = "index.php?r=student/index";
+                    window.localStorage.removeItem("current");
                 } else {
                     window.wxc.xcConfirm("交卷失败！请联系监考老师备份答案！", window.wxc.xcConfirm.typeEnum.warning);
                 }
