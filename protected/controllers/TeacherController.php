@@ -1119,4 +1119,17 @@ class TeacherController extends CController {
 
     return $this->renderPartial('simple',['data'=>$data,'indexID'=>$indexID]);
 }
+    public function actionIsOvered() {
+        $indexID = $_POST['indexID'];
+        $tags = "1";
+         $raceList = Race::model()->findAll("indexID = '$indexID'");
+         foreach ($raceList as $r) {
+             if($r["is_over"] == 0){
+                 $tags = "0";
+                 break;
+             }
+         }
+         echo $tags;
+    
+    }
 }
