@@ -34,7 +34,12 @@ class apiController extends Controller {
     public function actionAnswerDataSave(){
         $rate=$_POST['right_Radio'];
         $race_ID=$_POST['race_ID'];
+        $race = race::model()->find("raceID=?", array($race_ID));
         AnswerRecord::model()->updataAnswerData1($rate,$race_ID);
+        if($race['step']==32){
+        $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID'];
+        AnswerRecord::model()->updataAnswerData1($rate,$step31raceID);
+        }
     }
 
     public function actionPutChat() {
