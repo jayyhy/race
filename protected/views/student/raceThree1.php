@@ -36,11 +36,11 @@
     </div>
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
+        var raceID = <?php echo $race['raceID']; ?>;
+        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
         function savetxt() {
-            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
-            var raceID = <?php echo $race['raceID']; ?>;
             var route = "D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
             $.ajax({
             type: "POST",
@@ -60,6 +60,25 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
+            <?php $step31Content = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['content']; ?>;
+            var originalContent='<?php echo $step31Content;?>';
+            var content2 = yaweiOCX1.GetContent();
+            <?php $StudentID = Yii::app()->session['userid_now']; ?>
+            <?php $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
+            var content3 ="<?php echo AnswerRecord::model()->find("raceID=? AND StudentID=?", array($step31raceID, $StudentID))['content'] ?>";
+            content2 = content3+content2;
+            var worker = new Worker('js/exerJS/GetAccuracyRate.js');
+            worker.onmessage = function (event) {
+                if (!isNaN(event.data.accuracyRate)) {
+                    window.RightRadio = event.data.accuracyRate;
+                    saveRightRadio();
+                }
+                worker.terminate();
+            };
+            worker.postMessage({
+                currentContent: content2,
+                originalContent: originalContent
+            });
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
         }
         function playAudio(sideTime){
@@ -90,6 +109,21 @@
         function reciveContent() {
         yaweiOCX1.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
         }
+        
+        function saveRightRadio(){
+            $.ajax({
+                type:"POST",
+                dataType:"json",
+                url:"index.php?r=api/answerDataSave",
+                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>},
+                success:function(){
+                },
+                error: function (xhr) {
+                    console.log(xhr, "Failed");
+                }
+            });
+        }
+        
     </script>
 </body>
 
