@@ -139,8 +139,7 @@
             <div style="margin-top: 19px;margin-left: 60px">
                 <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
             </div>
-            <div style=" margin-left: 297px;margin-top: 25px">
-                <button  class="btn_6big" style=" width: 96px">取 消</button>&nbsp;&nbsp;
+            <div style=" margin-left: 38%;margin-top: 25px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
             </div>
             

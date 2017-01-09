@@ -53,6 +53,7 @@ require 'examSideBar.php';
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
+<body onbeforeunload="getVideoTime()">
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
@@ -133,7 +134,19 @@ require 'examSideBar.php';
         </div>
     </div>
 </div>
+</body>
 <script>
+    function getVideoTime() {
+          var audition = document.getElementById('audition');
+          var fristAu = document.getElementById("fristAu");
+          // Store
+          var auditionTime = audition.currentTime;
+          var fristAuTime = fristAu.currentTime;
+          window.localStorage.setItem("auditionTime", auditionTime);
+          window.localStorage.setItem("fristAuTime", fristAuTime);
+       }
+       
+       
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -162,6 +175,7 @@ require 'examSideBar.php';
     window.parent.doClick1();
     });
     var doc = document;
+    var tag ="1";
     (function () {
         var flag = <?php echo $flag; ?>;
 //        var CDTime = doc.querySelector('#CDTime');
@@ -178,16 +192,35 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo , playAudio,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
+        var audition = document.getElementById('audition');
+       var fristAu = document.getElementById("fristAu");
+       var auditionTimes = window.localStorage.getItem("auditionTime");
+       var fristAuTimes = window.localStorage.getItem("fristAuTime");
+       if(auditionTimes !==null){
+           var sideTime = document.getElementById('sideTime').innerHTML;
+           var str = sideTime.split(":");
+           var  m = parseInt(str[0]);
+           var  s = parseInt(str[1]);
+           sideTime = m * 60 + s;
+           var examTime = <?php echo (($race['time'] +$time) == NULL )?  0 : $race['time'] +$time; ?>;
+           if(sideTime !== 0 && sideTime < examTime){
+               audition.autoplay = "true";
+               audition.currentTime = auditionTimes;
+               fristTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
+             if(sideTime<=fristTime){
+                 tag = "0";
+                 fristAu.autoplay = "true";
+                 alert(fristAuTimes);
+                fristAu.currentTime = fristAuTimes;
+               
+           }
+        }
+       }
         function playAudio(sideTime){
             var fristAu = document.getElementById("fristAu");
-            var secondAu = document.getElementById("secondAu");
             var audition = document.getElementById("audition");
-            var tag ="1";
-            var flag ="1";
-            var examTime = <?php echo (($race['time'] +$race2['time'] +$time) == NULL )?  0 : $race['time'] +$race2['time'] +$time; ?>;
+            
+            var examTime = <?php echo (($race['time'] +$time) == NULL )?  0 : $race['time'] +$time; ?>;
             if(examTime == sideTime){
                audition.autoplay = "true";              
             }
@@ -195,25 +228,26 @@ require 'examSideBar.php';
                 fristAu.autoplay = "true";
                 tag ="0";
             }
-            if(fristAu.ended && flag == "1"){
-                secondAu.autoplay = "true";
-                flag ="0";
-            }
         }
         function endDo() {
-            <?php ?>
+            
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
+            window.localStorage.removeItem("auditionTime");
+            window.localStorage.removeItem("fristAuTime");
         }
     })();
 
     function start() {
 //        var time = doc.querySelector('#CDTime').value;
+            
         var time =20;
         var reg = new RegExp("^[0-9]*$");
         if(!reg.test(time)){
             window.wxc.xcConfirm('请输入正确的数字！', window.wxc.xcConfirm.typeEnum.error);
         }else{
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
+            window.localStorage.removeItem("auditionTime");
+            window.localStorage.removeItem("fristAuTime");
         }
     }
         function stop() {

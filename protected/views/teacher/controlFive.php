@@ -43,6 +43,7 @@ require 'examSideBar.php';
     
 </style>
 <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
+<body onbeforeunload="getVideoTime()">
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
@@ -121,8 +122,13 @@ require 'examSideBar.php';
         </div>
     </div>
 </div>
-
+</body>
 <script>
+    function getVideoTime() {
+        var secondAu = document.getElementById("fristAu");
+        var secondAuTime = secondAu.currentTime;
+        window.localStorage.setItem("secondAuTime", secondAuTime);
+    }
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -167,9 +173,21 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo,playAudio,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
+        var secondAu = document.getElementById("fristAu");
+        var secondAuTimes = window.localStorage.getItem("secondAuTime");
+        if(secondAuTimes !== null) {
+           var examTime = <?php echo $race['time'];?>;
+           var sideTime = document.getElementById('sideTime').innerHTML;
+           var str = sideTime.split(":");
+           var  m = parseInt(str[0]);
+           var  s = parseInt(str[1]);
+           sideTime = m * 60 + s;
+           if(sideTime<=examTime ){
+             secondAu.autoplay ="true";
+             secondAu.currentTime = secondAuTimes;
+             
+           }
+    }
         function playAudio(sideTime){
             var fristAu = document.getElementById("fristAu");
             var examTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
@@ -179,6 +197,7 @@ require 'examSideBar.php';
         }
         function endDo() {
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
+            window.localStorage.removeItem("secondAuTime");
         }
     })();
 
