@@ -19,13 +19,38 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
             <script src="<?php echo XC_Confirm; ?>js/xcConfirm.js"></script>
         </head>
         <body>
+            <?php 
+        $teacherID = Yii::app()->session['userid_now'];
+        $teacher = Teacher::model()->find("userID=?", array($teacherID));
+        $oncourse = Course::model()->find("courseID=?", array($teacher['classID']));
+        $onraceID = $oncourse['onRaceID'];
+        $onrace = Race::model()->find("raceID=?", array($onraceID));
+        $onindexID = $onrace['indexID'];
+        $onstep = $onrace['step'];
+        ?>   
             <div class="container">
             <div class="ywnav">
+                <?php if($onraceID == 0) { ?>
                 <a class="ywlogo" href="./index.php?r=teacher/index"> <div class="ywlogo"> </div></a>
+                <?php }else{ ?>
+                <a class="ywlogo" href="" onclick="nowonexam()"> <div class="ywlogo"> </div></a>
+                <?php } ?>
 <!--                <font class="ysgs">亚伟国赛管理系统</font>-->
+<?php if($onraceID == 0) { ?>
 <div class="sjdp" id="sjdp"><a href="./index.php?r=teacher/raceLst" onclick="changesjdp()">试卷调配</a></div>
+<?php }else{ ?>
+<div class="sjdp" id="sjdp"><a href="" onclick="nowonexam()">试卷调配</a></div>
+<?php } ?>
+<?php if($onraceID == 0) { ?>
 <div class="kcjk" id="kcjk"><a href="./index.php?r=teacher/raceControl">考场监控</a></div>
+<?php }else{ ?>
+<div class="kcjk" id="kcjk"><a href="./index.php?r=teacher/control&indexID=<?php echo $onindexID; ?>&&step=<?php echo $onstep; ?>">考场监控</a></div>
+<?php } ?>
+<?php if($onraceID == 0) { ?>
 <div class="ksjg" id = "ksjg"><a href="./index.php?r=teacher/results">考试结果</a></div>
+<?php }else{ ?>
+<div class="ksjg" id = "ksjg"><a href="" onclick="nowonexam()">考试结果</a></div>
+<?php } ?>
                 <div class="userUI">
                     <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                   <?php $name=Yii::app()->session['userName'];
@@ -39,8 +64,13 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
 
                               <ul class="dropdown-menu">
                                         <li>
-                                  <a href="./index.php?r=teacher/teaInformation">个人设置</a></li>
+                                    <?php if($onraceID == 0) { ?>        
+                                   <a href="./index.php?r=teacher/teaInformation">个人设置</a></li>
                                <li><a href="./index.php?r=user/login&exit=1">退出</a>
+                                   <?php }else{ ?>
+                                <a href="" onclick="nowonexam()">个人设置</a></li>
+                               <li><a href="" onclick="nowonexam()">退出</a>
+                                   <?php } ?>
                               </li>
                          </ul>   
                        </div></div>       
@@ -68,5 +98,8 @@ function doClick1(){
 function doClick2(){
    var obj = document.getElementById("ksjg");
    obj.setAttribute("class", "ksjg1");
+}
+function nowonexam(){
+    window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
 }
 </script>

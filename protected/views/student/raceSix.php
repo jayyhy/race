@@ -1,7 +1,7 @@
 
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<body>
+<body onbeforeunload="getVideoTime()">
     <img src="<?php echo IMG_URL_NEW; ?>icon_video.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">视频纠错</h2>
     <div style="width: 450px;height: 350px;background-color: #ffffff;float: left">
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
@@ -30,8 +30,11 @@
        }
        var video = document.getElementById('audio');
        var current = window.localStorage.getItem("current");
+       if(current === null){
+           
+       }else {
        video.currentTime = current;
-        
+      }
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         $("#audio").bind("contextmenu",function(e){  
@@ -61,6 +64,7 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
+            
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
