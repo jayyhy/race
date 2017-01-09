@@ -814,7 +814,8 @@ class TeacherController extends CController {
         $pager = RaceIndex::model()->getAllRaceIndex();
         $raceIndex = $pager['list'];
         $pages = $pager['pages'];
-        $this->render('raceControl', array("course" => $course, "raceIndex" => $raceIndex, "pages" => $pages));
+        $isoncourse = $course['onRaceID'];
+        $this->render('raceControl', array("course" => $course, "raceIndex" => $raceIndex, "pages" => $pages,"isoncourse"=>$isoncourse));
     }
 
     public function actionControl() {
@@ -825,6 +826,7 @@ class TeacherController extends CController {
         $teacherID = Yii::app()->session['userid_now'];
         $pager = RaceIndex::model()->getAllRaceIndex();
         $raceIndex = $pager['list'];
+        
         if(isset($_GET['over'])){
                     $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step+1));
                 }
