@@ -13,6 +13,7 @@
     
     <script>
         (function () {
+            window.parent.doC();
             var curtime = <?php echo time(); ?>;
             var endtime = <?php echo $endTime; ?>;
             tCounter(curtime, endtime, "time", endDo,"");

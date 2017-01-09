@@ -22,6 +22,7 @@
     </div>
     
     <script>
+        window.parent.doC();
        function getVideoTime() {
           var video = document.getElementById('audio');
           // Store
