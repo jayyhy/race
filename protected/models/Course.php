@@ -106,6 +106,7 @@ class Course extends CActiveRecord {
     public function startRace($raceID, $teacherID,$CDTime) {
         $courseID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
         $course = Course::model()->find("courseID=?", array($courseID));
+        if($course['onRaceID']==0){
         $step = Race::model()->find("raceID=?", array($raceID))['step'];
         if($step == 3){
             $indexID = Race::model()->find("raceID=?", array($raceID))['indexID'];
@@ -144,7 +145,7 @@ class Course extends CActiveRecord {
         $course->endTime = $endTime;
         $course->update();
     }
-
+    }
      public function isOpen($teacherID){
             $courseID = Teacher::model()->find("userID=?",array($teacherID))['classID'];
             $course = Course::model()->find("courseID=?",array($courseID));
