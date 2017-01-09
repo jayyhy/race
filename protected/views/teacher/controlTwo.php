@@ -119,7 +119,28 @@ require 'examSideBar.php';
     window.parent.doClick1();
     });
     function getExam(indexID){
-         window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+                var inindexID = indexID;
+        <?php 
+        $teacherID = Yii::app()->session['userid_now'];
+        $teacher = Teacher::model()->find("userID=?", array($teacherID));
+        $oncourse = Course::model()->find("courseID=?", array($teacher['classID']));
+        $onraceID = $oncourse['onRaceID'];
+        $onrace = Race::model()->find("raceID=?", array($onraceID));
+        $onindexID = $onrace['indexID'];
+        $onstep = $onrace['step'];
+        ?>   
+            <?php
+        if($nowOnStep == 0){ ?>
+        window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+        <?php }else{ ?>
+        var onindexID =<?php echo $onindexID?> 
+        if(onindexID == inindexID){ 
+        window.location.href = "./index.php?r=teacher/control&indexID=<?php echo $onindexID; ?>&&step=<?php echo $onstep; ?>";
+        }
+        else{
+            window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
+        }
+        <?php } ?>
     }
      var doc = document;
     (function () {

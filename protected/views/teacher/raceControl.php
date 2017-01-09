@@ -8,7 +8,15 @@ require 'examSideBar.php';
 ?>
 <script>
     function getExam(indexID){
+        <?php   if($isoncourse ==0){ ?>
          window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+        <?php }else{ 
+            $onrace = Race::model()->find("raceID=?", array($isoncourse));
+            $onstep = $onrace['step'];
+            $onindexID = $onrace['indexID'];
+            ?>
+            window.location.href = "./index.php?r=teacher/control&indexID=<?php echo $onindexID; ?>&&step=<?php echo $onstep; ?>";
+        <?php } ?>     
     }
     $(document).ready(function () {
     window.parent.doClick1();
