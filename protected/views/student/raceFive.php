@@ -18,6 +18,7 @@
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
     <script>
+        window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         function savetxt() {

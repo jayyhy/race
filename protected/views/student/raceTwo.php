@@ -12,6 +12,7 @@
         <h2 style="position: relative;left:230px;top:50px"><span id="time"></span></h2>
     </div>
     <script>
+        window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         function savetxt() {

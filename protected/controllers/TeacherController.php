@@ -853,6 +853,7 @@ class TeacherController extends CController {
                     $step = $step + 1;
                     Race::model()->isover($indexID,$step);
                     $render = "Three";
+                    $tip = 0;
                     break;
                 }
                 $render = "Two";
