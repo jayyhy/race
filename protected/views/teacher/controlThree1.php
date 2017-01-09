@@ -53,6 +53,7 @@ require 'examSideBar.php';
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
+<body onbeforeunload="getVideoTime()">
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
         <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文本校对</a></div>
@@ -75,6 +76,8 @@ require 'examSideBar.php';
         <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">看打</span></div>
       <?php
         }else if($nowOnStep == 3){
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
+        }else if($nowOnStep == 32){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
@@ -120,7 +123,15 @@ require 'examSideBar.php';
     </div>
     
 </div>
+</body>
 <script>
+    function getVideoTime() {
+        var secondAu = document.getElementById("secondAu");
+        var secondAuTime = secondAu.currentTime;
+        window.localStorage.setItem("secondAuTime", secondAuTime);
+    }
+    
+    
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -151,14 +162,10 @@ require 'examSideBar.php';
     var doc = document;
     (function () {
         var flag = <?php echo $flag; ?>;
-//        var CDTime = doc.querySelector('#CDTime');
         if (flag === 1) {
-//            doc.querySelector("#start")["hidden"] = true;
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
-            console.log("1-----",curtime);
-            console.log("2-----",endTime);
             tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
@@ -167,22 +174,33 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo , playAudio,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
+        var secondAu = document.getElementById("secondAu");
+        var secondAuTimes = window.localStorage.getItem("secondAuTime");
+        if(secondAuTimes !== null) {
+           var examTime = <?php echo $race['time'];?>;
+           var sideTime = document.getElementById('sideTime').innerHTML;
+           var str = sideTime.split(":");
+           var  m = parseInt(str[0]);
+           var  s = parseInt(str[1]);
+           sideTime = m * 60 + s;
+           if(sideTime<=examTime ){
+             secondAu.autoplay ="true";
+             secondAu.currentTime = secondAuTimes;
+             
+           }
+    }
         function playAudio(sideTime){
-//            var fristAu = document.getElementById("fristAu");
             var secondAu = document.getElementById("secondAu");
-//            var audition = document.getElementById("audition");
-//            var tag ="1";
-//            var flag ="1";
-            var examTime = <?php echo $race2['time'];?>;
+
+            var examTime = <?php echo $race['time'];?>;
             if(examTime == sideTime){
                secondAu.autoplay = "true";              
             }
         }
         function endDo() {
+            
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
+            window.localStorage.removeItem("secondAuTime");
         }
     })();
 
