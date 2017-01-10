@@ -77,6 +77,8 @@ require 'examSideBar.php';
         
         <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">看打</span></div>
       <?php
+        }else if($nowOnStep == 32){
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 3){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){

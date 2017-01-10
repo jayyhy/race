@@ -80,6 +80,8 @@ require 'examSideBar.php';
       <?php
         }else if($nowOnStep == 3){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
+        }else if($nowOnStep == 32){
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
         }else if($nowOnStep == 5){
@@ -182,7 +184,7 @@ require 'examSideBar.php';
            var  m = parseInt(str[0]);
            var  s = parseInt(str[1]);
            sideTime = m * 60 + s;
-           if(sideTime<=examTime ){
+           if(sideTime !== 0 && sideTime<=examTime ){
              secondAu.autoplay ="true";
              secondAu.currentTime = secondAuTimes;
              
