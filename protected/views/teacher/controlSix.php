@@ -44,7 +44,8 @@ require 'examSideBar.php';
     }
     
 </style>
-<?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
+<?php $listenpath = "./resources/race/" . $race['resourseID'];
+ ?>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
@@ -75,6 +76,8 @@ require 'examSideBar.php';
         
         <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">看打</span></div>
       <?php
+        }else if($nowOnStep == 32){
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 3){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){
