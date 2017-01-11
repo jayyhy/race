@@ -83,6 +83,15 @@ class RaceIndex extends CActiveRecord {
         RaceIndex::model()->deleteAll('indexID=?', array($raceIndex));
         $race = Race::model()->findAll('indexID=?', array($raceIndex));
         foreach ($race as $v){
+          $res_id=$v['resourseID'];
+          if($res_id!=""){
+              $filePath="./resources/race/".$res_id;
+              unlink($filePath);
+              $connection = Yii::app()->db;  
+              $sql = "DELETE FROM `resourse` WHERE `resourseID` = '$res_id'";  
+                $command=$connection->createCommand($sql);
+                $command->execute();
+          }
           AnswerRecord::model()->delete('raceID=?', array($v['raceID']));  
         }
         Race::model()->deleteAll('indexID=?', array($raceIndex));
