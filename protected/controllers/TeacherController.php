@@ -109,8 +109,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, "", "");
@@ -200,8 +205,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result3 = '上传答案为空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                           
@@ -299,8 +309,13 @@ class TeacherController extends CController {
                                     if (filesize($file_dir) < 1) {
                                         $result3 = '上传答案为空文件，上传失败';
                                     } else {
-                                        $contents = fread($fp, filesize($file_dir)); //读文件 
-                                        $content = iconv('GBK', 'utf-8', $contents);
+                                        $content = fread($fp, filesize($file_dir)); //读文件 
+                                        $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                                        if($encode == ""){
+                                           $content = iconv('UCS-2', 'utf-8', $content);
+                                        }else if($encode =="EUC-CN"){
+                                            $content = iconv('GBK', 'utf-8', $content);
+                                        }    
                                         $txtContent = Tool::SBC_DBC($content, 0);
                                         $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                                         $result = "1";
@@ -370,8 +385,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }                          
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, "", "");
@@ -435,8 +455,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
@@ -496,8 +521,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result3 = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             $result = "1";
@@ -559,8 +589,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
@@ -619,8 +654,13 @@ class TeacherController extends CController {
                         if (filesize($file_dir) < 1) {
                             $result3 = '空文件，上传失败';
                         } else {
-                            $contents = fread($fp, filesize($file_dir)); //读文件 
-                            $content = iconv('GBK', 'utf-8', $contents);
+                            $content = fread($fp, filesize($file_dir)); //读文件 
+                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
+                            if($encode == ""){
+                                $content = iconv('UCS-2', 'utf-8', $content);
+                            }else if($encode =="EUC-CN"){
+                                $content = iconv('GBK', 'utf-8', $content);
+                            }    
                             $txtContent = Tool::SBC_DBC($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                            
@@ -704,6 +744,15 @@ class TeacherController extends CController {
                 'result' => $result
             ));
         }
+    }
+    public function actionIsRepeated() {
+        $courseName = $_POST["courseName"];
+        $results =  RaceIndex::model()->find("name = '$courseName'");
+        $data = "0";
+        if($results !=NULL){
+            $data ="1";
+        }
+        echo $data;
     }
     
     public function actionAddRaceIndex() {

@@ -72,7 +72,7 @@
         <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" id="myForm" enctype="multipart/form-data">
             <div style="margin-top: -24px;margin-left: 60px" >
                 <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #D8D8D8;position: relative;top: 2px">分钟</span>
+                <span style="font-size: 16px;color: #BCBCBC;position: relative;top: 9px">分钟</span>
             
            </div>
             <div style="margin-top: 18px;margin-left: 60px;" >
@@ -80,12 +80,12 @@
                                 <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
             <?php if (file_exists($listenpath)) { ?>
                 <video id="audio2" src = "<?php echo $listenpath; ?>" preload = "auto" controls style=" width: 400px;height: 226px"></video><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
-                 <input type="file" name="file" id="input02" style="float: left; display: none; margin-bottom: 2%">  <span style=" position: relative;left: -24px;top: 2px;float: left; display: none" id="span2">(上传视频)</span>                   
+                 <input type="file" name="file" id="input02" style="float: left; display: none; margin-bottom: 2%">  <span style=" position: relative;left: 47px;top: 2px;float:24px left; display: none" id="span2">(上传视频，mp4)</span>                   
         <?php } else { ?>
-                            <input type="file" name="file" id="input02" style="float: left; margin-bottom: 2%">  <span style=" position: relative;left: -24px;top: 2px;float: left; ">(上传视频)</span>        <span style="color: red;position: relative;left: 1px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                            <input type="file" name="file" id="input02" style="float: left; margin-bottom: 2%">  <span style=" position: relative;left: 47px;top: 2px;float: left; ">(上传视频，mp4)</span>        <span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
                                 <?php } ?>
                                     <?php }else { ?>
-                                    <input type="file" name="file" id="input02" style="float: left; margin-bottom: 2%">  <span style=" position: relative;left: -24px;top: 2px;float: left; ">(上传视频)</span>
+                                    <input type="file" name="file" id="input02" style="float: left; margin-bottom: 2%">  <span style=" position: relative;left: 47px;top: 2px;float: left; ">(上传视频，mp4)</span>
             
             <?php } ?>
                                     
@@ -97,7 +97,7 @@
            </div>
             <div style="clear:both; margin-top: 24px;margin-left: 60px">
                 
-                <input type="file" name="myfile" id="myfile"  >  <span style=" position: relative;left: -24px;top: 2px">(上传答案)</span>
+                <input type="file" name="myfile" id="myfile"  >  <span style=" position: relative;left: 47px;top: 2px">(上传答案)</span>
             </div>
             <div style="margin-top: 19px;margin-left: 60px">
                 <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
@@ -108,65 +108,6 @@
         </form>
         </div>
     </div>
-    
-</div>
-<!--<div class="span9">
-    <h2>视频纠错</h2>
-    <div>
-        <h3 style="text-align: center">持续时间以及配分</h3>
-        <h3></h3>
-        <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" id="myForm" enctype="multipart/form-data"> 
-            
-            <div class="control-group">
-                <label class="control-label">时间：</label>
-                <div class="controls">
-                    <textarea name="time" style="width:50px; height:20px;" id="time"><?php echo $race['time']/60; ?></textarea> 分钟
-                </div>
-            </div>
- 
-            <span>(支持mp4及flv格式,最大2G)</span>
-            <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="input02">文件</label>
-                    <div class="controls">
-                        <?php if ($race != "") { ?>
-                            <div class="control-group">
-                                <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
-                                <?php if (file_exists($listenpath)) { ?>
-                                    <video  src = "<?php echo $listenpath; ?>" preload = "auto" controls></video>
-                                <?php } else { ?>
-                                    <p style="color: red">原音频文件丢失或损坏！</p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <input type="file" name="file" id="input02">   
-                        <div id="upload" style="display:inline;" hidden="true">
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                <label class="control-label" for="input04">上传答案</label>
-                <div class="controls">
-                    <input type="file" name="myfile" id="myfile" >
-                </div>
-            </div>
-                <div class="control-group">
-                    <label class="control-label" for="input03">参考答案</label>
-                    <div class="controls">               
-                        <textarea name="content" style="width:450px; height:200px;" id="input03"><?php echo $race['content']; ?></textarea>
-                        <br>字数：<span id="wordCount">0</span> 字
-                    </div>
-                </div> 
-            </fieldset>
-            <button type="submit" class="btn_4big" style="float:right">确定</button>
-        </form>
-    </div>
-    
-</div>-->
 <script>
     <?php
     $tag = "0";
