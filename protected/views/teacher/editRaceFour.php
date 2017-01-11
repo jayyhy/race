@@ -50,19 +50,22 @@
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
         <img src="<?php echo IMG_URL_NEW; ?>icon_proof.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打校对</h3>
-        <form method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4">
-        <div style="margin-top: -24px;margin-left: 20px" >
-            <ul class="nav nav-list" >
-            <li>
+        <form method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" enctype="multipart/form-data">
+        <div style="margin-top: -24px;margin-left: 60px" >
                 <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
                 <span style="font-size: 16px;color: #D8D8D8;position: relative;top: 2px">分钟</span>
-            </li>
-            <li style=" margin-left: 236px">
-                <button  class="btn_6big" style=" width: 96px">取 消</button>&nbsp;&nbsp;
-                <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
-            </li>
-        </ul>
+            
         </div>
+            <div style="margin-top: 16px;margin-left: 60px">
+                
+                <input type="file" name="myfile" id="myfile" ><span style=" position: relative;left: -68px;top: 2px">(上传答案)</span>
+            </div>
+            <div style="margin-top: 19px;margin-left: 60px">
+                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
+            </div>
+            <div style=" margin-left: 38%;margin-top: 25px">
+                <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
+            </div>
         </form>
     </div>
 </div>
@@ -93,14 +96,23 @@
             event.preventDefault();
             window.wxc.xcConfirm('请输入正确的数字', window.wxc.xcConfirm.typeEnum.info);
         }
+        var files =  document.getElementById("myfile").value;
+        var content = document.getElementById("content").value;
+        if(files === "" && content === "") {
+            event.preventDefault();
+            window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
+        }
     }, true);
     $(document).ready(function () {
         var result = <?php echo "'$result'"; ?>;
-        if (result === '1')
+        if (result === '1'){
             window.wxc.xcConfirm("设定成功！", window.wxc.xcConfirm.typeEnum.success, {
                 onOk: function () {
                     window.location.href = "./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5";
                 }
             });
+            }else if (result != ''){
+               window.wxc.xcConfirm(result, window.wxc.xcConfirm.typeEnum.info);
+        }
     });
 </script>

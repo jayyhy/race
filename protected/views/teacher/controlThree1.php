@@ -53,14 +53,15 @@ require 'examSideBar.php';
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
+<body onbeforeunload="getVideoTime()">
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-        <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文本校对</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">看打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=32" class="word" >听打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
+        <div class="stage" style=" margin-left: 25px"><a href="#" class="word">文本校对</a></div>
+        <div class="stage"><a href="#" class="word">看打</a></div>
+        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=32" class="word" style=" color: #ff0000;">听打</a></div>
+        <div class="stage"><a href="#" class="word">听打校对</a></div>
+        <div class="stage"><a href="#" class="word">盲打</a></div>
+        <div class="stage"><a href="#" class="word">视频纠错</a></div>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
         <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打(二)</h3>
@@ -75,6 +76,8 @@ require 'examSideBar.php';
         <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">看打</span></div>
       <?php
         }else if($nowOnStep == 3){
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
+        }else if($nowOnStep == 32){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
@@ -95,7 +98,7 @@ require 'examSideBar.php';
            } ?>
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 61px;">考试时间</font>
-            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time']+$race2['time']+$time) / 60); ?> 分 <?php echo floor(($race['time']+$race2['time']+$time)-floor(($race['time']+$race2['time']+$time) / 60) * 60); ?> 秒</h3>
+            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time']) / 60); ?> 分 <?php echo floor(($race['time'])-floor(($race['time']) / 60) * 60); ?> 秒</h3>
         </div>
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 25px;">倒计时</font>
@@ -107,12 +110,15 @@ require 'examSideBar.php';
             <h3 class="time" style="position: relative;left: 122px;top: 20px;" id = "endTime" >未开始</h3>
             </div>
         </div>
-        <div style=" width: 500px;height: 118px;margin-top: 196px">
+        <div style=" width: 600px;height: 118px;margin-top: 196px">
         <font class="words" style="position: relative;left: 61px;">考试音频</font>
         <?php if (file_exists($listenpath3)) { ?>
-        <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio><br>
-        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls"  ></audio><br>
-        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls" ></audio><br>
+        <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
+        <span style="position: relative;left: 95px;">(试音音频)</span><br>
+        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls"  ></audio>
+        <span style="position: relative;left: 172px;top: 17px">(第一个音频)</span><br>
+        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls" ></audio>
+        <span style="position: relative;left: 172px;top: 33px">(第二个音频)</span><br>
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
@@ -120,7 +126,15 @@ require 'examSideBar.php';
     </div>
     
 </div>
+</body>
 <script>
+    function getVideoTime() {
+        var secondAu = document.getElementById("secondAu");
+        var secondAuTime = secondAu.currentTime;
+        window.localStorage.setItem("secondAuTime", secondAuTime);
+    }
+    
+    
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -151,14 +165,10 @@ require 'examSideBar.php';
     var doc = document;
     (function () {
         var flag = <?php echo $flag; ?>;
-//        var CDTime = doc.querySelector('#CDTime');
         if (flag === 1) {
-//            doc.querySelector("#start")["hidden"] = true;
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
-            console.log("1-----",curtime);
-            console.log("2-----",endTime);
             tCounter3(curtime, <?php
     if ($endTime == 0) {
         echo 0;
@@ -167,22 +177,33 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo , playAudio,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
+        var secondAu = document.getElementById("secondAu");
+        var secondAuTimes = window.localStorage.getItem("secondAuTime");
+        if(secondAuTimes !== null) {
+           var examTime = <?php echo $race['time'];?>;
+           var sideTime = document.getElementById('sideTime').innerHTML;
+           var str = sideTime.split(":");
+           var  m = parseInt(str[0]);
+           var  s = parseInt(str[1]);
+           sideTime = m * 60 + s;
+           if(sideTime<=examTime ){
+             secondAu.autoplay ="true";
+             secondAu.currentTime = secondAuTimes;
+             
+           }
+    }
         function playAudio(sideTime){
-//            var fristAu = document.getElementById("fristAu");
             var secondAu = document.getElementById("secondAu");
-//            var audition = document.getElementById("audition");
-//            var tag ="1";
-//            var flag ="1";
-            var examTime = <?php echo $race2['time'];?>;
+
+            var examTime = <?php echo $race['time'];?>;
             if(examTime == sideTime){
                secondAu.autoplay = "true";              
             }
         }
         function endDo() {
+            
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
+            window.localStorage.removeItem("secondAuTime");
         }
     })();
 

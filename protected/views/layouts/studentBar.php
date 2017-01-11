@@ -19,7 +19,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
             <script src="<?php echo XC_Confirm; ?>js/xcConfirm.js"   ></script>
             <!--            -->
         </head>
-        <body  style="background: url(<?php echo IMG_UIStu_URL; ?>student_background.png) no-repeat bottom;background-color: #f8f4f2">
+        <body  style="background-color: #f8f4f2">
              <div class="ywnav">
                
                     <a class="ywlogo" href="./index.php?r=student/index"> <div class="ywlogo"> </div></a>
@@ -90,4 +90,9 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
 //
 //        });
 //    }
+function doC(){
+    document.body.style.backgroundImage="url(<?php echo IMG_UIStu_URL; ?>student_background.png)";
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundPosition="bottom";
+}
 </script>
