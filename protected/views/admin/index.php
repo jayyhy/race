@@ -134,7 +134,7 @@
         }
         else{ 
             if(isNaN(renshu) || renshu<=0 || renshu>100 || parseInt(renshu)!=renshu){
-                    window.wxc.xcConfirm('请在人数框里输入大于0小鱼100的正整数', window.wxc.xcConfirm.typeEnum.info);
+                    window.wxc.xcConfirm('请在人数框里输入大于0小于100的正整数', window.wxc.xcConfirm.typeEnum.info);
                     return false;
                     
             }

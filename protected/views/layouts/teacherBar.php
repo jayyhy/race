@@ -100,6 +100,6 @@ function doClick2(){
    obj.setAttribute("class", "ksjg1");
 }
 function nowonexam(){
-    window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
+//    window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
 }
 </script>
