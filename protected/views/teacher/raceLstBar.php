@@ -37,6 +37,12 @@
         </div>
 </div>
 <script>
+//    $(document).ready(function() {
+//        var result = <?php  ?>;
+//       if(result ==="2") {
+//            window.wxc.xcConfirm('试卷名重复，请重新输入试卷名', window.wxc.xcConfirm.typeEnum.info);
+//       }
+//    });
     function deleteRaceIndex(id, name) {
         var option = {
             title: "警告",
@@ -61,11 +67,27 @@
     function addRace() {
         var courseName = document.querySelector("#value").value;
         if(courseName!==""){
-            window.location.href="./index.php?r=teacher/addRaceIndex&raceName="+courseName;
+             $.ajax({
+            type: "POST",
+            url: "index.php?r=teacher/isRepeated",
+            data: {courseName: courseName},
+            success: function (data) {
+                if(data === "1"){
+                    window.wxc.xcConfirm('试卷名重名,请重新输入试卷名', window.wxc.xcConfirm.typeEnum.info);
+                }else {
+                    window.location.href="./index.php?r=teacher/addRaceIndex&raceName="+courseName;
+                }
+            },
+            error: function (xhr, type, exception) {
+                console.log("type",type);
+            }
+             });
+            
         }else{
             window.wxc.xcConfirm('请输入试卷名', window.wxc.xcConfirm.typeEnum.info);
         }
     }
+
     
 </script>
     
