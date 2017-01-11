@@ -8,6 +8,10 @@
 </div>
 <script>
     $(document).ready(function () {
+      <?php if(isset($showname)){ ?>
+alert("<?php echo "请确认你的考号："."$showname";?>");
+window.location.href = "./index.php?r=student/index";
+                <?php } ?>
     <?php $studentID = Yii::app()->session['userid_now'];
           $indexID = AnswerRecord::model()->find("studentID = '$studentID'")['indexID'];
           $tags = "0";
