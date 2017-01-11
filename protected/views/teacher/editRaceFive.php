@@ -75,12 +75,12 @@
                                 <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
             <?php if (file_exists($listenpath)) { ?>
            <audio id="audio2" src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
-                      <input type="file" name="file" id="input02" style="margin-bottom:2%;display: none;float: left;"> <span style=" position: relative;left: -24px;top: 4px;display: none" id="span2">(上传音频)</span>          
+                      <input type="file" name="file" id="input02" style="margin-bottom:2%;display: none;float: left;"> <span style=" position: relative;left: 47px;top: 4px;display: none" id="span2">(上传音频,mp3或wav)</span>          
                      <?php } else { ?>
-                                     <input type="file" name="file" id="input02" style="float: left;" > <span style=" position: relative;left: -24px;top: 0px">(上传音频)</span> <span style="color: red;position: relative;left: 1px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                                     <input type="file" name="file" id="input02" style="float: left;" > <span style=" position: relative;left:47px;top: 0px">(上传音频,mp3或wav)</span> <span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
                                 <?php } ?>
                                     <?php } else {?>
-                                    <input type="file" name="file" id="input02" style="float: left;" > <span style=" position: relative;left: -24px;top: 0px">(上传音频)</span>
+                                    <input type="file" name="file" id="input02" style="float: left;" > <span style=" position: relative;left: 47px;top: 0px">(上传音频,mp3或wav)</span>
             
             <?php } ?>
             
@@ -92,7 +92,7 @@
            </div>
             <div style="clear:both; margin-top: 24px;margin-left: 60px">
                 
-                <input type="file" name="myfile" id="myfile" >  <span style=" position: relative;left: -24px;top: 0px">(上传答案)</span>
+                <input type="file" name="myfile" id="myfile" >  <span style=" position: relative;left: 47px;top: 0px">(上传答案，txt)</span>
             </div>
             <div style="margin-top: 19px;margin-left: 60px">
                 <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
@@ -103,62 +103,6 @@
         </form>
      </div>
 </div>
-<!--<div class="span9">
-    <h2>盲打</h2>
-    <div>
-        <h3 style="text-align: center">持续时间以及配分</h3>
-        <h3></h3>
-        <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" id="myForm" enctype="multipart/form-data"> 
-            
-            <div class="control-group">
-                <label class="control-label">分数：</label>
-                <div class="controls">
-                    <textarea name="score" style="width:50px; height:20px;" id="score"><?php echo $race['score']; ?></textarea> 分
-                </div>
-            </div>
-
-            <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="input02">文件：</label>
-                    <div class="controls">
-                        <?php if ($race != "") { ?>
-                            <div class="control-group">
-                                <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
-                                <?php if (file_exists($listenpath)) { ?>
-                                    <audio  src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio>
-                                <?php } else { ?>
-                                    <p style="color: red">原音频文件丢失或损坏！</p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <input type="file" name="file" id="input02">   
-                        <div id="upload" style="display:inline;" hidden="true">
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                <label class="control-label" for="input04">上传答案</label>
-                <div class="controls">
-                    <input type="file" name="myfile" id="myfile" >
-                </div>
-            </div>
-                <div class="control-group">
-                    <label class="control-label" for="input03">答案：</label>
-                    <div class="controls">               
-                        <textarea name="content" style="width:450px; height:200px;" id="input03"><?php echo $race['content']; ?></textarea>
-                        <br>字数：<span id="wordCount">0</span> 字
-                    </div>
-                </div> 
-            </fieldset>
-            <button type="submit" class="btn_4big" style="float:right">确定</button>
-        </form>
-    </div>
-    
-</div>-->
 
 <script>
     <?php

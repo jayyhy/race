@@ -8,6 +8,9 @@
 </div>
 <script>
     $(document).ready(function () {
+      <?php if(isset($showname)){ ?>
+            window.wxc.xcConfirm('<?php echo "请确认你的考号："."$showname"."???";?>', window.wxc.xcConfirm.typeEnum.info);
+                <?php } ?>
     <?php $studentID = Yii::app()->session['userid_now'];
           $indexID = AnswerRecord::model()->find("studentID = '$studentID'")['indexID'];
           $tags = "0";

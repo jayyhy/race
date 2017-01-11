@@ -53,6 +53,13 @@ class StudentController extends CController {
         Yii::app()->session['student_courseID'] = $courseID;
         $this->render('index');
     }
+    public function ActionFristIndex() {
+        $userID = Yii::app()->session['userid_now'];
+        $courseID = Student::model()->find("userID=?", array($userID))['classID'];
+        Yii::app()->session['student_courseID'] = $courseID;
+        $showname = Yii::app()->session['userid_now'];
+        $this->render('index',array('showname' => $showname));
+    }
 
     public function ActionWaitForStart() {
         $this->renderPartial('waitForStart');
