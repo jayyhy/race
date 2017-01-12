@@ -15,7 +15,7 @@ require 'examSideBar.php';
     }
     .words{
        font-size: 18px;
-       color: #c9c9c9;
+       color: #767679;
     }
     .currentTag{
          float: right;
@@ -27,7 +27,7 @@ require 'examSideBar.php';
     }
     .wordTag1{
         font-size: 16px;
-        color: #DAD9D6;
+        color: #767679;
         position: relative;
         left: 18px;
         top: 9px;
