@@ -99,11 +99,11 @@
             <input type="file" name="files" id="input" style="float: left;">  <span style=" position: relative;left: 47px;top: 2px;float: left;">(上传试音音频,mp3或wav)</span>
             <?php } ?>
                                     
-                <div id="upload" style=" float: left;display: none" >
+                <span id="upload" style=" position: relative;left: 56px;display: none" >
                             <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
                             正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
+                            <span id="number">0%</span>
+                        </span>
         </div>
             
             <div style="clear:both;margin-top: 16px;margin-left: 60px;">
@@ -129,15 +129,15 @@
                                    <input type="file" name="file2" id="input02s">  <span style=" position: relative;left: 47px;top: 2px">(上传第二个音频,mp3或wav)</span> <span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
                                 <?php } ?>
                                     <?php } else { ?>
-                <input type="file" name="file2" id="input02s">  <span style=" position: relative;left: 47px;top: 2px">(上传第二个音频,mp3或wav)</span>
+                                   <input type="file" name="file2" id="input02s">  <span style=" position: relative;left: 47px;top: 2px">(上传第二个音频,mp3或wav)</span>
                 <?php } ?>
             </div>
             <div style="margin-top: 24px;margin-left: 60px">
                 
-                <input type="file" name="myfile" id="myfile" >  <span style=" position: relative;left: 47px;top: 2px">(上传答案，txt)</span>
+                <input type="file" name="myfile" id="myfile" >  <span style=" position: relative;left: 56px;top: 2px">(上传答案，txt)</span>
             </div>
             <div style="margin-top: 19px;margin-left: 60px">
-                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
+                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA; display: none" id="content" ><?php echo $race['content']; ?></textarea>
             </div>
             <div style=" margin-left: 38%;margin-top: 25px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
@@ -193,8 +193,8 @@
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
+        var content = "<?php echo $race['content']; ?>";
         var files =  document.getElementById("myfile").value;
-        var content = document.getElementById("content").value;
         if (files === "" && content ==="") {
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
