@@ -16,7 +16,7 @@ require 'examSideBar.php';
     }
     .words{
        font-size: 18px;
-       color: #c9c9c9;
+       color: #767679;
     }
     .currentTag{
          float: right;
@@ -28,7 +28,7 @@ require 'examSideBar.php';
     }
     .wordTag1{
         font-size: 16px;
-        color: #DAD9D6;
+        color: #767679;
         position: relative;
         left: 18px;
         top: 9px;
@@ -113,12 +113,8 @@ require 'examSideBar.php';
         <div style=" width: 600px;height: 118px;margin-top: 196px">
         <font class="words" style="position: relative;left: 61px;">考试音频</font>
         <?php if (file_exists($listenpath3)) { ?>
-        <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
-        <span style="position: relative;left: 95px;">(试音音频)</span><br>
-        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls"  ></audio>
-        <span style="position: relative;left: 172px;top: 17px">(第一个音频)</span><br>
-        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls" ></audio>
-        <span style="position: relative;left: 172px;top: 33px">(第二个音频)</span><br>
+        <audio id="secondAu" style="position: relative;left: 93px;top: 9px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls" ></audio>
+        <span style="position: relative;left: 95px;">(第二个音频)</span><br>
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>

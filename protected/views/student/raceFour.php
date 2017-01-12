@@ -15,9 +15,9 @@
         window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
-        var step3raceID = <?php $step3raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 32)); 
+        var step3raceID = "<?php $step3raceID = Race::model()->find("indexID=? AND step=?", array($race['indexID'], 32)); 
         echo $step3raceID['raceID'];
-        ?>;
+        ?>";
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
         function savetxt() {
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
