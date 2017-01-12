@@ -84,7 +84,7 @@ class StudentController extends CController {
         $raceID = $_GET['raceID'];
         $race = Race::model()->find("raceID=?", array($raceID));
         $step = $race['step'];
-        $course = Course::model()->find("onRaceID=?", array($race['raceID']));
+        $course = Course::model()->find("onRaceID=?", array($raceID));
         $EndTime = strtotime($course['endTime']);
         $startTime = strtotime($course['startTime']);
         $lastRaceIDForStepFour = 0;
