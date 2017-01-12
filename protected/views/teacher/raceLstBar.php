@@ -9,11 +9,20 @@
          <div style="margin-top: 15px;background:#F8F4F2;width: 210px;height: 88px;border-radius: 6px;" >
              
        
-            <a href="#" onclick="getExam(<?php echo $model['indexID']; ?>)" style="position: relative;left: 12px;top: 17px;"><span style="font-size:16px; font-weight: 600;color: #E35C43"><?php echo "0".$model['indexID']; ?>&nbsp;&nbsp;&nbsp;</span><span style="font-size:16px; font-weight: 600; color: #3A393E"><?php echo $model['name']; ?></span></a>
+            <a href="#" onclick="getExam(<?php echo $model['indexID']; ?>)" style="position: relative;left: 12px;top: 17px;" title="<?php echo $model['name']; ?>"><span style="font-size:16px; font-weight: 600;color: #E35C43"><?php echo "0".$model['indexID']; ?>&nbsp;&nbsp;&nbsp;</span>
+                <span style="font-size:16px; font-weight: 600; color: #3A393E">
+                    <?php if(Tool::clength($model['name']) <= 4) {
+                        echo $model['name'];
+                    }else {
+                         echo Tool::csubstr($model['name'], 0, 4) . "...";
+                    }
+?>
+                </span></a>
         
-            <a href="#" onclick="deleteRaceIndex(<?php echo $model['indexID']; ?>,'<?php echo $model['name']; ?>')" ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 74px;top: 15px;" /></a>
+             <div style="margin-left: 83%;margin-top: -3%"><a href="#" onclick="deleteRaceIndex(<?php echo $model['indexID']; ?>,'<?php echo $model['name']; ?>')"   >
+                     <img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" /></a></div>
              
-        <div style="margin-left: 12px;padding-top: 28px;"><?php echo $model['createTime']; ?></div>
+        <div style="margin-left: 12px;margin-top: 15px;"><?php echo $model['createTime']; ?></div>
      </div>
         
     <?php 
