@@ -984,6 +984,10 @@ class TeacherController extends CController {
             $race = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
           $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
          }
+         else if ($render == "Four") {
+            $race = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
+         }
         else {
           $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
         }
