@@ -23,6 +23,7 @@
     
     <script>
         window.parent.doC();
+        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
        function getVideoTime() {
           var video = document.getElementById('audio');
           // Store
@@ -60,7 +61,6 @@
         });
         }
         function saveInReTime(){
-            var yaweiOCX1=window.parent.document.getElementById("typeOCX")
             var content=yaweiOCX1.GetContent();
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
@@ -88,7 +88,7 @@
                 type:"POST",
                 dataType:"json",
                 url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>},
+                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
                 success:function(){
                 },
                 error: function (xhr) {

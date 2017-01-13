@@ -39,8 +39,13 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo(){
+            <?php $StudentID = Yii::app()->session['userid_now']; ?>
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
+            if(content2==""){
+                <?php $step2raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 2))['raceID']; ?>;
+                content2="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?",array($step2raceID,$StudentID))['content'];?>";
+            }
             currentCount = content2.length;
             originalCount = originalContent.length;
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
