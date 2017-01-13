@@ -21,7 +21,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
         <body>
             <div class="ywnav">
                
-                    <a class="ywlogo" href="./index.php?r=admin/index"> <div class="ywlogo"> </div></a>
+               <div class="ywlogo"> </div>
                
                 <font class="ysgs">亚伟国赛管理系统</font>
                 <div class="userUI">
