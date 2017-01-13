@@ -142,9 +142,9 @@ class AnswerRecord extends CActiveRecord
         return $result;
     }
     
-    public function updataAnswerData1($rate,$race_ID){
+    public function updataAnswerData1($rate,$race_ID,$studentID){
         $connection = Yii::app()->db;    
-        $sql = "UPDATE `answer_record` SET rate = '$rate' where raceID = $race_ID";
+        $sql = "UPDATE `answer_record` SET rate = '$rate' where raceID = $race_ID and studentID= '$studentID'";
         $command = $connection->createCommand($sql);
         $command->execute();
     }
