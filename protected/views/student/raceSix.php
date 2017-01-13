@@ -66,36 +66,7 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
-            
-            var originalContent='<?php echo $race['content'];?>';
-            var content2=yaweiOCX1.GetContent();
-            var worker = new Worker('js/exerJS/GetAccuracyRate.js');
-            worker.onmessage = function (event) {
-                if (!isNaN(event.data.accuracyRate)) {
-                    window.RightRadio = event.data.accuracyRate;
-                    saveRightRadio();
-                }
-                worker.terminate();
-            };
-            worker.postMessage({
-                currentContent: content2,
-                originalContent: originalContent
-            });
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
-        }
-        
-        function saveRightRadio(){
-            $.ajax({
-                type:"POST",
-                dataType:"json",
-                url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
-                success:function(){
-                },
-                error: function (xhr) {
-                    console.log(xhr, "Failed");
-                }
-            });
         }
         
         function timec(){
