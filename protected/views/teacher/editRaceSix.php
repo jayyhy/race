@@ -95,11 +95,7 @@
                             <span id="number">0%</span>
                         </span>
            </div>
-            <div style="clear:both; margin-top: 24px;margin-left: 60px">
-                
-                <input type="file" name="myfile" id="myfile"  >  <span style=" position: relative;left: 56px;top: 2px">(上传答案，txt)</span>
-            </div>
-            <div style=" margin-left: 38%;margin-top: 25px">
+            <div style=" margin-left: 38%;margin-top: 56px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
             </div>
         </form>
@@ -131,12 +127,6 @@
         if (uploadFile === "" && tag == "1")
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
-            return false;
-        }
-        var files =  document.getElementById("myfile").value;
-        var A = "<?php echo $race['content']; ?>";
-        if (files === "" && A === "") {
-            window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
         $("#upload").show();

@@ -28,10 +28,10 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                                             <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                                                 
                                                 <?php $name=Yii::app()->session['userName'];
-                                                        if(Tool::clength($name) <= 3)
+                                                        if(Tool::clength($name) <= 7)
                                                             echo $name;
                                                         else
-                                                            echo Tool::csubstr($name, 0, 3) . "...";
+                                                            echo Tool::csubstr($name, 0, 6) . "...";
                                                 ?>
                                                 <b class="user_dropdown_logo"></b>
                                             </a>
