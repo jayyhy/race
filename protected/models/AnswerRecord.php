@@ -123,6 +123,8 @@ class AnswerRecord extends CActiveRecord
         $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
         $accepttime = microtime(true)*10000;
         $completiontime = microtime(true)*10000;
+        $content = Tool::filterAllSpaceAndTab($content);
+        $content = Tool::SBC_DBC($content,0);
         if ($record == "") {
             $record = new AnswerRecord();
             $record->studentID = $studentID;
