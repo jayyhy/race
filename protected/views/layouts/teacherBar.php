@@ -30,11 +30,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
         ?>   
             <div class="container">
             <div class="ywnav">
-                <?php if($onraceID == 0) { ?>
-                <a class="ywlogo" href="./index.php?r=teacher/index"> <div class="ywlogo"> </div></a>
-                <?php }else{ ?>
-                <a class="ywlogo" href="" onclick="nowonexam()"> <div class="ywlogo"> </div></a>
-                <?php } ?>
+                <div class="ywlogo"> </div>
 <!--                <font class="ysgs">亚伟国赛管理系统</font>-->
 <?php if($onraceID == 0) { ?>
 <div class="sjdp" id="sjdp"><a href="./index.php?r=teacher/raceLst" onclick="changesjdp()">试卷调配</a></div>

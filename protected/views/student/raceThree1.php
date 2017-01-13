@@ -16,9 +16,10 @@
             $time=round($media->duration);
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
+    <div style="margin-left: 50px;">
     <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">听打(二)</h2>
     <?php if (file_exists($listenpath)) { ?>
-    <div style="width: 450px;height: 350px;background-color: #ffffff;float: left">
+    <div style="width: 310px;height: 200px;background-color: #ffffff;float: left">
         <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" height="250px" style="display: none"></video>
         <video id="audio3" src = "<?php echo $listenpath3; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" preload = "auto" autoplay="true" height="250px"></video>
         <video id="audio2" src = "<?php echo $listenpath2; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" height="250px" style="display: none"></video>
@@ -26,13 +27,14 @@
  <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
-    <div style="width: 300px;height: 350px;background-color: #ffffff;margin-left: 10px;float: left">
+    <div style="width: 300px;height: 150px;background-color: #ffffff;margin-left: 10px;float: left">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
         <h2 style="position: relative;left:100px;top:50px"><?php echo floor(($race2['time']) / 60); ?> 分 <?php echo floor($race2['time']-floor($race2['time'] / 60) * 60); ?> 秒</h2>
     </div>
-    <div style="width: 300px;height: 350px;background-color: #ffffff;margin-left: 10px;float: left">
+    <div style="width: 300px;height: 150px;background-color: #ffffff;margin-left: 10px;float: left">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">剩余时间：</h4>
         <h2 style="position: relative;left:100px;top:50px"><span id="time"></span></h2>
+    </div>
     </div>
     <script>
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");

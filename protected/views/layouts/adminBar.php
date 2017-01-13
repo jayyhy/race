@@ -21,17 +21,17 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
         <body>
             <div class="ywnav">
                
-                    <a class="ywlogo" href="./index.php?r=admin/index"> <div class="ywlogo"> </div></a>
+               <div class="ywlogo"> </div>
                
                 <font class="ysgs">亚伟国赛管理系统</font>
                 <div class="userUI">
                                             <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                                                 
                                                 <?php $name=Yii::app()->session['userName'];
-                                                        if(Tool::clength($name) <= 3)
+                                                        if(Tool::clength($name) <= 5)
                                                             echo $name;
                                                         else
-                                                            echo Tool::csubstr($name, 0, 3) . "...";
+                                                            echo Tool::csubstr($name, 0, 5) . "...";
                                                 ?>
                                                 <b class="user_dropdown_logo"></b>
                                             </a>
