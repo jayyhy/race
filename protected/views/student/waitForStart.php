@@ -1,6 +1,6 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<section style="height:200px">
-    <div id="ready" style="text-align: center">
+<section style="height:200px;margin-left: 50px;">
+    <div class="waittime"id="ready" style="text-align: center">
         <img src="<?php echo IMG_UIStu_URL; ?>null_prepare.png" height="250px" style="position: relative;top:40px">
     </div>
     <div id="beginTime" style="display:none;position: relative;" align="center">

@@ -173,3 +173,11 @@ text-decoration:none;
 .stuindex{
     margin:0 auto; 
 }
+.waittime{
+    
+   width: 300px;
+   height: 350px;
+   background-color: #ffffff;
+   margin-left: 10px;
+   float: left; 
+}
