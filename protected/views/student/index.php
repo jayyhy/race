@@ -1,7 +1,7 @@
 <div class="stuindex">
     <iframe scrolling="no" class="stuIframe" seamless src="./index.php?r=student/waitForStart"></iframe>
     <div style="float: right;margin-left: 0px;margin-top: 40px;">
-        <div style=" width :860px; height:560px; background: #A9A5A3;">
+        <div id="bgyw" style=" width :860px; height:560px; background: #A9A5A3;">
             <div style=" margin-left :5px; padding-top: 5px;">
     <object id="typeOCX" type="application/x-itst-activex" 
             clsid="{ED848B16-B8D3-46c3-8516-E22371CCBC4B}" 
@@ -104,6 +104,7 @@ window.location.href = "./index.php?r=student/index";
     
     function stepFive(){
         doc.querySelector("#typeOCX").height="0";
+        $("#bgyw").hide();
     }
 
 </script>
