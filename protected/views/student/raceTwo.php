@@ -15,10 +15,10 @@
     </div>
     <script>
         window.parent.doC();
+        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
         function savetxt() {
-            var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             var timestamp = (new Date()).valueOf();
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/2/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
             var route = "D:/YAWEIEXAM/2/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
@@ -70,7 +70,7 @@
                 type:"POST",
                 dataType:"json",
                 url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>},
+                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
                 success:function(){
                 },
                 error: function (xhr) {
