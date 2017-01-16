@@ -1070,10 +1070,76 @@ class TeacherController extends CController {
                 "resultstep5"=>$resultstep5,"resultstep6"=>$resultstep6,
                 ];
                 array_push($data, $arrayData);
-            }    
-
-    return $this->renderPartial('simple',['data'=>$data,'indexID'=>$indexID]);
-}
+            }   
+        $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
+        $filename="考场".$indexID."导出结果";
+        /* 把引入PHPExcel.php文件 */
+        Yii::$enableIncludePath = false;
+        Yii::import('application.extensions.PHPExcel.PHPExcel', 1);
+        $styleArray1 = array(
+            'font' => array(
+            'bold' => true,
+            'size'=>14,
+            'color'=>array(
+            'argb' => '00000000',),
+        ));
+        $objectPHPExcel = new PHPExcel();
+        $objectPHPExcel->setActiveSheetIndex(0);
+        $objActSheet = $objectPHPExcel->getActiveSheet();
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray1);
+        $objectPHPExcel->getActiveSheet()->setCellValue('A1','学号');
+        $objectPHPExcel->getActiveSheet()->setCellValue('B1','看打');
+        $objectPHPExcel->getActiveSheet()->setCellValue('C1','听打');
+        $objectPHPExcel->getActiveSheet()->setCellValue('D1','听打校对');
+        $objectPHPExcel->getActiveSheet()->setCellValue('E1','盲打');
+        $objectPHPExcel->getActiveSheet()->setCellValue('F1','视频纠错');
+        //设置字体居中
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:F101')
+        ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:F101')
+        ->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')
+        ->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('ccffff');
+        //设置视频纠错自动换行和宽度
+        $objActSheet->getColumnDimension('D')->setWidth(16);
+        $objActSheet->getColumnDimension('F')->setWidth(350);
+        $objectPHPExcel->getActiveSheet()->getStyle('F1:F101')->getAlignment()->setWrapText(true);
+        $one = 2;$two = 2;$tree = 2;$four =2;$five = 2;$six = 2;
+        //导出考生成绩信息
+        if (!empty($data)){
+              foreach ($data as $k => $model):
+              $objectPHPExcel->getActiveSheet()->setCellValue('A'.($one++) ,$model['studentID']);
+              if($model['resultstep2']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('B'.($two++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('B'.($two++) ,$model['resultstep2']['rate']."%");}
+              if($model['resultstep3']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,$model['resultstep3']['rate']."%");}
+              if($model['resultstep4']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,$model['resultstep4']['rate']."%");}
+              if($model['resultstep5']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('E'.($five++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('E'.($five++) ,$model['resultstep5']['rate']."%");}
+              if($model['resultstep6']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('F'.($six++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('F'.($six++) ,$model['resultstep6']['content']);} 
+              endforeach;
+      }
+        ob_end_clean();
+        ob_start();
+        header('Content-Type : application/vnd.ms-excel');
+        header('Content-Disposition:attachment;filename="'."$filename".'.xls"');
+        $objWriter= PHPExcel_IOFactory::createWriter($objectPHPExcel,'Excel5');
+        $objWriter->save('php://output');
+        exit;
+//    return $this->renderPartial('simple',['data'=>$data,'indexID'=>$indexID]);
+        }
     public function actionIsOvered() {
         $indexID = $_POST['indexID'];
         $tags = "1";
