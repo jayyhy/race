@@ -57,17 +57,20 @@
         });
         }
         function saveInReTime(){
-            var yaweiOCX1=window.parent.document.getElementById("typeOCX")
             var content=yaweiOCX1.GetContent();
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
             <?php $step31Content = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['content']; ?>;
-            var originalContent='<?php echo $step31Content;?>';
-            var content2 = yaweiOCX1.GetContent();
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
             <?php $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
-            var content3 ="<?php echo AnswerRecord::model()->find("raceID=? AND StudentID=?", array($step31raceID, $StudentID))['content'] ?>";
+            var originalContent='<?php echo $step31Content;?>';
+            var content2 = yaweiOCX1.GetContent();
+            if(content2==""){
+                <?php $step32raceID=  Race::model()->find("indexID=? AND step=?",array($race['indexID'],32))['raceID'];?>
+                content2="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?",array($step32raceID,$StudentID))['content']; ?>";
+            }
+            var content3 ="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?", array($step31raceID, $StudentID))['content']; ?>";
             content2 = content3+content2;
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
             worker.onmessage = function (event) {
@@ -117,7 +120,7 @@
                 type:"POST",
                 dataType:"json",
                 url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>},
+                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
                 success:function(){
                 },
                 error: function (xhr) {
