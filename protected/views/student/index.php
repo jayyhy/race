@@ -1,10 +1,16 @@
 <div class="stuindex">
     <iframe scrolling="no" class="stuIframe" seamless src="./index.php?r=student/waitForStart"></iframe>
+    <div style="float: right;margin-left: 0px;margin-top: 40px;">
+        <div id="bgyw" style=" width :860px; height:560px; background: #A9A5A3;">
+            <div style=" margin-left :5px; padding-top: 5px;">
     <object id="typeOCX" type="application/x-itst-activex" 
             clsid="{ED848B16-B8D3-46c3-8516-E22371CCBC4B}" 
-            width ='1090' height='350'
+            width ='850' height='550'
             >
     </object>
+            </div>
+        </div>
+        </div>
 </div>
 <script>
     $(document).ready(function () {
@@ -12,27 +18,6 @@
 alert("<?php echo "请确认你的考号："."$showname";?>");
 window.location.href = "./index.php?r=student/index";
                 <?php } ?>
-    <?php $studentID = Yii::app()->session['userid_now'];
-          $indexID = AnswerRecord::model()->find("studentID = '$studentID'")['indexID'];
-          $tags = "0";
-          if($indexID != NULL) {
-              
-             $races =  Race::model()->findAll("indexID = '$indexID'");
-             if($races != NULL){
-                 $tags = "1";
-                foreach ($races as $r) {
-                  if($r["is_over"] == 0){
-                   $tags = "0";
-                   break;
-              }
-            }
-          }
-       }   
-    ?>
-             var tags = <?php echo $tags; ?>;
-                if(tags =="1"){
-                     window.wxc.xcConfirm('考试结束', window.wxc.xcConfirm.typeEnum.info);
-                } 
     });
     var yaweiOCX = document.getElementById("typeOCX");
     var doc = document;
@@ -119,6 +104,7 @@ window.location.href = "./index.php?r=student/index";
     
     function stepFive(){
         doc.querySelector("#typeOCX").height="0";
+        $("#bgyw").hide();
     }
 
 </script>

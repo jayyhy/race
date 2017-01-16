@@ -123,6 +123,8 @@ class AnswerRecord extends CActiveRecord
         $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
         $accepttime = microtime(true)*10000;
         $completiontime = microtime(true)*10000;
+        $content = Tool::filterAllSpaceAndTab($content);
+        $content = Tool::SBC_DBC($content,0);
         if ($record == "") {
             $record = new AnswerRecord();
             $record->studentID = $studentID;
@@ -140,9 +142,9 @@ class AnswerRecord extends CActiveRecord
         return $result;
     }
     
-    public function updataAnswerData1($rate,$race_ID){
+    public function updataAnswerData1($rate,$race_ID,$studentID){
         $connection = Yii::app()->db;    
-        $sql = "UPDATE `answer_record` SET rate = '$rate' where raceID = $race_ID";
+        $sql = "UPDATE `answer_record` SET rate = '$rate' where raceID = $race_ID and studentID= '$studentID'";
         $command = $connection->createCommand($sql);
         $command->execute();
     }

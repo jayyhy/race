@@ -55,7 +55,7 @@
             <ul class="nav nav-list" >
             <li>
                 <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #BCBCBC;position: relative;top: 2px">分钟</span>
+                <span style="font-size: 16px;color: #767679;position: relative;top: 2px">分钟</span>
             </li>
             <li style=" margin-left: 34%;margin-top: 1%">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>

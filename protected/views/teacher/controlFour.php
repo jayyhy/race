@@ -16,7 +16,7 @@ require 'examSideBar.php';
     }
     .words{
        font-size: 18px;
-       color: #c9c9c9;
+       color: #767679;
     }
     .currentTag{
          float: right;
@@ -28,7 +28,7 @@ require 'examSideBar.php';
     }
     .wordTag1{
         font-size: 16px;
-        color: #DAD9D6;
+        color: #767679;
         position: relative;
         left: 18px;
         top: 9px;
@@ -81,7 +81,7 @@ require 'examSideBar.php';
         }else if($nowOnStep == 3){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
         }else if($nowOnStep == 4){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打校对</span></div>';
         }else if($nowOnStep == 5){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">盲打</span></div>';
         }else if($nowOnStep == 6){
@@ -146,9 +146,7 @@ require 'examSideBar.php';
      var doc = document;
     (function () {
         var flag = <?php echo $flag; ?>;
-//        var CDTime = doc.querySelector('#CDTime');
         if (flag === 1) {
-//            doc.querySelector("#start")["hidden"] = true;
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
@@ -160,9 +158,6 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
 
         function endDo() {
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step?>&over=1';
@@ -171,12 +166,7 @@ require 'examSideBar.php';
 
     function start() {
         var time = 20;
-        var reg = new RegExp("^[0-9]*$");
-        if(!reg.test(time)){
-            window.wxc.xcConfirm('请输入正确的数字！', window.wxc.xcConfirm.typeEnum.error);
-        }else{
-            window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
-        }
+        window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
     }
     function stop() {
     window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);

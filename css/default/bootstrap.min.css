@@ -4689,7 +4689,7 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus {
     top: -40px;
     position: relative;
     float: right;
-    width: 120px;
+    width: 140px;
 }
 .gsglxt{
     height: 60px;
@@ -5818,11 +5818,12 @@ table tr td {
     padding: 17px 120px;
 }
 .stuindex{
-    width: 1090px;
+    width: 1440px;
     height: 670px
 }
 .stuIframe{
+    float: left;
     border: 0px;
-    height: 350px;
-    width: 1090px;
+    height: 850px;
+    width: 400px;
 }

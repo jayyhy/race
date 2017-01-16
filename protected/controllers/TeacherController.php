@@ -545,8 +545,6 @@ class TeacherController extends CController {
                 if (isset($_POST['time'])) {
                     $flag6 = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
                     $time = $_POST['time']*60;
-//                    $score = $_POST['score'];
-//                    $content = $_POST['content'];
                     $dir = "./resources/race/";
                     if (!is_dir($dir)) {
                         mkdir($dir, 0777);
@@ -561,58 +559,14 @@ class TeacherController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
-//                            $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-//                            $player=new COM("WMPlayer.OCX");
-//                            $media=$player->newMedia($file);
-//                            $time=round($media->duration);
-                  if(!empty($_FILES["myfile"]['name'])){
-                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
-                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
-                     $file_type = $file_types [count($file_types) - 1];
-                     // 判别是不是excel文件
-                     if (strtolower($file_type) != "text/plain") {
-                        $result = '不是txt文件';
-                     } else {
-                     // 解析文件并存入数据库逻辑
-                     /* 设置上传路径 */
-                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
-                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
-                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
-                      if (!copy($tmp_file, $savePath . $file_name)) {
-                        $result = '上传失败';
-                      } else {
-                        $file_dir = $savePath . $file_name;
-                        $file_dir = str_replace("\\", "\\\\", $file_dir);
-                        $fp = fopen($file_dir, "r");
-                        move_uploaded_file($file_name, $savePath);
-                        $file_name=iconv("gb2312","UTF-8", $file_name);
-                        if (filesize($file_dir) < 1) {
-                            $result = '空文件，上传失败';
-                        } else {
-                            $content = fread($fp, filesize($file_dir)); //读文件 
-                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
-                            if($encode == ""){
-                                $content = iconv('UCS-2', 'utf-8', $content);
-                            }else if($encode =="EUC-CN"){
-                                $content = iconv('GBK', 'utf-8', $content);
-                            }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
-                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
-                            $result = "1";
-                       }
-                    }
-                }
-            }
-                            
+                            Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);  
+                            $result ="1";
                         }
                     } else {
                         $result = "请上传正确类型的文件！";
                     }
                  }
                 }else {
-                    $txtNoSpace = $flag6['content'];
-//                    $time = $flag6['time'];
                     $newName = $flag6['resourseID'];
                     $oldName = $flag6['fileName'];
                   if($_FILES["file"]["name"]!=""){
@@ -624,52 +578,17 @@ class TeacherController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
+                            Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);
                             $result ="1";
                         } 
                     }else {
                         $result2 = "请上传正确类型的文件！";
                     }
+                  }else {
+                      Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);
+                      $result ="1";
                   }
-                  if(!empty($_FILES["myfile"]['name'])){
-                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
-                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
-                     $file_type = $file_types [count($file_types) - 1];
-                     // 判别是不是excel文件
-                     if (strtolower($file_type) != "text/plain") {
-                        $result3 = '不是txt文件';
-                     } else {
-                     // 解析文件并存入数据库逻辑
-                     /* 设置上传路径 */
-                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
-                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
-                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
-                      if (!copy($tmp_file, $savePath . $file_name)) {
-                        $result3 = '上传失败';
-                      } else {
-                        $file_dir = $savePath . $file_name;
-                        $file_dir = str_replace("\\", "\\\\", $file_dir);
-                        $fp = fopen($file_dir, "r");
-                        move_uploaded_file($file_name, $savePath);
-                        $file_name=iconv("gb2312","UTF-8", $file_name);
-                        if (filesize($file_dir) < 1) {
-                            $result3 = '空文件，上传失败';
-                        } else {
-                            $content = fread($fp, filesize($file_dir)); //读文件 
-                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
-                            if($encode == ""){
-                                $content = iconv('UCS-2', 'utf-8', $content);
-                            }else if($encode =="EUC-CN"){
-                                $content = iconv('GBK', 'utf-8', $content);
-                            }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
-                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                           
-                            $result = "1";
-                       }
-                    }
-                }
-            }
-                 Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);  
+                   
                 }
               }
                 $render = 'Six';
@@ -908,7 +827,7 @@ class TeacherController extends CController {
                 $render = "Three";
                 break;
             case 4:
-                if (isset($_GET['raceID'])) {
+                if (isset($_GET['raceID']) && $_GET['raceID']!= "") {
                     $CDTime = $_GET['CDTime'];
                     Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
                 }
@@ -971,7 +890,7 @@ class TeacherController extends CController {
         }
             
         $endTime = Course::model()->isOpen($teacherID);
-        if ($endTime) {
+        if ($endTime != 0) {
             $flag = 1;
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
@@ -983,6 +902,10 @@ class TeacherController extends CController {
             $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 3));
             $race = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
           $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
+         }
+         else if ($render == "Four") {
+            $race = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
+          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
          }
         else {
           $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));

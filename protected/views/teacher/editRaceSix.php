@@ -72,7 +72,7 @@
         <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" id="myForm" enctype="multipart/form-data">
             <div style="margin-top: -24px;margin-left: 60px" >
                 <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #BCBCBC;position: relative;top: 9px">分钟</span>
+                <span style="font-size: 16px;color: #767679;position: relative;top: 9px">分钟</span>
             
            </div>
             <div style="margin-top: 18px;margin-left: 60px;" >
@@ -89,20 +89,13 @@
             
             <?php } ?>
                                     
-                <div id="upload" style=" float: left;display: inline" >
+                <span id="upload" style=" position: relative;left: 56px;display: none" >
                             <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
                             正在上传，请稍等...
-                            <div id="number">0%</div>
-                        </div>
+                            <span id="number">0%</span>
+                        </span>
            </div>
-            <div style="clear:both; margin-top: 24px;margin-left: 60px">
-                
-                <input type="file" name="myfile" id="myfile"  >  <span style=" position: relative;left: 47px;top: 2px">(上传答案)</span>
-            </div>
-            <div style="margin-top: 19px;margin-left: 60px">
-                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
-            </div>
-            <div style=" margin-left: 38%;margin-top: 25px">
+            <div style=" margin-left: 38%;margin-top: 56px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
             </div>
         </form>
@@ -134,12 +127,6 @@
         if (uploadFile === "" && tag == "1")
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
-            return false;
-        }
-        var files =  document.getElementById("myfile").value;
-        var A = document.getElementById("content").value;
-        if (files === "" && A === "") {
-            window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
             return false;
         }
         $("#upload").show();

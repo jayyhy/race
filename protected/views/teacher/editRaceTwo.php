@@ -54,15 +54,12 @@
             
         <div style="margin-top: -24px;margin-left: 60px" >
                 <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #BCBCBC;position: relative;top: 2px">分钟</span>
+                <span style="font-size: 16px;color: #767679;position: relative;top: 2px">分钟</span>
             
         </div>
             <div style="margin-top: 16px;margin-left: 60px">
                 
-                <input type="file" name="myfile" id="myfile" ><span style=" position: relative;left: -68px;top: 2px">(上传答案)</span>
-            </div>
-            <div style="margin-top: 19px;margin-left: 60px">
-                <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA;" id="content" ><?php echo $race['content']; ?></textarea>
+                <input type="file" name="myfile" id="myfile" ><span style=" position: relative;left: 56px;top: 2px">(上传答案，txt)</span>
             </div>
             <div style=" margin-left: 38%;margin-top: 25px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
@@ -82,7 +79,7 @@
             window.wxc.xcConfirm('请输入正确的数字', window.wxc.xcConfirm.typeEnum.info);
         }
         var files =  document.getElementById("myfile").value;
-        var content = document.getElementById("content").value;
+        var content = "<?php echo $race['content']; ?>";
         if(files === "" && content === "") {
             event.preventDefault();
             window.wxc.xcConfirm('内容不能为空', window.wxc.xcConfirm.typeEnum.warning);
