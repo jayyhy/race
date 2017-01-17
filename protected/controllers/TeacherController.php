@@ -676,7 +676,9 @@ class TeacherController extends CController {
     
     public function actionAddRaceIndex() {
         $raceName = $_GET['raceName'];
-        RaceIndex::model()->addRaceIndex($raceName);
+        $teacherID = Yii::app()->session['userid_now'];
+        $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
+        RaceIndex::model()->addRaceIndex($raceName,$classID);
         $aList = RaceIndex::model()->getAllRaceIndex();
         $result = $aList['list'];
         $pages = $aList['pages'];
