@@ -15,8 +15,10 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
+//                'application.extensions.PHPExcel.PHPExcel',
 		'application.models.*',
 		'application.components.*',
+                'application.extensions.phpexcel.*',
                 //'application.modules.houtai.modules.srbac.controllers.SBaseController',
 	),
 
