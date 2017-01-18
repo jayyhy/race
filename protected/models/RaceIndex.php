@@ -96,12 +96,13 @@ class RaceIndex extends CActiveRecord {
           }
           AnswerRecord::model()->delete('raceID=?', array($v['raceID']));  
         }
-        Race::model()->deleteAll('indexID=?', array($raceIndex));
+          Race::model()->deleteAll('indexID=?', array($raceIndex));
     }
 
-    public function addRaceIndex($name) {
+    public function addRaceIndex($name,$classID) {
         $raceIndex = new RaceIndex();
         $raceIndex->name = $name;
+        $raceIndex->classID = $classID;
         $raceIndex->createTime = date("Y-m-d  H:i:s");
         $raceIndex->insert();
     }

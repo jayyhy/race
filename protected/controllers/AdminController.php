@@ -133,10 +133,16 @@ class AdminController extends CController {
             Course::model()->deleteAll('courseID=?', array($courseID));
             Teacher::model()->deleteAll('classID=?', array($courseID));
             Student::model()->deleteAll('classID=?', array($courseID));
-            $index_ID=  AnswerRecord::model()->find('courseID=?', array($courseID));
-            Race::model()->deleteAll('indexID=?',array($index_ID['indexID']));
-            RaceIndex::model()->deleteAll('indexID=?',array($index_ID['indexID']));
-            AnswerRecord::model()->deleteAll('courseID=?', array($courseID));
+            $raceIndex = RaceIndex::model()->findAll('classID=?',array($courseID));
+            foreach ($raceIndex as $race){
+                $indexID = $race['indexID'];
+                error_log($indexID);
+                RaceIndex::model()->deleteRaceIndex($indexID);
+            }
+//            $index_ID=  AnswerRecord::model()->find('courseID=?', array($courseID));
+//            Race::model()->deleteAll('classID=?',array($courseID));
+              RaceIndex::model()->deleteAll('classID=?',array($courseID));
+//            AnswerRecord::model()->deleteAll('courseID=?', array($courseID));
             $result = 1;
         }
 
