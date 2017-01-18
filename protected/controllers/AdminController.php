@@ -12,7 +12,7 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent($courseID);
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $teacherID = "T".$courseID;
+        $teacherID = Teacher::model()->find('classID=?', array($courseID))['userID'];
         $teacher = Teacher::model()->findAll('userID=?', array($teacherID));
         }else{
         $result = Course::model()->getAllLst();
@@ -21,7 +21,8 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent($classID);
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $teacherID = "T".$classID;
+        $teacherID = Teacher::model()->find('classID=?', array($classID))['userID'];
+        error_log($teacherID);
         $teacher = Teacher::model()->findAll('userID=?', array($teacherID));
         }
         $this->render('index', array(
@@ -186,7 +187,7 @@ class AdminController extends CController {
             $stu = Student::model()->getStudent($classID);
             $pages = $stu ['pages'];
             $student =  $stu ['list'];
-            $teacherID = "T".$classID;
+            $teacherID = Teacher::model()->find('classID=?', array($classID))['userID'];
             $this->render('index', array(
                 'courseLst' => $courseLst,
                 'student'=>$student,
@@ -204,7 +205,8 @@ class AdminController extends CController {
         $stu = Student::model()->getStudent($courseID);
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $teacherID = "T".$courseID;
+//        $teacherID = "T".$courseID;
+        $teacherID = Teacher::model()->find('classID=?', array($courseID))['userID'];
         $teacher = Teacher::model()->findAll('userID=?',array($teacherID));
         $this->render('index', array(
             'courseLst' => $courseLst,
@@ -232,7 +234,7 @@ class AdminController extends CController {
         $pages = $result ['pages'];
         $stu = Student::model()->getStudent($courseID['courseID']);
         $student =  $stu['list'];
-        $teacherID = "T".$courseID['courseID'];
+        $teacherID = Teacher::model()->find('classID=?', array($courseID['courseID']))['userID'];
         $teacher = Teacher::model()->findAll('userID=?',array($teacherID));
         $this->render('index', array(
             'courseLst' => $courseLst,
