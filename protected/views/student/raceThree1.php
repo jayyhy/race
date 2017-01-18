@@ -61,16 +61,26 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
-            <?php $step31Content = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['content']; ?>;
-            <?php $StudentID = Yii::app()->session['userid_now']; ?>
-            <?php $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
-            var originalContent='<?php echo $step31Content;?>';
+            <?php   $step31Content = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['content']; 
+                    $StudentID = Yii::app()->session['userid_now']; 
+                    $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
+            var originalContent='<?php echo Tool::removeCharacter($step31Content);?>';
             var content2 = yaweiOCX1.GetContent();
+            content2=content2.replace(/[\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
+            content2=content2.replace(/\r\n/g, "").replace(/ /g, "");
             if(content2==""){
-                <?php $step32raceID=  Race::model()->find("indexID=? AND step=?",array($race['indexID'],32))['raceID'];?>
-                content2="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?",array($step32raceID,$StudentID))['content']; ?>";
+                <?php   $step32raceID=  Race::model()->find("indexID=? AND step=?",array($race['indexID'],32))['raceID'];
+                        $content321=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step32raceID,$StudentID))['content'];
+                        $content322=  Tool::removeCharacter($content321);
+                        $content323=  Tool::filterAllSpaceAndTab($content322);
+                ?>
+                content2="<?php echo $content323; ?>";
             }
-            var content3 ="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?", array($step31raceID, $StudentID))['content']; ?>";
+            <?php   $answer1=AnswerRecord::model()->find("raceID=? AND studentID=?", array($step31raceID, $StudentID))['content']; 
+                    $answer2= Tool::removeCharacter($answer1);
+                    $answer3= Tool::filterAllSpaceAndTab($answer2);
+            ?>
+            var content3 ="<?php echo $answer3; ?>";
             content2 = content3+content2;
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
             worker.onmessage = function (event) {
