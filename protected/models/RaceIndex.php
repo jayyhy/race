@@ -87,7 +87,8 @@ class RaceIndex extends CActiveRecord {
           if($res_id!=""){
               $filePath="./resources/race/".$res_id;
               if(file_exists($filePath)){
-              unlink($filePath);}
+                unlink($filePath);
+              }
               $connection = Yii::app()->db;  
               $sql = "DELETE FROM `resourse` WHERE `resourseID` = '$res_id'";  
                 $command=$connection->createCommand($sql);
