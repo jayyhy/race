@@ -23,32 +23,43 @@ window.location.href = "./index.php?r=student/index";
     var doc = document;
     var dialogArgument;
     function over(raceID, step) {
-        var content = yaweiOCX.GetContent();
+        var content="";
         if (step === 2) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
         if (step === 3) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" +step+ raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
         if (step === 4) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
         if (step === 5) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
         if (step === 6) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
         if (step === 32) {
+            content = yaweiOCX.GetContent();
             var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
             yaweiOCX.ExportTxtFile("D:/" + step + raceID + StudentID + ".txt");
+            yaweiOCX.ClearContent();
         }
-        yaweiOCX.ClearContent();
 //        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
 //            onClose: function () {
                 ajaxSubmit(raceID, content);
