@@ -98,6 +98,8 @@ class Race extends CActiveRecord {
     }
 
     public function addRace($indexID, $step, $content, $score, $time, $resourceID, $fileName) {
+        $teacherID = Yii::app()->session['userid_now'];
+        $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
         $result = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
         if ($result == "") {
             $race = new Race();
@@ -109,6 +111,7 @@ class Race extends CActiveRecord {
             $race->resourseID = $resourceID;
             $race->fileName = $fileName;
             $race->is_over = 0;
+            $race->classID = $classID;
             $race->insert();
         } else {
             $result->time = $time;
@@ -119,6 +122,7 @@ class Race extends CActiveRecord {
             $result->resourseID = $resourceID;
             $result->fileName = $fileName;
             $result->is_over = 0;
+            $result->classID = $classID;
             $result->update();
         }
     }

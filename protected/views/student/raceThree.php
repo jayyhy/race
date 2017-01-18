@@ -64,11 +64,18 @@
         }
         function endDo() {
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
-            var originalContent='<?php echo $race['content'];?>';
+            var originalContent='<?php echo Tool::removeCharacter($race['content']);?>';
             var content2=yaweiOCX1.GetContent();
+            content2=content2.replace(/[\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
+            content2=content2.replace(/\r\n/g, "").replace(/ /g, "");
             if(content2==""){
-                <?php $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
-                content2="<?php echo AnswerRecord::model()->find("raceID=? AND studentID=?",array($step31raceID,$StudentID))['content']; ?>";
+                <?php 
+                        $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; 
+                        $content31=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step31raceID,$StudentID))['content'];
+                        $content32=  Tool::removeCharacter($content31);
+                        $content33=  Tool::filterAllSpaceAndTab($content32);
+                ?>
+                content2="<?php echo $content33; ?>";
             }
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
             worker.onmessage = function (event) {

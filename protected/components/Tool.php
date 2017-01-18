@@ -297,6 +297,26 @@ class Tool {
             return false;
         }
     }
+    
+    public static function removeCharacter($str){
+        $DBC = Array(
+            '：', '—','、','“','”',
+            '；','\n','<br/>','*','$',
+            '￥','·','`','~',
+            '。', '，', '/', '%', '#',
+            '！', '＠', '＆', '（', '）',
+            '《', '＞', '＂', '＇', '？',
+            '【', '】', '{', '}', 
+            '｜', '+', '=', '_', '＾',
+            ':', '-','》','＜','……',
+            '.', ',',
+            '!', '@', '&', '(', ')',
+            '<', '>', '"', '\'', '?',
+            '[', ']', '\\',
+            '|', '^',';',
+        );
+        return str_replace($DBC, "", $str);
+    }
 
     public static function filterKeyContent($content) {
         if (strstr($content, "$$")) {
