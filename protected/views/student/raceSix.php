@@ -13,11 +13,11 @@
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
 
-    <div style="width: 150px;height: 120px;background-color: #ffffff;margin-left: 10px;float: left">
+    <div style="width: 150px;height: 160px;background-color: #ffffff;margin-left: 10px;float: left;margin-top: 20px;">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
         <h2 style="position: relative;left:30px;top:50px"><?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</h2>
     </div>
-    <div style="width: 150px;height: 120px;background-color: #ffffff;margin-left: 10px;float: left">
+    <div style="width: 150px;height: 160px;background-color: #ffffff;margin-left: 34px;float: left;margin-top: 20px;">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">剩余时间：</h4>
         <h2 style="position: relative;left:30px;top:50px"><span id="time"></span></h2>
     </div>
