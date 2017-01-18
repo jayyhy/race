@@ -86,7 +86,8 @@ class RaceIndex extends CActiveRecord {
           $res_id=$v['resourseID'];
           if($res_id!=""){
               $filePath="./resources/race/".$res_id;
-              unlink($filePath);
+              if(file_exists($filePath)){
+              unlink($filePath);}
               $connection = Yii::app()->db;  
               $sql = "DELETE FROM `resourse` WHERE `resourseID` = '$res_id'";  
                 $command=$connection->createCommand($sql);
@@ -94,19 +95,22 @@ class RaceIndex extends CActiveRecord {
           }
           AnswerRecord::model()->delete('raceID=?', array($v['raceID']));  
         }
-        Race::model()->deleteAll('indexID=?', array($raceIndex));
+          Race::model()->deleteAll('indexID=?', array($raceIndex));
     }
 
-    public function addRaceIndex($name) {
+    public function addRaceIndex($name,$classID) {
         $raceIndex = new RaceIndex();
         $raceIndex->name = $name;
+        $raceIndex->classID = $classID;
         $raceIndex->createTime = date("Y-m-d  H:i:s");
         $raceIndex->insert();
     }
 
     public function getAllRaceIndex() {
-        $sql = "SELECT * FROM race_index ORDER BY indexID DESC";
-        $result = Tool::pager($sql, 20);
+        $teacherID = Yii::app()->session['userid_now'];
+        $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
+        $sql = "SELECT * FROM race_index where classID = '$classID' ORDER BY indexID DESC";
+        $result = Tool::pager($sql, 200);
         return $result;
     }
 

@@ -5,12 +5,25 @@ class AdminController extends CController {
     public $layout = '//layouts/adminBar';
 
     public function actionIndex() {
+        if(isset($_GET['courseID'])){
+        $courseID = $_GET['courseID'];
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
-        $stu = Student::model()->getStudent();
+        $stu = Student::model()->getStudent($courseID);
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $teacher = Teacher::model()->findAll();
+        $teacherID = "T".$courseID;
+        $teacher = Teacher::model()->findAll('userID=?', array($teacherID));
+        }else{
+        $result = Course::model()->getAllLst();
+        $courseLst = $result ['list'];
+        $classID = Course::model()->find()['courseID'];
+        $stu = Student::model()->getStudent($classID);
+        $pages = $stu ['pages'];
+        $student =  $stu ['list'];
+        $teacherID = "T".$classID;
+        $teacher = Teacher::model()->findAll('userID=?', array($teacherID));
+        }
         $this->render('index', array(
             'courseLst' => $courseLst,
             'teacher' => $teacher,
@@ -133,10 +146,16 @@ class AdminController extends CController {
             Course::model()->deleteAll('courseID=?', array($courseID));
             Teacher::model()->deleteAll('classID=?', array($courseID));
             Student::model()->deleteAll('classID=?', array($courseID));
-            $index_ID=  AnswerRecord::model()->find('courseID=?', array($courseID));
-            Race::model()->deleteAll('indexID=?',array($index_ID['indexID']));
-            RaceIndex::model()->deleteAll('indexID=?',array($index_ID['indexID']));
-            AnswerRecord::model()->deleteAll('courseID=?', array($courseID));
+            $raceIndex = RaceIndex::model()->findAll('classID=?',array($courseID));
+            foreach ($raceIndex as $race){
+                $indexID = $race['indexID'];
+                error_log($indexID);
+                RaceIndex::model()->deleteRaceIndex($indexID);
+            }
+//            $index_ID=  AnswerRecord::model()->find('courseID=?', array($courseID));
+//            Race::model()->deleteAll('classID=?',array($courseID));
+              RaceIndex::model()->deleteAll('classID=?',array($courseID));
+//            AnswerRecord::model()->deleteAll('courseID=?', array($courseID));
             $result = 1;
         }
 
@@ -163,14 +182,16 @@ class AdminController extends CController {
         } else {
             $courses = Course::model()->getAllLst();
             $courseLst = $courses ['list'];
-            $stu = Student::model()->getStudent();
+            $classID = Course::model()->find()['courseID'];
+            $stu = Student::model()->getStudent($classID);
             $pages = $stu ['pages'];
             $student =  $stu ['list'];
+            $teacherID = "T".$classID;
             $this->render('index', array(
                 'courseLst' => $courseLst,
                 'student'=>$student,
                 'pages' => $pages,
-                'teacher' => Teacher::model()->findall(),
+                'teacher' => Teacher::model()->findall('userID=?',array($teacherID)),
                 'result' => $result
             ));
         }
@@ -179,10 +200,12 @@ class AdminController extends CController {
     public function actionCourseLst() {
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
-        $stu = Student::model()->getStudent();
+        $courseID = Course::model()->getAllLstDesc()['courseID'];
+        $stu = Student::model()->getStudent($courseID);
         $pages = $stu ['pages'];
         $student =  $stu ['list'];
-        $teacher = Teacher::model()->findAll();
+        $teacherID = "T".$courseID;
+        $teacher = Teacher::model()->findAll('userID=?',array($teacherID));
         $this->render('index', array(
             'courseLst' => $courseLst,
             'student'=>$student,
@@ -193,23 +216,24 @@ class AdminController extends CController {
     }
 
     public function actionAddRaceCourse() {
-        $flag = Course::model()->findAll();
-        $flag =  count($flag);
-    if($flag==0){
+//        $flag = Course::model()->findAll();
+//        $flag =  count($flag);
+//    if($flag==0){
         $courseName = $_GET['courseName'];
         //添加考号人数
-        $kaohao = $_GET['kaohao'];
-        $renshu = $_GET['renshu'];
+//        $kaohao = $_GET['kaohao'];
+//        $renshu = $_GET['renshu'];
         Course::model()->addRaceCourse($courseName);
         $courseID = Course::model()->getAllLstDesc();
-        Student::model()->addRaceStudent($courseID['courseID'],$renshu,$kaohao);
+        Student::model()->addRaceStudent($courseID['courseID']);
         Teacher::model()->addRaceTeacher($courseID['courseID']);
         $result = Course::model()->getAllLst();
         $courseLst = $result ['list'];
         $pages = $result ['pages'];
-        $stu = Student::model()->getStudent();
+        $stu = Student::model()->getStudent($courseID['courseID']);
         $student =  $stu['list'];
-        $teacher = Teacher::model()->findAll();
+        $teacherID = "T".$courseID['courseID'];
+        $teacher = Teacher::model()->findAll('userID=?',array($teacherID));
         $this->render('index', array(
             'courseLst' => $courseLst,
             'student'=>$student,
@@ -217,20 +241,20 @@ class AdminController extends CController {
             'pages' => $pages,
             'result' => "1"
         ));
-    }
-    else{$result = Course::model()->getAllLst();
-        $courseLst = $result ['list'];
-        $pages = $result ['pages'];
-        $stu = Student::model()->getStudent();
-        $student =  $stu['list'];
-        $teacher = Teacher::model()->findAll();
-        $this->render('index', array(
-            'courseLst' => $courseLst,
-            'student'=>$student,
-            'pages' => $pages,
-            'teacher'=>$teacher,
-            'result' => "3"
-        ));}
+//    }
+//    else{$result = Course::model()->getAllLst();
+//        $courseLst = $result ['list'];
+//        $pages = $result ['pages'];
+//        $stu = Student::model()->getStudent();
+//        $student =  $stu['list'];
+//        $teacher = Teacher::model()->findAll();
+//        $this->render('index', array(
+//            'courseLst' => $courseLst,
+//            'student'=>$student,
+//            'pages' => $pages,
+//            'teacher'=>$teacher,
+//            'result' => "3"
+//        ));}
     }
     public function actionRaceLst() {
         $aList = RaceIndex::model()->getAllRaceIndex();

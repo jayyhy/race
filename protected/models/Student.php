@@ -169,12 +169,12 @@ class Student extends CActiveRecord {
         return parent::model($className);
     }
     
-    public function addRaceStudent($courseID,$renshu,$kaohao){
-        //$studentNumber = Tool::getStudentLimitNumber();
-        for($i=1;$i<=$renshu;$i++){
+    public function addRaceStudent($courseID){
+        $studentNumber = Tool::getStudentLimitNumber();
+        for($i=1;$i<=$studentNumber;$i++){
             $student = new Student();
             $var=sprintf("%03d", $i);
-            $id = "$kaohao".$var;
+            $id = "GS".$courseID.$var;
             $student->userName = $id;
             $student->userID = $id;
             $student->password = md5("000");
@@ -182,8 +182,8 @@ class Student extends CActiveRecord {
             $student->insert();
         }
     }
-    public function getStudent() {
-        $sql = "SELECT * FROM student";
+    public function getStudent($classID) {
+        $sql = "SELECT * FROM student where classID ='$classID' ";
         $Allresult = Tool::pager($sql, 1000);
         return $Allresult;   
     }

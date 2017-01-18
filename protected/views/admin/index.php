@@ -7,8 +7,8 @@
         <ul class="nav nav-list" style="margin-top: 15px">
             <li>
                 <input id="value" type="text" class="search span2" placeholder="请输入考场名" style="margin-top: 13px;width: 92%;border-color: #FEE1DA;"/>
-                <input id="kaohao" type="text" class="search span2" placeholder="请输入考场号" style="width: 92%;border-color: #FEE1DA"/>
-                <input id="renshu" type="text" class="search span2" placeholder="请输入人数" style="width: 80%;border-color: #FEE1DA"/> <font color="#9797B7">人</font>
+<!--            <input id="kaohao" type="text" class="search span2" placeholder="请输入考场号" style="width: 92%;border-color: #FEE1DA"/>
+                <input id="renshu" type="text" class="search span2" placeholder="请输入人数" style="width: 80%;border-color: #FEE1DA"/> <font color="#9797B7">人</font>-->
             </li>
             <li style="margin-bottom: 30px">
                 <button onclick="cancel()" class="btn_6big">取 消</button>
@@ -21,15 +21,11 @@
 <div class="leftbar" id="on_add">
     <div style="height: 100%;margin-left: 10px;margin-top: 10px">
             <img src="<?php echo IMG_URL; ?>icon_test.png"/><font style="font-size:20px">&nbsp;创建考场</font>
-            <?php if(count($courseLst)==0){?>
-            <div style="margin-top: 10px;margin-left: 10px">
-         <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png">新建考场</a>
-    </div>
-            <?php } ?>
-            <div style="background-color:#FBF8F7;width: 92%; margin-top: 13px">
+
+            <div style="background-color:#FBF8F7;width: 92%; margin-top: 13px;overflow-y: auto;height: 500px;"id="examside">
              <?php foreach ($courseLst as $k => $model): ?>
                 <div style="padding: 30px">
-            <?php echo $model['name']; ?><br>
+                    <a href="./index.php?r=admin/index&&courseID=<?php echo $model['courseID']; ?>"><?php echo $model['name']; ?></a><br>
             <?php echo $model['createTime']; ?>
             <div style="float: right;margin-top: -10px;">
             <a href="#"  onclick="deleteCourse(<?php echo $model['courseID']; ?>,'<?php echo $model['name']; ?>')" ><img title="删除" src="<?php echo IMG_URL; ?>icon_delete.png"></a>
@@ -37,6 +33,11 @@
             </div>
              <?php endforeach; ?>   
         </div>
+                        <?php // if(count($courseLst)==0){?>
+            <div style="margin-top: 10px;margin-left: 10px">
+         <a href="#" onclick="adding()"><img title="添加" src="<?php echo IMG_URL; ?>icon_add_1.png">新建考场</a>
+    </div>
+            <?php //} ?>
     </div>
     </div>
     <?php if(count($courseLst)!=0){?>
@@ -99,6 +100,9 @@
                 }
             });
         }
+        <?php if(count($courseLst)==0){?>
+        document.getElementById("examside").style.display='none';
+        <?php } ?>
     });
     function check_all(obj, cName)
     {
@@ -122,30 +126,11 @@
     function addCourse() {
         var reg = /^[0-9a-zA-Z]+$/;
         var courseName = document.querySelector("#value").value;
-        var kaohao = document.querySelector("#kaohao").value;
-        var renshu = document.querySelector("#renshu").value;
         if(courseName==""){
             window.wxc.xcConfirm('请输入考场名', window.wxc.xcConfirm.typeEnum.info);
-        }else if(kaohao==""){
-            window.wxc.xcConfirm('请输入考号', window.wxc.xcConfirm.typeEnum.info);
-        }
-        else if(renshu==""){
-            window.wxc.xcConfirm('请输入人数', window.wxc.xcConfirm.typeEnum.info);
-        }
-        else{ 
-            if(isNaN(renshu) || renshu<=0 || renshu>100 || parseInt(renshu)!=renshu){
-                    window.wxc.xcConfirm('请在人数框里输入大于0小于100的正整数', window.wxc.xcConfirm.typeEnum.info);
-                    return false;
-                    
+        }else{
+                 window.location.href="./index.php?r=admin/addRaceCourse&courseName="+courseName;
             }
-            else if(!reg.test(kaohao)){
-                     window.wxc.xcConfirm('请在考号框里只能输入英文和数字', window.wxc.xcConfirm.typeEnum.info);
-                    return false;
-            }
-            else{
-                 window.location.href="./index.php?r=admin/addRaceCourse&courseName="+courseName+"&kaohao="+kaohao+"&renshu="+renshu;
-            }
-    }
     }
 
     function deleCheck() {
