@@ -2,7 +2,7 @@
          $race2 = Race::model()->find("indexID = '$indexID' and step = 32");
          
    ?>
-<meta http-equiv="refresh" content="300">
+<!--<meta http-equiv="refresh" content="300">-->
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
@@ -44,17 +44,19 @@
             var timestamp = (new Date()).valueOf();
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
             var route = "D:/YAWEIEXAM/3/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
-            $.ajax({
-            type: "POST",
-            url: "index.php?r=student/saveroute",
-            data: {raceID: raceID, route:route},
-            success: function () {
-               
-            },
-            error: function (xhr, type, exception) {
-                
-            }
-        });
+//            $.ajax({
+//            type: "POST",
+//            url: "index.php?r=student/saveroute",
+//            data: {raceID: raceID, route:route},
+//            success: function () {
+//               
+//            },
+//            error: function (xhr, type, exception) {
+//                
+//            }
+//        });
+             var content=yaweiOCX1.GetContent();
+             window.parent.sscc(<?php echo $race['raceID']; ?>,content,route);
         }
         function saveInReTime(){
             var content=yaweiOCX1.GetContent();
@@ -86,7 +88,8 @@
             worker.onmessage = function (event) {
                 if (!isNaN(event.data.accuracyRate)) {
                     window.RightRadio = event.data.accuracyRate;
-                    saveRightRadio();
+                    var rate = window.RightRadio;
+                    window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>,rate);
                 }
                 worker.terminate();
             };
@@ -94,7 +97,7 @@
                 currentContent: content2,
                 originalContent: originalContent
             });
-            window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
+//            window.parent.over(<?php// echo $race['raceID']; ?>,<?php //echo $race['step']?>);
         }
         function playAudio(sideTime){
             var audio3 = document.getElementById("audio3");
@@ -120,23 +123,23 @@
             reciveContent();
         }
         setTimeout(timec,0);
-        setInterval(savetxt,2000);
+        setInterval(savetxt,2239);
         function reciveContent() {
         yaweiOCX1.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
         }
         
         function saveRightRadio(){
-            $.ajax({
-                type:"POST",
-                dataType:"json",
-                url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
-                success:function(){
-                },
-                error: function (xhr) {
-                    console.log(xhr, "Failed");
-                }
-            });
+//            $.ajax({
+//                type:"POST",
+//                dataType:"json",
+//                url:"index.php?r=api/answerDataSave",
+//                data:{right_Radio:window.RightRadio,race_ID:<?php //echo $race['raceID']; ?>,studentID:StudentID},
+//                success:function(){
+//                },
+//                error: function (xhr) {
+//                    console.log(xhr, "Failed");
+//                }
+//            });
         }
         
     </script>
