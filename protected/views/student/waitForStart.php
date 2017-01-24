@@ -29,20 +29,20 @@
                         }else{
                             window.parent.clearContent();
                             window.location.href = "index.php?r=student/race&raceID=" + data['raceID'];
-                        $.ajax({
-                        type: "POST",
-                        dataType: 'json',
-                        url: "index.php?r=student/accepttime",
-                        data: {
-                        raceID:data['raceID'],
-                          },
-                        success: function (data) {},            
-                        error: function (xhr, type, exception) {
-                    console.log('waitForStart error', type);
-                    console.log(xhr, "Failed");
-                    console.log(exception, "exception");
-                }
-            });   
+//                        $.ajax({
+//                        type: "POST",
+//                        dataType: 'json',
+//                        url: "index.php?r=student/accepttime",
+//                        data: {
+//                        raceID:data['raceID'],
+//                          },
+//                        success: function (data) {},            
+//                        error: function (xhr, type, exception) {
+//                    console.log('waitForStart error', type);
+//                    console.log(xhr, "Failed");
+//                    console.log(exception, "exception");
+//                }
+//            });   
                         }
                     }
                 },

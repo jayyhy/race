@@ -118,10 +118,9 @@ class AnswerRecord extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function submitRace($studentID, $raceID, $content, $courseID) {
+        public function submitRace($studentID, $raceID, $content, $courseID,$rate) {
         $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
         $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
-        $accepttime = microtime(true)*10000;
         $completiontime = microtime(true)*10000;
         $content = Tool::filterAllSpaceAndTab($content);
         $content = Tool::SBC_DBC($content,0);
@@ -132,10 +131,12 @@ class AnswerRecord extends CActiveRecord
             $record->content = $content;
             $record->courseID = $courseID;
             $record->indexID = $indexID;
-            $record->accept_time = $accepttime;
+            $record->rate = $rate;
+            $record->completion_time =$completiontime;
             $result = $record->insert();
         } else {
             $record->content = $content;
+            $record->rate = $rate;
             $record->completion_time =$completiontime;
             $result = $record->update();
         }
@@ -181,4 +182,29 @@ class AnswerRecord extends CActiveRecord
        $answer->recovery = $route;
        $result = $answer->update();
     }
+    //实时存储业务逻辑层
+        public function ssccing($studentID, $raceID, $content, $courseID,$route) {
+        $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
+        $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
+        $accepttime = microtime(true)*10000;
+        $content = Tool::filterAllSpaceAndTab($content);
+        $content = Tool::SBC_DBC($content,0);
+        if ($record == "") {
+            $record = new AnswerRecord();
+            $record->studentID = $studentID;
+            $record->raceID = $raceID;
+            $record->content = $content;
+            $record->courseID = $courseID;
+            $record->indexID = $indexID;
+            $record->accept_time = $accepttime;
+            $record->recovery = $route;
+            $result = $record->insert();
+        } else {
+            $record->content = $content;
+            $record->recovery = $route;
+            $result = $record->update();
+        }
+        return $result;
+    }
+
 }
