@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="300">
+<!--<meta http-equiv="refresh" content="300">-->
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
@@ -6,11 +6,11 @@
     <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">盲打</h2>
     <div style="width: 530px;height: 150px;background-color: #ffffff;float: left">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
-        <h2 style="position: relative;left:230px;top:50px"><?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</h2>
+        <h2 style="position: relative;left:122px;top:50px"><?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</h2>
     </div>
-    <div style="width: 530px;height: 150px;background-color: #ffffff;margin-left: 10px;float: left">
+    <div style="width: 530px;height: 180px;background-color: #ffffff;margin-left: 10px;float: left">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">剩余时间：</h4>
-        <h2 style="position: relative;left:230px;top:50px"><span id="time"></span></h2>
+        <h2 style="position: relative;left:125px;top:50px"><span id="time"></span></h2>
     </div>
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
@@ -29,17 +29,19 @@
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/5/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
             var raceID = <?php echo $race['raceID']; ?>;
             var route = "D:/YAWEIEXAM/5/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
-            $.ajax({
-            type: "POST",
-            url: "index.php?r=student/saveroute",
-            data: {raceID: raceID, route:route},
-            success: function () {
-               
-            },
-            error: function (xhr, type, exception) {
-                
-            }
-        });
+//            $.ajax({
+//            type: "POST",
+//            url: "index.php?r=student/saveroute",
+//            data: {raceID: raceID, route:route},
+//            success: function () {
+//               
+//            },
+//            error: function (xhr, type, exception) {
+//                
+//            }
+//        });
+             var content=yaweiOCX1.GetContent();
+             window.parent.sscc(<?php echo $race['raceID']; ?>,content,route);
         }
         function saveInReTime(){
             var content=yaweiOCX1.GetContent();
@@ -63,7 +65,8 @@
             worker.onmessage = function (event) {
                 if (!isNaN(event.data.accuracyRate)) {
                     window.RightRadio = event.data.accuracyRate;
-                    saveRightRadio();
+                    var rate = window.RightRadio;
+                    window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>,rate);
                 }
                 worker.terminate();
             };
@@ -71,21 +74,21 @@
                 currentContent: content2,
                 originalContent: originalContent
             });
-            window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
+//            window.parent.over(<?php // echo $race['raceID']; ?>,<?php // echo $race['step']?>);
         }
         
         function saveRightRadio(){
-            $.ajax({
-                type:"POST",
-                dataType:"json",
-                url:"index.php?r=api/answerDataSave",
-                data:{right_Radio:window.RightRadio,race_ID:<?php echo $race['raceID']; ?>,studentID:StudentID},
-                success:function(){
-                },
-                error: function (xhr) {
-                    console.log(xhr, "Failed");
-                }
-            });
+//            $.ajax({
+//                type:"POST",
+//                dataType:"json",
+//                url:"index.php?r=api/answerDataSave",
+//                data:{right_Radio:window.RightRadio,race_ID:<?php // echo $race['raceID']; ?>,studentID:StudentID},
+//                success:function(){
+//                },
+//                error: function (xhr) {
+//                    console.log(xhr, "Failed");
+//                }
+//            });
         }
         
         function timec(){
