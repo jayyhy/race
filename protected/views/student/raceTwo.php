@@ -46,12 +46,10 @@
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
-            content2=content2.replace(/\r\n/g, "").replace(/ /g, "");
             if(content2==""){
                 <?php 
                         $step2raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 2))['raceID']; 
-                        $content1=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step2raceID,$StudentID))['content'];
-                        $content2=  Tool::filterAllSpaceAndTab($content1);
+                        $content2=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step2raceID,$StudentID))['content'];
                 ?>
                 content2="<?php echo $content2; ?>";
             }
