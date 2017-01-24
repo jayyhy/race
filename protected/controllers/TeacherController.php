@@ -1000,7 +1000,9 @@ class TeacherController extends CController {
             $data = Array();
         if(isset($_GET['indexID'])){
             $indexID = $_GET['indexID'];
-            $stuList = Student::model()->findAll();
+            $teacherID = Yii::app()->session['userid_now'];
+            $courseID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
+            $stuList = Student::model()->findAll("classID=?", array($courseID));
             foreach ($stuList as $key => $studentID){
                 $studentID = $studentID['userID'];
                 $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
@@ -1045,7 +1047,8 @@ class TeacherController extends CController {
             $arrayData = Array();
             $data = Array();
             $indexID = $_GET['indexID'];
-            $stuList = Student::model()->findAll();
+            $courseID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
+            $stuList = Student::model()->findAll("classID=?", array($courseID));
             foreach ($stuList as $key => $studentID){
                 $studentID = $studentID['userID'];
                 $step1 = Race::model()->find("step=? AND indexID=?",array(1,$indexID));
