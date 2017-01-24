@@ -132,8 +132,15 @@ class StudentController extends CController {
         $userID = Yii::app()->session['userid_now'];
         $raceID = $_POST['raceID'];
         $content = $_POST['content'];
+        if(isset($_POST['rate'])){
+        $rate = $_POST['rate'];
+        error_log($rate);
+        }
+        else{
+        $rate = 0;
+        }
         $courseID = Student::model()->find("userID=?",array($userID))['classID'];
-        $data = AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID);
+        $data = AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID,$rate);
         echo $data;
     }
 
@@ -149,5 +156,15 @@ class StudentController extends CController {
     $raceID = $_POST['raceID'];
     $userID = Yii::app()->session['userid_now'];
     AnswerRecord::model()->saveroute($route,$raceID,$userID);
+    }
+    //sscc是实时存储函数  杨堂堂2017-1-23
+    public function actionSscc(){
+        $userID = Yii::app()->session['userid_now'];
+        $raceID = $_POST['raceID'];
+        $content = $_POST['content'];
+        $route = $_POST['route'];
+        $courseID = Student::model()->find("userID=?",array($userID))['classID'];
+        $data = AnswerRecord::model()->ssccing($userID, $raceID, $content,$courseID,$route);
+        echo $data;
     }
     }
