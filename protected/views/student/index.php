@@ -22,7 +22,7 @@ window.location.href = "./index.php?r=student/index";
     var yaweiOCX = document.getElementById("typeOCX");
     var doc = document;
     var dialogArgument;
-    function over(raceID, step) {
+    function over(raceID, step,rate) {
         var content="";
         if (step === 2) {
             content = yaweiOCX.GetContent();
@@ -62,31 +62,31 @@ window.location.href = "./index.php?r=student/index";
         }
 //        window.wxc.xcConfirm("本阶段结束，将提交试卷！", window.wxc.xcConfirm.typeEnum.warning, {
 //            onClose: function () {
-                ajaxSubmit(raceID, content);
+                ajaxSubmit(raceID, content,rate);
 //            }
 //        });
     }
     
     function saveInRealTime(raceID, content){
-        $.ajax({
-            type: "POST",
-            url: "index.php?r=student/over",
-            data: {raceID: raceID, content: content},
-            success: function (data) {
-            },
-            error: function (xhr, type, exception) {
-                console.log('waitForStart error', type);
-                console.log(xhr, "Failed");
-                console.log(exception, "exception");
-            }
-        });
+//        $.ajax({
+//            type: "POST",
+//            url: "index.php?r=student/over",
+//            data: {raceID: raceID, content: content},
+//            success: function (data) {
+//            },
+//            error: function (xhr, type, exception) {
+//                console.log('waitForStart error', type);
+//                console.log(xhr, "Failed");
+//                console.log(exception, "exception");
+//            }
+//        });
     }
 
-    function ajaxSubmit(raceID, content) {
+    function ajaxSubmit(raceID, content,rate) {
         $.ajax({
             type: "POST",
             url: "index.php?r=student/over",
-            data: {raceID: raceID, content: content},
+            data: {raceID: raceID, content: content,rate:rate},
             success: function (data) {
                 if (data === '1') {
                     window.location.href = "index.php?r=student/index";
@@ -103,6 +103,21 @@ window.location.href = "./index.php?r=student/index";
             }
         });
     }
+       function sscc(raceID, content,route){
+        $.ajax({
+            type: "POST",
+            url: "index.php?r=student/sscc",
+            data: {raceID: raceID, content: content, route:route},
+            success: function (data) {
+            },
+            error: function (xhr, type, exception) {
+                console.log('waitForStart error', type);
+                console.log(xhr, "Failed");
+                console.log(exception, "exception");
+            }
+        });
+    }
+
 
     function clearContent() {
         yaweiOCX.ClearContent();
