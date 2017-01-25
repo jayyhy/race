@@ -386,6 +386,13 @@ class Tool {
         $newcontent = str_replace("　", "", $newcontent);
         return $newcontent;
     }
+    public static function replaceSpaceAndTabToOther($content) {
+        $new = str_replace("\n", "*", $content);
+        $newcontent = str_replace("\r", "*", $new);
+        $newcontent = str_replace(" ", "*", $newcontent);
+        $newcontent = str_replace("　", "*", $newcontent);
+        return $newcontent;
+    }
 
     public static function utf8_substr($str, $start = 0) {
         if (empty($str)) {
