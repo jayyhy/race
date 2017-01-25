@@ -386,7 +386,7 @@ class Tool {
         $newcontent = str_replace("　", "", $newcontent);
         return $newcontent;
     }
-    
+
     public static function filterAllSpaceAndTab1($content) {
         $new = str_replace("\n", "*", $content);
         $newcontent = str_replace("\r", "*", $new);
