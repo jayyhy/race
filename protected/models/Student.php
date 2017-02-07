@@ -177,6 +177,7 @@ class Student extends CActiveRecord {
             $id = "$kaohao".$var;
             $student->userName = $id;
             $student->userID = $id;
+            $password = Tool::createPassword(6);
             $student->password = md5($password);
             $student->ShowPassword = $password;
             $student->classID = $courseID;
