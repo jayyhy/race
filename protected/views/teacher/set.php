@@ -38,18 +38,18 @@ function long2(){
 </script>
 
 <div class="span3">
-       <div class="well" style="padding: 8px 0;height: 565px;">
-           <li class="nav-header"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;个人设置</h4></li> 
+       <div style="padding: 8px 8px;height: 565px;">
+           <li ><h3>&nbsp;&nbsp;个人设置</h3></li> 
            <ul class="nav nav-list">
-           <li class="" id="two"><a class="cont2" href="./index.php?r=teacher/teaInformation">个人资料</a></li>   
-           <li class="active" id="one"><a class="cont1" href="./index.php?r=teacher/set">修改密码</a></li>   
+           <li  id="two"><a class="cont2" href="./index.php?r=teacher/teaInformation">个人资料</a></li>   
+           <li  id="one"><a class="cont1" href="./index.php?r=teacher/set">修改密码</a></li>   
            </ul>
         </div>
 </div>
 
-<div class="span9">
-    <div class="span_set">
-    <h3 >设置密码</h3>
+<div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
+    <div style="margin-left: 30px">
+        <h3 >设置密码</h3><br>
     
     <form id="myForm" method="post" action="./index.php?r=teacher/set" enctype="multipart/form-data">
         <fieldset>
