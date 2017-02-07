@@ -40,7 +40,7 @@
     </div>
     </div>
     <?php if(count($courseLst)!=0){?>
-<div class="rightbar">
+<div class="rightbar" style=" overflow: visible">
     <div style="margin-left:3%;font-weight:bold">
         <div style="font-size: 25px;margin-top: 20px;">教学ID:<font color="#FE0100">
             <?php
@@ -52,32 +52,22 @@
             <a href="./index.php?r=admin/daochuxuesheng&&classID=<?php echo $tea['classID'];?>">导出excel</a>
         </div>
     <h3>学生ID:</h3>
-   <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="text-align: left;overflow: auto">
         <thead>
         </thead>
-        <tbody>   
+        <tbody style="text-align: left">   
     <?php 
      $i = 0;
      $th = 0;
      $thnum = count($student);
-     if($thnum<5){
-         for($th=0;$th<$thnum;$th++){
-            echo "<th>账号</th><th>密码</th>";
-         }
-                }
-     else{
-        for($th=0;$th<5;$th++){
-         echo "<th>账号</th><th>密码</th>";  
-         }
-                }
-            echo "<tr>";
+            echo '<tr style="text-align: left">';
     foreach ($student as $allstu){ 
         $i++;
-        echo "<td>";
-        echo $allstu['userID'];
-        echo "</td><td>";
-        echo $allstu['ShowPassword'];
+        echo '<td style="text-align: left">';
+        echo "账号：".$allstu['userID']."<br>";
+        echo "密码：".$allstu['ShowPassword'];
         echo "</td>";
+        
         if ($i % 5 == 0) {
           echo "</tr>";
         }
