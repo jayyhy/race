@@ -56,6 +56,7 @@
         <tbody>   
     <?php 
      $i = 0;
+         }
             echo "<tr>";
     foreach ($student as $allstu){ 
         $i++;
