@@ -146,6 +146,20 @@ class Tool {
         // echo("id:$id\n");
         return $id;
     }
+        //学生随机密码 在$length里面传入长度
+    public static function createPassword($length) {
+        // ytt 密码字符集，可任意添加你需要的密码字符
+    $chars = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    // 在 $chars 中随机取 $length 个数组元素键名
+    $keys = array_rand($chars, $length);
+    $password = '';
+    for($i = 0; $i < $length; $i++)
+    {
+        // 将 $length 个数组元素连接成字符串
+        $password .= $chars[$keys[$i]];
+    }
+    return $password;
+    }
     
     public static function getStudentLimitNumber(){
         $datas = json_decode(file_get_contents(__DIR__ . "/../config/test2.php"));
