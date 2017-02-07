@@ -117,7 +117,7 @@ class TeacherController extends CController {
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
                             $txtContent = Tool::SBC_DBC($content, 0);
-                            $txtContent = Tool::replaceSpaceAndTabToOther($txtContent);
+                            $txtContent = Tool::filterAllSpaceAndTab1($txtContent);
                             Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
                             $result = "1";
                        }

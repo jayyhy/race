@@ -48,7 +48,9 @@
             ?>
             </font>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            学生人数:<font color="#FE0100"><?php echo count($student);?></font></div>
+            学生人数:<font color="#FE0100"><?php echo count($student);?></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="./index.php?r=admin/daochuxuesheng&&classID=<?php echo $tea['classID'];?>">导出excel</a>
+        </div>
     <h3>学生ID:</h3>
    <table class="table table-bordered table-striped">
         <thead>
@@ -56,11 +58,25 @@
         <tbody>   
     <?php 
      $i = 0;
+     $th = 0;
+     $thnum = count($student);
+     if($thnum<5){
+         for($th=0;$th<$thnum;$th++){
+            echo "<th>账号</th><th>密码</th>";
+         }
+                }
+     else{
+        for($th=0;$th<5;$th++){
+         echo "<th>账号</th><th>密码</th>";  
+         }
+                }
             echo "<tr>";
     foreach ($student as $allstu){ 
         $i++;
         echo "<td>";
         echo $allstu['userID'];
+        echo "</td><td>";
+        echo $allstu['ShowPassword'];
         echo "</td>";
         if ($i % 5 == 0) {
           echo "</tr>";
