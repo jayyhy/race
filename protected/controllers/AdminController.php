@@ -537,9 +537,9 @@ class AdminController extends CController {
         if (!empty($data)){
               foreach ($data as $k => $model):
               $objectPHPExcel->getActiveSheet()->setCellValue('A'.($one++) ,'账号:');
-              $objectPHPExcel->getActiveSheet()->setCellValue('B'.($two++) ,$model['userID']);
+              $objectPHPExcel->getActiveSheet()->setCellValueExplicit('B'.($two++) ,$model['userID'],PHPExcel_Cell_DataType::TYPE_STRING);
               $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,'密码:');
-              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,$model['password']);
+              $objectPHPExcel->getActiveSheet()->setCellValueExplicit('D'.($four++) ,$model['password'],PHPExcel_Cell_DataType::TYPE_STRING);
               endforeach;
       }
         ob_end_clean();
