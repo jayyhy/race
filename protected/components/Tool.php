@@ -401,6 +401,15 @@ class Tool {
         return $newcontent;
     }
 
+    public static function filterAllSpaceAndTab1($content) {
+//        $new = str_replace("\n", "*", $content);
+//        error_log($new);
+        $newcontent = str_replace("\r\n", "*", $content);
+        $newcontent = str_replace(" ", "*", $newcontent);
+        $newcontent = str_replace("　", "*", $newcontent);
+        return $newcontent;
+    }
+
     public static function utf8_substr($str, $start = 0) {
         if (empty($str)) {
             return false;

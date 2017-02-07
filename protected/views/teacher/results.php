@@ -33,7 +33,6 @@
                 <th class="font-center">听打</th>
                 <th class="font-center">听打校对</th>
                 <th class="font-center">盲打</th>
-                <th class="font-center">视频纠错</th>
             </tr>
         </thead>
         <tbody>        
@@ -45,7 +44,6 @@
                 <td><?php if($model['resultstep3']['rate']==null){echo"未作答";}else{echo $model['resultstep3']['rate']."%";}?></td>
                 <td><?php if($model['resultstep4']['rate']==null){echo"未作答";}else{echo $model['resultstep4']['rate']."%";}?></td>
                 <td><?php if($model['resultstep5']['rate']==null){echo"未作答";}else{echo $model['resultstep5']['rate']."%";}?></td>
-                <td><?php if($model['resultstep6']['rate']==null){echo"未作答";}else{echo $model['resultstep6']['rate']."%";}?></td>   
             </tr>
             <?php endforeach; ?> 
         </tbody>
