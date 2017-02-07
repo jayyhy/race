@@ -116,7 +116,7 @@ class TeacherController extends CController {
                             }else if($encode =="EUC-CN"){
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtContent = Tool::removesign($content, 0);
                             $txtContent = Tool::filterAllSpaceAndTab1($txtContent);
                             Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
                             $result = "1";
@@ -212,7 +212,7 @@ class TeacherController extends CController {
                             }else if($encode =="EUC-CN"){
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                           
                            if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
@@ -316,7 +316,7 @@ class TeacherController extends CController {
                                         }else if($encode =="EUC-CN"){
                                             $content = iconv('GBK', 'utf-8', $content);
                                         }    
-                                        $txtContent = Tool::SBC_DBC($content, 0);
+                                        $txtContent = Tool::removesign($content, 0);
                                         $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                                         $result = "1";
                                     }
@@ -392,7 +392,7 @@ class TeacherController extends CController {
                             }else if($encode =="EUC-CN"){
                                 $content = iconv('GBK', 'utf-8', $content);
                             }                          
-                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, "", "");
                             $result = "1";
@@ -462,7 +462,7 @@ class TeacherController extends CController {
                             }else if($encode =="EUC-CN"){
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
                             $result = "1";
@@ -528,7 +528,7 @@ class TeacherController extends CController {
                             }else if($encode =="EUC-CN"){
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
-                            $txtContent = Tool::SBC_DBC($content, 0);
+                            $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             $result = "1";
                        }

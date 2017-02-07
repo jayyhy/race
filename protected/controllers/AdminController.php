@@ -490,5 +490,66 @@ class AdminController extends CController {
             'result' => ''
         ));   
     }
+    public function Actiondaochuxuesheng(){
+         $data = array();
+         $classID = $_GET['classID'];
+         $sql = "select * FROM student WHERE classID = '$classID'"; 
+         $criteria   =   new CDbCriteria();
+         $Dil  =   Yii::app()->db->createCommand($sql)->queryAll();
+         foreach ($Dil as $key){
+         $arrayData =[
+         "userName"=>$key['userName'],
+         "userID"=>$key['userID'],
+         "password"=>$key['ShowPassword']];
+         array_push($data, $arrayData);
+         }
+         $filename="导出结果";
+        /* 把引入PHPExcel.php文件 */
+        Yii::$enableIncludePath = false;
+        Yii::import('application.extensions.PHPExcel.PHPExcel', 1);
+//        $styleArray1 = array(
+//            'font' => array(
+//            'bold' => true,
+//            'size'=>14,
+//            'color'=>array(
+//            'argb' => '00000000',),
+//        ));
+        $objectPHPExcel = new PHPExcel();
+        $objectPHPExcel->setActiveSheetIndex(0);
+        $objActSheet = $objectPHPExcel->getActiveSheet();
+//        $objectPHPExcel->getActiveSheet()->getStyle('A1:D1')->applyFromArray($styleArray1);
+//        $objectPHPExcel->getActiveSheet()->setCellValue('A1','名次');
+//        $objectPHPExcel->getActiveSheet()->setCellValue('B1','姓名');
+//        $objectPHPExcel->getActiveSheet()->setCellValue('C1','学号');
+//        $objectPHPExcel->getActiveSheet()->setCellValue('D1','勤奋度（万字）');
+        //设置字体居中
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:D101')
+        ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objectPHPExcel->getActiveSheet()->getStyle('A1:D101')
+        ->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+//        $objectPHPExcel->getActiveSheet()->getStyle('A1:D1')
+//        ->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('ccffff');
+        //设置视频纠错自动换行和宽度
+        $objActSheet->getColumnDimension('D')->setWidth(23);
+        $objectPHPExcel->getActiveSheet()->getStyle('F1:D101')->getAlignment()->setWrapText(true);
+        $one = 1;$two = 1;$tree = 1;$four =1;$five = 1;$six = 1;$PAIMING = 1;
+        //导出考生成绩信息
+        if (!empty($data)){
+              foreach ($data as $k => $model):
+              $objectPHPExcel->getActiveSheet()->setCellValue('A'.($one++) ,'账号:');
+              $objectPHPExcel->getActiveSheet()->setCellValueExplicit('B'.($two++) ,$model['userID'],PHPExcel_Cell_DataType::TYPE_STRING);
+              $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,'密码:');
+              $objectPHPExcel->getActiveSheet()->setCellValueExplicit('D'.($four++) ,$model['password'],PHPExcel_Cell_DataType::TYPE_STRING);
+              endforeach;
+      }
+        ob_end_clean();
+        ob_start();
+        header('Content-Type : application/vnd.ms-excel');
+        header('Content-Disposition:attachment;filename="'."$filename".'.xls"');
+        $objWriter= PHPExcel_IOFactory::createWriter($objectPHPExcel,'Excel5');
+        $objWriter->save('php://output');
+        exit;
+     }
+ 
     
 }
