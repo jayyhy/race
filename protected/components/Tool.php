@@ -194,6 +194,7 @@ class Tool {
         $dateNow = date('Ymd');
         $m = "";
         $LimitDate = "";
+        $LimitStudent = "";
         if (isset($flagArray[1])) {
             $m = $flagArray[0];
             $LimitDate = $flagArray[1];
@@ -301,6 +302,23 @@ class Tool {
             '<', '>', '"', '\'', '?',
             '[', ']', '{', '}', '\\',
             '|', '+', '=', '_', '^',
+        );
+
+        if ($args2 == 0) {
+            return str_replace($SBC, $DBC, $str);  // 半角到全角
+        } else if ($args2 == 1) {
+            return str_replace($DBC, $SBC, $str);  // 全角到半角
+        } else {
+            return false;
+        }
+    }
+        public static function removesign($str, $args2) {
+        $DBC = Array(
+            '“', '‘',
+        );
+
+        $SBC = Array(// 半角
+             '"', "'",
         );
 
         if ($args2 == 0) {
