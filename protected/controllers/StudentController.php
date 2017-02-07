@@ -134,13 +134,17 @@ class StudentController extends CController {
         $content = $_POST['content'];
         if(isset($_POST['rate'])){
         $rate = $_POST['rate'];
-        error_log($rate);
         }
         else{
         $rate = 0;
         }
+        $step32 = Race::model()->find('raceID=?',array($raceID));
         $courseID = Student::model()->find("userID=?",array($userID))['classID'];
         $data = AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID,$rate);
+        if($step32['step']==32){
+            $raceID = Race::model()->find('indexID=? AND step=?',array($step32['indexID'],3))['raceID'];
+            AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID,$rate);
+        }
         echo $data;
     }
 
