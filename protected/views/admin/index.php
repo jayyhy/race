@@ -1,3 +1,4 @@
+<script src="<?php echo JS_URL; ?>fenye.js"></script>
 <div class="leftbar" style ="display: none; background: #FFE9E3" id="on_adding">
     <div style="padding: 8px 0; height: 650px;background: #FFE9E3">
     <div style="margin-left: 10px;margin-top: 10px">
@@ -52,10 +53,10 @@
             <a href="./index.php?r=admin/daochuxuesheng&&classID=<?php echo $tea['classID'];?>">导出excel</a>
         </div>
     <h3>学生ID:</h3>
-    <table class="table table-bordered table-striped" style="text-align: left;overflow: auto">
+    <table class="table table-bordered table-striped" style="text-align: left;overflow: auto" id="table1">
         <thead>
         </thead>
-        <tbody style="text-align: left">   
+        <tbody id="group_one" style="text-align: left">   
     <?php 
      $i = 0;
      $th = 0;
@@ -75,6 +76,17 @@
 <?php }?>
         </tbody>
     </table>
+    	<table>
+		<td><a href="#" onclick="page.firstPage();">首页</a>&nbsp;&nbsp;</td>
+			<td><a href="#" onclick="page.prePage();">上一页</a>&nbsp;&nbsp;</td>&nbsp;&nbsp;
+			<td>第<span id="pageindex">1</span>页&nbsp;&nbsp;</td>&nbsp;&nbsp;
+			<td><a href="#" onclick="page.nextPage();">下一页</a>&nbsp;&nbsp;</td>&nbsp;&nbsp;
+			<td><a href="#" onclick="page.lastPage();">尾页</a>&nbsp;&nbsp;</td>&nbsp;&nbsp;
+                        <td>共<font id='t'>2</font>页&nbsp;&nbsp;</td>&nbsp;&nbsp;
+                        <td style="position: relative;top:1px">第&nbsp;<select id="pageselect" style="width:40px;height: 26px;position: relative;top:4px" onchange="page.changePage();"></select>&nbsp;页</td>
+		</tr>
+
+	</table>
 </div>
 </div>
     <?php } else { ?>
@@ -188,4 +200,7 @@
         document.getElementById("on_adding").style.display='none';
         document.getElementById("on_add").style.display='block';  
     }
+           	window.onload = function() {
+		page = new Page(8, 'table1', 'group_one');
+	}
 </script>
