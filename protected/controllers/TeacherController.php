@@ -1105,9 +1105,44 @@ class TeacherController extends CController {
         //设置视频纠错自动换行和宽度
         $objActSheet->getColumnDimension('D')->setWidth(16);
         $objActSheet->getColumnDimension('F')->setWidth(350);
+        if(isset($_GET['answer'])){
+        $objectPHPExcel->getActiveSheet()->getStyle('B1:F101')->getAlignment()->setWrapText(true);
+        $objActSheet->getColumnDimension('B')->setWidth(300);
+        $objActSheet->getColumnDimension('C')->setWidth(300);
+        $objActSheet->getColumnDimension('D')->setWidth(300);
+        $objActSheet->getColumnDimension('E')->setWidth(300); 
+        $objActSheet->getColumnDimension('F')->setWidth(300);   
+        }
         $objectPHPExcel->getActiveSheet()->getStyle('F1:F101')->getAlignment()->setWrapText(true);
         $one = 2;$two = 2;$tree = 2;$four =2;$five = 2;$six = 2;
         //导出考生成绩信息
+        if(isset($_GET['answer'])){
+                    if (!empty($data)){
+              foreach ($data as $k => $model):
+              $objectPHPExcel->getActiveSheet()->setCellValue('A'.($one++) ,$model['studentID']);
+              if($model['resultstep2']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('B'.($two++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('B'.($two++) ,$model['resultstep2']['content']);}
+              if($model['resultstep3']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('C'.($tree++) ,$model['resultstep3']['content']);}
+              if($model['resultstep4']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,$model['resultstep4']['content']);}
+              if($model['resultstep5']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('E'.($five++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('E'.($five++) ,$model['resultstep5']['content']);}
+              if($model['resultstep6']['rate']==null){
+              $objectPHPExcel->getActiveSheet()->setCellValue('F'.($six++) ,"未作答");}
+              else{
+              $objectPHPExcel->getActiveSheet()->setCellValue('F'.($six++) ,$model['resultstep6']['content']);} 
+              endforeach;
+        }}  
+        else {
         if (!empty($data)){
               foreach ($data as $k => $model):
               $objectPHPExcel->getActiveSheet()->setCellValue('A'.($one++) ,$model['studentID']);
@@ -1132,7 +1167,8 @@ class TeacherController extends CController {
               else{
               $objectPHPExcel->getActiveSheet()->setCellValue('F'.($six++) ,$model['resultstep6']['content']);} 
               endforeach;
-      }
+        }
+              }
         ob_end_clean();
         ob_start();
         header('Content-Type : application/vnd.ms-excel');
@@ -1140,7 +1176,6 @@ class TeacherController extends CController {
         $objWriter= PHPExcel_IOFactory::createWriter($objectPHPExcel,'Excel5');
         $objWriter->save('php://output');
         exit;
-//    return $this->renderPartial('simple',['data'=>$data,'indexID'=>$indexID]);
         }
     public function actionIsOvered() {
         $indexID = $_POST['indexID'];
