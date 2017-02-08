@@ -66,6 +66,7 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
+            clearInterval(qcsscc);
             window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
         }
         
@@ -79,7 +80,7 @@
             reciveContent(); 
         }
         setTimeout(timec,0);
-        setInterval(savetxt,2000);
+        var qcsscc =  setInterval(savetxt,2239);
         function reciveContent() {
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
         }

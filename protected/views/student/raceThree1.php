@@ -63,6 +63,7 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo() {
+            clearInterval(qcsscc);
             <?php   $step31Content = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['content']; 
                     $StudentID = Yii::app()->session['userid_now']; 
                     $step31raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 3))['raceID']; ?>;
@@ -123,7 +124,7 @@
             reciveContent();
         }
         setTimeout(timec,0);
-        setInterval(savetxt,2239);
+        var qcsscc =  setInterval(savetxt,2239);
         function reciveContent() {
         yaweiOCX1.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
         }
