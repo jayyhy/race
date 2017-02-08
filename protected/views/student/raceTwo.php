@@ -47,7 +47,6 @@
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
             content2=content2.replace(/'/, "‘").replace(/"/, "“");
-            alert(content2);
             content2=content2.replace(/\r\n/g, "*").replace(/ /g, "*");
             if(content2==""){
                 <?php 
