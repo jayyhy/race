@@ -14,7 +14,7 @@
                     <td class="font-center"><?php echo $model['indexID']; ?></td>
                     <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,0)"><?php echo $model['name']; ?></a></td>
                     <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,1)">导出成绩</a></td>
-                    <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,1)">导出结果</a></td>
+                    <td class="font-center"><a href="#" onclick="isOver2(<?php echo $model['indexID']; ?>,1)">导出结果</a></td>
                 </tr>            
             <?php endforeach; ?> 
         </tbody>
@@ -75,8 +75,28 @@
             error: function (xhr, type, exception) {
                 
             }
-        });
+        });          
+    }
+        function isOver2(indexID ,tag){
+        $.ajax({
+            type: "POST",
+            url: "index.php?r=teacher/isOvered",
+            data: {indexID: indexID},
+            success: function (data) {
+               if(data =="1"){
+                    if(tag === 1){
+                        window.location.href = "./index.php?r=teacher/Exportresults&indexID="+indexID+"&&answer=1";
+                    }
+                    if(tag=== 0){
+                       window.location.href = "./index.php?r=teacher/results&indexID="+indexID;
+                    }
+                } else{
+                    window.wxc.xcConfirm('考试还未结束', window.wxc.xcConfirm.typeEnum.info);
+                }
+            },
+            error: function (xhr, type, exception) {
                 
-                
+            }
+        });          
     }
   </script>
