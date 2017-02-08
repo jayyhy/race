@@ -43,6 +43,7 @@
              window.parent.saveInRealTime(<?php echo $race['raceID']; ?>,content);
         }
         function endDo(){
+            clearInterval(qcsscc);
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
@@ -96,7 +97,7 @@
             reciveContent();
         }
         setTimeout(timec,0);
-        setInterval(savetxt,2239)
+        var qcsscc =  setInterval(savetxt,2239);
         function reciveContent() {
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
         }
