@@ -1106,6 +1106,7 @@ class TeacherController extends CController {
         $objActSheet->getColumnDimension('D')->setWidth(16);
         $objActSheet->getColumnDimension('F')->setWidth(350);
         if(isset($_GET['answer'])){
+        $objectPHPExcel->getActiveSheet()->getStyle('B1:F101')->getAlignment()->setWrapText(true);
         $objActSheet->getColumnDimension('B')->setWidth(300);
         $objActSheet->getColumnDimension('C')->setWidth(300);
         $objActSheet->getColumnDimension('D')->setWidth(300);
