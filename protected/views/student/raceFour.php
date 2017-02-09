@@ -93,8 +93,8 @@
       function timec(){
             var curtime = <?php echo time(); ?>;
             var endtime = <?php echo $endTime; ?>;
-            var lastRaceIDForStepFour = <?php echo $lastRaceIDForStepFour;?>;
-            window.parent.reciveContent(lastRaceIDForStepFour);
+//            var lastRaceIDForStepFour = <?php //echo $lastRaceIDForStepFour;?>;
+//            window.parent.reciveContent(lastRaceIDForStepFour);
             tCounter(curtime, endtime, "time", endDo,saveInReTime);
             reciveContent();
         }
