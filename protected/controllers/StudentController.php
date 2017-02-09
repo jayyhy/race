@@ -101,12 +101,12 @@ class StudentController extends CController {
                 $render = "Three";
                 break;
             case 4:
-                $allRace = Race::model()->findAll("indexID=?", array($race['indexID']));
-                foreach ($allRace as $v) {
-                    if ($v['step'] == 3) {
-                        $lastRaceIDForStepFour = $v['raceID'];
-                    }
-                }
+//                $allRace = Race::model()->findAll("indexID=?", array($race['indexID']));
+//                foreach ($allRace as $v) {
+//                    if ($v['step'] == 3) {
+//                        $lastRaceIDForStepFour = $v['raceID'];
+//                    }
+//                }
                 $render = "Four";
                 break;
             case 5:
@@ -119,7 +119,7 @@ class StudentController extends CController {
                 $render = "Three1";
                 break;
         }
-        $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, "lastRaceIDForStepFour" => $lastRaceIDForStepFour,
+        $this->renderPartial("race" . $render, array("race" => $race, "endTime" => $EndTime, "startTime" => $startTime, 
             "route" => $route   
             ));
     }
