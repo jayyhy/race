@@ -49,17 +49,19 @@
             yaweiOCX1.ExportTxtFile("D:/YAWEIEXAM/6/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt");
             var raceID = <?php echo $race['raceID']; ?>;
             var route = "D:/YAWEIEXAM/6/" + 2 + <?php echo $race['raceID']; ?> + StudentID +timestamp+ ".txt";
-            $.ajax({
-            type: "POST",
-            url: "index.php?r=student/saveroute",
-            data: {raceID: raceID, route:route},
-            success: function () {
-               
-            },
-            error: function (xhr, type, exception) {
-                
-            }
-        });
+//            $.ajax({
+//            type: "POST",
+//            url: "index.php?r=student/saveroute",
+//            data: {raceID: raceID, route:route},
+//            success: function () {
+//               
+//            },
+//            error: function (xhr, type, exception) {
+//                
+//            }
+//        });
+             var content=yaweiOCX1.GetContent();
+             window.parent.sscc(<?php echo $race['raceID']; ?>,content,route);
         }
         function saveInReTime(){
             var content=yaweiOCX1.GetContent();
