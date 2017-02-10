@@ -4,8 +4,8 @@
             <tr>
                 <th class="font-center">试卷号</th>
                 <th class="font-center">试卷名</th>
-                <th class="font-center">操作</th>
-                <th class="font-center">操作</th>
+                <th class="font-center">正确率</th>
+                <th class="font-center">作答内容</th>
             </tr>
         </thead>
         <tbody>        
@@ -13,8 +13,8 @@
                 <tr>
                     <td class="font-center"><?php echo $model['indexID']; ?></td>
                     <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,0)"><?php echo $model['name']; ?></a></td>
-                    <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,1)">导出成绩</a></td>
-                    <td class="font-center"><a href="#" onclick="isOver2(<?php echo $model['indexID']; ?>,1)">导出结果</a></td>
+                    <td class="font-center"><a href="#" onclick="isOver(<?php echo $model['indexID']; ?>,1)">导出</a></td>
+                    <td class="font-center"><a href="#" onclick="isOver2(<?php echo $model['indexID']; ?>,1)">导出</a></td>
                 </tr>            
             <?php endforeach; ?> 
         </tbody>
