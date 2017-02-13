@@ -7,13 +7,13 @@
         <div style="position: absolute;z-index:2;left:43%;top:50%;color: grey">倒计时：</div>
         <div style="position: absolute;z-index:2;left:48%;top:65%"><span id = "sideTime" style="font-size: 30px;color: red">00</span></div>
     </div>
-    <div style="margin-left: 30px;" id="examTime" style=" display:none;">
+    <div style="margin-left: 30px;" id="examTime" style=" display:none;position: relative;">
     <img src="<?php echo IMG_URL_NEW; ?>icon_video.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">视频纠错</h2>
 
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>
 
-        <video id="audio" src = "<?php echo $listenpath; ?>" preload = "auto" style="width: 350px;"></video>
+        <video id="audio" src = "<?php echo $listenpath; ?>" preload = "auto" style="width: 350px; "></video>
     <?php } else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
@@ -28,7 +28,8 @@
     </div>
     </div>
     <script>
-        
+        var qcsscc ;
+        $("#examTime").hide();
         (function () {
       var side = setInterval(function () {
             $.ajax({
@@ -40,10 +41,10 @@
                     if (data !== 0) {
                         var nowTime = data['nowTime'];
                         var startTime = data['startTime'];
-                        if (startTime > nowTime) {
+                        if (startTime >nowTime) {
                             $("#beginTime").show();
                             var seconds = startTime - nowTime;
-                            printTime(seconds, "sideTime");                   
+                            printTimes(seconds, "sideTime");                   
                         }else{
                             $("#beginTime").hide();
                             $("#examTime").show();
@@ -52,7 +53,8 @@
                             setTimeout(timec,0);
                             var video = document.getElementById('audio');
                             video.autoplay = "true";
-                            var qcsscc =  setInterval(savetxt,2239);
+                            qcsscc =  setInterval(savetxt,2239);
+                            
                         }
                     }
                 },
@@ -62,9 +64,20 @@
                     console.log(exception, "exception");
                 }
             });
-        }, 500);
+        }, 1433);
     })();
-        
+         function printTimes(seconds, eleID) {
+        var hh = parseInt((seconds) / 3600);
+        var mm = parseInt((seconds) % 3600 / 60);
+        var ss = parseInt((seconds) % 60);
+        var strTime = "";
+//        strTime += hh < 10 ? "0" + hh : hh;
+//        strTime += ":";
+//        strTime += mm < 10 ? "0" + mm : mm;
+//        strTime += ":";
+        strTime += ss < 10 ? "0" + ss : ss;
+        document.getElementById(eleID).innerHTML = strTime;
+    }
         
         window.parent.doC();
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
@@ -106,7 +119,7 @@
         
         function timec(){
             var startTime =  <?php echo $startTime; ?>;
-            var curtime = <?php echo time(); ?>;
+            var curtime = <?php echo time()+20; ?>;
             var endtime = <?php echo $endTime; ?>;
 //            var audio = document.querySelector("#audio");
 //            audio.currentTime = (curtime - startTime);
