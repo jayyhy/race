@@ -72,10 +72,8 @@ class StudentController extends CController {
         $startTime = strtotime($course['startTime']);
         $raceEndTime = strtotime($course['endTime']);
         $nowTime = time();
-        $raceID = $course['onRaceID'];
-        $step = Race::model()->find("raceID = '$raceID'")['step'];
         if ($raceEndTime > $timeNow) {
-            $this->renderJSON(array('nowTime' => $nowTime, 'startTime' => $startTime, 'raceID' => $course['onRaceID'],'step' =>$step));
+            $this->renderJSON(array('nowTime' => $nowTime, 'startTime' => $startTime, 'raceID' => $course['onRaceID']));
         }
         echo 0;
     }

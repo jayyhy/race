@@ -19,9 +19,6 @@
                 data: {},
                 success: function (data) {
                     if (data !== 0) {
-                        if(data['step'] === "6"){
-                            window.location.href = "index.php?r=student/race&raceID=" + data['raceID'];
-                        }
                         var nowTime = data['nowTime'];
                         var startTime = data['startTime'];
                         if (startTime > nowTime) {
