@@ -180,7 +180,7 @@ require 'examSideBar.php';
          function playAudio(sideTime){
             var fristAu = document.getElementById("audio");
             var examTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
-            if(examTime == sideTime){
+            if(examTime === sideTime){
                fristAu.autoplay = "true";
                 fristAu.style.visibility = "visible";        
             }
