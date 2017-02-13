@@ -1074,7 +1074,9 @@ class TeacherController extends CController {
                 array_push($data, $arrayData);
             }   
         $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
-        $filename="考场".$indexID."导出结果";
+        $filename="考场".$indexID."导出正确率";
+        if(isset($_GET['answer'])){
+        $filename="考场".$indexID."导出作答内容";}
         /* 把引入PHPExcel.php文件 */
         Yii::$enableIncludePath = false;
         Yii::import('application.extensions.PHPExcel.PHPExcel', 1);
