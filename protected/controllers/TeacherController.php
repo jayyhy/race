@@ -323,6 +323,26 @@ class TeacherController extends CController {
                                 }
                             }
                      }
+                      //上传音频图片
+                     if($_FILES["picfile"]["name"]){
+                      if ($_FILES ['picfile'] ['type'] != "image/png" &&
+                            $_FILES ['picfile'] ['type'] != "image/jpeg" &&
+                            $_FILES ['picfile'] ['type'] != "image/gif") {
+                        $result2 = '文件格式不正确，应为gif或jpg或png格式';
+                    } else if ($_FILES['picfile']['error'] > 0) {
+                        $result2 = '文件上传失败';
+                    } else {
+                        $oldName = $_FILES["picfile"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["picfile"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Picture::model()->insertPicture($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        $result = "1";
+                    } 
+                   } 
                      Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
                      
                  if($_FILES["file2"]["name"]!=""){
@@ -496,7 +516,7 @@ class TeacherController extends CController {
                         $time=round($media->duration);
                         $result = "1";
                     } 
-                   } 
+                   }
                    if(!empty($_FILES["myfile"]['name'])){
                      $tmp_file = $_FILES ['myfile'] ['tmp_name'];
                      $file_types = explode(".", $_FILES ['myfile'] ['type']);
