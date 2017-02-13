@@ -139,7 +139,10 @@
             <div style="margin-top: 19px;margin-left: 60px">
                 <textarea name="content" style="width:435px; height:200px;border-color: #FEE1DA; display: none" id="content" ><?php echo $race['content']; ?></textarea>
             </div>
-            <div style=" margin-left: 38%;margin-top: 25px">
+             <div style="margin-top: 9px;margin-left: 60px">
+             <input type="file" name="picfile" id="pic" style="float: left;">  <span style=" position: relative;left: 47px;top: 2px;float: left;">(上传音频图片)</span>
+            </div>
+            <div style=" margin-left: 38%;margin-top: 55px">
                 <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
             </div>
             
