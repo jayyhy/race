@@ -11,8 +11,8 @@ date_default_timezone_set('PRC');
 
 
 
-defined('WWW') or define('WWW', 'https://'.$host.'/');
-defined('SITE_URL') or define('SITE_URL','https://'.$host.dirname($_SERVER['PHP_SELF']).'/');//网站根目录
+defined('WWW') or define('WWW', 'http://'.$host.'/');
+defined('SITE_URL') or define('SITE_URL','http://'.$host.dirname($_SERVER['PHP_SELF']).'/');//网站根目录
 //
 //前台
 defined('CSS_URL') or define('CSS_URL',SITE_URL.'css/default/');
