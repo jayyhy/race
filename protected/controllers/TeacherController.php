@@ -150,6 +150,28 @@ class TeacherController extends CController {
                     $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
                     $flag2 = Race::model()->find("indexID=? AND step =?", array($indexID, 32));
                     if ($flag==null){
+                          //上传音频图片
+                     if($_FILES["picfile"]["name"]){
+                      if ($_FILES ['picfile'] ['type'] != "image/png" &&
+                            $_FILES ['picfile'] ['type'] != "image/jpeg" &&
+                            $_FILES ['picfile'] ['type'] != "image/gif") {
+                        $result2 = '文件格式不正确，应为gif或jpg或png格式';
+                    } else if ($_FILES['picfile']['error'] > 0) {
+                        $result2 = '文件上传失败';
+                    } else {
+                        $oldName = $_FILES["picfile"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["picfile"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Picture::model()->insertPicture($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        $result = "1";
+                    } 
+                   } 
+                        
+                        
                         if($_FILES["files"]["name"]!=""){
                          if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
                             $_FILES ['files'] ['type'] != "audio/wav" &&
