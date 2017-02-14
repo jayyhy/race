@@ -167,7 +167,7 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        $result = "1";
+//                        $result = "1";
                     } 
                    } 
                         
@@ -345,7 +345,8 @@ class TeacherController extends CController {
                                 }
                             }
                      }
-                      //上传音频图片
+                     Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                                           //上传音频图片
                      if($_FILES["picfile"]["name"]){
                       if ($_FILES ['picfile'] ['type'] != "image/png" &&
                             $_FILES ['picfile'] ['type'] != "image/jpeg" &&
@@ -365,7 +366,6 @@ class TeacherController extends CController {
                         $result = "1";
                     } 
                    } 
-                     Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
                      
                  if($_FILES["file2"]["name"]!=""){
                         if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
