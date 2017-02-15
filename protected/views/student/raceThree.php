@@ -23,16 +23,16 @@
     <div style="width: 300px;height: 200px;background-color: #ffffff;float: left;margin-left:60px;">
         <?php 
                 $Picture = Picture::model()->find();
-                if($Picture != ""){
-                    $pic = $Picture['New_Name'];
-                    $filePath="./resources/race/".$pic;
-                 if(file_exists($filePath)){
+                $pic = $Picture['New_Name'];
+                $filePath="./resources/race/".$pic;
+                if($Picture != "" && file_exists($filePath)){
+                 
                      ?>
         <video id="audio" src = "<?php echo $listenpath; ?>" poster="<?php echo $filePath; ?>" height="200px" style="display: none"></video>
         <video id="audio3" src = "<?php echo $listenpath3; ?>" poster="<?php echo $filePath; ?>" preload = "auto" autoplay="true" height="200px"></video>
         <video id="audio2" src = "<?php echo $listenpath2; ?>" poster="<?php echo $filePath; ?>" height="200px" style="display: none"></video>
             <?php        
-        }
+
               }else{
         ?>
         <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" height="200px" style="display: none"></video>
