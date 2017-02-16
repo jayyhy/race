@@ -142,7 +142,31 @@ class AnswerRecord extends CActiveRecord
         }
         return $result;
     }
-    
+    public function submitRace2($studentID, $raceID, $content, $courseID,$rate) {
+        $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
+        $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
+        $completiontime = microtime(true)*10000;
+        $content = Tool::filterAllSpaceAndTab($content);
+        $content = Tool::removesign($content,0);
+        if ($record == "") {
+            $record = new AnswerRecord();
+            $record->studentID = $studentID;
+            $record->raceID = $raceID;
+            $record->content = $content;
+            $record->courseID = $courseID;
+            $record->indexID = $indexID;
+            $record->rate = $rate;
+            $record->completion_time =$completiontime;
+            $result = $record->insert();
+        } else {
+            $content = $record['content'].$content;
+            $record->content = $content;
+            $record->rate = $rate;
+            $record->completion_time =$completiontime;
+            $result = $record->update();
+        }
+        return $result;
+    }
     public function updataAnswerData1($rate,$race_ID,$studentID){
         $connection = Yii::app()->db;    
         $sql = "UPDATE `answer_record` SET rate = '$rate' where raceID = $race_ID and studentID= '$studentID'";

@@ -83,7 +83,7 @@
             var originalContent='<?php echo Tool::removeCharacter($step31Content);?>';
             var content2 = yaweiOCX1.GetContent();
             content2=content2.replace(/[\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
-            content2=content2.replace(/\r\n/g, "").replace(/ /g, "");
+            content2=content2.replace(/\r\n/g, "").replace(/ /g, "").replace(/[　]/g, "");
             if(content2==""){
                 <?php   $step32raceID=  Race::model()->find("indexID=? AND step=?",array($race['indexID'],32))['raceID'];
                         $content321=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step32raceID,$StudentID))['content'];
