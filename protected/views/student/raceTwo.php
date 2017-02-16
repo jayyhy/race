@@ -46,9 +46,6 @@
             clearInterval(qcsscc);
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
             var originalContent='<?php echo $race['content'];?>';
-            var aa=originalContent.length;
-            alert(aa);
-            alert(originalContent);
             var content2=yaweiOCX1.GetContent();
             content2=content2.replace(/'/, "‘").replace(/"/, "“");
             content2=content2.replace(/\r\n/g, "*").replace(/ /g, "*").replace(/[　]/g, "*");
@@ -60,9 +57,6 @@
                 ?>
                 content2="<?php echo $content2; ?>";
             }
-            var bb=content2.length;
-            alert(bb);
-            alert(content2);
             currentCount = content2.length;
             originalCount = originalContent.length;
             var worker = new Worker('js/exerJS/GetAccuracyRate.js');
