@@ -118,6 +118,25 @@ class AnswerRecord extends CActiveRecord
 		return parent::model($className);
 	}
         
+        public function AcceptTime($studentID, $raceID, $courseID){
+            $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
+            $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
+            $acceptTime = microtime(true)*10000;
+                    if ($record == "") {
+            $record = new AnswerRecord();
+            $record->studentID = $studentID;
+            $record->raceID = $raceID;
+            $record->courseID = $courseID;
+            $record->indexID = $indexID;
+            $record->accept_time =$acceptTime;
+            $result = $record->insert();
+        } else {
+            $record->completion_time =$completiontime;
+            $result = $record->update();
+        }
+        return $result;
+            
+        }
         public function submitRace($studentID, $raceID, $content, $courseID,$rate) {
         $record = AnswerRecord::model()->find("studentID = ? AND raceID = ?", array($studentID, $raceID));
         $indexID = Race::model()->find("raceID=?",array($raceID))['indexID'];
