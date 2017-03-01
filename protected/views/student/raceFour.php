@@ -17,7 +17,7 @@
         window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var RightRadio=0;
-        var step3raceID = "<?php $step3raceID = Race::model()->find("indexID=? AND step=?", array($race['indexID'], 32)); 
+        var step3raceID = "<?php $step3raceID = Race::model()->find("indexID=? AND step=?", array($race['indexID'], 3)); 
         echo $step3raceID['raceID'];
         ?>";
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
@@ -47,33 +47,7 @@
         }
         function endDo(){
             clearInterval(qcsscc);
-            <?php $StudentID = Yii::app()->session['userid_now']; ?>
-            var originalContent='<?php echo Tool::removeCharacter($race['content']);?>';
-            var content2=yaweiOCX1.GetContent();
-            content2=content2.replace(/[\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
-            content2=content2.replace(/\r\n/g, "").replace(/ /g, "").replace(/[　]/g, "");
-            if(content2==""){
-                <?php   $step4raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 4))['raceID']; 
-                        $content1=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step4raceID,$StudentID))['content'];
-                        $content2=  Tool::removeCharacter($content1);
-                        $content3=  Tool::filterAllSpaceAndTab($content2);
-                ?>
-                content2="<?php echo $content3;?>";
-            }
-            var worker = new Worker('js/exerJS/GetAccuracyRate.js');
-            worker.onmessage = function (event) {
-                if (!isNaN(event.data.accuracyRate)) {
-                    window.RightRadio = event.data.accuracyRate;
-                    var rate = window.RightRadio;
-                    window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>,rate);
-                }
-                worker.terminate();
-            };
-            worker.postMessage({
-                currentContent: content2,
-                originalContent: originalContent
-            });
-           // window.parent.over(<?php //echo $race['raceID']; ?>,<?php //echo $race['step']?>);
+            window.parent.over(<?php echo $race['raceID']; ?>,<?php echo $race['step']?>);
         }
         
         function saveRightRadio(){
@@ -105,7 +79,7 @@
         yaweiOCX1.LoadFromTxtFile("<?php echo $route;?>");
 
              <?php }else{ ?>
-        yaweiOCX1.LoadFromTxtFile("D:/" + "32" + step3raceID + StudentID + ".txt");
+        yaweiOCX1.LoadFromTxtFile("D:/" + "3" + step3raceID + StudentID + ".txt");
             <?php } ?>        }
     </script>
 </body>
