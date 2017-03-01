@@ -57,7 +57,9 @@
             <p style="position: relative;right: 90px;top: 15px;">记住用户名和身份</p>
         </label>
         <button id="submit" type="submit">登录</button>
-<!--        <button id="toReborn" style="background:#A2b4ba;" >教学平台</button>-->
+        <button id="toReborn" class="btn-link" style="border:1px solid #FFF;;border-radius:6px;text-decoration:none" >
+            <font color="#fff">进入教学平台</font>
+        </button>
         <div class="forget-password">
 <!--            <p>
                 <a href="./index.php?r=user/forgetpassword" class="" id="forget-password" style="position: relative;top: 30px;left: 95px;">忘记密码?</a>

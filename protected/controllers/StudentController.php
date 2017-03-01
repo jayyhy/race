@@ -148,9 +148,8 @@ class StudentController extends CController {
     public function actionAcceptTime(){
         $userID = Yii::app()->session['userid_now'];
         $raceID = $_POST['raceID'];
-        $content ="";
         $courseID = Student::model()->find("userID=?",array($userID))['classID'];
-        $data = AnswerRecord::model()->submitRace($userID, $raceID, $content,$courseID);
+        $data = AnswerRecord::model()->AcceptTime($userID, $raceID,$courseID);
     }
     public function actionSaveroute(){
     $route=$_POST['route'];
