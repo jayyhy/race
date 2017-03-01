@@ -110,7 +110,6 @@ class Course extends CActiveRecord {
         $step = Race::model()->find("raceID=?", array($raceID))['step'];
         if($step == 3){
             $indexID = Race::model()->find("raceID=?", array($raceID))['indexID'];
-            $currentTime2 = Race::model()->find("indexID=? AND step=?", array($indexID,32))['time'];
             $currentTime = Race::model()->find("raceID=?", array($raceID))['time'];
             $radio = Resourse::model()->find("path='$indexID'"); 
             $dir ="./resources/race/radio/";
@@ -121,21 +120,7 @@ class Course extends CActiveRecord {
             $currentTime = $currentTime +$time;
             $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
             $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime))); 
-        }else if($step == 32){
-            $indexID = Race::model()->find("raceID=?", array($raceID))['indexID'];
-            $currentTime2 = Race::model()->find("indexID=? AND step=?", array($indexID,32))['time'];
-            $currentTime = Race::model()->find("raceID=?", array($raceID))['time'];
-            $radio = Resourse::model()->find("path='$indexID'"); 
-            $dir ="./resources/race/radio/";
-            $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
-            $player=new COM("WMPlayer.OCX");
-            $media=$player->newMedia($file);
-            $time=round($media->duration);
-            $currentTime = $currentTime2;
-            $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
-            $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime))); 
-        }  
-        else {
+        }else {
             $currentTime = Race::model()->find("raceID=?", array($raceID))['time'];
             $startTime = date("Y-m-d  H:i:s",time()+$CDTime);
             $endTime = date("Y-m-d  H:i:s", (time()+$CDTime + ($currentTime))); 

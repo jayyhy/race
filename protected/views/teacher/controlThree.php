@@ -43,7 +43,6 @@ require 'examSideBar.php';
     
 </style>
 <?php $listenpath = "./resources/race/" . $race['resourseID']; 
-       $listenpath2 = "./resources/race/" . $race2['resourseID'];
             $indexID = $_GET['indexID'];
             $radio = Resourse::model()->find("path='$indexID'"); 
             $dir ="./resources/race/radio/";
@@ -77,7 +76,7 @@ require 'examSideBar.php';
     <?php } ?>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打(一)</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">听打</h3>
             <?php
     if ($nowOnStep != 0) {
         if($nowOnStep == 1){?>
@@ -132,8 +131,6 @@ require 'examSideBar.php';
         <span style="position: relative;left: 95px;">(试音音频)</span><br>
         <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
         <span style="position: relative;left: 172px;top: 17px">(第一个音频)</span><br>
-<!--        <audio id="secondAu" style="position: relative;left: 169px;top: 42px;width: 360px" src="<?php echo $listenpath2; ?>" preload="auto" controls="controls" ></audio>
-        <span style="position: relative;left: 172px;top: 33px">(第二个音频)</span><br>-->
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
@@ -243,7 +240,6 @@ require 'examSideBar.php';
     })();
 
     function start() {
-//        var time = doc.querySelector('#CDTime').value;
             
         var time =20;
         var reg = new RegExp("^[0-9]*$");
