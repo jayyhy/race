@@ -62,10 +62,12 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                                         <li>
                                     <?php if($onraceID == 0) { ?>        
                                    <a href="./index.php?r=teacher/teaInformation">个人设置</a></li>
-                               <li><a href="./index.php?r=user/login&exit=1">退出</a>
+                               <li><a href="./index.php?r=user/login&exit=1">退出</a></li>
+                                   <li><a href="#" onclick="shutDown()" >关机</a>
                                    <?php }else{ ?>
                                 <a href="" onclick="nowonexam()">个人设置</a></li>
-                               <li><a href="" onclick="nowonexam()">退出</a>
+                               <li><a href="" onclick="nowonexam()">退出</a></li>
+                                   <li><a href="#" onclick="nowonexam()" >关机</a>
                                    <?php } ?>
                               </li>
                          </ul>   
@@ -95,6 +97,11 @@ function doClick2(){
    var obj = document.getElementById("ksjg");
    obj.setAttribute("class", "ksjg1");
 }
+
+function shutDown(){
+        window.open("./index.php?r=teacher/shutDown", 'newwindow', 'height=400,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no,left=500,top=200,');
+    }
+
 function nowonexam(){
 //    window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
 }
