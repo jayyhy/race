@@ -29,7 +29,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
         $onstep = $onrace['step'];
         ?>   
             <div class="container">
-            <div class="ywnav">
+            <div class="ywnav1">
                 <div class="ywlogo"> </div>
 <!--                <font class="ysgs">亚伟国赛管理系统</font>-->
 <?php if($onraceID == 0) { ?>
