@@ -1,5 +1,5 @@
 <?php
-    $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
+    $title=array('学号','文本速录','实时速录','会议公文整理','蒙目速录','模拟办公管理');
     $filename="考场".$indexID."导出结果";
     header("Content-type:application/octet-stream");
     header("Accept-Ranges:bytes");

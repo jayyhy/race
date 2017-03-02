@@ -17,7 +17,7 @@
             $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
     <div style="margin-left: 50px;">
-    <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">听打(二)</h2>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">实时速录(二)</h2>
     <?php if (file_exists($listenpath)) { ?>
     <div style="width: 310px;height: 200px;background-color: #ffffff;float: left">
                 <?php 
