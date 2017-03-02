@@ -130,7 +130,7 @@ require 'examSideBar.php';
         <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
         <span style="position: relative;left: 95px;">(试音音频)</span><br>
         <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
-        <span style="position: relative;left: 172px;top: 17px">(第一个音频)</span><br>
+        <span style="position: relative;left: 172px;top: 17px">(实时速录音频)</span><br>
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
