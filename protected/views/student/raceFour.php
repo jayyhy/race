@@ -3,7 +3,7 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
     <div style="margin-left: 40px;">
-    <img src="<?php echo IMG_URL_NEW; ?>icon_proof.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px;">听打校对</h2>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_proof.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 180px;">会议公文整理</h2>
     </div>
     <div style="width: 530px;height: 150px;background-color: #ffffff;float: left;margin-left: 40px;">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>

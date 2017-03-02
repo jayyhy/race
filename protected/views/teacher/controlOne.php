@@ -44,44 +44,44 @@ require 'examSideBar.php';
 </style>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-        <div class="stage" style=" margin-left: 25px;border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" style=" color: #ff0000;">文本校对</a></div>
+        <div class="stage" style=" margin-left: 25px;border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" style=" color: #ff0000;">文字校对</a></div>
     <?php
         if($nowOnStep == 1){?>
-            <div class="stage"><a href="#" class="word">看打</a></div>
-            <div class="stage"><a href="#" class="word">听打</a></div>
-            <div class="stage"><a href="#" class="word">听打校对</a></div>
-            <div class="stage"><a href="#" class="word">盲打</a></div>
-            <div class="stage"><a href="#" class="word">视频纠错</a></div>
+            <div class="stage"><a href="#" class="word">文本速录</a></div>
+            <div class="stage"><a href="#" class="word">实时速录</a></div>
+            <div class="stage"><a href="#" class="word">会议公文整理</a></div>
+            <div class="stage"><a href="#" class="word">蒙目速录</a></div>
+            <div class="stage"><a href="#" class="word">模拟办公管理</a></div>
     <?php }else{ ?>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">看打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">听打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">听打校对</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">盲打</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">视频纠错</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">文本速录</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">实时速录</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">会议公文整理</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">蒙目速录</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">模拟办公管理</a></div>
     <?php } ?>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_magnifier.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">文本校对</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_magnifier.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">文字校对</h3>
             <?php
     if ($nowOnStep != 0) {
         if($nowOnStep == 1){?>
         
-        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">文本校对</span></div>
+        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">文字校对</span></div>
       <?php
         }else if($nowOnStep == 2){?>
         
-        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">看打</span></div>
+        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">文本速录</span></div>
       <?php
         }else if($nowOnStep == 32){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">实时速录</span></div>';
         }else if($nowOnStep == 3){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听打</span></div>';
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">实时速录</span></div>';
         }else if($nowOnStep == 4){
             echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
         }else if($nowOnStep == 5){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">盲打</span></div>';
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">蒙目速录</span></div>';
         }else if($nowOnStep == 6){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">视频纠错</span></div>';
+            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">模拟办公管理</span></div>';
         }
     } else {?>
          <?php 
