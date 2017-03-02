@@ -31,10 +31,9 @@
         <thead>
             <tr>
                 <th class="font-center">考  号</th>
-                <th class="font-center">看打</th>
-                <th class="font-center">听打</th>
-                <th class="font-center">听打校对</th>
-                <th class="font-center">盲打</th>
+                <th class="font-center">文本速录</th>
+                <th class="font-center">实时速录</th>
+                <th class="font-center">蒙目速录</th>
             </tr>
         </thead>
         <tbody>        
@@ -43,7 +42,6 @@
                 <td style="text-align: center"><?php echo $model['studentID'];?></td>
                 <td style="text-align: center"><?php if($model['resultstep2']['rate']==null){echo"未作答";}else{echo $model['resultstep2']['rate']."%";}?></td>
                 <td style="text-align: center"><?php if($model['resultstep3']['rate']==null){echo"未作答";}else{echo $model['resultstep3']['rate']."%";}?></td>
-                <td style="text-align: center"><?php if($model['resultstep4']['rate']==null){echo"未作答";}else{echo $model['resultstep4']['rate']."%";}?></td>
                 <td style="text-align: center"><?php if($model['resultstep5']['rate']==null){echo"未作答";}else{echo $model['resultstep5']['rate']."%";}?></td>
             </tr>
             <?php endforeach; ?> 

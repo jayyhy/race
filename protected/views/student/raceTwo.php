@@ -3,7 +3,7 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
     <div style="margin-left: 40px;">
-    <img src="<?php echo IMG_URL_NEW; ?>icon_open.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">看打</h2>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_open.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">文本速录</h2>
     </div>
     <div style="width: 530px;height: 150px;background-color: #ffffff;float: left;margin-left: 40px;">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
@@ -48,12 +48,12 @@
             var originalContent='<?php echo $race['content'];?>';
             var content2=yaweiOCX1.GetContent();
             content2=content2.replace(/'/, "‘").replace(/"/, "“");
-            content2=content2.replace(/\r\n/g, "*").replace(/ /g, "*").replace(/[　]/g, "*");
+            content2=content2.replace(/\r\n/g, "").replace(/ /g, "").replace(/[　]/g, "");
             if(content2==""){
                 <?php 
                         $step2raceID = race::model()->find("indexID=? AND step=?", array($race['indexID'], 2))['raceID']; 
                         $content1=AnswerRecord::model()->find("raceID=? AND studentID=?",array($step2raceID,$StudentID))['content'];
-                        $content2=  Tool::filterAllSpaceAndTab1($content1);
+                        $content2=  Tool::filterAllSpaceAndTab($content1);
                 ?>
                 content2="<?php echo $content2; ?>";
             }

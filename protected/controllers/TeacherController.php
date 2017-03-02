@@ -74,7 +74,6 @@ class TeacherController extends CController {
             case 1:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
-//                    $score = $_POST['score'];
                     Race::model()->addRace($indexID, $step, "", 0, $time, "", "");
                     $result = 1;
                 }
@@ -117,7 +116,7 @@ class TeacherController extends CController {
                                 $content = iconv('GBK', 'utf-8', $content);
                             }    
                             $txtContent = Tool::removesign($content, 0);
-                            $txtContent = Tool::filterAllSpaceAndTab1($txtContent);
+                            $txtContent = Tool::filterAllSpaceAndTab($txtContent);
                             Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
                             $result = "1";
                        }
@@ -148,7 +147,6 @@ class TeacherController extends CController {
                         mkdir($radioDir, 0777);
                     }
                     $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
-                    $flag2 = Race::model()->find("indexID=? AND step =?", array($indexID, 32));
                     if ($flag==null){
                           //上传音频图片
                      if($_FILES["picfile"]["name"]){
@@ -167,7 +165,6 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-//                        $result = "1";
                     } 
                    } 
                         
@@ -184,16 +181,14 @@ class TeacherController extends CController {
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newName));
                         Resourse::model()->insertAudition($newName, $oldName,$indexID);
-                        
-//                        $result = "1";
                             } 
                         }
                             if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
-                            $result4 = '第一个音频格式不正确，应为MP3或WAV格式';
+                            $result4 = '音频格式不正确，应为MP3或WAV格式';
                         } else if ($_FILES['file']['error'] > 0) {
-                                 $result4 = '第一个音频文件上传失败';
+                                 $result4 = '音频文件上传失败';
                          } else {
                         $oldName = $_FILES["file"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
@@ -236,28 +231,8 @@ class TeacherController extends CController {
                             }    
                             $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                          
-                           if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
-                          $_FILES ['file2'] ['type'] != "audio/wav" &&
-                          $_FILES ['file2'] ['type'] != "audio/x-wav") {
-                          $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
-                          } else if ($_FILES['file2']['error'] > 0) {
-                              $result2 = '第二个音频文件上传失败';
-                         } else {
-                              Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
-                           $oldName = $_FILES["file2"]["name"];
-                           $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
-                           move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
-                           Resourse::model()->insertRelaVoice($newName, $oldName);
-                           $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                           $player=new COM("WMPlayer.OCX");
-                           $media=$player->newMedia($file);
-                           $time=round($media->duration);
-                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
-                           $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-                           Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
-                           $result = "1";
-                        } 
+                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                            $result = "1";
                        }
                     }
                 }
@@ -282,16 +257,16 @@ class TeacherController extends CController {
                         $newNames = Tool::createID() . "." . pathinfo($oldNames, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newNames));
                         Resourse::model()->insertAudition($newNames, $oldNames,$indexID);
-//                        $result = "1";
+                        $result = "1";
                             } 
                         }
                    if($_FILES["file"]["name"]!=""){
                         if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
-                                $result4 = '第一个音频文件格式不正确，应为MP3或WAV格式';
+                                $result4 = '音频文件格式不正确，应为MP3或WAV格式';
                             } else if ($_FILES['file']['error'] > 0) {
-                                 $result4 = '第一个音频文件上传失败';
+                                 $result4 = '音频文件上传失败';
                               }else {
                         $oldName = $_FILES["file"]["name"];
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
@@ -365,87 +340,16 @@ class TeacherController extends CController {
                         $time=round($media->duration);
                         $result = "1";
                     } 
-                   } 
-                     
-                 if($_FILES["file2"]["name"]!=""){
-                        if ($_FILES ['file2'] ['type'] != "audio/mpeg" &&
-                            $_FILES ['file2'] ['type'] != "audio/wav" &&
-                            $_FILES ['file2'] ['type'] != "audio/x-wav") {
-                                $result2 = '第二个音频文件格式不正确，应为MP3或WAV格式';
-                            } else if ($_FILES['file2']['error'] > 0) {
-                                 $result2 = '第二个音频文件上传失败';
-                              }else {
-                        $oldName = $_FILES["file2"]["name"];
-                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
-                        move_uploaded_file($_FILES["file2"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
-                        Resourse::model()->insertRelaVoice($newName, $oldName);
-                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                        $player=new COM("WMPlayer.OCX");
-                        $media=$player->newMedia($file);
-                        $time=round($media->duration);
-                        Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
-                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-                        Race::model()->addRace($indexID, 4, "", 0, $step4['time'], "", "");
-                        $result = "1";
-                            } 
-                        }else {
-                           $newName = $flag2['resourseID'];
-                           $oldName = $flag2['fileName'];
-                           $time = $flag2['time'];
-                           Race::model()->addRace($indexID, 32, "", 0, $time, $newName, $oldName);
-                        }    
+                   }   
          }          
              }
                 $render = 'Three';
                 break;
             case 4:
                 if (isset($_POST['time'])) {
-                    $flag = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
                     $time = $_POST['time']*60;
-                    $txtNoSpace="";
-                    if(!empty($_FILES["myfile"]['name'])){
-                     $tmp_file = $_FILES ['myfile'] ['tmp_name'];
-                     $file_types = explode(".", $_FILES ['myfile'] ['type']);
-                     $file_type = $file_types [count($file_types) - 1];
-                     // 判别是不是excel文件
-                     if (strtolower($file_type) != "text/plain") {
-                        $result = '不是txt文件';
-                     } else {
-                     // 解析文件并存入数据库逻辑
-                     /* 设置上传路径 */
-                      $savePath = dirname(Yii::app()->BasePath) . "./resources/race/";
-                      $file_name = "-" . $_FILES ['myfile'] ['name'] . "-";
-                      $file_name = iconv("UTF-8","GB2312//IGNORE",$file_name);
-                      if (!copy($tmp_file, $savePath . $file_name)) {
-                        $result = '上传失败';
-                      } else {
-                        $file_dir = $savePath . $file_name;
-                        $file_dir = str_replace("\\", "\\\\", $file_dir);
-                        $fp = fopen($file_dir, "r");
-                        move_uploaded_file($file_name, $savePath);
-                        $file_name=iconv("gb2312","UTF-8", $file_name);
-                        if (filesize($file_dir) < 1) {
-                            $result = '空文件，上传失败';
-                        } else {
-                            $content = fread($fp, filesize($file_dir)); //读文件 
-                            $encode = mb_detect_encoding($content, array("ASCII","UTF-8","GB2312","GBK",'BIG5'));
-                            if($encode == ""){
-                                $content = iconv('UCS-2', 'utf-8', $content);
-                            }else if($encode =="EUC-CN"){
-                                $content = iconv('GBK', 'utf-8', $content);
-                            }                          
-                            $txtContent = Tool::removesign($content, 0);
-                            $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, "", "");
-                            $result = "1";
-                       }
-                    }
-                }
-            }else {
-                $txtContent = $flag["content"];
-                Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
-                $result = "1";
-            }
+                    Race::model()->addRace($indexID, $step, "", 0, $time, "", "");
+                    $result = "1";
                 }
                 $render = 'Four';
                 break;
@@ -638,11 +542,9 @@ class TeacherController extends CController {
         }
         $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
         if($render == "Three"){
-            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
             $this->render('editRace' . $render, array(
                 'raceLst' => $raceList,
             'race' => $race,
-            'race2'=>$race2,
             'result' => $result,
             'result2' => $result2,
             'result3' => $result3,
@@ -861,9 +763,7 @@ class TeacherController extends CController {
                     Course::model()->overRace($teacherID);
                     $step = $step + 1;
                     Race::model()->isover($indexID,$step);
-                    $step = 32;
-                    $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
-                    $render = "Three1";
+                    $render = "four";
                     $tip = 1;
                     break;
                 }
@@ -913,24 +813,6 @@ class TeacherController extends CController {
                 }
                 $render = "Six";
                 break;
-            case 32:
-                if (isset($_GET['raceID'])) {
-                    $CDTime = $_GET['CDTime'];
-                    Course::model()->startRace($_GET['raceID'], $teacherID,$CDTime);
-                }
-                if (isset($_GET['over'])) {
-                    Course::model()->overRace($teacherID);
-                    $step = 32;
-                    Race::model()->isover($indexID,$step);
-                    $step = 4;
-                    $tip = 1;
-                    $render = "Four";
-                    break;
-                }
-                $step = 32;
-                $render = "Three1";
-                $tip = 0;
-                break;
         }
             
         $endTime = Course::model()->isOpen($teacherID);
@@ -939,14 +821,8 @@ class TeacherController extends CController {
         }
         $nowOnStep = Course::model()->getNowOnStep($teacherID);
         if($render == "Three"){
-           $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
-          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
+          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
         }
-        else if ($render == "Three1") {
-            $race2 = Race::model()->find("indexID=? AND step=?", array($indexID, 3));
-            $race = Race::model()->find("indexID=? AND step=?", array($indexID, 32));
-          $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race,'race2'=>$race2, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep,"tip" =>$tip));  
-         }
          else if ($render == "Four") {
             $race = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
           $this->render('control' . $render, array("step" => $step,"raceIndex" => $raceIndex, "race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));  
@@ -1115,7 +991,7 @@ class TeacherController extends CController {
                 ];
                 array_push($data, $arrayData);
             }   
-        $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
+        $title=array('学号','文本速录','实时速录','会议公文整理','蒙目速录','模拟办公管理');
         $filename="考场".$indexID."导出正确率";
         if(isset($_GET['answer'])){
         $filename="考场".$indexID."导出作答内容";}
@@ -1134,11 +1010,11 @@ class TeacherController extends CController {
         $objActSheet = $objectPHPExcel->getActiveSheet();
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray1);
         $objectPHPExcel->getActiveSheet()->setCellValue('A1','学号');
-        $objectPHPExcel->getActiveSheet()->setCellValue('B1','看打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('C1','听打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('D1','听打校对');
-        $objectPHPExcel->getActiveSheet()->setCellValue('E1','盲打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('F1','视频纠错');
+        $objectPHPExcel->getActiveSheet()->setCellValue('B1','文本速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('C1','实时速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('D1','会议公文整理');
+        $objectPHPExcel->getActiveSheet()->setCellValue('E1','蒙目速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('F1','模拟办公管理');
         //设置字体居中
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F101')
         ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -1147,7 +1023,7 @@ class TeacherController extends CController {
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')
         ->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('ccffff');
         //设置视频纠错自动换行和宽度
-        $objActSheet->getColumnDimension('D')->setWidth(16);
+        $objActSheet->getColumnDimension('D')->setWidth(350);
         $objActSheet->getColumnDimension('F')->setWidth(350);
         if(isset($_GET['answer'])){
         $objectPHPExcel->getActiveSheet()->getStyle('B1:F101')->getAlignment()->setWrapText(true);
@@ -1157,6 +1033,7 @@ class TeacherController extends CController {
         $objActSheet->getColumnDimension('E')->setWidth(300); 
         $objActSheet->getColumnDimension('F')->setWidth(300);   
         }
+        $objectPHPExcel->getActiveSheet()->getStyle('D1:D101')->getAlignment()->setWrapText(true);
         $objectPHPExcel->getActiveSheet()->getStyle('F1:F101')->getAlignment()->setWrapText(true);
         $one = 2;$two = 2;$tree = 2;$four =2;$five = 2;$six = 2;
         //导出考生成绩信息
@@ -1201,7 +1078,7 @@ class TeacherController extends CController {
               if($model['resultstep4']['rate']==null){
               $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,"未作答");}
               else{
-              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,$model['resultstep4']['rate']."%");}
+              $objectPHPExcel->getActiveSheet()->setCellValue('D'.($four++) ,$model['resultstep4']['content']."%");}
               if($model['resultstep5']['rate']==null){
               $objectPHPExcel->getActiveSheet()->setCellValue('E'.($five++) ,"未作答");}
               else{
