@@ -629,7 +629,7 @@ class TeacherController extends CController {
         $this->render('raceLst', array(
             'raceLst' => $result,
             'pages' => $pages,
-            'result' => ''
+            'result' => '1'
         ));
     }
     
