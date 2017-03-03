@@ -3,7 +3,7 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body onbeforeunload="getVideoTime()">
     <div style="margin-left: 30px;">
-    <img src="<?php echo IMG_URL_NEW; ?>icon_video.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">视频纠错</h2>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_video.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 180px">模拟办公管理</h2>
 
     <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
     <?php if (file_exists($listenpath)) { ?>

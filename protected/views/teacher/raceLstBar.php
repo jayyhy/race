@@ -96,7 +96,22 @@
             window.wxc.xcConfirm('请输入试卷名', window.wxc.xcConfirm.typeEnum.info);
         }
     }
-
+    $(document).ready(function () {
+        var result = <?php echo "'$result'"; ?>;
+        if (result === '1')
+            window.wxc.xcConfirm("操作成功！", window.wxc.xcConfirm.typeEnum.success, {
+                onOk: function () {
+                    window.location.href = "./index.php?r=teacher/raceLst";
+                }
+            });
+        else if (result === '0') {
+            window.wxc.xcConfirm("操作失败！", window.wxc.xcConfirm.typeEnum.error, {
+                onOk: function () {
+                    window.location.href = "./index.php?r=teacher/raceLst";
+                }
+            });
+        }
+    });
     
 </script>
     

@@ -94,7 +94,7 @@ class RaceIndex extends CActiveRecord {
                 $command=$connection->createCommand($sql);
                 $command->execute();
           }
-          AnswerRecord::model()->delete('raceID=?', array($v['raceID']));  
+          AnswerRecord::model()->deleteAll('raceID=?', array($v['raceID']));  
         }
           Race::model()->deleteAll('indexID=?', array($raceIndex));
     }

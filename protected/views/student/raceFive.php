@@ -3,7 +3,7 @@
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
     <div style="margin-left: 50px">
-    <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">盲打</h2>
+    <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 120px">蒙目速录</h2>
     <div style="width: 530px;height: 150px;background-color: #ffffff;float: left">
         <h4 style="position: relative;left: 30px;color: gray;top: 10px">本阶段共：</h4>
         <h2 style="position: relative;left:122px;top:50px"><?php echo floor($race['time'] / 60); ?> 分 <?php echo floor($race['time']-floor($race['time'] / 60) * 60); ?> 秒</h2>

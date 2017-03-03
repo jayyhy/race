@@ -629,7 +629,7 @@ class TeacherController extends CController {
         $this->render('raceLst', array(
             'raceLst' => $result,
             'pages' => $pages,
-            'result' => ''
+            'result' => '1'
         ));
     }
     
@@ -991,7 +991,7 @@ class TeacherController extends CController {
                 ];
                 array_push($data, $arrayData);
             }   
-        $title=array('学号','看打','听打','听打校对','盲打','视频纠错');
+        $title=array('学号','文本速录','实时速录','会议公文整理','蒙目速录','模拟办公管理');
         $filename="考场".$indexID."导出正确率";
         if(isset($_GET['answer'])){
         $filename="考场".$indexID."导出作答内容";}
@@ -1010,11 +1010,11 @@ class TeacherController extends CController {
         $objActSheet = $objectPHPExcel->getActiveSheet();
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray1);
         $objectPHPExcel->getActiveSheet()->setCellValue('A1','学号');
-        $objectPHPExcel->getActiveSheet()->setCellValue('B1','看打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('C1','听打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('D1','听打校对');
-        $objectPHPExcel->getActiveSheet()->setCellValue('E1','盲打');
-        $objectPHPExcel->getActiveSheet()->setCellValue('F1','视频纠错');
+        $objectPHPExcel->getActiveSheet()->setCellValue('B1','文本速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('C1','实时速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('D1','会议公文整理');
+        $objectPHPExcel->getActiveSheet()->setCellValue('E1','蒙目速录');
+        $objectPHPExcel->getActiveSheet()->setCellValue('F1','模拟办公管理');
         //设置字体居中
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F101')
         ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

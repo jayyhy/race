@@ -31,9 +31,9 @@
         <thead>
             <tr>
                 <th class="font-center">考  号</th>
-                <th class="font-center">看打</th>
-                <th class="font-center">听打</th>
-                <th class="font-center">盲打</th>
+                <th class="font-center">文本速录</th>
+                <th class="font-center">实时速录</th>
+                <th class="font-center">蒙目速录</th>
             </tr>
         </thead>
         <tbody>        
