@@ -104,12 +104,12 @@
                                 <?php $listenpath1 = "./resources/race/" . $race['resourseID'];; ?>
             <?php if (file_exists($listenpath1)) { ?>
                  <audio id="audio2" src = "<?php echo $listenpath1; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
-                      <input type="file" name="file" id="input02" style="margin-top: 17px;display: none"> <span style=" position: relative;left: 47px;top: 11px;display: none" id="span2">(上传第一个音频,mp3或wav)</span>          
+                      <input type="file" name="file" id="input02" style="margin-top: 17px;display: none"> <span style=" position: relative;left: 47px;top: 11px;display: none" id="span2">(上传音频,mp3或wav)</span>          
                      <?php } else { ?>
-                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: 47px;top: 11px">(上传第一个音频,mp3或wav)</span><span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
+                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: 47px;top: 11px">(上传音频,mp3或wav)</span><span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
                                 <?php } ?>
                                     <?php } else {?>
-                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: 47px;top: 11px">(上传第一个音频,mp3或wav)</span>
+                                    <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: 47px;top: 11px">(上传音频,mp3或wav)</span>
                 <?php } ?>
             </div>
             <div style="margin-top: 24px;margin-left: 60px">
