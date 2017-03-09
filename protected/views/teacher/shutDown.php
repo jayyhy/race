@@ -1,7 +1,7 @@
 <html lang="zh-cn">
     <head>
         <meta charset="utf-8">
-        <title>亚伟速录</title>
+        <title>亚伟速录竞赛系统(2017)</title>
         <link href="<?php echo CSS_URL; ?>bootstrap.min.css" rel="stylesheet">
             <link href="<?php echo CSS_URL; ?>site.css" rel="stylesheet">
             <script src="<?php echo JS_URL; ?>jquery.min.js"></script>
