@@ -6,7 +6,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
     <html lang="zh-cn"><!--<![endif]--> 
         <head>
             <meta charset="utf-8">
-            <title>亚伟速录</title>
+            <title>亚伟速录竞赛系统(2017)</title>
             <link href="<?php echo CSS_URL; ?>bootstrap.min.css" rel="stylesheet">
             <link href="<?php echo CSS_URL; ?>site.css" rel="stylesheet">
             <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -22,7 +22,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
         <body  style="background-color: #f8f4f2">
              <div class="ywnav">
                  <div class="ywlogo"> </div>
-                    <font class="ysgs" style="margin-left: 48%;">亚伟国赛考试系统</font>
+                    <font class="ysgs" style="margin-left: 42%;">亚伟速录竞赛系统(2017)</font>
                 <div class="userUI">
                                             <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                                                 
