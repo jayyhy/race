@@ -47,48 +47,36 @@ require 'examSideBar.php';
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
+        $index_id=$_GET['indexID'];
+        $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
+        $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
+        $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
+        $stepName4=  Race::model()->find("indexID=? AND step=?",array($index_id,4))['raceName'];
+        $stepName5=  Race::model()->find("indexID=? AND step=?",array($index_id,5))['raceName'];
+        $stepName6=  Race::model()->find("indexID=? AND step=?",array($index_id,6))['raceName'];
         if($nowOnStep == 5){?>
-            <div class="stage" style=" margin-left: 25px"><a href="#" class="word">文字校对</a></div>
-            <div class="stage"><a href="#" class="word">文本速录</a></div>
-            <div class="stage"><a href="#" class="word">实时速录</a></div>
-            <div class="stage"><a href="#" class="word">会议公文整理</a></div>
+            <div class="stage" style=" margin-left: 25px"><a href="#" class="word"><?php echo $stepName1; ?></a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName2; ?></a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName3; ?></a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName4; ?></a></div>
     <?php }else{ ?>    
-            <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word">文字校对</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">文本速录</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">实时速录</a></div>
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">会议公文整理</a></div>
+            <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word"><?php echo $stepName1; ?></a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word"><?php echo $stepName2; ?></a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word"><?php echo $stepName3; ?></a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>
     <?php } ?>    
-        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word" style=" color: #ff0000;">蒙目速录</a></div>
+        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word" style=" color: #ff0000;"><?php echo $stepName5; ?></a></div>
     <?php
         if($nowOnStep == 5){?>
-            <div class="stage"><a href="#" class="word">模拟办公管理</a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName6; ?></a></div>
     <?php }else{ ?>    
-            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">模拟办公管理</a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word"><?php echo $stepName6; ?></a></div>
     <?php } ?>    
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">蒙目速录</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 300px"><?php echo $stepName5; ?></h3>
             <?php
     if ($nowOnStep != 0) {
-        if($nowOnStep == 1){?>
-        
-        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">文字校对</span></div>
-      <?php
-        }else if($nowOnStep == 2){?>
-        
-        <div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">文本速录</span></div>
-      <?php
-        }else if($nowOnStep == 3){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">实时速录</span></div>';
-        }else if($nowOnStep == 32){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">实时速录</span></div>';
-        }else if($nowOnStep == 4){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">听到校对</span></div>';
-        }else if($nowOnStep == 5){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">蒙目速录</span></div>';
-        }else if($nowOnStep == 6){
-            echo '<div class="currentTag"><span class="wordTag1">当前进行:</span><span class="wordTag2">模拟办公管理</span></div>';
-        }
     } else {?>
          <?php 
             $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));

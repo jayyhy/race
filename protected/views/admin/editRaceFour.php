@@ -5,37 +5,37 @@
             if ($step == 1) {
                 echo 'class="active"';
             }
-            ?>  ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1"><i class="icon-align-left"></i> 文字校对</a></li>
+            ?>  ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1"><i class="icon-align-left"></i> 1</a></li>
             <li <?php
             if ($step == 2) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2"><i class="icon-align-left"></i> 文本速录</a></li>
+            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2"><i class="icon-align-left"></i> 2</a></li>
             <li <?php
             if ($step == 3) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3"><i class="icon-align-left"></i> 实时速录</a></li>
+            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3"><i class="icon-align-left"></i> 3</a></li>
             <li <?php
             if ($step == 4) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4"><i class="icon-align-left"></i> 会议公文整理</a></li>
+            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4"><i class="icon-align-left"></i> 4</a></li>
             <li <?php
             if ($step == 5) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5"><i class="icon-align-left"></i> 蒙目速录</a></li>
+            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5"><i class="icon-align-left"></i> 5</a></li>
             <li <?php
             if ($step == 6) {
                 echo 'class="active"';
             }
-            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6"><i class="icon-align-left"></i> 模拟办公管理</a></li>
+            ?> ><a href="./index.php?r=admin/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6"><i class="icon-align-left"></i> 6</a></li>
         </ul>
     </div>
 </div>
 <div class="span9">
-    <h2>会议公文整理</h2>
+    <h2>4</h2>
     <div align="center">
         <h3>持续时间以及配分</h3><br/>
         <h3></h3>
