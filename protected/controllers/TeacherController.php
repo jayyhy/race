@@ -71,6 +71,41 @@ class TeacherController extends CController {
         $result4 = "";
         $result5 = "";
         switch ($step) {
+            case 0:
+                if (isset($_POST['name'])) {
+                    $flag0 = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+                    $dir = "./resources/race/";
+                    $raceName=$_POST['name'];
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777);
+                    }
+                    if($_FILES["file"]["name"]!=""){
+                     if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
+                            $_FILES ['file'] ['type'] != "audio/wav" &&
+                            $_FILES ['file'] ['type'] != "audio/x-wav") {
+                        $result = '文件格式不正确，应为MP3或WAV格式';
+                     } else if ($_FILES['file']['error'] > 0) {
+                        $result = '文件上传失败';
+                     } else {
+                        $oldName = $_FILES["file"]["name"];
+                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
+                        Resourse::model()->insertRelaVoice($newName, $oldName);
+                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
+                        $player=new COM("WMPlayer.OCX");
+                        $media=$player->newMedia($file);
+                        $time=round($media->duration);
+                        Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, $newName, $oldName);
+                        $result = "1";
+                      } 
+                     }  else {
+                         $race0 = Race::model()->find("indexID=? AND step =?", array($indexID, $step));
+                         $race0 ->raceName = $raceName;
+                         $race0->update();
+                     }
+                }
+                $render = 'Audition';
+                break;
             case 1:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
@@ -170,22 +205,6 @@ class TeacherController extends CController {
                         $time=round($media->duration);
                     } 
                    } 
-                        
-                        
-                        if($_FILES["files"]["name"]!=""){
-                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
-                            $_FILES ['files'] ['type'] != "audio/wav" &&
-                            $_FILES ['files'] ['type'] != "audio/x-wav") {
-                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
-                            } else if ($_FILES['files']['error'] > 0) {
-                                 $result5 = '试音音频文件上传失败';
-                              }else {
-                        $oldName = $_FILES["files"]["name"];
-                        $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
-                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newName));
-                        Resourse::model()->insertAudition($newName, $oldName,$indexID);
-                            } 
-                        }
                             if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
                             $_FILES ['file'] ['type'] != "audio/x-wav") {
@@ -249,21 +268,6 @@ class TeacherController extends CController {
                    $oldName = $flag['fileName'];
                    $time = $flag['time'];
                    $txtNoSpace = $flag['content']; 
-                   if($_FILES["files"]["name"]!=""){
-                         if ($_FILES ['files'] ['type'] != "audio/mpeg" &&
-                            $_FILES ['files'] ['type'] != "audio/wav" &&
-                            $_FILES ['files'] ['type'] != "audio/x-wav") {
-                                $result5 = '试音音频文件格式不正确，应为MP3或WAV格式';
-                            } else if ($_FILES['files']['error'] > 0) {
-                                 $result5 = '试音音频文件上传失败';
-                              }else {
-                        $oldNames = $_FILES["files"]["name"];
-                        $newNames = Tool::createID() . "." . pathinfo($oldNames, PATHINFO_EXTENSION);
-                        move_uploaded_file($_FILES["files"]["tmp_name"], $radioDir . iconv("UTF-8", "gb2312", $newNames));
-                        Resourse::model()->insertAudition($newNames, $oldNames,$indexID);
-                        $result = "1";
-                            } 
-                        }
                    if($_FILES["file"]["name"]!=""){
                         if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
                             $_FILES ['file'] ['type'] != "audio/wav" &&
@@ -280,9 +284,6 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
-                        
-//                        $step4 = Race::model()->find("indexID=? AND step=?", array($indexID, 4));
-//                        Race::model()->addRace($indexID, 4, $content, $step4['score'], $step4['time'], "", "");
                         $result = "1";
                             } 
                         }
@@ -736,6 +737,9 @@ class TeacherController extends CController {
             }
          }
         switch ($step) {
+            case 0:
+                $render = "Audition";
+                break;
             case 1:
                 if (isset($_GET['raceID'])) {
                     $CDTime = $_GET['CDTime'];
@@ -1041,7 +1045,10 @@ class TeacherController extends CController {
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')
         ->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('ccffff');
         //设置视频纠错自动换行和宽度
+        $objActSheet->getColumnDimension('B')->setWidth(16);
+        $objActSheet->getColumnDimension('C')->setWidth(16);
         $objActSheet->getColumnDimension('D')->setWidth(350);
+        $objActSheet->getColumnDimension('E')->setWidth(16);
         $objActSheet->getColumnDimension('F')->setWidth(350);
         if(isset($_GET['answer'])){
         $objectPHPExcel->getActiveSheet()->getStyle('B1:F101')->getAlignment()->setWrapText(true);

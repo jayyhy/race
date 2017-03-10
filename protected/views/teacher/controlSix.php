@@ -50,6 +50,7 @@ require 'examSideBar.php';
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
         $index_id=$_GET['indexID'];
+        $stepName0=  Race::model()->find("indexID=? AND step=?",array($index_id,0))['raceName'];
         $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
         $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
         $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
@@ -57,13 +58,15 @@ require 'examSideBar.php';
         $stepName5=  Race::model()->find("indexID=? AND step=?",array($index_id,5))['raceName'];
         $stepName6=  Race::model()->find("indexID=? AND step=?",array($index_id,6))['raceName'];
         if($nowOnStep == 6){?>
-            <div class="stage" style=" margin-left: 25px"><a href="#" class="word"><?php echo $stepName1; ?></a></div>
+            <div class="stage" style=" margin-left: 25px;"><a href="#" class="word"><?php echo $stepName0; ?></a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName1; ?></a></div>
             <div class="stage"><a href="#" class="word"><?php echo $stepName2; ?></a></div>
             <div class="stage"><a href="#" class="word"><?php echo $stepName3; ?></a></div>
             <div class="stage"><a href="#" class="word"><?php echo $stepName4; ?></a></div>    
             <div class="stage"><a href="#" class="word"><?php echo $stepName5; ?></a></div>
     <?php }else{ ?>    
-            <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word"><?php echo $stepName1; ?></a></div>
+            <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=0" class="word"><?php echo $stepName0; ?></a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word"><?php echo $stepName1; ?></a></div>
             <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word"><?php echo $stepName2; ?></a></div>
             <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word"><?php echo $stepName3; ?></a></div>
             <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>    
@@ -103,7 +106,7 @@ require 'examSideBar.php';
         
         <?php if (file_exists($listenpath)) { ?>
         <span class="words" style="position: relative;left: 61px;top: -174px">考试视频</span>
-        <video id="audio" style="position: relative;left: 93px;top: 9px;width: 356px;height: 200px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></video><br>
+        <video id="audio" style="position: relative;left: 93px;top: 9px;width: 356px;height: 200px" src="<?php echo $listenpath; ?>" preload="auto"  ></video><br>
     <?php } else { ?>
         <span class="words" style="position: relative;left: 61px;">考试音频</span>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
@@ -113,6 +116,9 @@ require 'examSideBar.php';
 </div>
 
 <script>
+    $("#audio").bind("contextmenu",function(e){  
+          return false;  
+        });
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -126,7 +132,7 @@ require 'examSideBar.php';
         ?>   
             <?php
         if($nowOnStep == 0){ ?>
-        window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+        window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=0";
         <?php }else{ ?>
         var onindexID =<?php echo $onindexID?> 
         if(onindexID == inindexID){ 
