@@ -74,7 +74,8 @@ class TeacherController extends CController {
             case 1:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
-                    Race::model()->addRace($indexID, $step, "", 0, $time, "", "");
+                    $raceName=$_POST['name'];
+                    Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, "", "");
                     $result = 1;
                 }
                 $render = 'One';
@@ -117,14 +118,16 @@ class TeacherController extends CController {
                             }    
                             $txtContent = Tool::removesign($content, 0);
                             $txtContent = Tool::filterAllSpaceAndTab($txtContent);
-                            Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
+                            $raceName=$_POST['name'];
+                            Race::model()->addRace($indexID, $step,$raceName, $txtContent, 0, $time, "", "");
                             $result = "1";
                        }
                     }
                 }
             }else {
                 $txtContent = $flag["content"];
-                Race::model()->addRace($indexID, $step, $txtContent, 0, $time, "", "");
+                $raceName=$_POST['name'];
+                Race::model()->addRace($indexID, $step,$raceName, $txtContent, 0, $time, "", "");
                 $result = "1";
             }
                     
@@ -231,7 +234,8 @@ class TeacherController extends CController {
                             }    
                             $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                            Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                            $raceName=$_POST['name'];
+                            Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
                             $result = "1";
                        }
                     }
@@ -320,7 +324,8 @@ class TeacherController extends CController {
                                 }
                             }
                      }
-                     Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                     $raceName=$_POST['name'];
+                     Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
                                            //上传音频图片
                      if($_FILES["picfile"]["name"]){
                       if ($_FILES ['picfile'] ['type'] != "image/png" &&
@@ -348,7 +353,8 @@ class TeacherController extends CController {
             case 4:
                 if (isset($_POST['time'])) {
                     $time = $_POST['time']*60;
-                    Race::model()->addRace($indexID, $step, "", 0, $time, "", "");
+                    $raceName=$_POST['name'];
+                    Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, "", "");
                     $result = "1";
                 }
                 $render = 'Four';
@@ -410,7 +416,8 @@ class TeacherController extends CController {
                             }    
                             $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
-                           Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                            $raceName=$_POST['name'];
+                           Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
                             $result = "1";
                        }
                     }
@@ -481,7 +488,8 @@ class TeacherController extends CController {
                     }
                 }
             }
-                 Race::model()->addRace($indexID, $step, $txtNoSpace, 0, $time, $newName, $oldName);
+                 $raceName=$_POST['name'];
+                 Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
 //                 $result = "1";   
                 }
               }
@@ -505,7 +513,8 @@ class TeacherController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
-                            Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);  
+                            $raceName=$_POST['name'];
+                            Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, $newName, $oldName);  
                             $result ="1";
                         }
                     } else {
@@ -524,14 +533,16 @@ class TeacherController extends CController {
                             $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                             move_uploaded_file($_FILES["file"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                             Resourse::model()->insertRelaVideo($newName, $oldName);
-                            Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);
+                            $raceName=$_POST['name'];
+                            Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, $newName, $oldName);
                             $result ="1";
                         } 
                     }else {
                         $result2 = "请上传正确类型的文件！";
                     }
                   }else {
-                      Race::model()->addRace($indexID, $step, "", 0, $time, $newName, $oldName);
+                      $raceName=$_POST['name'];
+                      Race::model()->addRace($indexID, $step,$raceName, "", 0, $time, $newName, $oldName);
                       $result ="1";
                   }
                    
@@ -947,13 +958,15 @@ class TeacherController extends CController {
                 array_push($data, $arrayData);
             }
             $this->render('results', array(
-            'raceLst' => $result,
-            'pages' => $pages,
-            'stuList' => $stuList,
-            'data' => $data,
+                'indexID'=>$indexID,
+                'raceLst' => $result,
+                'pages' => $pages,
+                'stuList' => $stuList,
+                'data' => $data,
         ));
         }else{
         $this->render('results', array(
+            'indexID'=>'',
             'raceLst' => $result,
             'pages' => $pages,
             'result' => ''
@@ -970,18 +983,23 @@ class TeacherController extends CController {
                 $step1 = $step1['raceID'];
                 $resultstep1 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step1));
                 $step2 = Race::model()->find("step=? AND indexID=?",array(2,$indexID));
+                $stepName2=$step2['raceName'];
                 $step2 = $step2['raceID'];
                 $resultstep2 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step2));
                 $step3 = Race::model()->find("step=? AND indexID=?",array(3,$indexID));
+                $stepName3=$step3['raceName'];
                 $step3 = $step3['raceID'];
                 $resultstep3 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step3));
                 $step4 = Race::model()->find("step=? AND indexID=?",array(4,$indexID));
+                $stepName4=$step4['raceName'];
                 $step4 = $step4['raceID'];
                 $resultstep4 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step4));
                 $step5 = Race::model()->find("step=? AND indexID=?",array(5,$indexID));
+                $stepName5=$step5['raceName'];
                 $step5 = $step5['raceID'];
                 $resultstep5 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step5));
                 $step6 = Race::model()->find("step=? AND indexID=?",array(6,$indexID));
+                $stepName6=$step6['raceName'];
                 $step6 = $step6['raceID'];
                 $resultstep6 = AnswerRecord::model()->find("studentID=? AND raceid=?", array($studentID, $step6));
                 $arrayData = ["studentID"=>$studentID,
@@ -991,7 +1009,7 @@ class TeacherController extends CController {
                 ];
                 array_push($data, $arrayData);
             }   
-        $title=array('学号','文本速录','实时速录','会议公文整理','蒙目速录','模拟办公管理');
+        $title=array('学号',$stepName2,$stepName3,$stepName4,$stepName5,$stepName6);
         $filename="考场".$indexID."导出正确率";
         if(isset($_GET['answer'])){
         $filename="考场".$indexID."导出作答内容";}
@@ -1010,11 +1028,11 @@ class TeacherController extends CController {
         $objActSheet = $objectPHPExcel->getActiveSheet();
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray1);
         $objectPHPExcel->getActiveSheet()->setCellValue('A1','学号');
-        $objectPHPExcel->getActiveSheet()->setCellValue('B1','文本速录');
-        $objectPHPExcel->getActiveSheet()->setCellValue('C1','实时速录');
-        $objectPHPExcel->getActiveSheet()->setCellValue('D1','会议公文整理');
-        $objectPHPExcel->getActiveSheet()->setCellValue('E1','蒙目速录');
-        $objectPHPExcel->getActiveSheet()->setCellValue('F1','模拟办公管理');
+        $objectPHPExcel->getActiveSheet()->setCellValue('B1',$stepName2);
+        $objectPHPExcel->getActiveSheet()->setCellValue('C1',$stepName3);
+        $objectPHPExcel->getActiveSheet()->setCellValue('D1',$stepName4);
+        $objectPHPExcel->getActiveSheet()->setCellValue('E1',$stepName5);
+        $objectPHPExcel->getActiveSheet()->setCellValue('F1',$stepName6);
         //设置字体居中
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F101')
         ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
