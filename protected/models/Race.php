@@ -100,6 +100,10 @@ class Race extends CActiveRecord {
     }
     
     public function stepName($step){
+        if($step == "0"){
+            $i="试音";
+            return $i;
+        }
         if($step=='1'){
             $i="文字校对";
             return $i;

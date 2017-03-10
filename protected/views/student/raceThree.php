@@ -1,19 +1,9 @@
-<?php $indexID = $race['indexID'];
-         $race2 = Race::model()->find("indexID = '$indexID' and step = 32");
-         
-   ?>
+
 <!--<meta http-equiv="refresh" content="300">-->
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
 <body>
     <?php $listenpath = "./resources/race/" . $race['resourseID']; 
-            $radio = Resourse::model()->find("path='$indexID'"); 
-            $dir ="./resources/race/radio/";
-            $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
-            $player=new COM("WMPlayer.OCX");
-            $media=$player->newMedia($file);
-            $time=round($media->duration);
-            $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
     ?>
     <div style="margin-left: 60px;">
     <img src="<?php echo IMG_URL_NEW; ?>icon_horn.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 300px"><?php echo $race['raceName'];?></h2>
@@ -28,20 +18,18 @@
                 if($Picture != "" && file_exists($filePath)){
                  
                      ?>
-        <video id="audio" src = "<?php echo $listenpath; ?>" poster="<?php echo $filePath; ?>" height="200px" style="display: none"></video>
-        <video id="audio3" src = "<?php echo $listenpath3; ?>" poster="<?php echo $filePath; ?>" preload = "auto" autoplay="true" height="200px"></video>
+        <video id="audio" src = "<?php echo $listenpath; ?>" poster="<?php echo $filePath; ?>" preload = "auto" autoplay="true" height="200px"></video>
             <?php        
 
               }else{
         ?>
-        <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" height="200px" style="display: none"></video>
-        <video id="audio3" src = "<?php echo $listenpath3; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" preload = "auto" autoplay="true" height="200px"></video>
+        <video id="audio" src = "<?php echo $listenpath; ?>" poster="./resources/race/01d32256f4084132f875a944080917.gif" preload = "auto" autoplay="true" height="200px" ></video>
               <?php }} else { ?>
         <p style="color: red">原音频文件丢失或损坏！</p>
     <?php } ?>
     <div style="width: 300px;height: 150px;background-color: #ffffff;margin-left: -1px;float: left">
         <h4 style="position: relative;left: -86px;color: gray;top: 10px">本阶段共：</h4>
-        <h2 style="position: relative;left:-6px;top:31px"><?php echo floor(($race['time']+$time) / 60); ?> 分 <?php echo floor(($race['time']+$time)-floor(($race['time']+$time) / 60) * 60); ?> 秒</h2>
+        <h2 style="position: relative;left:-6px;top:31px"><?php echo floor(($race['time']) / 60); ?> 分 <?php echo floor(($race['time'])-floor(($race['time']) / 60) * 60); ?> 秒</h2>
     </div>
     <div style="width: 300px;height: 150px;background-color: #ffffff;margin-left: -1px;float: left">
         <h4 style="position: relative;left: -86px;color: gray;top: 10px">剩余时间：</h4>
@@ -124,7 +112,6 @@
         }
         
         function playAudio(sideTime){
-            var audio3 = document.getElementById("audio3");
             var audio = document.querySelector("#audio");
         }
             function timec(){

@@ -60,12 +60,10 @@
     }
 
 </script>
-<?php   
-         $indexID = $_GET['indexID'];
-         $radio = Resourse::model()->find("path='$indexID'");
-         $listenpath = "./resources/race/radio" . $radio['resourseID'];
+<?php
          $listenpath1 = "./resources/race/" . $race['resourseID'];
          $index_id=$_GET['indexID'];
+         $stepName0=  Race::model()->find("indexID=? AND step=?",array($index_id,0))['raceName'];
          $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
          $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
          $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
@@ -75,7 +73,8 @@
 ?>
 <div class="span9" style="width: 1176px;height: 800px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=0" class="word" ><?php echo $stepName0; ?></a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
         <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" ><?php echo $stepName2; ?></a></div>
         <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" style=" color: #ff0000;"><?php echo $stepName3; ?></a></div>
         <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>
@@ -90,29 +89,11 @@
                 <input id="name" type="text" class="search span2" placeholder="请输入本阶段名称" name="name" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['raceName']; ?>"/>&nbsp;&nbsp;
                 <span style="font-size: 16px;color: #767679;position: relative;top: 10px">(可重命名)</span>
             </div><br><br>
-            <div style="margin-top: -24px;margin-left: 60px;" >
-                <?php if ($radio != "") { ?>
-                <?php $listenpath = "./resources/race/radio/" . $radio['resourseID']; ?>
-                <?php if (file_exists($listenpath)) { ?>
-                    <audio id="audio1" src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(1)" id="a1"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
-                    <input type="file" name="files" id="input" style="float: left; display: none;margin-bottom:1% ">  <span style=" position: relative;left: 47px;top: 2px;float: left; display: none" id="span1">(上传试音音频,mp3或wav)</span>                        
-                <?php } else { ?>
-                            <input type="file" name="files" id="input" style="float: left;">  <span style=" position: relative;left: 47px;top: 2px;float: left;">(上传试音音频,mp3或wav)</span>         <span style="color: red;position: relative;left: 56px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
-                                <?php } ?>
-                                    <?php }else { ?>
-                <input type="file" name="files" id="input" style="float: left;">  <span style=" position: relative;left: 47px;top: 2px;float: left;">(上传试音音频,mp3或wav)</span>
-                <?php } ?>
-                                    
-                <span id="upload" style=" position: relative;left: 56px;display: none" >
-                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
-                            正在上传，请稍等...
-                            <span id="number">0%</span>
-                        </span>
-        </div>
             
-            <div style="clear:both;margin-top: 16px;margin-left: 60px;">
-               <?php if ($race != "") { ?>
-                                <?php $listenpath1 = "./resources/race/" . $race['resourseID'];; ?>
+            <div style="margin-top: -24px;margin-left: 60px;" >
+               <?php if ($race['resourseID']!="" ) { ?>
+                                <?php $listenpath1 = "./resources/race/" . $race['resourseID'];
+                                ?>
             <?php if (file_exists($listenpath1)) { ?>
                  <audio id="audio2" src = "<?php echo $listenpath1; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
                       <input type="file" name="file" id="input02" style="margin-top: 17px;display: none"> <span style=" position: relative;left: 47px;top: 11px;display: none" id="span2">(上传音频,mp3或wav)</span>          
@@ -122,6 +103,11 @@
                                     <?php } else {?>
                                     <input type="file" name="file" id="input02" style="margin-top: 22px"> <span style=" position: relative;left: 47px;top: 11px">(上传音频,mp3或wav)</span>
                 <?php } ?>
+                                     <span id="upload" style=" position: relative;left: 56px;display: none" >
+                            <img src="./img/default/upload-small.gif"  alt="正在努力上传。。"/>
+                            正在上传，请稍等...
+                            <span id="number">0%</span>
+                        </span>
             </div>
             <div style="margin-top: 24px;margin-left: 60px">
                 
@@ -146,23 +132,13 @@
     
     <?php 
     $tag = "0";
-    $tag3 = "0";
-    if($race == NULL){
+    if($race['resourseID'] == NULL){
        $tag = "1"; 
-    }
-    if($radio == NULL) {
-        $tag3 = "1";
     }
     ?>
     var tag = <?php echo $tag; ?>;
-    var tag3 = <?php echo $tag3; ?>;
     $("#myForm").submit(function () {
         var uploadFile = $("#input02")[0].value;
-        var radio = document.getElementById("input").value;
-        if(radio == "" && tag3 == "1"){
-            window.wxc.xcConfirm('试音文件不能为空', window.wxc.xcConfirm.typeEnum.warning);
-            return false;
-        }
         if (uploadFile === "" && tag=="1" )
         {
             window.wxc.xcConfirm('上传文件不能为空', window.wxc.xcConfirm.typeEnum.warning);

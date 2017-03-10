@@ -43,6 +43,7 @@
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
         <?php 
             $index_id=$_GET['indexID'];
+            $stepName0=  Race::model()->find("indexID=? AND step=?",array($index_id,0))['raceName'];
             $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
             $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
             $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
@@ -50,7 +51,8 @@
             $stepName5=  Race::model()->find("indexID=? AND step=?",array($index_id,5))['raceName'];
             $stepName6=  Race::model()->find("indexID=? AND step=?",array($index_id,6))['raceName'];
         ?>
-        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=0" class="word" ><?php echo $stepName0; ?></a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
         <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" style=" color: #ff0000;"><?php echo $stepName2; ?></a></div>
         <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word"><?php echo $stepName3; ?></a></div>
         <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>
