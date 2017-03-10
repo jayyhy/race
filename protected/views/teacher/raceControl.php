@@ -9,7 +9,7 @@ require 'examSideBar.php';
 <script>
     function getExam(indexID){
         <?php   if($isoncourse ==0){ ?>
-         window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+         window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=0";
         <?php }else{ 
             $onrace = Race::model()->find("raceID=?", array($isoncourse));
             $onstep = $onrace['step'];

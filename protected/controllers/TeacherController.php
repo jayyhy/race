@@ -1045,7 +1045,10 @@ class TeacherController extends CController {
         $objectPHPExcel->getActiveSheet()->getStyle('A1:F1')
         ->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('ccffff');
         //设置视频纠错自动换行和宽度
+        $objActSheet->getColumnDimension('B')->setWidth(16);
+        $objActSheet->getColumnDimension('C')->setWidth(16);
         $objActSheet->getColumnDimension('D')->setWidth(350);
+        $objActSheet->getColumnDimension('E')->setWidth(16);
         $objActSheet->getColumnDimension('F')->setWidth(350);
         if(isset($_GET['answer'])){
         $objectPHPExcel->getActiveSheet()->getStyle('B1:F101')->getAlignment()->setWrapText(true);
