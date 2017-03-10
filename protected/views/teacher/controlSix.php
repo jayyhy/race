@@ -71,8 +71,7 @@ require 'examSideBar.php';
     <?php } ?>
         <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word" style=" color: #ff0000;"><?php echo $stepName6; ?></a></div>
     </div>
-    <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_video.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 300px"><?php echo $stepName6; ?></h3>
+    <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px"><br><br><br><br>
             <?php
     if ($nowOnStep != 0) {
     } else {?>
