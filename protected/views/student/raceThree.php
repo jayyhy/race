@@ -70,7 +70,7 @@
             <?php $StudentID = Yii::app()->session['userid_now']; ?>
             var originalContent='<?php echo Tool::removeCharacter($race['content']);?>';
             var content2=yaweiOCX1.GetContent();
-            content2=content2.replace(/[\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
+            content2=content2.replace(/[\||\…|\^|\：|\—|\-|\~|\*|\￥|\$|\·|\`|\、|\“|\”|\’|\‘|\；|\;|\。|\，|\/|\%|\#|\！|\＠|\＆|\（|\）|\《|\＞|\＂|\＇|\？|\【|\】|\{|\}|\\|\｜|\+|\=|\_|\＾|\:|\》|\＜|\……|\.|\,|\!|\@|\&|\(|\)|\<|\>|\"|\?|\[|\]|]/g,"");
             content2=content2.replace(/\r\n/g, "").replace(/ /g, "").replace(/[　]/g, "");
             if(content2==""){
                 <?php 
