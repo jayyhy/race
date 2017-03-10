@@ -65,7 +65,7 @@
                 <a href="./index.php?r=user/forgetpassword" class="" id="forget-password" style="position: relative;top: 30px;left: 95px;">忘记密码?</a>
             </p>-->
             <div class="connect">
-                <p style="margin-right: 500px;margin-top:20px;">2015 &copy;南京兜秘网络科技有限公司.&nbsp;&nbsp;&nbsp;</p>
+                <p style="margin-right: 500px;margin-top:20px;">2017 &copy;北京速录科技有限公司.&nbsp;&nbsp;&nbsp;</p>
             </div>
         </div>
         <?php $this->endWidget(); ?>

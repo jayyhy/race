@@ -77,7 +77,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now'] 
                 </div></div> 
             </div>  
             <div  class="copyright">
-                2015 &copy;南京兜秘网络科技有限公司.&nbsp;&nbsp;&nbsp;<a href="#"  class="copyright">法律声明</a><a href="#"  class="copyright">联系我们</a><a href="#"  class="copyright">获得帮助</a>
+                2017 &copy;北京速录科技有限公司.&nbsp;&nbsp;&nbsp;<a href="#"  class="copyright">法律声明</a><a href="#"  class="copyright">联系我们</a><a href="#"  class="copyright">获得帮助</a>
             </div>
         </body>
     </html>
