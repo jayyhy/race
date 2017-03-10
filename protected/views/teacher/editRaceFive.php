@@ -59,20 +59,29 @@
 </script>
 <div class="span9" style="width: 1176px;height: 800px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" >&nbsp;&nbsp;1&nbsp;&nbsp;</a></div>
-        <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" >&nbsp;&nbsp;2&nbsp;&nbsp;</a></div>
-        <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" >&nbsp;&nbsp;3&nbsp;&nbsp;</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">&nbsp;&nbsp;4&nbsp;&nbsp;</a></div>
-        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word" style=" color: #ff0000;">&nbsp;&nbsp;5&nbsp;&nbsp;</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">&nbsp;&nbsp;6&nbsp;&nbsp;</a></div>
+        <?php 
+            $index_id=$_GET['indexID'];
+            $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
+            $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
+            $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
+            $stepName4=  Race::model()->find("indexID=? AND step=?",array($index_id,4))['raceName'];
+            $stepName5=  Race::model()->find("indexID=? AND step=?",array($index_id,5))['raceName'];
+            $stepName6=  Race::model()->find("indexID=? AND step=?",array($index_id,6))['raceName'];
+        ?>
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
+        <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" ><?php echo $stepName2; ?></a></div>
+        <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" ><?php echo $stepName3; ?></a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>
+        <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word" style=" color: #ff0000;"><?php echo $stepName5; ?></a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word"><?php echo $stepName6; ?></a></div>
     </div>
      <div style="background-color: #fff;height: 700px;margin-top: 20px;width: 1082px;margin-left: 16px;">
         <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-        <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">5</h3><br>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">阶段五</h3>
         <form class="form-horizontal" method="post" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" id="myForm" enctype="multipart/form-data">
             <div style="margin-top: -24px;margin-left: 60px" >
                 <input id="name" type="text" class="search span2" placeholder="请输入本阶段名称" name="name" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['raceName']; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #767679;position: relative;top:10px">本阶段名称</span>
+                <span style="font-size: 16px;color: #767679;position: relative;top:10px">(可重命名)</span>
             </div><br><br>
             <div style="margin-top: -24px;margin-left: 60px;" >
             <?php if ($race != "") { ?>
