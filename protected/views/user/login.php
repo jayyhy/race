@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
-    <title>亚伟国赛</title>
+    <title>亚伟速录竞赛系统(2017)</title>
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache,no-store, must-revalidate">
     <META HTTP-EQUIV="pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="expires" CONTENT="0"> 
@@ -22,8 +22,8 @@
 
 <body oncontextmenu="return false">
     <?php $form = $this->beginWidget('CActiveForm'); ?>
-    <div class="page-container">
-        <h1>国赛登录</h1>
+    <div class="page-container" style="text-align: center">
+        <h1 style="width: 400px;margin-left: -40px">亚伟速录竞赛系统(2017)</h1>
         <div>
             <?php
             $cookie = Yii::app()->request->getCookies();

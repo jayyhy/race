@@ -7,7 +7,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
     <html lang="zh-cn"><!--<![endif]--> 
         <head>
             <meta charset="utf-8">
-            <title>亚伟速录</title>
+            <title>亚伟速录竞赛系统(2017)</title>
 <!--            <link rel='icon' href='pic.ico ' type=‘image/x-ico’ /> -->
             <link href="<?php echo CSS_URL; ?>bootstrap.min.css" rel="stylesheet">
             <link href="<?php echo CSS_URL; ?>site.css" rel="stylesheet">
@@ -23,7 +23,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
                
                <div class="ywlogo"> </div>
                
-                <font class="ysgs">亚伟国赛管理系统</font>
+                <font class="ysgs">亚伟速录竞赛系统(2017)</font>
                 <div class="userUI">
                                             <a href="" id="userUI" data-toggle="dropdown" title="<?php echo Yii::app()->session['userName']; ?>">
                                                 
