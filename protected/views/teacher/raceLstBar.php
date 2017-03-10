@@ -6,10 +6,16 @@
     <div style="margin-left: 20px;margin-top: 54px;">
     <?php if(count($raceLst)>0){ 
         foreach ($raceLst as $k => $model):?>
-         <div style="margin-top: 15px;background:#F8F4F2;width: 210px;height: 88px;border-radius: 6px;" >
-             
-       
+         <div style="margin-top: 15px;background:#F8F4F2;width: 210px;height: 88px;border-radius: 6px;" >                    
             <a href="#" onclick="getExam(<?php echo $model['indexID']; ?>)" style="position: relative;left: 12px;top: 17px;" title="<?php echo $model['name']; ?>"><span style="font-size:16px; font-weight: 600;color: #E35C43"><?php echo "0".$model['indexID']; ?>&nbsp;&nbsp;&nbsp;</span>
+            <?php
+                for($i=1;$i<=6;$i++){
+                    $stepNameall=Race::model()->find("indexID=? AND step =?", array($model['indexID'], $i));
+                    if($stepNameall==""){
+                        Race::model()->addRace($model['indexID'], $i, "", "", 0, 0, "", "");
+                    }
+                }    
+            ?>
                 <span style="font-size:16px; font-weight: 600; color: #3A393E">
                     <?php if(Tool::clength($model['name']) <= 4) {
                         echo $model['name'];

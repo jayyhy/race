@@ -1,4 +1,9 @@
-<div class="leftbar" style="margin-left: 20px;">    
+<div class="leftbar" style="margin-left: 20px;"> 
+<?php 
+    $stepName2=  Race::model()->find("indexID=? AND step=?",array($indexID,2))['raceName'];
+    $stepName3=  Race::model()->find("indexID=? AND step=?",array($indexID,3))['raceName'];
+    $stepName5=  Race::model()->find("indexID=? AND step=?",array($indexID,5))['raceName'];
+?>
 <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -31,9 +36,9 @@
         <thead>
             <tr>
                 <th class="font-center">考  号</th>
-                <th class="font-center">文本速录</th>
-                <th class="font-center">实时速录</th>
-                <th class="font-center">蒙目速录</th>
+                <th class="font-center"><?php echo $stepName2; ?></th>
+                <th class="font-center"><?php echo $stepName3; ?></th>
+                <th class="font-center"><?php echo $stepName5; ?></th>
             </tr>
         </thead>
         <tbody>        
@@ -59,15 +64,11 @@
             url: "index.php?r=teacher/isOvered",
             data: {indexID: indexID},
             success: function (data) {
-               if(data =="1"){
-                    if(tag === 1){
-                        window.location.href = "./index.php?r=teacher/Exportresults&indexID="+indexID;
-                    }
-                    if(tag=== 0){
-                       window.location.href = "./index.php?r=teacher/results&indexID="+indexID;
-                    }
-                } else{
-                    window.wxc.xcConfirm('考试还未结束', window.wxc.xcConfirm.typeEnum.info);
+                if(tag === 1){
+                     window.location.href = "./index.php?r=teacher/Exportresults&indexID="+indexID;
+                }
+                if(tag=== 0){
+                    window.location.href = "./index.php?r=teacher/results&indexID="+indexID;
                 }
             },
             error: function (xhr, type, exception) {
@@ -81,16 +82,12 @@
             url: "index.php?r=teacher/isOvered",
             data: {indexID: indexID},
             success: function (data) {
-               if(data =="1"){
                     if(tag === 1){
                         window.location.href = "./index.php?r=teacher/Exportresults&indexID="+indexID+"&&answer=1";
                     }
                     if(tag=== 0){
                        window.location.href = "./index.php?r=teacher/results&indexID="+indexID;
                     }
-                } else{
-                    window.wxc.xcConfirm('考试还未结束', window.wxc.xcConfirm.typeEnum.info);
-                }
             },
             error: function (xhr, type, exception) {
                 

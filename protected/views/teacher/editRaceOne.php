@@ -41,25 +41,29 @@
 </style>
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
-        <div class="stage" style=" margin-left: 25px;border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" style=" color: #ff0000;">文字校对</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">文本速录</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">实时速录</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">会议公文整理</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">蒙目速录</a></div>
-        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">模拟办公管理</a></div>
+        <div class="stage" style=" margin-left: 25px;border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" style=" color: #ff0000;">&nbsp;&nbsp;1&nbsp;&nbsp;</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word">&nbsp;&nbsp;2&nbsp;&nbsp;</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word">&nbsp;&nbsp;3&nbsp;&nbsp;</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word">&nbsp;&nbsp;4&nbsp;&nbsp;</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=5" class="word">&nbsp;&nbsp;5&nbsp;&nbsp;</a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=6" class="word">&nbsp;&nbsp;6&nbsp;&nbsp;</a></div>
     </div>
     <div style="background-color: #fff;height: 600px;margin-top: 20px;width: 1082px;margin-left: 16px">
-        <img src="<?php echo IMG_URL_NEW; ?>icon_magnifier.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">文字校对</h3>
+        <img src="<?php echo IMG_URL_NEW; ?>icon_magnifier.png" style="position: relative;left: 25px;top: 25px;"/><h3 style="position: relative;left: 61px;top: -18px;width: 120px">1</h3>
         <form method="POST" action="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1">
         <div style="margin-top: -24px;margin-left: 20px" >
             <ul class="nav nav-list" >
-            <li>
-                <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
-                <span style="font-size: 16px;color: #767679;position: relative;top: 2px">分钟</span>
-            </li>
-            <li style=" margin-left: 34%;margin-top: 1%">
-                <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
-            </li>
+                <li>
+                    <input id="name" type="text" class="search span2" placeholder="请输入本阶段名称" name="name" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['raceName']; ?>"/>&nbsp;&nbsp;
+                    <span style="font-size: 16px;color: #767679;position: relative;top: 2px">本阶段名称</span>
+                </li>
+                <li>
+                    <input id="time" type="text" class="search span2" placeholder="请输入考试时间" name="time" style="margin-top: 13px;width: 390px;height: 25px;border-color: #FEE1DA; " value="<?php echo $race['time']/60; ?>"/>&nbsp;&nbsp;
+                    <span style="font-size: 16px;color: #767679;position: relative;top: 2px">分钟</span>
+                </li>
+                <li style=" margin-left: 34%;margin-top: 1%">
+                    <button class="btn_5big" style=" width: 96px" type="submit">确 定</button>
+                </li>
         </ul>
         </div>
         </form>
