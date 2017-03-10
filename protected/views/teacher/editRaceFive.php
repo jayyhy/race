@@ -61,6 +61,7 @@
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
         <?php 
             $index_id=$_GET['indexID'];
+            $stepName0=  Race::model()->find("indexID=? AND step=?",array($index_id,0))['raceName'];
             $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
             $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
             $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
@@ -68,7 +69,8 @@
             $stepName5=  Race::model()->find("indexID=? AND step=?",array($index_id,5))['raceName'];
             $stepName6=  Race::model()->find("indexID=? AND step=?",array($index_id,6))['raceName'];
         ?>
-        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
+        <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=0" class="word" ><?php echo $stepName0; ?></a></div>
+        <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word" ><?php echo $stepName1; ?></a></div>
         <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word" ><?php echo $stepName2; ?></a></div>
         <div class="stage" ><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" ><?php echo $stepName3; ?></a></div>
         <div class="stage"><a href="./index.php?r=teacher/editRace&indexID=<?php echo $_GET['indexID']; ?>&step=4" class="word"><?php echo $stepName4; ?></a></div>
@@ -84,7 +86,7 @@
                 <span style="font-size: 16px;color: #767679;position: relative;top:10px">(可重命名)</span>
             </div><br><br>
             <div style="margin-top: -24px;margin-left: 60px;" >
-            <?php if ($race != "") { ?>
+            <?php if ($race['resourseID'] != "") { ?>
                                 <?php $listenpath = "./resources/race/" . $race['resourseID']; ?>
             <?php if (file_exists($listenpath)) { ?>
            <audio id="audio2" src = "<?php echo $listenpath; ?>" preload = "auto" controls></audio><a href="javascript:;" onclick="wo(2)" id="a2"  ><img src="<?php echo IMG_URL_NEW; ?>icon_delete_on.png" style="position: relative;left: 25px;top: -11px;" /></a>
@@ -120,7 +122,7 @@
 <script>
     <?php
     $tag = "0";
-    if($race == null) {
+    if($race['resourseID'] == null) {
         $tag = "1";
     }
     ?>

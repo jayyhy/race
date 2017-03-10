@@ -44,15 +44,8 @@ require 'examSideBar.php';
 </style>
 <?php      
             $listenpath = "./resources/race/" . $race['resourseID']; 
-            $indexID = $_GET['indexID'];
-            $radio = Resourse::model()->find("path='$indexID'"); 
-            $dir ="./resources/race/radio/";
-            $file=realpath($dir . iconv("UTF-8", "gb2312", $radio['resourseID']));
-            $player=new COM("WMPlayer.OCX");
-            $media=$player->newMedia($file);
-            $time=round($media->duration);
-            $listenpath3 = "./resources/race/radio/" . $radio['resourseID'];
             $index_id=$_GET['indexID'];
+            $stepName0=  Race::model()->find("indexID=? AND step=?",array($index_id,0))['raceName'];
             $stepName1=  Race::model()->find("indexID=? AND step=?",array($index_id,1))['raceName'];
             $stepName2=  Race::model()->find("indexID=? AND step=?",array($index_id,2))['raceName'];
             $stepName3=  Race::model()->find("indexID=? AND step=?",array($index_id,3))['raceName'];
@@ -64,11 +57,13 @@ require 'examSideBar.php';
 <div class="span9" style="width: 1159px;height: 750px;margin-top: -19px;background-color: #f8f4f2">
     <div style="background-color: #fbf8f7;height: 58px;width: 1159px;">
     <?php
-        if($nowOnStep == 3){?>    
-            <div class="stage" style=" margin-left: 25px"><a href="#" class="word"><?php echo $stepName1; ?></a></div>
+        if($nowOnStep == 3){?>
+            <div class="stage" style=" margin-left: 25px;"><a href="#" class="word"><?php echo $stepName0; ?></a></div>
+            <div class="stage"><a href="#" class="word"><?php echo $stepName1; ?></a></div>
             <div class="stage"><a href="#" class="word"><?php echo $stepName2; ?></a></div>
     <?php }else{ ?>
-            <div class="stage" style=" margin-left: 25px"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word"><?php echo $stepName1; ?></a></div>
+            <div class="stage" style=" margin-left: 25px;"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=0" class="word"><?php echo $stepName0; ?></a></div>
+            <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=1" class="word"><?php echo $stepName1; ?></a></div>
             <div class="stage"><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=2" class="word"><?php echo $stepName2; ?></a></div>
     <?php } ?>    
         <div class="stage" style="border-bottom:2px solid #ff0000; "><a href="./index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=3" class="word" style=" color: #ff0000;"><?php echo $stepName3; ?></a></div>
@@ -100,7 +95,7 @@ require 'examSideBar.php';
            
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 61px;">考试时间</font>
-            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time']+$time)/ 60); ?> 分 <?php echo floor(($race['time']+$time)-floor(($race['time']+$time) / 60) * 60); ?> 秒</h3>
+            <h3 class="time" style="position: relative;left: 140px;top: 20px"><?php echo floor(($race['time'])/ 60); ?> 分 <?php echo floor(($race['time'])-floor(($race['time']) / 60) * 60); ?> 秒</h3>
         </div>
         <div style=" width: 320px;height: 118px;background-color: #fff;border-right:2px solid #fedfd7;float: left">
             <font class="words" style="position: relative;left: 25px;">倒计时</font>
@@ -115,10 +110,8 @@ require 'examSideBar.php';
         <div style=" width: 600px;height: 118px;margin-top: 196px">
         <font class="words" style="position: relative;left: 61px;">考试音频</font>
         <?php if (file_exists($listenpath)) { ?>
-        <audio id="audition" style="position: relative;left: 93px;top: 9px;width: 360px;" src="<?php echo $listenpath3; ?>" preload="auto" controls="controls"  ></audio>
-        <span style="position: relative;left: 95px;">(试音音频)</span><br>
-        <audio id="fristAu" style="position: relative;left: 169px;top: 26px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls="controls"  ></audio>
-        <span style="position: relative;left: 172px;top: 17px">(实时速录音频)</span><br>
+        <audio id="fristAu" style="position: relative;left: 93px;top: 9px;width: 360px" src="<?php echo $listenpath; ?>" preload="auto" controls=""></audio>
+        <span style="position: relative;left: 95px;">(实时速录音频)</span><br>
     <?php } else { ?>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
     <?php } ?>
@@ -127,13 +120,15 @@ require 'examSideBar.php';
 </div>
 </body>
 <script>
+    $("#fristAu").bind("contextmenu",function(e){  
+          return false;  
+        }); 
+      $("#fristAu").bind("onselectstart",function(e){  
+          return false;  
+        });   
     function getVideoTime() {
-          var audition = document.getElementById('audition');
           var fristAu = document.getElementById("fristAu");
-          // Store
-          var auditionTime = audition.currentTime;
           var fristAuTime = fristAu.currentTime;
-          window.localStorage.setItem("auditionTime", auditionTime);
           window.localStorage.setItem("fristAuTime", fristAuTime);
        }
        
@@ -151,7 +146,7 @@ require 'examSideBar.php';
         ?>   
             <?php
         if($nowOnStep == 0){ ?>
-        window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=1";
+        window.location.href = "./index.php?r=teacher/control&indexID="+indexID+"&&step=0";
         <?php }else{ ?>
         var onindexID =<?php echo $onindexID?> 
         if(onindexID == inindexID){ 
@@ -163,7 +158,7 @@ require 'examSideBar.php';
         <?php } ?>
     }
     $(document).ready(function () {
-    window.parent.doClick1();
+//    window.parent.doClick1();
     });
     var doc = document;
     var tag ="1";
@@ -183,46 +178,31 @@ require 'examSideBar.php';
     }
     ?>, "sideTime", endDo , playAudio,"");
         }
-        var audition = document.getElementById('audition');
        var fristAu = document.getElementById("fristAu");
-       var auditionTimes = window.localStorage.getItem("auditionTime");
        var fristAuTimes = window.localStorage.getItem("fristAuTime");
-       if(auditionTimes !==null){
+       if(fristAuTimes !==null){
            var sideTime = document.getElementById('sideTime').innerHTML;
            var str = sideTime.split(":");
            var  m = parseInt(str[0]);
            var  s = parseInt(str[1]);
            sideTime = m * 60 + s;
-           var examTime = <?php echo (($race['time'] +$time) == NULL )?  0 : $race['time'] +$time; ?>;
+           var examTime = <?php echo (($race['time']) == NULL )?  0 : $race['time']; ?>;
            if(sideTime !== 0 && sideTime < examTime){
-               audition.autoplay = "true";
-               audition.currentTime = auditionTimes;
-               fristTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
-             if(sideTime<=fristTime){
-                 tag = "0";
                  fristAu.autoplay = "true";
                 fristAu.currentTime = fristAuTimes;
-               
-           }
         }
        }
         function playAudio(sideTime){
             var fristAu = document.getElementById("fristAu");
-            var audition = document.getElementById("audition");
             
-            var examTime = <?php echo (($race['time'] +$time) == NULL )?  0 : $race['time'] +$time; ?>;
-            if(examTime == sideTime){
-               audition.autoplay = "true";              
-            }
-            if(audition.ended && tag == "1"){
-                fristAu.autoplay = "true";
-                tag ="0";
+            var examTime = <?php echo (($race['time']) == NULL )?  0 : $race['time']; ?>;
+            if(examTime === sideTime){
+               fristAu.autoplay = "true";             
             }
         }
         function endDo() {
             
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&over=1';
-            window.localStorage.removeItem("auditionTime");
             window.localStorage.removeItem("fristAuTime");
         }
     })();

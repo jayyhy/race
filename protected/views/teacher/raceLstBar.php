@@ -9,11 +9,11 @@
          <div style="margin-top: 15px;background:#F8F4F2;width: 210px;height: 88px;border-radius: 6px;" >                    
             <a href="#" onclick="getExam(<?php echo $model['indexID']; ?>)" style="position: relative;left: 12px;top: 17px;" title="<?php echo $model['name']; ?>"><span style="font-size:16px; font-weight: 600;color: #E35C43"><?php echo "0".$model['indexID']; ?>&nbsp;&nbsp;&nbsp;</span>
             <?php
-                for($i=1;$i<=6;$i++){
-                    $stepNameall=Race::model()->find("indexID=? AND step =?", array($model['indexID'], $i));
-                    if($stepNameall==""){
-                        Race::model()->addRace($model['indexID'], $i, "", "", 0, 0, "", "");
-                    }
+            $stepNameall=Race::model()->find("indexID=? AND step =?", array($model['indexID'], 1));
+             if($stepNameall==""){
+                for($i=0;$i<=6;$i++){
+                    Race::model()->addRace($model['indexID'], $i, "", "", 0, 0, "", "");
+                   }
                 }    
             ?>
                 <span style="font-size:16px; font-weight: 600; color: #3A393E">
@@ -69,7 +69,7 @@
         window.wxc.xcConfirm("确定要删除试卷：" + name + "?这样导致删除人员，考试记录等，并且无法恢复！", "custom", option);
     }
     function getExam(indexID){
-             window.location.href = "./index.php?r=teacher/editRace&indexID="+indexID+"&step=1";
+             window.location.href = "./index.php?r=teacher/editRace&indexID="+indexID+"&step=0";
     }
     function adding(){
         document.getElementById("on_adding").style.display='block';
