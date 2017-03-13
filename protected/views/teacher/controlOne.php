@@ -106,7 +106,10 @@ require 'examSideBar.php';
         <div style=" width: 320px;height: 118px;background-color: #fff;float: left">
             <font class="words" style="position: relative;left: 25px;">阶段结束时间</font>
             <div>
-            <h3 class="time" style="position: relative;left: 122px;top: 20px;" id = "endTime" >未开始</h3>
+        <?php
+            $result = Race::model()->findAll("indexID=? AND step =? AND is_over =?", array($_GET['indexID'], $step,1));
+                ?>
+            <h3 class="time" style="position: relative;left: 122px;top: 20px;" id = "endTime" ><?php if(count($result)===0){ ?>未开始<?php }else{ ?>已结束<?php } ?></h3>
             </div>
         </div>
     </div>
@@ -166,7 +169,7 @@ require 'examSideBar.php';
     })();
 
     function start() {
-        var time = 20;
+        var time = 0;
         var reg = new RegExp("^[0-9]*$");
         if(!reg.test(time)){
             window.wxc.xcConfirm('请输入正确的数字！', window.wxc.xcConfirm.typeEnum.error);
