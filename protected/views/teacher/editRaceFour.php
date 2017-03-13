@@ -89,6 +89,7 @@
         }
     }, true);
     $(document).ready(function () {
+        window.parent.doClick();
         var result = <?php echo "'$result'"; ?>;
         if (result === '1'){
             window.wxc.xcConfirm("设定成功！", window.wxc.xcConfirm.typeEnum.success, {

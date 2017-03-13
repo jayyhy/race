@@ -91,6 +91,8 @@ window.location.href = "./index.php?r=student/index";
                 if (data === '1') {
                     window.location.href = "index.php?r=student/index";
                     window.localStorage.removeItem("current");
+                    window.localStorage.removeItem("currentThree");
+                    window.localStorage.removeItem("currentFive");
                 } else {
                     window.wxc.xcConfirm("交卷失败！请联系监考老师备份答案！", window.wxc.xcConfirm.typeEnum.warning);
                 }
@@ -124,7 +126,6 @@ window.location.href = "./index.php?r=student/index";
     }
 
     function reciveContent(raceID) {
-        var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
 //        yaweiOCX.LoadFromTxtFile("D:/" + "3" + raceID + StudentID + ".txt");
     }
     

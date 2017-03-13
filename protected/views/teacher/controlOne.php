@@ -118,6 +118,7 @@ require 'examSideBar.php';
     function getExam(indexID){
         var inindexID = indexID;
         <?php 
+      if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $teacher = Teacher::model()->find("userID=?", array($teacherID));
         $oncourse = Course::model()->find("courseID=?", array($teacher['classID']));
@@ -137,7 +138,11 @@ require 'examSideBar.php';
         else{
             window.wxc.xcConfirm('正在考试，暂时不能离开此试卷！', window.wxc.xcConfirm.typeEnum.error);
         }
-        <?php } ?>
+        <?php } 
+        }  else {
+          ?>
+           window.location.href =  "./index.php?r=teacher/index" ;     
+       <?php }?>
     }
     $(document).ready(function () {
     window.parent.doClick1();

@@ -25,6 +25,7 @@ class TeacherController extends CController {
     public function actionSet() {       //set
         $result = 'no';
         $mail = '';
+      if(isset(Yii::app()->session['userid_now'])){
         $userid_now = Yii::app()->session['userid_now'];
         $user = Teacher::model()->find('userID=?', array($userid_now));
         if (!empty($user->mail_address)) {
@@ -42,8 +43,12 @@ class TeacherController extends CController {
             }
             $user->password = md5($new1);
             $result = $user->update();
+          }
+           $this->render('set', ['result' => $result]);
+       }else{
+            $this->render('index');
+            
         }
-        $this->render('set', ['result' => $result]);
     }
 
     public function actionIndex() {
@@ -632,6 +637,7 @@ class TeacherController extends CController {
     
     public function actionAddRaceIndex() {
         $raceName = $_GET['raceName'];
+      if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
         RaceIndex::model()->addRaceIndex($raceName,$classID);
@@ -643,9 +649,13 @@ class TeacherController extends CController {
             'pages' => $pages,
             'result' => '1'
         ));
+      }else {
+          $this->render('index');
+      }
     }
     
     public function actionteaInformation() {
+      if(isset(Yii::app()->session['userid_now'])){ 
         $ID = Yii::app()->session['userid_now'];
         $teacher = Teacher::model()->find("userID = '$ID'");
         return $this->render('teaInformation', array(
@@ -653,6 +663,9 @@ class TeacherController extends CController {
                     'name' => $teacher ['userName'],
                     'password' => $teacher['password'],
         ));
+      }  else {
+          $this->render('index');
+      }
     }
 
     public function ActionUpdateTime() {      //更新时间
@@ -712,6 +725,7 @@ class TeacherController extends CController {
     }
 
     public function actionRaceControl() {
+      if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $teacher = Teacher::model()->find("userID=?", array($teacherID));
         $course = Course::model()->find("courseID=?", array($teacher['classID']));
@@ -720,6 +734,9 @@ class TeacherController extends CController {
         $pages = $pager['pages'];
         $isoncourse = $course['onRaceID'];
         $this->render('raceControl', array("course" => $course, "raceIndex" => $raceIndex, "pages" => $pages,"isoncourse"=>$isoncourse));
+      }else {
+          $this->render('index');
+      }
     }
 
     public function actionControl() {
@@ -727,6 +744,7 @@ class TeacherController extends CController {
         $indexID = $_GET['indexID'];
         $flag = 0;
         $race = Race::model()->find("indexID=? AND step=?", array($indexID, $step));
+     if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $pager = RaceIndex::model()->getAllRaceIndex();
         $raceIndex = $pager['list'];
@@ -845,9 +863,13 @@ class TeacherController extends CController {
         else {
           $this->render('control' . $render, array("step" => $step, "raceIndex" => $raceIndex,"race" => $race, "flag" => $flag, "endTime" => $endTime, "nowOnStep" => $nowOnStep));
         }
+     }  else {
+         $this->render('index');
+     }
     }
 
     public function actionMarkRace() {
+      if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $teacher = Teacher::model()->find("userID=?", array($teacherID));
         $course = Course::model()->find("courseID=?", array($teacher['classID']));
@@ -855,9 +877,13 @@ class TeacherController extends CController {
         $raceIndex = $pager['list'];
         $pages = $pager['pages'];
         $this->render('markRace', array("course" => $course, "raceIndex" => $raceIndex, "pages" => $pages));
+      }  else {
+          $this->render('index');
+      }
     }
 
     public function actionStuLst() {
+     if(isset(Yii::app()->session['userid_now'])){
         $teacherID = Yii::app()->session['userid_now'];
         $classID = Teacher::model()->find("userID=?", array($teacherID))['classID'];
         $lstWithPages = Student::model()->getStuLstByClassID($classID);
@@ -866,6 +892,9 @@ class TeacherController extends CController {
         $indexID = $_GET['indexID'];
         $raceIndex = RaceIndex::model()->find("indexID=?", array($indexID));
         $this->render('stuLst', array("students" => $students, "pages" => $pages, "raceIndex" => $raceIndex));
+        }  else {
+          $this->render('index');
+      }
     }
 
     public function actionDetail() {
@@ -1142,6 +1171,7 @@ class TeacherController extends CController {
     }
         public function actionIsShutDown(){
             $pass=md5($_POST ['password']);
+         if(isset(Yii::app()->session['userid_now'])){
             $userid_now=Yii::app()->session['userid_now'];
             $user = Teacher::model()->find('userID=?', array($userid_now));
             if($pass==$user->password){
@@ -1152,6 +1182,9 @@ class TeacherController extends CController {
             $result = 2;
              $this->renderpartial('shutdown',['result'=>$result]);
         }
+       }  else {
+          $this->render('index');
+      }
         }
     
 }

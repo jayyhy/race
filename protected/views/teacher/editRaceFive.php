@@ -161,6 +161,7 @@
         }, 'html');
     }
     $(document).ready(function () {
+        window.parent.doClick();
         var v=<?php echo Tool::clength($race['content']);?>;
 //        $("#wordCount").text(v);
         $("#upload").hide();

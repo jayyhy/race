@@ -165,6 +165,7 @@
         }, 'html');
     }
     $(document).ready(function () {
+        window.parent.doClick();
         var v=<?php echo Tool::clength($race['content']);?>;
         $("#upload").hide();
         var result = <?php echo "'$result'"; ?>;
