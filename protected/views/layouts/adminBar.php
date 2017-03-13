@@ -46,6 +46,7 @@ if (isset(Yii::app()->session['userid_now']) && Yii::app()->session['role_now']=
                 <?php echo $content; ?>
                     
 <!--                  <div style="float: bottom"  class="copyright">
+                      2017 &copy;北京速录科技有限公司.&nbsp;&nbsp;&nbsp;
 	</div>-->
                 
         </body>
