@@ -164,7 +164,7 @@ require 'examSideBar.php';
     })();
 
     function start() {
-        var time = 20;
+        var time = 0;
         var reg = new RegExp("^[0-9]*$");
         if(!reg.test(time)){
             window.wxc.xcConfirm('请输入正确的数字！', window.wxc.xcConfirm.typeEnum.error);
