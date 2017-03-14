@@ -2,7 +2,7 @@
 <!--<meta http-equiv="refresh" content="300">-->
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<body>
+<body onbeforeunload="getVideoTime()">
     <?php $listenpath = "./resources/race/" . $race['resourseID']; 
     ?>
     <div style="margin-left: 60px;">
@@ -41,6 +41,19 @@
         window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+        function getVideoTime() {
+          var video = document.getElementById('audio');
+          // Store
+          var current = video.currentTime;
+          window.localStorage.setItem("currentThree", current);
+       }
+       var video = document.getElementById('audio');
+       var current = window.localStorage.getItem("currentThree");
+       if(current === null){
+           
+       }else {
+       video.currentTime = current;
+      }
         var RightRadio=0;
         function savetxt() {
             var timestamp = (new Date()).valueOf();

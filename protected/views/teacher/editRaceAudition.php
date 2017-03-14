@@ -141,6 +141,7 @@
         }, 'html');
     }
     $(document).ready(function () {
+        window.parent.doClick();
         $("#upload").hide();
         var result = <?php echo "'$result'"; ?>;
         var result2 = <?php echo "'$result2'"; ?>;

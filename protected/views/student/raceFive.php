@@ -1,7 +1,7 @@
 <!--<meta http-equiv="refresh" content="300">-->
 <script src="<?php echo JS_URL; ?>exerJS/timeCounter.js"></script>
 <script src="<?php echo JS_URL; ?>jquery.min.js" ></script>
-<body>
+<body onbeforeunload="getVideoTime()">
     <div style="margin-left: 50px">
     <img src="<?php echo IMG_URL_NEW; ?>icon_close.png" style="position: relative;top: 31px;"/><h2 style="position: relative;left:38px;top: -18px;width: 300px"><?php echo $race['raceName'];?></h2>
     <div style="width: 530px;height: 150px;background-color: #ffffff;float: left">
@@ -23,6 +23,19 @@
         window.parent.doC();
         var yaweiOCX1=window.parent.document.getElementById("typeOCX");
         var StudentID = '<?php echo Yii::app()->session['userid_now']; ?>';
+        function getVideoTime() {
+          var video = document.getElementById('audio');
+          // Store
+          var current = video.currentTime;
+          window.localStorage.setItem("current", current);
+       }
+       var video = document.getElementById('audio');
+       var current = window.localStorage.getItem("current");
+       if(current === null){
+           
+       }else {
+       video.currentTime = current;
+      }
         var RightRadio=0;
         function savetxt() {
             var timestamp = (new Date()).valueOf();
