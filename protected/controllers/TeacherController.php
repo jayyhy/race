@@ -204,10 +204,6 @@ class TeacherController extends CController {
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["picfile"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                         Picture::model()->insertPicture($newName, $oldName);
-                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                        $player=new COM("WMPlayer.OCX");
-                        $media=$player->newMedia($file);
-                        $time=round($media->duration);
                     } 
                    } 
                             if ($_FILES ['file'] ['type'] != "audio/mpeg" &&
@@ -259,7 +255,7 @@ class TeacherController extends CController {
                             $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             $raceName=$_POST['name'];
-                            Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
+                            Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time+5, $newName, $oldName);
                             $result = "1";
                        }
                     }
@@ -289,6 +285,7 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
+                        $time = $time +5;
                         $result = "1";
                             } 
                         }
@@ -345,10 +342,6 @@ class TeacherController extends CController {
                         $newName = Tool::createID() . "." . pathinfo($oldName, PATHINFO_EXTENSION);
                         move_uploaded_file($_FILES["picfile"]["tmp_name"], $dir . iconv("UTF-8", "gb2312", $newName));
                         Picture::model()->insertPicture($newName, $oldName);
-                        $file=realpath($dir . iconv("UTF-8", "gb2312", $newName));
-                        $player=new COM("WMPlayer.OCX");
-                        $media=$player->newMedia($file);
-                        $time=round($media->duration);
                         $result = "1";
                     } 
                    }   
@@ -423,7 +416,7 @@ class TeacherController extends CController {
                             $txtContent = Tool::removesign($content, 0);
                             $txtNoSpace = Tool::filterAllSpaceAndTab($txtContent);
                             $raceName=$_POST['name'];
-                           Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time, $newName, $oldName);
+                           Race::model()->addRace($indexID, $step,$raceName, $txtNoSpace, 0, $time+5, $newName, $oldName);
                             $result = "1";
                        }
                     }
@@ -453,6 +446,7 @@ class TeacherController extends CController {
                         $player=new COM("WMPlayer.OCX");
                         $media=$player->newMedia($file);
                         $time=round($media->duration);
+                        $time = $time + 5;
                         $result = "1";
                     } 
                    }

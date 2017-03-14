@@ -109,7 +109,7 @@ require 'examSideBar.php';
         
         <?php if (file_exists($listenpath)) { ?>
         <span class="words" style="position: relative;left: 61px;top: -174px">考试视频</span>
-        <video id="audio" style="position: relative;left: 93px;top: 9px;width: 356px;height: 200px" src="<?php echo $listenpath; ?>" preload="auto"  ></video><br>
+        <video id="audio" style="position: relative;left: 93px;top: 9px;width: 356px;height: 200px" src="<?php echo $listenpath; ?>" preload="auto" controls="" ></video><br>
     <?php } else { ?>
         <span class="words" style="position: relative;left: 61px;">考试音频</span>
        <span style="color: red;position: relative;left: 93px;top: 1px;width: 360px;font-size: 16px">原音频文件丢失或损坏！</span>
@@ -119,9 +119,6 @@ require 'examSideBar.php';
 </div>
 
 <script>
-    $("#audio").bind("contextmenu",function(e){  
-          return false;  
-        });
     function getExam(indexID){
                  var inindexID = indexID;
         <?php 
@@ -152,17 +149,12 @@ require 'examSideBar.php';
        <?php }?>
     }
     $(document).ready(function () {
-    window.parent.doClick1();
-    $("#audio").bind("contextmenu",function(e){  
-          return false;  
-    }); 
+        window.parent.doClick1();
     });
    var doc = document;
     (function () {
         var flag = <?php echo $flag; ?>;
-//        var CDTime = doc.querySelector('#CDTime');
         if (flag === 1) {
-//            doc.querySelector("#start")["hidden"] = true;
             var curtime = <?php echo time(); ?>;
             var endTime = doc.querySelector("#endTime");
             endTime.innerHTML = '<?php echo $endTime; ?>';
@@ -175,15 +167,12 @@ require 'examSideBar.php';
 
     ?>, "sideTime", endDo,playAudio,"");
         }
-//        else {
-//            CDTime.focus();
-//        }
          function playAudio(sideTime){
             var fristAu = document.getElementById("audio");
             var examTime = <?php echo ($race['time'] == NULL )?  0 : $race['time']; ?>;
             if(examTime === sideTime){
+               
                fristAu.autoplay = "true";
-                fristAu.style.visibility = "visible";        
             }
         }
         function endDo() {
@@ -198,7 +187,7 @@ require 'examSideBar.php';
             window.wxc.xcConfirm('请输入正确的数字！', window.wxc.xcConfirm.typeEnum.error);
         }else{
             window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
-        }
+       }
     }
     function stop() {
     window.wxc.xcConfirm('该阶段已经考过了！', window.wxc.xcConfirm.typeEnum.error);

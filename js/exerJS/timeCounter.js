@@ -76,7 +76,7 @@ function tCounter3(currTime, endTime, time_id, endDo , playAudio,saveInReTime){
             saveInReTime();
         }
         seconds = seconds - 1;
-        playAudio(seconds);
+        playAudio(seconds+1);
         if(seconds <= 0){
             endDo();
             clearInterval(timer);
