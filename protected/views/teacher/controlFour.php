@@ -163,7 +163,7 @@ require 'examSideBar.php';
     })();
 
     function start() {
-        var time = 20;
+        var time = 0;
         window.location.href = './index.php?r=teacher/control&indexID=<?php echo $_GET['indexID']; ?>&step=<?php echo $step ?>&raceID=<?php echo $race['raceID']; ?>&CDTime=' + time;
     }
     function stop() {
