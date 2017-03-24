@@ -52,7 +52,7 @@
 //            error: function (xhr, type, exception) {
 //                
 //            }
-//        });
+//          });
              var content=yaweiOCX1.GetContent();
              window.parent.sscc(<?php echo $race['raceID']; ?>,content,route);
         }
